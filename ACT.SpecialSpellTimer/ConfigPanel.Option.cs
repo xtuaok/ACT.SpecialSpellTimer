@@ -44,19 +44,24 @@
                 this.LoadSettingsOption();
             };
 
+            this.LanguageComboBox.SelectedValueChanged += (s1, e1) =>
+            {
+                Language language = (Language)this.LanguageComboBox.SelectedItem;
+                this.LanguageRestartLabel.Text = Utility.Translate.GetTranslationsFor(language.Value).GetString("RequiresRestart");
+                Settings.Default.Language = language.Value;
+                Settings.Default.Save();
+                this.LoadSettingsOption();
+            };
+
             Action action = new Action(() =>
             {
                 if (Settings.Default.OverlayVisible)
                 {
-                    this.SwitchOverlayButton.Text =
-                        "オーバーレイの表示スイッチ" + Environment.NewLine +
-                        "現在の状態 -> ON";
+                    this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOn");
                 }
                 else
                 {
-                    this.SwitchOverlayButton.Text =
-                        "オーバーレイの表示スイッチ" + Environment.NewLine +
-                        "現在の状態 -> OFF";
+                    this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOff");
                 }
             });
 
@@ -71,6 +76,17 @@
         /// <param name="e">イベント引数</param>
         private void ShokikaButton_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show(
+                this,
+                Translate.Get("ResetAllPrompt"),
+                "ACT.SpecialSpellTimer",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2) != DialogResult.OK)
+            {
+                return;
+            }
+
             Settings.Default.Reset();
             Settings.Default.Save();
 
@@ -108,32 +124,30 @@
         /// </summary>
         private void LoadSettingsOption()
         {
+            foreach (Language lang in this.LanguageComboBox.Items)
+            {
+                if (lang.Value == Settings.Default.Language)
+                    this.LanguageComboBox.SelectedItem = lang;
+            }
+
             this.OverlayForceVisibleCheckBox.Checked = Settings.Default.OverlayForceVisible;
 
             if (Settings.Default.OverlayVisible)
             {
-                this.SwitchOverlayButton.Text =
-                    "オーバーレイの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> ON";
+                this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOn");
             }
             else
             {
-                this.SwitchOverlayButton.Text =
-                    "オーバーレイの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> OFF";
+                this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOff");
             }
 
             if (Settings.Default.TelopAlwaysVisible)
             {
-                this.SwitchTelopButton.Text =
-                    "テロップの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> 常に表示(位置調整向け)";
+                this.SwitchTelopButton.Text = Translate.Get("TelopDisplaySwitchIsOn");
             }
             else
             {
-                this.SwitchTelopButton.Text =
-                    "テロップの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> 通常";
+                this.SwitchTelopButton.Text = Translate.Get("TelopDisplaySwitchIsOff");
             }
 
             this.DefaultVisualSetting.BarSize = Settings.Default.ProgressBarSize;
@@ -159,6 +173,7 @@
         /// </summary>
         private void ApplySettingsOption()
         {
+            Settings.Default.Language = ((Utility.Language)this.LanguageComboBox.SelectedItem).Value;
             Settings.Default.OverlayForceVisible = this.OverlayForceVisibleCheckBox.Checked;
             Settings.Default.ProgressBarSize = this.DefaultVisualSetting.BarSize;
             Settings.Default.ProgressBarColor = this.DefaultVisualSetting.BarColor;
