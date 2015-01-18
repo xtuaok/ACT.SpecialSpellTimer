@@ -434,6 +434,7 @@
 
             // パネル名を取り出す
             var panelName = e.Node.Text;
+            this.DetailPanelGroupBox.Tag = panelName;
 
             // パネルの位置を取得する
             double left, top;
@@ -446,19 +447,26 @@
             this.PanelTopNumericUpDown.Value = (int)top;
 
             // 更新ボタンの挙動をセットする
-            var updatePanel = new EventHandler((s1, e1) =>
+            if (this.UpdatePanelButton.Tag == null ||
+                !(bool)(this.UpdatePanelButton.Tag))
             {
-                left = (double)this.PanelLeftNumericUpDown.Value;
-                top = (double)this.PanelTopNumericUpDown.Value;
+                this.UpdatePanelButton.Click += new EventHandler((s1, e1) =>
+                {
+                    left = (double)this.PanelLeftNumericUpDown.Value;
+                    top = (double)this.PanelTopNumericUpDown.Value;
 
-                SpellTimerCore.Default.SetPanelLocation(
-                    panelName,
-                    left,
-                    top);
-            });
+                    if (this.DetailPanelGroupBox.Tag != null)
+                    {
+                        var panelNameToUpdate = (string)this.DetailPanelGroupBox.Tag;
+                        SpellTimerCore.Default.SetPanelLocation(
+                            panelNameToUpdate,
+                            left,
+                            top);
+                    }
+                });
 
-            this.UpdatePanelButton.Click -= updatePanel;
-            this.UpdatePanelButton.Click += updatePanel;
+                this.UpdatePanelButton.Tag = true;
+            }
         }
 
         /// <summary>
