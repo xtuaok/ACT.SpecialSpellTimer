@@ -1,4 +1,4 @@
-ACT.SpecialSpellTimer [![Analytics](https://ga-beacon.appspot.com/UA-18629623-2/ACT.SpecialSpellTimer/)](https://github.com/anoyetta/ACT.SpecialSpellTimer/)
+ACT.SpecialSpellTimer [![Analytics](https://ga-beacon.appspot.com/UA-18629623-2/ACT.SpecialSpellTimer/readme?pixel)](https://github.com/anoyetta/ACT.SpecialSpellTimer)
 =====================
 
 概要
