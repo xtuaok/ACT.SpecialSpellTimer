@@ -109,8 +109,8 @@
                     catch (Exception ex)
                     {
                         ActGlobals.oFormActMain.WriteExceptionLog(
-                        ex,
-                        Translate.Get("SpellTimerRefreshError"));
+                            ex,
+                            Translate.Get("SpellTimerRefreshError"));
                     }
                     finally
                     {

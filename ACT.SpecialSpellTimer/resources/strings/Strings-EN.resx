@@ -785,4 +785,8 @@
     <value>Are you sure you want to reset all settings and ticker positions?</value>
     <comment>あなたはすべての設定とテロップ位置をリセットしてもよろしいですか？</comment>
   </data>
+  <data name="LoadXMLError" xml:space="preserve">
+    <value>An exception occurred by a load of a XML file.</value>
+    <comment>XMLファイルの読み込みで例外が発生しました</comment>
+  </data>
 </root>

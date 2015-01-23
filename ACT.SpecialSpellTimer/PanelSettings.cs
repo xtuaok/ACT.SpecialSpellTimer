@@ -3,6 +3,9 @@
     using System;
     using System.IO;
 
+    using ACT.SpecialSpellTimer.Utility;
+    using Advanced_Combat_Tracker;
+
     /// <summary>
     /// Panel設定
     /// </summary>
@@ -71,7 +74,17 @@
             if (File.Exists(this.DefaultFile))
             {
                 this.settingsTable.Clear();
-                this.settingsTable.ReadXml(this.DefaultFile);
+
+                try
+                {
+                    this.settingsTable.ReadXml(this.DefaultFile);
+                }
+                catch (Exception ex)
+                {
+                    ActGlobals.oFormActMain.WriteExceptionLog(
+                        ex,
+                        Translate.Get("LoadXMLError"));
+                }
             }
         }
 

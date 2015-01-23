@@ -11,6 +11,7 @@
 
     using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
+    using Advanced_Combat_Tracker;
 
     /// <summary>
     /// ワンポイントテレロップ設定テーブル
@@ -233,11 +234,20 @@
 
                 using (var sr = new StreamReader(file, new UTF8Encoding(false)))
                 {
-                    if (sr.BaseStream.Length > 0)
+                    try
                     {
-                        var xs = new XmlSerializer(table.GetType());
-                        var data = xs.Deserialize(sr) as List<OnePointTelop>;
-                        table.AddRange(data);
+                        if (sr.BaseStream.Length > 0)
+                        {
+                            var xs = new XmlSerializer(table.GetType());
+                            var data = xs.Deserialize(sr) as List<OnePointTelop>;
+                            table.AddRange(data);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ActGlobals.oFormActMain.WriteExceptionLog(
+                            ex,
+                            Translate.Get("LoadXMLError"));
                     }
                 }
 
