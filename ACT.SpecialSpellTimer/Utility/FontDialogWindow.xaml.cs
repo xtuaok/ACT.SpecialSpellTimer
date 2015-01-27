@@ -279,7 +279,7 @@
         {
             System.Drawing.Font f = new System.Drawing.Font(
                 this.FamilyName,
-                (float)(this.Size * 72d / 96d));
+                (float)(this.Size * 72.0d / 96.0d));
 
             System.Drawing.FontStyle style = System.Drawing.FontStyle.Regular;
 

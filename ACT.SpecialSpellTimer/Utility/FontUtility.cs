@@ -62,7 +62,7 @@
             var fi = new FontInfo()
             {
                 Family = font.ToFontFamilyWPF(),
-                Size = font.Size,
+                Size = font.ToFontSizeWPF(),
                 Style = font.ToFontStyleWPF(),
                 Weight = font.ToFontWeightWPF(),
                 Stretch = System.Windows.FontStretches.Normal

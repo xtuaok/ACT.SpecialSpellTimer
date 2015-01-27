@@ -36,7 +36,7 @@
       </Border>
     </ControlTemplate>
 
-    <Style x:Key="HighlightButton" TargetType="Button">
+    <Style x:Key="ApplyButton" TargetType="Button">
       <Style.Triggers>
         <Trigger Property="IsFocused" Value="True">
           <Setter Property="Background" Value="#16A6B6"/>
@@ -53,6 +53,28 @@
         </Trigger>
         <Trigger Property="IsMouseOver" Value="False">
           <Setter Property="Background" Value="#EE6557"/>
+          <Setter Property="Foreground" Value="#F5F5F5"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CancelButton" TargetType="Button">
+      <Style.Triggers>
+        <Trigger Property="IsFocused" Value="True">
+          <Setter Property="Background" Value="#16A6B6"/>
+          <Setter Property="Foreground" Value="#F5F5F5"/>
+        </Trigger>
+        <Trigger Property="IsFocused" Value="False">
+          <Setter Property="Background" Value="#BFBFBF"/>
+          <Setter Property="Foreground" Value="#F5F5F5"/>
+        </Trigger>
+
+        <Trigger Property="IsMouseOver" Value="True">
+          <Setter Property="Background" Value="#16A6B6"/>
+          <Setter Property="Foreground" Value="#F5F5F5"/>
+        </Trigger>
+        <Trigger Property="IsMouseOver" Value="False">
+          <Setter Property="Background" Value="#BFBFBF"/>
           <Setter Property="Foreground" Value="#F5F5F5"/>
         </Trigger>
       </Style.Triggers>
@@ -230,7 +252,7 @@
             Width="90" Height="25" Margin="6" 
             IsDefault="True" 
             Template="{StaticResource FlatButtonTemplate}"
-            Style="{StaticResource HighlightButton}" 
+            Style="{StaticResource ApplyButton}" 
             FocusVisualStyle="{x:Null}">
             OK
           </Button>
@@ -240,7 +262,7 @@
             Width="90" Height="25" Margin="6" 
             IsCancel="True"  
             Template="{StaticResource FlatButtonTemplate}"
-            Style="{StaticResource HighlightButton}" 
+            Style="{StaticResource CancelButton}" 
             FocusVisualStyle="{x:Null}">
             Cancel
           </Button>
