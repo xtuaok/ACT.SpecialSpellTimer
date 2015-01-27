@@ -253,9 +253,7 @@
 
                     c.BarWidth = spell.BarWidth;
                     c.BarHeight = spell.BarHeight;
-                    c.TextFontFamily = spell.FontFamily;
-                    c.TextFontSize = spell.FontSize;
-                    c.TextFontStyle = spell.FontStyle;
+                    c.FontInfo = spell.Font;
                     c.FontColor = spell.FontColor;
                     c.FontOutlineColor = spell.FontOutlineColor;
                     c.BarColor = spell.BarColor;

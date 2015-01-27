@@ -51,9 +51,6 @@
         /// <summary>背景色のBrush</summary>
         private SolidColorBrush BackgroundBrush { get; set; }
 
-        /// <summary>Cacheされたフォント</summary>
-        private System.Drawing.Font CachedFont { get; set; }
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -159,18 +156,6 @@
             this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
             this.BackgroundBrush = this.CreateBrush(this.BackgroundBrush, backGroundColor);
 
-            // フォントを生成する
-            if (this.CachedFont == null ||
-                this.CachedFont.Name != this.DataSource.FontFamily ||
-                this.CachedFont.Size != this.DataSource.FontSize ||
-                this.CachedFont.Style != (System.Drawing.FontStyle)this.DataSource.FontStyle)
-            {
-                this.CachedFont = new System.Drawing.Font(
-                    this.DataSource.FontFamily,
-                    this.DataSource.FontSize,
-                    (System.Drawing.FontStyle)this.DataSource.FontStyle);
-            }
-
             Dispatcher.InvokeAsync(new Action(() =>
             {
                 // 背景色を設定する
@@ -215,11 +200,12 @@
                 {
                     this.MessageTextBlock.Text = message;
 
-                    var font = this.CachedFont;
-                    this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
-                    this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
-                    this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
-                    this.MessageTextBlock.FontWeight = font.ToFontWeightWPF();
+                    var font = this.DataSource.Font;
+                    this.MessageTextBlock.FontFamily = font.Family;
+                    this.MessageTextBlock.FontSize = font.Size;
+                    this.MessageTextBlock.FontStyle = font.Style;
+                    this.MessageTextBlock.FontWeight = font.Weight;
+                    this.MessageTextBlock.FontStretch = font.Stretch;
                     this.MessageTextBlock.Fill = this.FontBrush;
                     this.MessageTextBlock.Stroke = this.FontOutlineBrush;
                     this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);

@@ -53,7 +53,6 @@
             this.HeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.BarSizeXLabel = new System.Windows.Forms.Label();
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
-            this.FontDialog = new System.Windows.Forms.FontDialog();
             this.label3 = new System.Windows.Forms.Label();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -98,105 +97,105 @@
             this.LoadColorSetItem,
             this.SaveColorSetItem});
             this.VisualSettingContextMenuStrip.Name = "ContextMenuStrip";
-            this.VisualSettingContextMenuStrip.Size = new System.Drawing.Size(287, 330);
+            this.VisualSettingContextMenuStrip.Size = new System.Drawing.Size(229, 330);
             // 
             // ChangeFontItem
             // 
             this.ChangeFontItem.Name = "ChangeFontItem";
-            this.ChangeFontItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeFontItem.Size = new System.Drawing.Size(228, 22);
             this.ChangeFontItem.Text = "ChangeFont";
             // 
             // ChangeFontColorItem
             // 
             this.ChangeFontColorItem.Name = "ChangeFontColorItem";
-            this.ChangeFontColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeFontColorItem.Size = new System.Drawing.Size(228, 22);
             this.ChangeFontColorItem.Text = "ChangeFontColor";
             // 
             // ChangeFontOutlineColorItem
             // 
             this.ChangeFontOutlineColorItem.Name = "ChangeFontOutlineColorItem";
-            this.ChangeFontOutlineColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeFontOutlineColorItem.Size = new System.Drawing.Size(228, 22);
             this.ChangeFontOutlineColorItem.Text = "ChangeFontOutlineColor";
             // 
             // ChangeBarColorItem
             // 
             this.ChangeBarColorItem.Name = "ChangeBarColorItem";
-            this.ChangeBarColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeBarColorItem.Size = new System.Drawing.Size(228, 22);
             this.ChangeBarColorItem.Text = "ChangeBarColor";
             // 
             // ChangeBarOutlineColorItem
             // 
             this.ChangeBarOutlineColorItem.Name = "ChangeBarOutlineColorItem";
-            this.ChangeBarOutlineColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeBarOutlineColorItem.Size = new System.Drawing.Size(228, 22);
             this.ChangeBarOutlineColorItem.Text = "ChangeBarOutlineColor";
             // 
             // ChangeBackgoundColorItem
             // 
             this.ChangeBackgoundColorItem.Name = "ChangeBackgoundColorItem";
-            this.ChangeBackgoundColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeBackgoundColorItem.Size = new System.Drawing.Size(228, 22);
             this.ChangeBackgoundColorItem.Text = "ChangeBackgroundColor";
             // 
             // ChangeBackgroundAlphaItem
             // 
             this.ChangeBackgroundAlphaItem.Name = "ChangeBackgroundAlphaItem";
-            this.ChangeBackgroundAlphaItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeBackgroundAlphaItem.Size = new System.Drawing.Size(228, 22);
             this.ChangeBackgroundAlphaItem.Text = "ChangeBackgroundAlpha";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(283, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(225, 6);
             // 
             // ResetSpellFontItem
             // 
             this.ResetSpellFontItem.Name = "ResetSpellFontItem";
-            this.ResetSpellFontItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetSpellFontItem.Size = new System.Drawing.Size(228, 22);
             this.ResetSpellFontItem.Text = "ResetSpellFont";
             // 
             // ResetSpellBarSizeItem
             // 
             this.ResetSpellBarSizeItem.Name = "ResetSpellBarSizeItem";
-            this.ResetSpellBarSizeItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetSpellBarSizeItem.Size = new System.Drawing.Size(228, 22);
             this.ResetSpellBarSizeItem.Text = "ResetSpellBarSize";
             // 
             // ResetSpellColorItem
             // 
             this.ResetSpellColorItem.Name = "ResetSpellColorItem";
-            this.ResetSpellColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetSpellColorItem.Size = new System.Drawing.Size(228, 22);
             this.ResetSpellColorItem.Text = "ResetSpellColor";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(283, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(225, 6);
             // 
             // ResetTelopFontItem
             // 
             this.ResetTelopFontItem.Name = "ResetTelopFontItem";
-            this.ResetTelopFontItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetTelopFontItem.Size = new System.Drawing.Size(228, 22);
             this.ResetTelopFontItem.Text = "ResetTelopFont";
             // 
             // ResetTelopColorItem
             // 
             this.ResetTelopColorItem.Name = "ResetTelopColorItem";
-            this.ResetTelopColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetTelopColorItem.Size = new System.Drawing.Size(228, 22);
             this.ResetTelopColorItem.Text = "ResetTelopColor";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(283, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(225, 6);
             // 
             // LoadColorSetItem
             // 
             this.LoadColorSetItem.Name = "LoadColorSetItem";
-            this.LoadColorSetItem.Size = new System.Drawing.Size(286, 22);
+            this.LoadColorSetItem.Size = new System.Drawing.Size(228, 22);
             this.LoadColorSetItem.Text = "LoadColorSet";
             // 
             // SaveColorSetItem
             // 
             this.SaveColorSetItem.Name = "SaveColorSetItem";
-            this.SaveColorSetItem.Size = new System.Drawing.Size(286, 22);
+            this.SaveColorSetItem.Size = new System.Drawing.Size(228, 22);
             this.SaveColorSetItem.Text = "SaveColorSet";
             // 
             // BarSizeLabel
@@ -205,7 +204,7 @@
             this.BarSizeLabel.AutoSize = true;
             this.BarSizeLabel.Location = new System.Drawing.Point(110, 62);
             this.BarSizeLabel.Name = "BarSizeLabel";
-            this.BarSizeLabel.Size = new System.Drawing.Size(60, 12);
+            this.BarSizeLabel.Size = new System.Drawing.Size(44, 12);
             this.BarSizeLabel.TabIndex = 2;
             this.BarSizeLabel.Text = "BarSize";
             this.BarSizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -254,7 +253,7 @@
             this.BarSizeXLabel.AutoSize = true;
             this.BarSizeXLabel.Location = new System.Drawing.Point(233, 62);
             this.BarSizeXLabel.Name = "BarSizeXLabel";
-            this.BarSizeXLabel.Size = new System.Drawing.Size(17, 12);
+            this.BarSizeXLabel.Size = new System.Drawing.Size(25, 12);
             this.BarSizeXLabel.TabIndex = 5;
             this.BarSizeXLabel.Text = "__×";
             // 
@@ -263,11 +262,6 @@
             this.ColorDialog.AnyColor = true;
             this.ColorDialog.FullOpen = true;
             // 
-            // FontDialog
-            // 
-            this.FontDialog.AllowVerticalFonts = false;
-            this.FontDialog.ShowEffects = false;
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -275,20 +269,20 @@
             this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label3.Location = new System.Drawing.Point(3, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 12);
+            this.label3.Size = new System.Drawing.Size(125, 12);
             this.label3.TabIndex = 6;
             this.label3.Text = "ChangeByRightClicking";
             // 
             // SaveFileDialog
             // 
             this.SaveFileDialog.DefaultExt = "xml";
-            this.SaveFileDialog.Filter = Utility.Translate.Get("XmlFileFilter");
+            this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.SaveFileDialog.RestoreDirectory = true;
             // 
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
-            this.OpenFileDialog.Filter = Utility.Translate.Get("XmlFileFilter");
+            this.OpenFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.OpenFileDialog.RestoreDirectory = true;
             // 
             // VisualSettingControl
@@ -326,7 +320,6 @@
         private System.Windows.Forms.NumericUpDown HeightNumericUpDown;
         private System.Windows.Forms.Label BarSizeXLabel;
         private System.Windows.Forms.ColorDialog ColorDialog;
-        private System.Windows.Forms.FontDialog FontDialog;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem SaveColorSetItem;
         private System.Windows.Forms.ToolStripMenuItem LoadColorSetItem;

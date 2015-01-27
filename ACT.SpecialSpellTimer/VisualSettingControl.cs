@@ -59,7 +59,7 @@
             this.InitializeComponent();
 
             this.components.Add(this.alphaDialog);
-            this.TextFont = Settings.Default.Font;
+            this.FontInfo = Settings.Default.Font.ToFontInfo();
             this.FontColor = Settings.Default.FontColor;
             this.FontOutlineColor = Settings.Default.FontOutlineColor;
             this.BarColor = Settings.Default.ProgressBarColor;
@@ -87,10 +87,13 @@
 
             this.ChangeFontItem.Click += (s1, e1) =>
             {
-                this.FontDialog.Font = this.TextFont;
-                if (this.FontDialog.ShowDialog(this) != DialogResult.Cancel)
+                var f = new FontDialogWindow();
+                f.SetOwner(this.ParentForm);
+
+                f.FontInfo = this.FontInfo;
+                if (f.ShowDialog().Value)
                 {
-                    this.TextFont = this.FontDialog.Font;
+                    this.FontInfo = f.FontInfo;
                     this.RefreshSampleImage();
                 }
             };
@@ -233,9 +236,7 @@
             {
                 foreach (var s in SpellTimerTable.Table)
                 {
-                    s.FontFamily = this.TextFont.Name;
-                    s.FontSize = this.TextFont.Size;
-                    s.FontStyle = (int)this.TextFont.Style;
+                    s.Font = this.FontInfo;
                 }
 
                 SpellTimerCore.Default.ClosePanels();
@@ -274,9 +275,7 @@
             {
                 foreach (var s in OnePointTelopTable.Default.Table)
                 {
-                    s.FontFamily = this.TextFont.Name;
-                    s.FontSize = this.TextFont.Size;
-                    s.FontStyle = (int)this.TextFont.Style;
+                    s.Font = this.FontInfo;
                 }
 
                 OnePointTelopController.CloseTelops();
@@ -298,7 +297,7 @@
             };
         }
 
-        public Font TextFont { get; set; }
+        public FontInfo FontInfo { get; set; }
 
         public Color FontColor { get; set; }
 
@@ -373,7 +372,7 @@
         /// </summary>
         public void RefreshSampleImage()
         {
-            var font = this.TextFont;
+            var font = this.FontInfo.ToFontFotWindowsForm();
             var fontColor = this.FontColor;
             var fontOutlineColor = this.FontOutlineColor;
             var barColor = this.BarColor;

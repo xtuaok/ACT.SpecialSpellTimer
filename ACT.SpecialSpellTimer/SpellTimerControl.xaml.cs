@@ -61,19 +61,9 @@
         public int BarHeight { get; set; }
 
         /// <summary>
-        /// フォントファミリー
+        /// フォント
         /// </summary>
-        public string TextFontFamily { get; set; }
-
-        /// <summary>
-        /// フォントサイズ
-        /// </summary>
-        public float TextFontSize { get; set; }
-
-        /// <summary>
-        /// フォントスタイル
-        /// </summary>
-        public int TextFontStyle { get; set; }
+        public FontInfo FontInfo { get; set; }
 
         /// <summary>
         /// Fontの色
@@ -99,9 +89,6 @@
 
         /// <summary>バーのアウトラインのBrush</summary>
         private SolidColorBrush BarOutlineBrush { get; set; }
-
-        /// <summary>Cacheされたフォント</summary>
-        private System.Drawing.Font CachedFont { get; set; }
 
         /// <summary>
         /// 描画を更新する
@@ -134,20 +121,8 @@
             this.BarBackBrush = this.CreateBrush(this.BarBackBrush, barBackColor);
             this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
 
-            // フォントを生成する
-            if (this.CachedFont == null ||
-                this.CachedFont.Name != this.TextFontFamily ||
-                this.CachedFont.Size != this.TextFontSize ||
-                this.CachedFont.Style != (System.Drawing.FontStyle)this.TextFontStyle)
-            {
-                this.CachedFont = new System.Drawing.Font(
-                    this.TextFontFamily,
-                    this.TextFontSize,
-                    (System.Drawing.FontStyle)this.TextFontStyle);
-            }
-
             var tb = default(OutlineTextBlock);
-            var font = this.CachedFont;
+            var font = this.FontInfo;
 
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
@@ -155,10 +130,11 @@
             if (tb.Text != title)
             {
                 tb.Text = title;
-                tb.FontFamily = font.ToFontFamilyWPF();
-                tb.FontSize = font.ToFontSizeWPF();
-                tb.FontStyle = font.ToFontStyleWPF();
-                tb.FontWeight = font.ToFontWeightWPF();
+                tb.FontFamily = font.Family;
+                tb.FontSize = font.Size;
+                tb.FontStyle = font.Style;
+                tb.FontWeight = font.Weight;
+                tb.FontStretch = font.Stretch;
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.2d;
@@ -172,10 +148,11 @@
             if (tb.Text != recast)
             {
                 tb.Text = recast;
-                tb.FontFamily = font.ToFontFamilyWPF();
-                tb.FontSize = font.ToFontSizeWPF();
-                tb.FontStyle = font.ToFontStyleWPF();
-                tb.FontWeight = font.ToFontWeightWPF();
+                tb.FontFamily = font.Family;
+                tb.FontSize = font.Size;
+                tb.FontStyle = font.Style;
+                tb.FontWeight = font.Weight;
+                tb.FontStretch = font.Stretch;
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.2d;

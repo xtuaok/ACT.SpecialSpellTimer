@@ -50,5 +50,25 @@
         {
             return (font.Style & System.Drawing.FontStyle.Bold) != 0 ? FontWeights.Bold : FontWeights.Normal;
         }
+
+        /// <summary>
+        /// FontInfoに変換する
+        /// </summary>
+        /// <param name="font">Font</param>
+        /// <returns>FontInfo</returns>
+        public static FontInfo ToFontInfo(
+            this System.Drawing.Font font)
+        {
+            var fi = new FontInfo()
+            {
+                Family = font.ToFontFamilyWPF(),
+                Size = font.Size,
+                Style = font.ToFontStyleWPF(),
+                Weight = font.ToFontWeightWPF(),
+                Stretch = System.Windows.FontStretches.Normal
+            };
+
+            return fi;
+        }
     }
 }

@@ -169,6 +169,32 @@
                 {
                     row.BackgroundColor = Color.Transparent.ToHTML();
                 }
+
+                if (row.Font == null ||
+                    row.Font.Family == null ||
+                    string.IsNullOrWhiteSpace(row.Font.Family.Source))
+                {
+                    var style = (FontStyle)row.FontStyle;
+
+                    row.Font = new FontInfo()
+                    {
+                        FamilyName = row.FontFamily,
+                        Size = row.FontSize / 72.0d * 96.0d,
+                        Style = System.Windows.FontStyles.Normal,
+                        Weight = System.Windows.FontWeights.Normal,
+                        Stretch = System.Windows.FontStretches.Normal
+                    };
+
+                    if ((style & FontStyle.Italic) != 0)
+                    {
+                        row.Font.Style = System.Windows.FontStyles.Italic;
+                    }
+
+                    if ((style & FontStyle.Bold) != 0)
+                    {
+                        row.Font.Weight = System.Windows.FontWeights.Bold;
+                    }
+                }
             }
         }
 
@@ -258,6 +284,13 @@
                 item.TimeupSound = !string.IsNullOrWhiteSpace(item.TimeupSound) ?
                     Path.GetFileName(item.TimeupSound) :
                     string.Empty;
+
+                if (!string.IsNullOrWhiteSpace(item.Font.Family.Source))
+                {
+                    item.FontFamily = string.Empty;
+                    item.FontSize = 1;
+                    item.FontStyle = 0;
+                }
             }
 
             using (var sw = new StreamWriter(file, false, new UTF8Encoding(false)))
@@ -338,6 +371,7 @@
             this.MatchedLog = string.Empty;
             this.RegexPattern = string.Empty;
             this.JobFilter = string.Empty;
+            this.Font = new FontInfo();
         }
 
         public long ID { get; set; }
@@ -357,6 +391,7 @@
         public DateTime MatchDateTime { get; set; }
         public bool TimeupHide { get; set; }
         public bool IsReverse { get; set; }
+        public FontInfo Font { get; set; }
         public string FontFamily { get; set; }
         public float FontSize { get; set; }
         public int FontStyle { get; set; }

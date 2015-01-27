@@ -415,7 +415,7 @@
             this.SpellVisualSetting.Name = "SpellVisualSetting";
             this.SpellVisualSetting.Size = new System.Drawing.Size(408, 95);
             this.SpellVisualSetting.TabIndex = 28;
-            this.SpellVisualSetting.TextFont = new System.Drawing.Font("MS PGothic", 9.75F, System.Drawing.FontStyle.Bold);
+            this.SpellVisualSetting.FontInfo = new Utility.FontInfo();
             // 
             // SelectJobButton
             // 
@@ -1008,7 +1008,7 @@
             this.TelopVisualSetting.Name = "TelopVisualSetting";
             this.TelopVisualSetting.Size = new System.Drawing.Size(408, 95);
             this.TelopVisualSetting.TabIndex = 6;
-            this.TelopVisualSetting.TextFont = new System.Drawing.Font("MS PGothic", 9.75F, System.Drawing.FontStyle.Bold);
+            this.TelopVisualSetting.FontInfo = new Utility.FontInfo();
             // 
             // TelopSelectJobButton
             // 
@@ -2106,7 +2106,7 @@
             this.DefaultVisualSetting.Name = "DefaultVisualSetting";
             this.DefaultVisualSetting.Size = new System.Drawing.Size(408, 95);
             this.DefaultVisualSetting.TabIndex = 37;
-            this.DefaultVisualSetting.TextFont = new System.Drawing.Font("Meiryo", 11.25F, System.Drawing.FontStyle.Bold);
+            this.DefaultVisualSetting.FontInfo = new Utility.FontInfo();
             // 
             // OpenFileDialog
             // 

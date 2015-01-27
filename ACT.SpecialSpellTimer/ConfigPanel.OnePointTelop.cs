@@ -261,9 +261,7 @@
                 src.ProgressBarEnabled = this.TelopProgressBarEnabledCheckBox.Checked;
                 src.FontColor = this.TelopVisualSetting.FontColor.ToHTML();
                 src.FontOutlineColor = this.TelopVisualSetting.FontOutlineColor.ToHTML();
-                src.FontFamily = this.TelopVisualSetting.TextFont.Name;
-                src.FontSize = this.TelopVisualSetting.TextFont.Size;
-                src.FontStyle = (int)this.TelopVisualSetting.TextFont.Style;
+                src.Font = this.TelopVisualSetting.FontInfo;
                 src.BackgroundColor = this.TelopVisualSetting.BackgroundColor.ToHTML();
                 src.BackgroundAlpha = this.TelopVisualSetting.BackgroundColor.A;
                 src.Left = (double)this.TelopLeftNumericUpDown.Value;
@@ -401,10 +399,7 @@
             this.TelopVisualSetting.FontColor = src.FontColor.FromHTML();
             this.TelopVisualSetting.FontOutlineColor = src.FontOutlineColor.FromHTML();
             this.TelopVisualSetting.FontColor = src.FontColor.FromHTML();
-            this.TelopVisualSetting.TextFont = new Font(
-                src.FontFamily,
-                src.FontSize,
-                (FontStyle)src.FontStyle);
+            this.TelopVisualSetting.FontInfo = src.Font;
             this.TelopVisualSetting.BackgroundColor = string.IsNullOrWhiteSpace(src.BackgroundColor) ?
                 Settings.Default.BackgroundColor :
                 Color.FromArgb(src.BackgroundAlpha, src.BackgroundColor.FromHTML());

@@ -318,9 +318,7 @@
                     src.IsReverse = this.IsReverseCheckBox.Checked;
                     src.DontHide = this.DontHideCheckBox.Checked;
 
-                    src.FontFamily = this.SpellVisualSetting.TextFont.Name;
-                    src.FontSize = this.SpellVisualSetting.TextFont.Size;
-                    src.FontStyle = (int)this.SpellVisualSetting.TextFont.Style;
+                    src.Font = this.SpellVisualSetting.FontInfo;
                     src.FontColor = this.SpellVisualSetting.FontColor.ToHTML();
                     src.FontOutlineColor = this.SpellVisualSetting.FontOutlineColor.ToHTML();
                     src.BarColor = this.SpellVisualSetting.BarColor.ToHTML();
@@ -558,10 +556,7 @@
             this.IsReverseCheckBox.Checked = src.IsReverse;
             this.DontHideCheckBox.Checked = src.DontHide;
 
-            this.SpellVisualSetting.TextFont = new Font(
-                src.FontFamily,
-                src.FontSize,
-                (FontStyle)src.FontStyle);
+            this.SpellVisualSetting.FontInfo = src.Font;
             this.SpellVisualSetting.BarColor = string.IsNullOrWhiteSpace(src.BarColor) ?
                 Settings.Default.ProgressBarColor :
                 src.BarColor.FromHTML();
