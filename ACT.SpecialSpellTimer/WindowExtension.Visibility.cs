@@ -20,6 +20,7 @@
         {
             var targetOpacity = (100d - Settings.Default.Opacity) / 100d;
             x.Opacity = targetOpacity;
+            x.Topmost = true;
         }
 
         /// <summary>
@@ -30,6 +31,7 @@
             this Window x)
         {
             x.Opacity = 0;
+            x.Topmost = false;
         }
 
         /// <summary>

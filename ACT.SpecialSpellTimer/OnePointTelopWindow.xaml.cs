@@ -131,9 +131,6 @@
                 return;
             }
 
-            this.Topmost = false;
-            this.Topmost = true;
-
             // Brushを生成する
             var fontColor = this.DataSource.FontColor.FromHTML().ToWPF();
             var fontOutlineColor = string.IsNullOrWhiteSpace(this.DataSource.FontOutlineColor) ?

@@ -311,6 +311,7 @@
                     }
 
                     w.Opacity = 0;
+                    w.Topmost = false;
                     w.Show();
 
                     telopWindowList.Add(telop.ID, w);

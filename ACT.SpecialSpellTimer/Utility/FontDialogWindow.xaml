@@ -11,7 +11,10 @@
   ResizeMode="NoResize"
   SnapsToDevicePixels="True"
   WindowStartupLocation="CenterOwner"
-  AllowsTransparency="True" Background="Transparent" WindowStyle="None">
+  AllowsTransparency="True" Background="Transparent" WindowStyle="None"
+  TextOptions.TextFormattingMode="Display"
+  TextOptions.TextHintingMode="Fixed"
+  TextOptions.TextRenderingMode="ClearType">
 
   <!-- Windowをメトロ風に書き換える -->
   <WindowChrome.WindowChrome>

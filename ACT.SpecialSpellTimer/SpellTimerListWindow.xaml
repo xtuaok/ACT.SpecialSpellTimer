@@ -1,14 +1,14 @@
 ﻿<Window 
-    x:Class="ACT.SpecialSpellTimer.SpellTimerListWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="SpellTimerListWindow" SizeToContent="WidthAndHeight"
-    AllowsTransparency="True" WindowStyle="None" Opacity="0" Background="Transparent" ShowInTaskbar="False" Topmost="True"
-    TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextHintingMode="Fixed"
-    TextOptions.TextRenderingMode="ClearType">
+  x:Class="ACT.SpecialSpellTimer.SpellTimerListWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  Title="SpellTimerListWindow" SizeToContent="WidthAndHeight"
+  AllowsTransparency="True" WindowStyle="None" Opacity="0" Background="Transparent" ShowInTaskbar="False" Topmost="True"
+  TextOptions.TextFormattingMode="Ideal"
+  TextOptions.TextHintingMode="Fixed"
+  TextOptions.TextRenderingMode="ClearType">
 
-    <Grid Name="BackgroundColorGrid">
+  <Grid Name="BackgroundColorGrid">
 
         <Canvas
             Margin="0,0,0,0">
