@@ -275,12 +275,8 @@
             }
         }
 
-        public System.Drawing.Font ToFontFotWindowsForm()
+        public System.Drawing.Font ToFontForWindowsForm()
         {
-            System.Drawing.Font f = new System.Drawing.Font(
-                this.FamilyName,
-                (float)(this.Size * 72.0d / 96.0d));
-
             System.Drawing.FontStyle style = System.Drawing.FontStyle.Regular;
 
             if (this.Style == FontStyles.Italic ||
@@ -293,6 +289,11 @@
             {
                 style |= System.Drawing.FontStyle.Bold;
             }
+
+            System.Drawing.Font f = new System.Drawing.Font(
+                this.FamilyName,
+                (float)(this.Size * 72.0d / 96.0d),
+                style);
 
             return f;
         }

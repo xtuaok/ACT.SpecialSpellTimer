@@ -372,7 +372,7 @@
         /// </summary>
         public void RefreshSampleImage()
         {
-            var font = this.FontInfo.ToFontFotWindowsForm();
+            var font = this.FontInfo.ToFontForWindowsForm();
             var fontColor = this.FontColor;
             var fontOutlineColor = this.FontOutlineColor;
             var barColor = this.BarColor;

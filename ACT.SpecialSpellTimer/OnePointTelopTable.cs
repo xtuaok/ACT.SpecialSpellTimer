@@ -311,7 +311,9 @@
                     Path.GetFileName(item.DelaySound) :
                     string.Empty;
 
-                if (!string.IsNullOrWhiteSpace(item.Font.Family.Source))
+                if (item.Font != null &&
+                    item.Font.Family != null &&
+                    !string.IsNullOrWhiteSpace(item.Font.Family.Source))
                 {
                     item.FontFamily = string.Empty;
                     item.FontSize = 1;

@@ -178,7 +178,7 @@
             Settings.Default.ProgressBarSize = this.DefaultVisualSetting.BarSize;
             Settings.Default.ProgressBarColor = this.DefaultVisualSetting.BarColor;
             Settings.Default.ProgressBarOutlineColor = this.DefaultVisualSetting.BarOutlineColor;
-            Settings.Default.Font = this.DefaultVisualSetting.FontInfo.ToFontFotWindowsForm();
+            Settings.Default.Font = this.DefaultVisualSetting.FontInfo.ToFontForWindowsForm();
             Settings.Default.FontColor = this.DefaultVisualSetting.FontColor;
             Settings.Default.FontOutlineColor = this.DefaultVisualSetting.FontOutlineColor;
             Settings.Default.BackgroundColor = this.DefaultVisualSetting.BackgroundColor;
