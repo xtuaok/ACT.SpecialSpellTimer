@@ -122,8 +122,8 @@
 
         <TextBlock.Effect>
           <DropShadowEffect
-            Color="#EE6557"
-            ShadowDepth="0"
+            Color="Silver"
+            ShadowDepth="2"
             BlurRadius="2"
             RenderingBias="Quality"
             />

@@ -115,11 +115,11 @@
                 Settings.Default.ProgressBarOutlineColor.ToWPF() :
                 this.BarOutlineColor.FromHTMLWPF();
 
-            this.FontBrush = this.CreateBrush(this.FontBrush, fontColor);
-            this.FontOutlineBrush = this.CreateBrush(this.FontOutlineBrush, fontOutlineColor);
-            this.BarBrush = this.CreateBrush(this.BarBrush, barColor);
-            this.BarBackBrush = this.CreateBrush(this.BarBackBrush, barBackColor);
-            this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
+            this.FontBrush = this.GetBrush(fontColor);
+            this.FontOutlineBrush = this.GetBrush(fontOutlineColor);
+            this.BarBrush = this.GetBrush(barColor);
+            this.BarBackBrush = this.GetBrush(barBackColor);
+            this.BarOutlineBrush = this.GetBrush(barOutlineColor);
 
             var tb = default(OutlineTextBlock);
             var font = this.FontInfo;
@@ -130,11 +130,7 @@
             if (tb.Text != title)
             {
                 tb.Text = title;
-                tb.FontFamily = font.Family;
-                tb.FontSize = font.Size;
-                tb.FontStyle = font.Style;
-                tb.FontWeight = font.Weight;
-                tb.FontStretch = font.Stretch;
+                tb.SetFontInfo(font);
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.2d;
@@ -148,11 +144,7 @@
             if (tb.Text != recast)
             {
                 tb.Text = recast;
-                tb.FontFamily = font.Family;
-                tb.FontSize = font.Size;
-                tb.FontStyle = font.Style;
-                tb.FontWeight = font.Weight;
-                tb.FontStretch = font.Stretch;
+                tb.SetFontInfo(font);
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.2d;

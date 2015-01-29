@@ -198,7 +198,7 @@
                         c.G,
                         c.B);
 
-                    this.BackgroundBrush = this.CreateBrush(this.BackgroundBrush, backGroundColor);
+                    this.BackgroundBrush = this.GetBrush(backGroundColor);
                 }
             }
 

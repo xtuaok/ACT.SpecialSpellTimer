@@ -1,9 +1,9 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
+    using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
-
     using ACT.SpecialSpellTimer.Properties;
 
     /// <summary>
@@ -12,15 +12,23 @@
     public static partial class WindowExtension
     {
         /// <summary>
+        /// Brush辞書
+        /// </summary>
+        private static Dictionary<string, SolidColorBrush> brushDictionary = new Dictionary<string, SolidColorBrush>();
+
+        /// <summary>
         /// オーバーレイとして表示する
         /// </summary>
         /// <param name="x">Window</param>
         public static void ShowOverlay(
             this Window x)
         {
-            var targetOpacity = (100d - Settings.Default.Opacity) / 100d;
-            x.Opacity = targetOpacity;
-            x.Topmost = true;
+            if (x.Opacity <= 0d)
+            {
+                var targetOpacity = (100d - Settings.Default.Opacity) / 100d;
+                x.Opacity = targetOpacity;
+                x.Topmost = true;
+            }
         }
 
         /// <summary>
@@ -30,50 +38,55 @@
         public static void HideOverlay(
             this Window x)
         {
-            x.Opacity = 0;
-            x.Topmost = false;
+            if (x.Opacity > 0d)
+            {
+                x.Opacity = 0d;
+                x.Topmost = false;
+            }
         }
 
         /// <summary>
-        /// Brushを生成する
+        /// Brushを取得する
         /// </summary>
         /// <param name="x">Window</param>
-        /// <param name="brush">今のBrush</param>
-        /// <param name="color">カラー</param>
+        /// <param name="color">Brushの色</param>
         /// <returns>Brush</returns>
-        public static SolidColorBrush CreateBrush(
+        public static SolidColorBrush GetBrush(
             this Window x,
-            SolidColorBrush brush,
             Color color)
         {
-            if (brush == null || brush.Color != color)
-            {
-                brush = new SolidColorBrush(color);
-                brush.Freeze();
-            }
-
-            return brush;
+            return GetBrush(color);
         }
 
         /// <summary>
-        /// Brushを生成する
+        /// Brushを取得する
         /// </summary>
-        /// <param name="x">Window</param>
-        /// <param name="brush">今のBrush</param>
-        /// <param name="color">カラー</param>
+        /// <param name="x">UserControl</param>
+        /// <param name="color">Brushの色</param>
         /// <returns>Brush</returns>
-        public static SolidColorBrush CreateBrush(
+        public static SolidColorBrush GetBrush(
             this UserControl x,
-            SolidColorBrush brush,
             Color color)
         {
-            if (brush == null || brush.Color != color)
+            return GetBrush(color);
+        }
+
+        /// <summary>
+        /// Brushを取得する
+        /// </summary>
+        /// <param name="color">Brushの色</param>
+        /// <returns>Brush</returns>
+        private static SolidColorBrush GetBrush(
+            Color color)
+        {
+            if (!brushDictionary.ContainsKey(color.ToString()))
             {
-                brush = new SolidColorBrush(color);
+                var brush = new SolidColorBrush(color);
                 brush.Freeze();
+                brushDictionary[color.ToString()] = brush;
             }
 
-            return brush;
+            return brushDictionary[color.ToString()];
         }
     }
 }

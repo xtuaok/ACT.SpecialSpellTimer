@@ -1,6 +1,8 @@
 ﻿namespace ACT.SpecialSpellTimer.Utility
 {
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Threading;
     using System.Windows;
@@ -189,10 +191,41 @@
         [XmlIgnore]
         private static FontWeightConverter weightConverter = new FontWeightConverter();
 
+        [XmlIgnore]
+        private static Dictionary<string, FontFamily> fontFamilyDictionary = new Dictionary<string, FontFamily>();
+
         public FontInfo()
         {
-            this.Family = new FontFamily();
+            this.Family = GetFontFamily(string.Empty);
             this.Size = 11.25;
+        }
+
+        public FontInfo(
+            string family,
+            double size,
+            string style,
+            string weight,
+            string stretch)
+        {
+            this.Family = GetFontFamily(family);
+            this.Size = size;
+            this.StyleString = style;
+            this.WeightString = weight;
+            this.StretchString = stretch;
+        }
+
+        public FontInfo(
+            FontFamily family,
+            double size,
+            FontStyle style,
+            FontWeight weight,
+            FontStretch stretch)
+        {
+            this.Family = family;
+            this.Size = size;
+            this.Style = style;
+            this.Weight = weight;
+            this.Stretch = stretch;
         }
 
         [XmlIgnore]
@@ -207,7 +240,7 @@
             }
             set
             {
-                this.Family = new FontFamily(value);
+                this.Family = GetFontFamily(value);
             }
         }
 
@@ -297,19 +330,45 @@
 
             return f;
         }
+
+        public override string ToString()
+        {
+            var t = string.Empty;
+
+            t += "{ ";
+            t += "\"Family\":" + "\"" + this.FamilyName + "\"" + ", ";
+            t += "\"Size\":" + this.Size + ", ";
+            t += "\"Style\":" + "\"" + this.StyleString + "\"" + ", ";
+            t += "\"Weight\":" + "\"" + this.WeightString + "\"" + ", ";
+            t += "\"Streth\":" + "\"" + this.StretchString + "\"";
+            t += " }";
+
+            return t;
+        }
+
+        private static FontFamily GetFontFamily(
+            string source)
+        {
+            if (!fontFamilyDictionary.ContainsKey(source))
+            {
+                fontFamilyDictionary[source] = new FontFamily(source);
+            }
+
+            return fontFamilyDictionary[source];
+        }
     }
     public class FontFamilyToNameConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var v = value as FontFamily;
             var currentLang = XmlLanguage.GetLanguage(culture.IetfLanguageTag);
             return v.FamilyNames.FirstOrDefault(o => o.Key == currentLang).Value ?? v.Source;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 
@@ -319,26 +378,50 @@
             this Control control,
             FontInfo fontInfo)
         {
-            control.FontFamily = fontInfo.Family;
-            control.FontSize = fontInfo.Size;
-            control.FontStyle = fontInfo.Style;
-            control.FontWeight = fontInfo.Weight;
-            control.FontStretch = fontInfo.Stretch;
+            if (control.GetFontInfo().ToString() != fontInfo.ToString())
+            {
+                control.FontFamily = fontInfo.Family;
+                control.FontSize = fontInfo.Size;
+                control.FontStyle = fontInfo.Style;
+                control.FontWeight = fontInfo.Weight;
+                control.FontStretch = fontInfo.Stretch;
+            }
+        }
+
+        internal static void SetFontInfo(
+            this OutlineTextBlock control,
+            FontInfo fontInfo)
+        {
+            if (control.GetFontInfo().ToString() != fontInfo.ToString())
+            {
+                control.FontFamily = fontInfo.Family;
+                control.FontSize = fontInfo.Size;
+                control.FontStyle = fontInfo.Style;
+                control.FontWeight = fontInfo.Weight;
+                control.FontStretch = fontInfo.Stretch;
+            }
         }
 
         public static FontInfo GetFontInfo(
             this Control control)
         {
-            var fi = new FontInfo()
-            {
-                Family = control.FontFamily,
-                Size = control.FontSize,
-                Style = control.FontStyle,
-                Weight = control.FontWeight,
-                Stretch = control.FontStretch
-            };
+            return new FontInfo(
+                control.FontFamily,
+                control.FontSize,
+                control.FontStyle,
+                control.FontWeight,
+                control.FontStretch);
+        }
 
-            return fi;
+        internal static FontInfo GetFontInfo(
+            this OutlineTextBlock control)
+        {
+            return new FontInfo(
+                control.FontFamily,
+                control.FontSize,
+                control.FontStyle,
+                control.FontWeight,
+                control.FontStretch);
         }
     }
 }

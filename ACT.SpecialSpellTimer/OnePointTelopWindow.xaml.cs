@@ -146,12 +146,12 @@
                 c.G,
                 c.B);
 
-            this.FontBrush = this.CreateBrush(this.FontBrush, fontColor);
-            this.FontOutlineBrush = this.CreateBrush(this.FontOutlineBrush, fontOutlineColor);
-            this.BarBrush = this.CreateBrush(this.BarBrush, barColor);
-            this.BarBackBrush = this.CreateBrush(this.BarBackBrush, barBackColor);
-            this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
-            this.BackgroundBrush = this.CreateBrush(this.BackgroundBrush, backGroundColor);
+            this.FontBrush = this.GetBrush(fontColor);
+            this.FontOutlineBrush = this.GetBrush(fontOutlineColor);
+            this.BarBrush = this.GetBrush(barColor);
+            this.BarBackBrush = this.GetBrush(barBackColor);
+            this.BarOutlineBrush = this.GetBrush(barOutlineColor);
+            this.BackgroundBrush = this.GetBrush(backGroundColor);
 
             Dispatcher.InvokeAsync(new Action(() =>
             {
@@ -197,12 +197,7 @@
                 {
                     this.MessageTextBlock.Text = message;
 
-                    var font = this.DataSource.Font;
-                    this.MessageTextBlock.FontFamily = font.Family;
-                    this.MessageTextBlock.FontSize = font.Size;
-                    this.MessageTextBlock.FontStyle = font.Style;
-                    this.MessageTextBlock.FontWeight = font.Weight;
-                    this.MessageTextBlock.FontStretch = font.Stretch;
+                    this.MessageTextBlock.SetFontInfo(this.DataSource.Font);
                     this.MessageTextBlock.Fill = this.FontBrush;
                     this.MessageTextBlock.Stroke = this.FontOutlineBrush;
                     this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
