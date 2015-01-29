@@ -143,10 +143,14 @@
       <Grid Grid.Row="1" Grid.ColumnSpan="2">
         <Grid.Resources>
           <DataTemplate x:Key="fontFamilyData">
-            <TextBlock 
-          Text="{Binding Converter={StaticResource FontFamilyToNameConverter}, Mode=OneWay}" 
-          FontFamily="{Binding Source}" 
-          FontSize="12.0"/>
+            <Label 
+              Content="{Binding Converter={StaticResource FontFamilyToNameConverter}, Mode=OneWay}" 
+              FontFamily="{Binding Source}" 
+              FontSize="12.0"
+              Height="22"
+              Margin="0"
+              Padding="0"
+              VerticalContentAlignment="Center"/>
           </DataTemplate>
 
           <DataTemplate DataType="{x:Type FamilyTypeface}">
