@@ -155,15 +155,16 @@
         {
             this.FontSizeTextBox.Text = this.fontInfo.Size.ToString("N1");
 
-            int i;
-
-            i = 0;
-            foreach (var item in this.FontFamilyListBox.Items)
+            int i = 0;
+            foreach (FontFamily item in this.FontFamilyListBox.Items)
             {
-                if (this.fontInfo.Family != null &&
-                    item.ToString() == this.fontInfo.Family.Source)
+                if (this.fontInfo.Family != null)
                 {
-                    break;
+                    if (item.Source == this.fontInfo.Family.Source ||
+                        item.FamilyNames.Any(x => x.Value == this.fontInfo.Family.Source))
+                    {
+                        break;
+                    }
                 }
 
                 i++;
