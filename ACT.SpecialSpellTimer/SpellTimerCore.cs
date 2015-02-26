@@ -614,7 +614,10 @@
                     setting.Top = panel.Top;
                 }
 
-                PanelSettings.Default.Save();
+                if (this.SpellTimerPanels.Count > 0)
+                {
+                    PanelSettings.Default.Save();
+                }
 
                 ActInvoker.Invoke(() =>
                 {

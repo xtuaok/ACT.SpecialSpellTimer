@@ -111,7 +111,10 @@
                     }
                 });
 
-                OnePointTelopTable.Default.Save();
+                if (telopWindowList.Count > 0)
+                {
+                    OnePointTelopTable.Default.Save();
+                }
 
                 telopWindowList.Clear();
             }
