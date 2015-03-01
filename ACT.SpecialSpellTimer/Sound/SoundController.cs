@@ -16,11 +16,6 @@
     public class SoundController
     {
         /// <summary>
-        /// ロックオブジェクト
-        /// </summary>
-        private static object lockObject = new object();
-
-        /// <summary>
         /// シングルトンinstance
         /// </summary>
         private static SoundController instance;
@@ -32,10 +27,9 @@
         {
             get
             {
-                lock (lockObject)
+                if (instance == null)
                 {
                     instance = new SoundController();
-                    instance.LoadTTSYukkuri();
                 }
 
                 return instance;
@@ -43,9 +37,14 @@
         }
 
         /// <summary>
-        /// TTSYukkuriプラグインinstance
+        /// ゆっくりをチェックしたタイムスタンプ
         /// </summary>
-        private dynamic ttsYukkuriPlugin;
+        private DateTime checkedYukkuriTimeStamp = DateTime.MinValue;
+
+        /// <summary>
+        /// ゆっくりが有効かどうか？
+        /// </summary>
+        private bool enabledYukkuri;
 
         /// <summary>
         /// ゆっくりが有効かどうか？
@@ -54,8 +53,21 @@
         {
             get
             {
-                this.LoadTTSYukkuri();
-                return this.ttsYukkuriPlugin != null;
+                if ((DateTime.Now - this.checkedYukkuriTimeStamp).TotalSeconds >= 10d)
+                {
+                    if (ActGlobals.oFormActMain.Visible)
+                    {
+                        this.enabledYukkuri = ActGlobals.oFormActMain.ActPlugins
+                            .Where(x =>
+                                x.pluginFile.Name.ToUpper() == "ACT.TTSYukkuri.dll".ToUpper() &&
+                                x.lblPluginStatus.Text.ToUpper() == "Plugin Started".ToUpper())
+                            .Any();
+
+                        this.checkedYukkuriTimeStamp = DateTime.Now;
+                    }
+                }
+
+                return this.enabledYukkuri;
             }
         }
 
@@ -121,31 +133,6 @@
         }
 
         /// <summary>
-        /// TTSYukkuriをロードする
-        /// </summary>
-        public void LoadTTSYukkuri()
-        {
-            lock (lockObject)
-            {
-                if (this.ttsYukkuriPlugin == null)
-                {
-                    if (ActGlobals.oFormActMain.Visible)
-                    {
-                        foreach (var item in ActGlobals.oFormActMain.ActPlugins)
-                        {
-                            if (item.pluginFile.Name.ToUpper() == "ACT.TTSYukkuri.dll".ToUpper() &&
-                                item.lblPluginStatus.Text.ToUpper() == "Plugin Started".ToUpper())
-                            {
-                                this.ttsYukkuriPlugin = item.pluginObj;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// 再生する
         /// </summary>
         /// <param name="source">
@@ -162,7 +149,7 @@
 
                 if (this.EnabledYukkuri)
                 {
-                    this.ttsYukkuriPlugin.Speak(source);
+                    ActGlobals.oFormActMain.TTS(source);
                 }
                 else
                 {
