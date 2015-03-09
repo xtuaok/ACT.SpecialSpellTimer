@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
@@ -14,11 +15,6 @@
     /// </summary>
     public class SpellTimerCore
     {
-        /// <summary>
-        /// ロックオブジェクト
-        /// </summary>
-        private static object lockObject = new object();
-
         /// <summary>
         /// シングルトンinstance
         /// </summary>
@@ -91,38 +87,7 @@
                 Interval = (int)this.RefreshInterval
             };
 
-            this.RefreshTimer.Tick += (s1, e1) =>
-            {
-                lock (lockObject)
-                {
-#if DEBUG
-                    var sw = Stopwatch.StartNew();
-#endif
-                    try
-                    {
-                        if (this.RefreshTimer != null &&
-                            this.RefreshTimer.Enabled)
-                        {
-                            this.RefreshWindow();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ActGlobals.oFormActMain.WriteExceptionLog(
-                            ex,
-                            Translate.Get("SpellTimerRefreshError"));
-                    }
-                    finally
-                    {
-#if DEBUG
-                        sw.Stop();
-                        Debug.WriteLine("●Refresh " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
-#endif
-                        this.RefreshTimer.Interval = (int)this.RefreshInterval;
-                    }
-                }
-            };
-
+            this.RefreshTimer.Tick += this.RefreshTimerOnTick;
             this.RefreshTimer.Start();
         }
 
@@ -141,15 +106,12 @@
                 this.LogBuffer = null;
             }
 
-            lock (lockObject)
+            // 監視を開放する
+            if (this.RefreshTimer != null)
             {
-                // 監視を開放する
-                if (this.RefreshTimer != null)
-                {
-                    this.RefreshTimer.Stop();
-                    this.RefreshTimer.Dispose();
-                    this.RefreshTimer = null;
-                }
+                this.RefreshTimer.Stop();
+                this.RefreshTimer.Dispose();
+                this.RefreshTimer = null;
             }
 
             // 全てのPanelを閉じる
@@ -166,6 +128,42 @@
         }
 
         /// <summary>
+        /// RefreshTimerOnTick
+        /// </summary>
+        /// <param name="sender">イベント発生元</param>
+        /// <param name="e">イベント引数</param>
+        private void RefreshTimerOnTick(
+            object sender,
+            EventArgs e)
+        {
+#if DEBUG
+            var sw = Stopwatch.StartNew();
+#endif
+            try
+            {
+                if (this.RefreshTimer != null &&
+                    this.RefreshTimer.Enabled)
+                {
+                    this.RefreshWindow();
+                }
+            }
+            catch (Exception ex)
+            {
+                ActGlobals.oFormActMain.WriteExceptionLog(
+                    ex,
+                    Translate.Get("SpellTimerRefreshError"));
+            }
+            finally
+            {
+#if DEBUG
+                sw.Stop();
+                Debug.WriteLine("●Refresh " + sw.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+                this.RefreshTimer.Interval = (int)this.RefreshInterval;
+            }
+        }
+
+        /// <summary>
         /// Windowを更新する
         /// </summary>
         private void RefreshWindow()
@@ -173,10 +171,129 @@
 #if DEBUG
             var sw1 = Stopwatch.StartNew();
 #endif
-            // 有効なSpellリストを取得する
+            // 有効なスペルとテロップのリストを取得する
             var spellArray = SpellTimerTable.EnabledTable;
+            var telopArray = OnePointTelopTable.Default.EnabledTable;
 
             // 不要なWindowを閉じる
+            OnePointTelopController.GarbageWindows(telopArray);
+            this.GarbageSpellPanelWindows(spellArray);
+#if DEBUG
+            sw1.Stop();
+            Debug.WriteLine("Refresh ClosePanels ->" + sw1.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+
+            // ACTが起動していない？
+#if DEBUG
+            var sw7 = Stopwatch.StartNew();
+#endif
+            if (ActGlobals.oFormActMain == null ||
+                !ActGlobals.oFormActMain.Visible)
+            {
+                this.HidePanels();
+                this.RefreshInterval = 1000;
+                return;
+            }
+
+            if ((DateTime.Now - this.LastFFXIVProcessDateTime).TotalSeconds >= 5.0d)
+            {
+                // FF14が起動していない？
+                if (FF14PluginHelper.GetFFXIVProcess == null)
+                {
+                    this.RefreshInterval = 1000;
+
+                    if (!Settings.Default.OverlayForceVisible)
+                    {
+                        this.ClosePanels();
+                        OnePointTelopController.CloseTelops();
+                        return;
+                    }
+                }
+
+                this.LastFFXIVProcessDateTime = DateTime.Now;
+            }
+
+            // タイマの間隔を標準に戻す
+            this.RefreshInterval = Settings.Default.RefreshInterval;
+#if DEBUG
+            sw7.Stop();
+            Debug.WriteLine("Refresh Exists FF14 ->" + sw7.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+
+            // ログを取り出す
+#if DEBUG
+            var sw2 = Stopwatch.StartNew();
+#endif
+            var logLines = this.LogBuffer.GetLogLines();
+#if DEBUG
+            sw2.Stop();
+            Debug.WriteLine("Refresh GetLog ->" + sw2.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+
+            // テロップとマッチングする
+#if DEBUG
+            var sw3 = Stopwatch.StartNew();
+#endif
+            OnePointTelopController.Match(
+                telopArray,
+                logLines);
+#if DEBUG
+            sw3.Stop();
+            Debug.WriteLine("Refresh MatchTelop ->" + sw3.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+
+            // スペルリストとマッチングする
+#if DEBUG
+            var sw4 = Stopwatch.StartNew();
+#endif
+            this.MatchSpells(
+                spellArray,
+                logLines);
+#if DEBUG
+            sw4.Stop();
+            Debug.WriteLine("Refresh MatchSpell ->" + sw4.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+
+            // コマンドとマッチングする
+            TextCommandController.MatchCommand(
+                logLines);
+
+            // オーバーレイが非表示？
+            if (!Settings.Default.OverlayVisible)
+            {
+                this.HidePanels();
+                OnePointTelopController.HideTelops();
+                return;
+            }
+
+            // テロップWindowを表示する
+#if DEBUG
+            var sw5 = Stopwatch.StartNew();
+#endif
+            OnePointTelopController.RefreshTelopWindows(telopArray);
+#if DEBUG
+            sw5.Stop();
+            Debug.WriteLine("Refresh RefreshTelopWindows ->" + sw5.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+
+            // スペルWindowを表示する
+#if DEBUG
+            var sw6 = Stopwatch.StartNew();
+#endif
+            this.RefreshSpellPanelWindows(spellArray);
+#if DEBUG
+            sw6.Stop();
+            Debug.WriteLine("Refresh RefreshSpellPanelWindows ->" + sw6.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
+        }
+
+        /// <summary>
+        /// 不要なスペルタイマWindowを閉じる
+        /// </summary>
+        /// <param name="spells">Spell</param>
+        private void GarbageSpellPanelWindows(
+            SpellTimer[] spells)
+        {
             if (this.SpellTimerPanels != null)
             {
                 var removeList = new List<SpellTimerListWindow>();
@@ -207,7 +324,7 @@
                     }
 
                     // スペルリストに存在しないパネルを閉じる
-                    if (!spellArray.Any(x => x.Panel == panel.PanelName))
+                    if (!spells.Any(x => x.Panel == panel.PanelName))
                     {
                         ActInvoker.Invoke(() => panel.Close());
                         removeList.Add(panel);
@@ -219,132 +336,6 @@
                     this.SpellTimerPanels.Remove(item);
                 }
             }
-
-#if DEBUG
-            sw1.Stop();
-            Debug.WriteLine("Refresh ClosePanels ->" + sw1.ElapsedMilliseconds.ToString("N0") + "ms");
-#endif
-
-            // ACTが起動していない？
-            if (ActGlobals.oFormActMain == null ||
-                !ActGlobals.oFormActMain.Visible)
-            {
-                this.HidePanels();
-                this.RefreshInterval = 1000;
-                return;
-            }
-
-            if ((DateTime.Now - this.LastFFXIVProcessDateTime).TotalSeconds >= 5.0d)
-            {
-                // FF14が起動していない？
-                if (FF14PluginHelper.GetFFXIVProcess == null)
-                {
-                    this.RefreshInterval = 1000;
-
-                    if (!Settings.Default.OverlayForceVisible)
-                    {
-                        this.ClosePanels();
-                        OnePointTelopController.CloseTelops();
-                        return;
-                    }
-                }
-
-                this.LastFFXIVProcessDateTime = DateTime.Now;
-            }
-
-            // タイマの間隔を標準に戻す
-            this.RefreshInterval = Settings.Default.RefreshInterval;
-
-            // ログを取り出す
-#if DEBUG
-            var sw2 = Stopwatch.StartNew();
-#endif
-            var logLines = this.LogBuffer.GetLogLines();
-#if DEBUG
-            sw2.Stop();
-            Debug.WriteLine("Refresh GetLog ->" + sw2.ElapsedMilliseconds.ToString("N0") + "ms");
-#endif
-
-            // テロップとマッチングする
-#if DEBUG
-            var sw3 = Stopwatch.StartNew();
-#endif
-            OnePointTelopController.Match(
-                logLines);
-#if DEBUG
-            sw3.Stop();
-            Debug.WriteLine("Refresh MatchTelop ->" + sw3.ElapsedMilliseconds.ToString("N0") + "ms");
-#endif
-
-            // スペルリストとマッチングする
-#if DEBUG
-            var sw4 = Stopwatch.StartNew();
-#endif
-            this.MatchSpells(
-                spellArray,
-                logLines);
-#if DEBUG
-            sw4.Stop();
-            Debug.WriteLine("Refresh MatchSpell ->" + sw4.ElapsedMilliseconds.ToString("N0") + "ms");
-#endif
-
-            // コマンドとマッチングする
-            TextCommandController.MatchCommand(
-                logLines);
-
-            // オーバーレイが非表示？
-            if (!Settings.Default.OverlayVisible)
-            {
-                this.HidePanels();
-                OnePointTelopController.HideTelops();
-                return;
-            }
-
-            // Windowを表示する
-#if DEBUG
-            var sw5 = Stopwatch.StartNew();
-#endif
-            var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
-            foreach (var name in panelNames)
-            {
-                var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
-                if (w == null)
-                {
-                    w = new SpellTimerListWindow()
-                    {
-                        Title = "SpecialSpellTimer - " + name,
-                        PanelName = name,
-                    };
-
-                    this.SpellTimerPanels.Add(w);
-
-                    // クリックスルー？
-                    if (Settings.Default.ClickThroughEnabled)
-                    {
-                        w.ToTransparentWindow();
-                    }
-
-                    w.Show();
-                }
-
-                w.SpellTimers = (
-                    from x in spellArray
-                    where
-                    x.Panel.Trim() == name
-                    select
-                    x).ToArray();
-
-                // ドラッグ中じゃない？
-                if (!w.IsDragging)
-                {
-                    w.RefreshSpellTimer();
-                }
-            }
-
-#if DEBUG
-            sw5.Stop();
-            Debug.WriteLine("Refresh RefreshSpell ->" + sw5.ElapsedMilliseconds.ToString("N0") + "ms");
-#endif
         }
 
         /// <summary>
@@ -356,8 +347,7 @@
             SpellTimer[] spells,
             string[] logLines)
         {
-            // Spellを舐める
-            foreach (var spell in spells.AsParallel())
+            Parallel.ForEach(spells, (spell) =>
             {
                 var regex = spell.Regex;
 
@@ -473,6 +463,52 @@
 
                         spell.TimeupDone = true;
                     }
+                }
+            }); // end loop spells
+        }
+
+        /// <summary>
+        /// スペルパネルWindowを更新する
+        /// </summary>
+        /// <param name="spells">
+        /// 対象のスペル</param>
+        private void RefreshSpellPanelWindows(
+            SpellTimer[] spells)
+        {
+            var panelNames = spells.Select(x => x.Panel.Trim()).Distinct();
+            foreach (var name in panelNames)
+            {
+                var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
+                if (w == null)
+                {
+                    w = new SpellTimerListWindow()
+                    {
+                        Title = "SpecialSpellTimer - " + name,
+                        PanelName = name,
+                    };
+
+                    this.SpellTimerPanels.Add(w);
+
+                    // クリックスルー？
+                    if (Settings.Default.ClickThroughEnabled)
+                    {
+                        w.ToTransparentWindow();
+                    }
+
+                    w.Show();
+                }
+
+                w.SpellTimers = (
+                    from x in spells
+                    where
+                    x.Panel.Trim() == name
+                    select
+                    x).ToArray();
+
+                // ドラッグ中じゃない？
+                if (!w.IsDragging)
+                {
+                    w.RefreshSpellTimer();
                 }
             }
         }

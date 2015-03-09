@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
@@ -155,14 +156,12 @@
         }
 
         /// <summary>
-        /// ログとマッチングする
+        /// 不要になったWindowを閉じる
         /// </summary>
-        /// <param name="logLines">ログ行</param>
-        public static void Match(
-            string[] logLines)
+        /// <param name="telops">Telops</param>
+        public static void GarbageWindows(
+            OnePointTelop[] telops)
         {
-            var telops = OnePointTelopTable.Default.EnabledTable;
-
             // 不要になったWindowを閉じる
             var removeWindowList = new List<OnePointTelopWindow>();
             foreach (var window in telopWindowList.Values)
@@ -184,12 +183,21 @@
 
                 telopWindowList.Remove(window.DataSource.ID);
             }
+        }
 
-            foreach (var telop in telops.AsParallel())
+        /// <summary>
+        /// ログとマッチングする
+        /// </summary>
+        /// <param name="telops">Telops</param>
+        /// <param name="logLines">ログ行</param>
+        public static void Match(
+            OnePointTelop[] telops,
+            string[] logLines)
+        {
+            Parallel.ForEach(telops, (telop) =>
             {
                 var regex = telop.Regex;
                 var regexToHide = telop.RegexToHide;
-                var isForceHide = false;
 
                 foreach (var log in logLines)
                 {
@@ -216,6 +224,7 @@
                                 telop.MatchDateTime = DateTime.Now;
                                 telop.Delayed = false;
                                 telop.MatchedLog = log;
+                                telop.ForceHide = false;
 
                                 SoundController.Default.Play(telop.MatchSound);
                                 SoundController.Default.Play(telop.MatchTextToSpeak);
@@ -244,6 +253,7 @@
                             telop.MatchDateTime = DateTime.Now;
                             telop.Delayed = false;
                             telop.MatchedLog = log;
+                            telop.ForceHide = false;
 
                             SoundController.Default.Play(telop.MatchSound);
                             if (!string.IsNullOrWhiteSpace(telop.MatchTextToSpeak))
@@ -265,7 +275,7 @@
                             if (log.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
-                                isForceHide = true;
+                                telop.ForceHide = true;
                                 continue;
                             }
                         }
@@ -276,7 +286,7 @@
                     {
                         if (regexToHide.IsMatch(log))
                         {
-                            isForceHide = true;
+                            telop.ForceHide = true;
                             continue;
                         }
                     }
@@ -298,7 +308,18 @@
                         SoundController.Default.Play(tts);
                     }
                 }
+            }); // end loop telops
+        }
 
+        /// <summary>
+        /// Windowをリフレッシュする
+        /// </summary>
+        /// <param name="telop">テロップ</param>
+        public static void RefreshTelopWindows(
+            OnePointTelop[] telops)
+        {
+            foreach (var telop in telops)
+            {
                 var w = telopWindowList.ContainsKey(telop.ID) ? telopWindowList[telop.ID] : null;
                 if (w == null)
                 {
@@ -362,7 +383,7 @@
                         }
                     }
 
-                    if (isForceHide)
+                    if (telop.ForceHide)
                     {
                         w.HideOverlay();
                         telop.MatchDateTime = DateTime.MinValue;
@@ -374,7 +395,7 @@
                     w.HideOverlay();
                     telop.MessageReplaced = string.Empty;
                 }
-            }   // end loop telops
+            }
         }
     }
 }

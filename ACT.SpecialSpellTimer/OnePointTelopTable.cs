@@ -440,5 +440,7 @@
         public Regex Regex { get; set; }
         [XmlIgnore]
         public Regex RegexToHide { get; set; }
+        [XmlIgnore]
+        public bool ForceHide { get; set; }
     }
 }

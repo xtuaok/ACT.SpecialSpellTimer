@@ -153,136 +153,133 @@
             this.BarOutlineBrush = this.GetBrush(barOutlineColor);
             this.BackgroundBrush = this.GetBrush(backGroundColor);
 
-            Dispatcher.InvokeAsync(new Action(() =>
+            // 背景色を設定する
+            var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
+            if (nowbackground == null ||
+                nowbackground.Color != this.BackgroundBrush.Color)
             {
-                // 背景色を設定する
-                var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
-                if (nowbackground == null ||
-                    nowbackground.Color != this.BackgroundBrush.Color)
-                {
-                    this.BaseColorRectangle.Fill = this.BackgroundBrush;
-                }
+                this.BaseColorRectangle.Fill = this.BackgroundBrush;
+            }
 
-                var message = Settings.Default.TelopAlwaysVisible ?
-                    this.DataSource.Message.Replace(",", Environment.NewLine) :
-                    this.DataSource.MessageReplaced.Replace(",", Environment.NewLine);
+            var message = Settings.Default.TelopAlwaysVisible ?
+                this.DataSource.Message.Replace(",", Environment.NewLine) :
+                this.DataSource.MessageReplaced.Replace(",", Environment.NewLine);
 
-                // カウントダウンプレースホルダを置換する
-                var count = (
-                    this.DataSource.MatchDateTime.AddSeconds(DataSource.Delay + DataSource.DisplayTime) -
+            // カウントダウンプレースホルダを置換する
+            var count = (
+                this.DataSource.MatchDateTime.AddSeconds(DataSource.Delay + DataSource.DisplayTime) -
+                DateTime.Now).TotalSeconds;
+
+            if (count < 0.0d)
+            {
+                count = 0.0d;
+            }
+
+            if (Settings.Default.TelopAlwaysVisible)
+            {
+                count = 0.0d;
+            }
+
+            var countAsText = count.ToString("N1");
+            var displayTimeAsText = this.DataSource.DisplayTime.ToString("N1");
+            countAsText = countAsText.PadLeft(displayTimeAsText.Length, '0');
+
+            var count0AsText = count.ToString("N0");
+            var displayTime0AsText = this.DataSource.DisplayTime.ToString("N0");
+            count0AsText = count0AsText.PadLeft(displayTime0AsText.Length, '0');
+
+            message = message.Replace("{COUNT}", countAsText);
+            message = message.Replace("{COUNT0}", count0AsText);
+
+            if (this.MessageTextBlock.Text != message)
+            {
+                this.MessageTextBlock.Text = message;
+
+                this.MessageTextBlock.SetFontInfo(this.DataSource.Font);
+                this.MessageTextBlock.Fill = this.FontBrush;
+                this.MessageTextBlock.Stroke = this.FontOutlineBrush;
+                this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
+            }
+
+            // プログレスバーを表示しない？
+            if (!this.DataSource.ProgressBarEnabled ||
+                this.DataSource.DisplayTime <= 0)
+            {
+                this.ProgressBarCanvas.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            // 残り表示時間の率を算出する
+            var progress = 1.0d;
+            if (this.DataSource.MatchDateTime > DateTime.MinValue)
+            {
+                // 表示の残り時間を求める
+                var displayTimeRemain = (
+                    this.DataSource.MatchDateTime.AddSeconds(this.DataSource.Delay + this.DataSource.DisplayTime) -
                     DateTime.Now).TotalSeconds;
 
-                if (count < 0.0d)
+                if (displayTimeRemain < 0.0d)
                 {
-                    count = 0.0d;
+                    displayTimeRemain = 0.0d;
                 }
 
-                if (Settings.Default.TelopAlwaysVisible)
+                // 率を求める
+                if (this.DataSource.DisplayTime > 0)
                 {
-                    count = 0.0d;
+                    progress = displayTimeRemain / this.DataSource.DisplayTime;
                 }
+            }
 
-                var countAsText = count.ToString("N1");
-                var displayTimeAsText = this.DataSource.DisplayTime.ToString("N1");
-                countAsText = countAsText.PadLeft(displayTimeAsText.Length, '0');
+            // 常に表示するときは100%表示
+            if (Settings.Default.TelopAlwaysVisible)
+            {
+                progress = 1.0d;
+            }
 
-                var count0AsText = count.ToString("N0");
-                var displayTime0AsText = this.DataSource.DisplayTime.ToString("N0");
-                count0AsText = count0AsText.PadLeft(displayTime0AsText.Length, '0');
-
-                message = message.Replace("{COUNT}", countAsText);
-                message = message.Replace("{COUNT0}", count0AsText);
-
-                if (this.MessageTextBlock.Text != message)
+            if (progress > 0.0d)
+            {
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    this.MessageTextBlock.Text = message;
+                    var barRect = this.BarRectangle;
+                    barRect.Stroke = this.BarBrush;
+                    barRect.Fill = this.BarBrush;
+                    barRect.Width = this.MessageTextBlock.ActualWidth * progress;
+                    barRect.Height = Settings.Default.ProgressBarSize.Height;
+                    barRect.RadiusX = 2.0d;
+                    barRect.RadiusY = 2.0d;
+                    Canvas.SetLeft(barRect, 0);
+                    Canvas.SetTop(barRect, 0);
 
-                    this.MessageTextBlock.SetFontInfo(this.DataSource.Font);
-                    this.MessageTextBlock.Fill = this.FontBrush;
-                    this.MessageTextBlock.Stroke = this.FontOutlineBrush;
-                    this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
-                }
+                    var backRect = this.BarBackRectangle;
+                    backRect.Stroke = this.BarBackBrush;
+                    backRect.Fill = this.BarBackBrush;
+                    backRect.Width = this.MessageTextBlock.ActualWidth;
+                    backRect.Height = Settings.Default.ProgressBarSize.Height;
+                    backRect.RadiusX = 2.0d;
+                    backRect.RadiusY = 2.0d;
+                    Canvas.SetLeft(backRect, 0);
+                    Canvas.SetTop(backRect, 0);
 
-                // プログレスバーを表示しない？
-                if (!this.DataSource.ProgressBarEnabled ||
-                    this.DataSource.DisplayTime <= 0)
-                {
-                    this.ProgressBarCanvas.Visibility = Visibility.Collapsed;
-                    return;
-                }
+                    var outlineRect = this.BarOutlineRectangle;
+                    outlineRect.Stroke = this.BarOutlineBrush;
+                    outlineRect.StrokeThickness = 1.0d;
+                    outlineRect.Width = this.MessageTextBlock.ActualWidth;
+                    outlineRect.Height = Settings.Default.ProgressBarSize.Height;
+                    outlineRect.RadiusX = 2.0d;
+                    outlineRect.RadiusY = 2.0d;
+                    Canvas.SetLeft(outlineRect, 0);
+                    Canvas.SetTop(outlineRect, 0);
 
-                // 残り表示時間の率を算出する
-                var progress = 1.0d;
-                if (this.DataSource.MatchDateTime > DateTime.MinValue)
-                {
-                    // 表示の残り時間を求める
-                    var displayTimeRemain = (
-                        this.DataSource.MatchDateTime.AddSeconds(this.DataSource.Delay + this.DataSource.DisplayTime) -
-                        DateTime.Now).TotalSeconds;
+                    // バーのエフェクトの色を設定する
+                    this.BarEffect.Color = this.BarBrush.Color.ChangeBrightness(1.05d);
 
-                    if (displayTimeRemain < 0.0d)
-                    {
-                        displayTimeRemain = 0.0d;
-                    }
+                    this.ProgressBarCanvas.Width = backRect.Width;
+                    this.ProgressBarCanvas.Height = backRect.Height;
+                }),
+                DispatcherPriority.Loaded);
 
-                    // 率を求める
-                    if (this.DataSource.DisplayTime > 0)
-                    {
-                        progress = displayTimeRemain / this.DataSource.DisplayTime;
-                    }
-                }
-
-                // 常に表示するときは100%表示
-                if (Settings.Default.TelopAlwaysVisible)
-                {
-                    progress = 1.0d;
-                }
-
-                if (progress > 0.0d)
-                {
-                    Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        var barRect = this.BarRectangle;
-                        barRect.Stroke = this.BarBrush;
-                        barRect.Fill = this.BarBrush;
-                        barRect.Width = this.MessageTextBlock.ActualWidth * progress;
-                        barRect.Height = Settings.Default.ProgressBarSize.Height;
-                        barRect.RadiusX = 2.0d;
-                        barRect.RadiusY = 2.0d;
-                        Canvas.SetLeft(barRect, 0);
-                        Canvas.SetTop(barRect, 0);
-
-                        var backRect = this.BarBackRectangle;
-                        backRect.Stroke = this.BarBackBrush;
-                        backRect.Fill = this.BarBackBrush;
-                        backRect.Width = this.MessageTextBlock.ActualWidth;
-                        backRect.Height = Settings.Default.ProgressBarSize.Height;
-                        backRect.RadiusX = 2.0d;
-                        backRect.RadiusY = 2.0d;
-                        Canvas.SetLeft(backRect, 0);
-                        Canvas.SetTop(backRect, 0);
-
-                        var outlineRect = this.BarOutlineRectangle;
-                        outlineRect.Stroke = this.BarOutlineBrush;
-                        outlineRect.StrokeThickness = 1.0d;
-                        outlineRect.Width = this.MessageTextBlock.ActualWidth;
-                        outlineRect.Height = Settings.Default.ProgressBarSize.Height;
-                        outlineRect.RadiusX = 2.0d;
-                        outlineRect.RadiusY = 2.0d;
-                        Canvas.SetLeft(outlineRect, 0);
-                        Canvas.SetTop(outlineRect, 0);
-
-                        // バーのエフェクトの色を設定する
-                        this.BarEffect.Color = this.BarBrush.Color.ChangeBrightness(1.05d);
-
-                        this.ProgressBarCanvas.Width = backRect.Width;
-                        this.ProgressBarCanvas.Height = backRect.Height;
-                    }),
-                    DispatcherPriority.Loaded);
-
-                    this.ProgressBarCanvas.Visibility = Visibility.Visible;
-                }
-            }));
+                this.ProgressBarCanvas.Visibility = Visibility.Visible;
+            }
         }
 
         #region フォーカスを奪わない対策
