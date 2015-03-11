@@ -5,7 +5,6 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Threading.Tasks;
 
     using ACT.SpecialSpellTimer.Utility;
     using Advanced_Combat_Tracker;
@@ -153,34 +152,19 @@
                 }
                 else
                 {
-                    Task.Run(() =>
+                    // wav？
+                    if (source.EndsWith(".wav"))
                     {
-                        // wav？
-                        if (source.EndsWith(".wav"))
+                        // ファイルが存在する？
+                        if (File.Exists(source))
                         {
-                            // ファイルが存在する？
-                            if (File.Exists(source))
-                            {
-                                ActInvoker.Invoke(() =>
-                                {
-                                    ActGlobals.oFormActMain.PlaySound(source);
-                                });
-                            }
+                            ActGlobals.oFormActMain.PlaySound(source);
                         }
-                        else
-                        {
-                            ActInvoker.Invoke(() =>
-                            {
-                                ActGlobals.oFormActMain.TTS(source);
-                            });
-                        }
-                    }).ContinueWith((t) =>
+                    }
+                    else
                     {
-                        if (t != null)
-                        {
-                            t.Dispose();
-                        }
-                    });
+                        ActGlobals.oFormActMain.TTS(source);
+                    }
                 }
             }
             catch (Exception ex)

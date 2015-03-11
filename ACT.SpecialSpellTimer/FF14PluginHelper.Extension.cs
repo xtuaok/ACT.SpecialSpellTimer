@@ -23,6 +23,11 @@
         private static DateTime lastPlayerDateTime = DateTime.MinValue;
 
         /// <summary>
+        /// プレイヤ情報の更新間隔
+        /// </summary>
+        private static double playerInfoRefreshInterval = Settings.Default.PlayerInfoRefreshInterval;
+
+        /// <summary>
         /// プレイヤー情報を取得する
         /// </summary>
         /// <returns>プレイヤー情報</returns>
@@ -31,7 +36,7 @@
             // 3分以上経過した？
             if (player == null ||
                 lastPlayerDateTime <= DateTime.MinValue ||
-                (DateTime.Now - lastPlayerDateTime).TotalMinutes >= Settings.Default.PlayerInfoRefreshInterval)
+                (DateTime.Now - lastPlayerDateTime).TotalMinutes >= playerInfoRefreshInterval)
             {
                 RefreshPlayer();
             }

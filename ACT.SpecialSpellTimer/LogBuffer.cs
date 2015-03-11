@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -19,6 +20,11 @@
         /// ペットID更新ロックオブジェクト
         /// </summary>
         private static object lockPetidObject = new object();
+
+        /// <summary>
+        /// パーティメンバの代名詞が有効か？
+        /// </summary>
+        private static bool enabledPartyMemberPlaceHolder = Settings.Default.EnabledPartyMemberPlaceholder;
 
         /// <summary>
         /// パーティメンバ
@@ -211,21 +217,21 @@
                 return keyword.Trim();
             }
 
-            keyword = keyword.Trim();
+            var sb = new StringBuilder(keyword.Trim());
 
             var player = FF14PluginHelper.GetPlayer();
             if (player != null)
             {
-                keyword = keyword.Replace("<me>", player.Name.Trim());
+                sb.Replace("<me>", player.Name.Trim());
             }
 
-            if (Settings.Default.EnabledPartyMemberPlaceholder)
+            if (enabledPartyMemberPlaceHolder)
             {
                 if (ptmember != null)
                 {
                     for (int i = 0; i < ptmember.Count; i++)
                     {
-                        keyword = keyword.Replace(
+                        sb.Replace(
                             "<" + (i + 2).ToString() + ">",
                             ptmember[i].Trim());
                     }
@@ -234,10 +240,10 @@
 
             if (!string.IsNullOrWhiteSpace(petid))
             {
-                keyword = keyword.Replace("<petid>", petid);
+                sb.Replace("<petid>", petid);
             }
 
-            return keyword;
+            return sb.ToString();
         }
 
         /// <summary>
@@ -288,7 +294,7 @@
                 ptmember.Clear();
             }
 
-            if (Settings.Default.EnabledPartyMemberPlaceholder)
+            if (enabledPartyMemberPlaceHolder)
             {
                 Debug.WriteLine("PT: Refresh");
 
@@ -300,29 +306,26 @@
                 }
 
                 // PTメンバの名前を記録しておく
-                if (Settings.Default.EnabledPartyMemberPlaceholder)
+                var partyList = FF14PluginHelper.GetCombatantListParty();
+
+                // FF14内部のPTメンバ自動ソート順で並び替える
+                var sorted =
+                    from x in partyList
+                    join y in Job.GetJobList() on
+                        x.Job equals y.JobId
+                    where
+                        x.ID != player.ID
+                    orderby
+                        y.Role,
+                        x.Job,
+                        x.ID
+                    select
+                        x.Name.Trim();
+
+                foreach (var name in sorted)
                 {
-                    var partyList = FF14PluginHelper.GetCombatantListParty();
-
-                    // FF14内部のPTメンバ自動ソート順で並び替える
-                    var sorted =
-                        from x in partyList
-                        join y in Job.GetJobList() on
-                            x.Job equals y.JobId
-                        where
-                            x.ID != player.ID
-                        orderby
-                            y.Role,
-                            x.Job,
-                            x.ID
-                        select
-                            x.Name.Trim();
-
-                    foreach (var name in sorted)
-                    {
-                        ptmember.Add(name);
-                        Debug.WriteLine("<-  " + name);
-                    }
+                    ptmember.Add(name);
+                    Debug.WriteLine("<-  " + name);
                 }
             }
         }
