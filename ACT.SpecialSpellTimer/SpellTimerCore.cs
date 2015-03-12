@@ -385,15 +385,14 @@
                     }
 
                     // 正規表現でマッチングする
-                    if (regex.IsMatch(logLine))
+                    var match = regex.Match(logLine);
+                    if (match.Success)
                     {
                         // ヒットしたログを格納する
                         spell.MatchedLog = logLine;
 
                         // 置換したスペル名を格納する
-                        spell.SpellTitleReplaced = regex.Replace(
-                            logLine,
-                            spell.SpellTitle);
+                        spell.SpellTitleReplaced = match.Result(spell.SpellTitle);
 
                         spell.MatchDateTime = DateTime.Now;
                         spell.OverDone = false;
@@ -404,7 +403,7 @@
 
                         if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
                         {
-                            var tts = regex.Replace(logLine, spell.MatchTextToSpeak);
+                            var tts = match.Result(spell.MatchTextToSpeak);
                             this.Play(tts);
                         }
                     }

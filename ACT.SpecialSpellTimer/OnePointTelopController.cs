@@ -237,17 +237,18 @@
                     // 正規表現マッチ
                     if (regex != null)
                     {
-                        if (regex.IsMatch(log))
+                        var match = regex.Match(log);
+                        if (match.Success)
                         {
                             if (!telop.AddMessageEnabled)
                             {
-                                telop.MessageReplaced = regex.Replace(log, telop.Message);
+                                telop.MessageReplaced = match.Result(telop.Message);
                             }
                             else
                             {
                                 telop.MessageReplaced += string.IsNullOrWhiteSpace(telop.MessageReplaced) ?
-                                    regex.Replace(log, telop.Message) :
-                                    Environment.NewLine + regex.Replace(log, telop.Message);
+                                    match.Result(telop.Message) :
+                                    Environment.NewLine + match.Result(telop.Message);
                             }
 
                             telop.MatchDateTime = DateTime.Now;
@@ -258,7 +259,7 @@
                             SoundController.Default.Play(telop.MatchSound);
                             if (!string.IsNullOrWhiteSpace(telop.MatchTextToSpeak))
                             {
-                                var tts = regex.Replace(log, telop.MatchTextToSpeak);
+                                var tts = match.Result(telop.MatchTextToSpeak);
                                 SoundController.Default.Play(tts);
                             }
 
