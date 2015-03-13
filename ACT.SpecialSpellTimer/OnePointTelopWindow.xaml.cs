@@ -198,7 +198,7 @@
                 this.MessageTextBlock.SetFontInfo(this.DataSource.Font);
                 this.MessageTextBlock.Fill = this.FontBrush;
                 this.MessageTextBlock.Stroke = this.FontOutlineBrush;
-                this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
+                this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 3.5d);
             }
 
             // プログレスバーを表示しない？

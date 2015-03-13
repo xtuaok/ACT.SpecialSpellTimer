@@ -8,99 +8,77 @@
   mc:Ignorable="d" 
   d:DesignHeight="32" d:DesignWidth="300" 
   Background="Transparent"
+  TextOptions.TextFormattingMode="Display"
+  TextOptions.TextHintingMode="Animated" 
+  TextOptions.TextRenderingMode="ClearType"
   >
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="TitleColumn" Width="68*"/>
-            <ColumnDefinition x:Name="RecastTimeColumn" Width="32*"/>
-        </Grid.ColumnDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition x:Name="TitleColumn" Width="68*"/>
+      <ColumnDefinition x:Name="RecastTimeColumn" Width="32*"/>
+    </Grid.ColumnDefinitions>
 
-        <Canvas 
-            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
-            Name="ProgressBarCanvas"
-            Margin="0,2,0,10"
-            VerticalAlignment="Top" 
-            >
-            <Rectangle x:Name="BarBackRectangle" />
-            <Rectangle x:Name="BarRectangle" >
-                <Rectangle.Effect>
-                    <DropShadowEffect
-                        x:Name="BarEffect"
-                        ShadowDepth="0"
-                        BlurRadius="11"
-                        RenderingBias="Quality"
-                        />
-                </Rectangle.Effect>
-            </Rectangle>
-            <Rectangle x:Name="BarOutlineRectangle" />
-        </Canvas>
-
-        <Utility:OutlineTextBlock
-            Grid.Column="0" Grid.Row="0"
-            HorizontalAlignment="{Binding HorizontalAlignment, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            VerticalAlignment="{Binding VerticalAlignment, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            Margin="{Binding Margin, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            TextWrapping="{Binding TextWrapping, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            Text="{Binding Text, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            FontFamily="{Binding FontFamily, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            FontSize="{Binding FontSize, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            FontStyle="{Binding FontStyle, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            FontWeight="{Binding FontWeight, ElementName=SpellTitleTextBlock, Mode=OneWay}" 
-            Fill="{Binding Fill, ElementName=SpellTitleTextBlock}"
-            Stroke="{Binding Stroke, ElementName=SpellTitleTextBlock}"
-            >
-            <Utility:OutlineTextBlock.Effect>
-                <BlurEffect 
-                    Radius="2" 
-                    RenderingBias="Quality" />
-            </Utility:OutlineTextBlock.Effect>
-        </Utility:OutlineTextBlock>
-
-        <Utility:OutlineTextBlock 
-            Grid.Column="0" Grid.Row="0"
-            x:Name="SpellTitleTextBlock" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top"
-            Margin="0,0,0,0" 
-            TextWrapping="NoWrap"
+    <Canvas 
+      Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+      Name="ProgressBarCanvas"
+      Margin="0,2,0,10"
+      VerticalAlignment="Top" 
+      >
+      <Rectangle x:Name="BarBackRectangle" />
+      <Rectangle x:Name="BarRectangle" >
+        <Rectangle.Effect>
+          <DropShadowEffect
+            x:Name="BarEffect"
+            ShadowDepth="0"
+            BlurRadius="11"
+            RenderingBias="Performance"
             />
+        </Rectangle.Effect>
+      </Rectangle>
+      <Rectangle x:Name="BarOutlineRectangle" />
+    </Canvas>
 
-        <Utility:OutlineTextBlock
-            Grid.Column="1" Grid.Row="0"
-            HorizontalAlignment="{Binding HorizontalAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            VerticalAlignment="{Binding VerticalAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            Margin="{Binding Margin, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            TextWrapping="{Binding TextWrapping, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            Text="{Binding Text, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            FontFamily="{Binding FontFamily, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            FontSize="{Binding FontSize, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            FontStyle="{Binding FontStyle, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            FontWeight="{Binding FontWeight, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            TextAlignment="{Binding TextAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            Fill="{Binding Fill, ElementName=RecastTimeTextBlock}"
-            Stroke="{Binding Stroke, ElementName=RecastTimeTextBlock}"
-            >
-            <Utility:OutlineTextBlock.Effect>
-                <BlurEffect 
-                    Radius="2" 
-                    RenderingBias="Quality" />
-            </Utility:OutlineTextBlock.Effect>
-        </Utility:OutlineTextBlock>
+    <Utility:OutlineTextBlock 
+      Grid.Column="0" Grid.Row="0"
+      x:Name="SpellTitleTextBlock" 
+      HorizontalAlignment="Left" 
+      VerticalAlignment="Top"
+      Margin="0,0,0,0" 
+      TextWrapping="NoWrap"
+      >
+      <Utility:OutlineTextBlock.Effect>
+        <DropShadowEffect
+          Direction="0" 
+          ShadowDepth="0" 
+          BlurRadius="11" 
+          RenderingBias="Performance"
+          Color="{Binding ElementName=RecastTimeTextBlock, Path=Fill.Color, Mode=OneWay}" />
+      </Utility:OutlineTextBlock.Effect>
+    </Utility:OutlineTextBlock>
 
-        <Utility:OutlineTextBlock 
-            Grid.Column="1" Grid.Row="0"
-            x:Name="RecastTimeTextBlock" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Top"
-            TextAlignment="Right"
-            Margin="0,0,3,0" 
-            TextWrapping="NoWrap"
-            />
-    </Grid>
+    <Utility:OutlineTextBlock 
+      Grid.Column="1" Grid.Row="0"
+      x:Name="RecastTimeTextBlock" 
+      HorizontalAlignment="Right" 
+      VerticalAlignment="Top"
+      TextAlignment="Right"
+      Margin="0,0,3,0" 
+      TextWrapping="NoWrap"
+      >
+      <Utility:OutlineTextBlock.Effect>
+        <DropShadowEffect
+          Direction="0" 
+          ShadowDepth="0" 
+          BlurRadius="11" 
+          RenderingBias="Performance"
+          Color="{Binding ElementName=RecastTimeTextBlock, Path=Fill.Color, Mode=OneWay}" />
+      </Utility:OutlineTextBlock.Effect>
+    </Utility:OutlineTextBlock>
+  </Grid>
 </UserControl>

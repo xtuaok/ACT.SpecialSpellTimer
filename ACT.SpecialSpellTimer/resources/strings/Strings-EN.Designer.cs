@@ -574,6 +574,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Enabled に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string EnabledSpellTimerNoDecimalCheckBox {
+            get {
+                return ResourceManager.GetString("EnabledSpellTimerNoDecimalCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Hide spell timers after completion に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string EraseAfterRecast {
@@ -916,7 +925,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   ※ &lt;2&gt; - &lt;8&gt; can be used, however the order may be incorrect. に類似しているローカライズされた文字列を検索します。
+        ///   ※ &lt;2&gt; - &lt;8&gt; can be used, however the order may be incorrect. (Requires restart) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PartyMemberNumberExplainLabel {
             get {
@@ -1326,6 +1335,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string SpellNameLabel {
             get {
                 return ResourceManager.GetString("SpellNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ※ A performance of drawing improves. (Requires restart) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SpellTimerFormatExplainLabel {
+            get {
+                return ResourceManager.GetString("SpellTimerFormatExplainLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recast time of spell timers is indicated by an integer. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SpellTimerFormatLabel {
+            get {
+                return ResourceManager.GetString("SpellTimerFormatLabel", resourceCulture);
             }
         }
         

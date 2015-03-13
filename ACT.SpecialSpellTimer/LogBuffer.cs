@@ -142,9 +142,6 @@
                 {
                     Thread.Sleep(5 * 1000);
                     RefreshPTList();
-                }).ContinueWith((t) =>
-                {
-                    t.Dispose();
                 });
             }
 
@@ -164,9 +161,6 @@
                         {
                             Thread.Sleep(5 * 1000);
                             RefreshPetID();
-                        }).ContinueWith((t) =>
-                        {
-                            t.Dispose();
                         });
                     }
 
@@ -190,9 +184,6 @@
                                     }
                                 }
                             }
-                        }).ContinueWith((t) =>
-                        {
-                            t.Dispose();
                         });
                     }
                 }

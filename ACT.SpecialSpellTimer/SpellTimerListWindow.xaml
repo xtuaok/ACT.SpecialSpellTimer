@@ -4,28 +4,31 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title="SpellTimerListWindow" SizeToContent="WidthAndHeight"
   AllowsTransparency="True" WindowStyle="None" Opacity="0" Background="Transparent" ShowInTaskbar="False" Topmost="True"
+  TextOptions.TextFormattingMode="Display"
+  TextOptions.TextHintingMode="Animated" 
+  TextOptions.TextRenderingMode="ClearType"
   >
-  
+
   <Grid Name="BackgroundColorGrid">
 
-        <Canvas
-            Margin="0,0,0,0">
-            <Rectangle
-                x:Name="BaseColorRectangle"
-                Margin="0,0,0,0"
-                Fill="Transparent"
-                RadiusX="8"
-                RadiusY="8"
-                Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
-                Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
-                >
-            </Rectangle>
-        </Canvas>
+    <Canvas
+      Margin="0,0,0,0">
+      <Rectangle
+        x:Name="BaseColorRectangle"
+        Margin="0,0,0,0"
+        Fill="Transparent"
+        RadiusX="8"
+        RadiusY="8"
+        Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
+        Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
+        >
+      </Rectangle>
+    </Canvas>
 
-        <Grid Name="BaseGrid" Margin="8,6,6,6">
-        </Grid>
-
+    <Grid Name="BaseGrid" Margin="8,6,6,6">
     </Grid>
+
+  </Grid>
 
 </Window>
     

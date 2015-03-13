@@ -237,7 +237,10 @@
         {
             get
             {
-                return this.Family != null ? this.Family.Source : string.Empty;
+                return 
+                    this.Family != null ? 
+                    this.Family.Source ?? string.Empty : 
+                    string.Empty;
             }
             set
             {
@@ -403,6 +406,20 @@
             }
         }
 
+        internal static void SetFontInfo(
+            this TextBlock control,
+            FontInfo fontInfo)
+        {
+            if (control.GetFontInfo().ToString() != fontInfo.ToString())
+            {
+                control.FontFamily = fontInfo.Family;
+                control.FontSize = fontInfo.Size;
+                control.FontStyle = fontInfo.Style;
+                control.FontWeight = fontInfo.Weight;
+                control.FontStretch = fontInfo.Stretch;
+            }
+        }
+
         public static FontInfo GetFontInfo(
             this Control control)
         {
@@ -416,6 +433,17 @@
 
         internal static FontInfo GetFontInfo(
             this OutlineTextBlock control)
+        {
+            return new FontInfo(
+                control.FontFamily,
+                control.FontSize,
+                control.FontStyle,
+                control.FontWeight,
+                control.FontStretch);
+        }
+
+        internal static FontInfo GetFontInfo(
+            this TextBlock control)
         {
             return new FontInfo(
                 control.FontFamily,

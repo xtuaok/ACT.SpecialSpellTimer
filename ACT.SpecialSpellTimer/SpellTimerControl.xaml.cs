@@ -13,6 +13,12 @@
     public partial class SpellTimerControl : UserControl
     {
         /// <summary>
+        /// リキャスト秒数の書式
+        /// </summary>
+        private static string recastTimeFormat = 
+            Settings.Default.EnabledSpellTimerNoDecimal ? "N0" : "N1";
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public SpellTimerControl()
@@ -133,13 +139,13 @@
                 tb.SetFontInfo(font);
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
-                tb.StrokeThickness = 0.2d;
+                tb.StrokeThickness = (tb.FontSize / 100d) * 3.5d;
             }
 
             // リキャスト時間を描画する
             tb = this.RecastTimeTextBlock;
             var recast = this.RecastTime > 0 ?
-                this.RecastTime.ToString("N1") :
+                this.RecastTime.ToString(recastTimeFormat) :
                 this.IsReverse ? "Over" : "Ready";
             if (tb.Text != recast)
             {
@@ -147,7 +153,7 @@
                 tb.SetFontInfo(font);
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
-                tb.StrokeThickness = 0.2d;
+                tb.StrokeThickness = (tb.FontSize / 100d) * 3.5d;
             }
 
             // ProgressBarを描画する

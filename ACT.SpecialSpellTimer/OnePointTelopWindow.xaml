@@ -5,82 +5,72 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title="OnePointTelopWindow" SizeToContent="WidthAndHeight"
   AllowsTransparency="True" WindowStyle="None" Opacity="0" Background="Transparent" ShowInTaskbar="False" Topmost="True"
+  TextOptions.TextFormattingMode="Display"
+  TextOptions.TextHintingMode="Animated" 
+  TextOptions.TextRenderingMode="ClearType"
   >
-  
-    <Grid Name="BackgroundColorGrid">
-        <Canvas
-            Margin="0,0,0,0">
-            <Rectangle
-                x:Name="BaseColorRectangle"
-                Margin="0,0,0,0"
-                Fill="Transparent"
-                RadiusX="8"
-                RadiusY="8"
-                Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
-                Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
-                >
-            </Rectangle>
-        </Canvas>
 
-        <Grid Name="BaseGrid" Margin="6,6,6,6">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+  <Grid Name="BackgroundColorGrid">
+    <Canvas
+      Margin="0,0,0,0">
+      <Rectangle
+        x:Name="BaseColorRectangle"
+        Margin="0,0,0,0"
+        Fill="Transparent"
+        RadiusX="8"
+        RadiusY="8"
+        Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
+        Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
+        >
+      </Rectangle>
+    </Canvas>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+    <Grid Name="BaseGrid" Margin="6,6,6,6">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
 
-            <Canvas 
-                Grid.Column="0" Grid.Row="1"
-                Name="ProgressBarCanvas"
-                Margin="0,0,0,0"
-                VerticalAlignment="Top" HorizontalAlignment="Left">
-                <Rectangle x:Name="BarBackRectangle" />
-                <Rectangle x:Name="BarRectangle" >
-                    <Rectangle.Effect>
-                        <DropShadowEffect
-                            x:Name="BarEffect"
-                            ShadowDepth="0"
-                            BlurRadius="11"
-                            RenderingBias="Quality"
-                            />
-                    </Rectangle.Effect>
-                </Rectangle>
-                <Rectangle x:Name="BarOutlineRectangle" />
-            </Canvas>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
 
-            <Utility:OutlineTextBlock 
-            Grid.Column="0" Grid.Row="0"
-            HorizontalAlignment="{Binding HorizontalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
-            VerticalAlignment="{Binding VerticalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
-            Margin="{Binding Margin, ElementName=MessageTextBlock, Mode=OneWay}"
-            TextWrapping="{Binding TextWrapping, ElementName=MessageTextBlock, Mode=OneWay}"
-            Text="{Binding Text, ElementName=MessageTextBlock, Mode=OneWay}"
-            FontFamily="{Binding FontFamily, ElementName=MessageTextBlock, Mode=OneWay}"
-            FontSize="{Binding FontSize, ElementName=MessageTextBlock, Mode=OneWay}"
-            FontStyle="{Binding FontStyle, ElementName=MessageTextBlock, Mode=OneWay}"
-            FontWeight="{Binding FontWeight, ElementName=MessageTextBlock, Mode=OneWay}" 
-            Visibility="{Binding Visibility, ElementName=MessageTextBlock, Mode=OneWay}"
-            Fill="{Binding Fill, ElementName=MessageTextBlock}"
-            Stroke="{Binding Stroke, ElementName=MessageTextBlock}"
-            >
-                <Utility:OutlineTextBlock.Effect>
-                    <BlurEffect 
-                    Radius="4"
-                    RenderingBias="Quality" />
-                </Utility:OutlineTextBlock.Effect>
-            </Utility:OutlineTextBlock>
+      <Canvas 
+        Grid.Column="0" Grid.Row="1"
+        Name="ProgressBarCanvas"
+        Margin="0,0,0,0"
+        VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Rectangle x:Name="BarBackRectangle" />
+        <Rectangle x:Name="BarRectangle" >
+          <Rectangle.Effect>
+            <DropShadowEffect
+              x:Name="BarEffect"
+              ShadowDepth="0"
+              BlurRadius="11"
+              RenderingBias="Performance"
+              />
+          </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle x:Name="BarOutlineRectangle" />
+      </Canvas>
 
-            <Utility:OutlineTextBlock 
-            Grid.Column="0" Grid.Row="0"
-            x:Name="MessageTextBlock" 
-            Margin="0,0,0,0" 
-            TextWrapping="Wrap"
-            Text="" HorizontalAlignment="Left" 
-            />
-        </Grid>
-
+      <Utility:OutlineTextBlock 
+        Grid.Column="0" Grid.Row="0"
+        x:Name="MessageTextBlock" 
+        Margin="0,0,0,0" 
+        TextWrapping="Wrap"
+        HorizontalAlignment="Left" 
+        >
+        <Utility:OutlineTextBlock.Effect>
+          <DropShadowEffect
+            Direction="0" 
+            ShadowDepth="0" 
+            BlurRadius="11" 
+            RenderingBias="Performance"
+            Color="{Binding ElementName=MessageTextBlock, Path=Fill.Color, Mode=OneWay}" />
+        </Utility:OutlineTextBlock.Effect>
+      </Utility:OutlineTextBlock>
     </Grid>
+
+  </Grid>
 </Window>

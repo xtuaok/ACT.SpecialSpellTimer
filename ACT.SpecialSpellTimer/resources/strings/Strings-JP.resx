@@ -438,8 +438,8 @@
     <comment>Panel name</comment>
   </data>
   <data name="PartyMemberNumberExplainLabel" xml:space="preserve">
-    <value>※&lt;2&gt;～&lt;8&gt;が使用可能になります。ただし2～8の順序は正しくない場合があります</value>
-    <comment>※ &lt;2&gt; - &lt;8&gt; can be used, however the order may be incorrect.</comment>
+    <value>※&lt;2&gt;～&lt;8&gt;が使用可能になります。ただし2～8の順序は正しくない場合があります（要再起動）</value>
+    <comment>※ &lt;2&gt; - &lt;8&gt; can be used, however the order may be incorrect. (Requires restart)</comment>
   </data>
   <data name="PartyPronounLabel" xml:space="preserve">
     <value>PTメンバの代名詞を有効にする</value>
@@ -450,7 +450,7 @@
     <comment>♪</comment>
   </data>
   <data name="PLD" xml:space="preserve">
-    <value>戦士</value>
+    <value>ナイト</value>
     <comment>Paladin</comment>
   </data>
   <data name="PleaseWait1" xml:space="preserve">
@@ -662,7 +662,7 @@
     <comment>Please enter the name of the ticker</comment>
   </data>
   <data name="WAR" xml:space="preserve">
-    <value>ナイト</value>
+    <value>戦士</value>
     <comment>Warrior</comment>
   </data>
   <data name="WaveSoundLabel" xml:space="preserve">
@@ -788,5 +788,17 @@
   <data name="LoadXMLError" xml:space="preserve">
     <value>XMLファイルの読み込みで例外が発生しました</value>
     <comment>An exception occurred by a load of a XML file.</comment>
+  </data>
+  <data name="EnabledSpellTimerNoDecimalCheckBox" xml:space="preserve">
+    <value>有効</value>
+    <comment>Enabled</comment>
+  </data>
+  <data name="SpellTimerFormatExplainLabel" xml:space="preserve">
+    <value>※描画の負荷が下がります（要再起動）</value>
+    <comment>※ A performance of drawing improves. (Requires restart)</comment>
+  </data>
+  <data name="SpellTimerFormatLabel" xml:space="preserve">
+    <value>スペルタイマの秒数を整数表示にする</value>
+    <comment>Recast time of spell timers is indicated by an integer.</comment>
   </data>
 </root>

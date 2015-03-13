@@ -574,6 +574,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   有効 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string EnabledSpellTimerNoDecimalCheckBox {
+            get {
+                return ResourceManager.GetString("EnabledSpellTimerNoDecimalCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   リキャスト完了後に消去する に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string EraseAfterRecast {
@@ -916,7 +925,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   ※&lt;2&gt;～&lt;8&gt;が使用可能になります。ただし2～8の順序は正しくない場合があります に類似しているローカライズされた文字列を検索します。
+        ///   ※&lt;2&gt;～&lt;8&gt;が使用可能になります。ただし2～8の順序は正しくない場合があります（要再起動） に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PartyMemberNumberExplainLabel {
             get {
@@ -943,7 +952,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   戦士 に類似しているローカライズされた文字列を検索します。
+        ///   ナイト に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PLD {
             get {
@@ -1330,6 +1339,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   ※描画の負荷が下がります（要再起動） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SpellTimerFormatExplainLabel {
+            get {
+                return ResourceManager.GetString("SpellTimerFormatExplainLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   スペルタイマの秒数を整数表示にする に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SpellTimerFormatLabel {
+            get {
+                return ResourceManager.GetString("SpellTimerFormatLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SpellTimerRefreshError {
@@ -1510,7 +1537,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   ナイト に類似しているローカライズされた文字列を検索します。
+        ///   戦士 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WAR {
             get {

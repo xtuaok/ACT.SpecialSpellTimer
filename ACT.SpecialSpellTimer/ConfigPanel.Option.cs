@@ -166,6 +166,7 @@
             this.TimeOfHideNumericUpDown.Value = (decimal)Settings.Default.TimeOfHideSpell;
             this.RefreshIntervalNumericUpDown.Value = Settings.Default.RefreshInterval;
             this.EnabledPTPlaceholderCheckBox.Checked = Settings.Default.EnabledPartyMemberPlaceholder;
+            this.EnabledSpellTimerNoDecimalCheckBox.Checked = Settings.Default.EnabledSpellTimerNoDecimal;
         }
 
         /// <summary>
@@ -190,6 +191,7 @@
             Settings.Default.TimeOfHideSpell = (double)this.TimeOfHideNumericUpDown.Value;
             Settings.Default.RefreshInterval = (long)this.RefreshIntervalNumericUpDown.Value;
             Settings.Default.EnabledPartyMemberPlaceholder = this.EnabledPTPlaceholderCheckBox.Checked;
+            Settings.Default.EnabledSpellTimerNoDecimal = this.EnabledSpellTimerNoDecimalCheckBox.Checked;
 
             // 設定を保存する
             Settings.Default.Save();
