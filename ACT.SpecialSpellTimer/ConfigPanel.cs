@@ -210,6 +210,7 @@
                         nr.FontFamily = baseRow.FontFamily;
                         nr.FontSize = baseRow.FontSize;
                         nr.FontStyle = baseRow.FontStyle;
+                        nr.Font = baseRow.Font;
                         nr.BarWidth = baseRow.BarWidth;
                         nr.BarHeight = baseRow.BarHeight;
                         nr.BackgroundColor = baseRow.BackgroundColor;
