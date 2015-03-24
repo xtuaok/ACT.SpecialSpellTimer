@@ -4,8 +4,8 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title="SpellTimerListWindow" SizeToContent="WidthAndHeight"
   AllowsTransparency="True" WindowStyle="None" Opacity="0" Background="Transparent" ShowInTaskbar="False" Topmost="True"
-  TextOptions.TextFormattingMode="Display"
-  TextOptions.TextHintingMode="Animated" 
+  TextOptions.TextFormattingMode="Ideal"
+  TextOptions.TextHintingMode="Auto"
   TextOptions.TextRenderingMode="ClearType"
   >
 

@@ -8,8 +8,8 @@
   mc:Ignorable="d" 
   d:DesignHeight="32" d:DesignWidth="300" 
   Background="Transparent"
-  TextOptions.TextFormattingMode="Display"
-  TextOptions.TextHintingMode="Animated" 
+  TextOptions.TextFormattingMode="Ideal"
+  TextOptions.TextHintingMode="Auto"
   TextOptions.TextRenderingMode="ClearType"
   >
 

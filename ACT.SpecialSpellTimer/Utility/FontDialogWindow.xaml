@@ -12,6 +12,9 @@
   SnapsToDevicePixels="True"
   WindowStartupLocation="CenterOwner"
   AllowsTransparency="True" Background="Transparent" WindowStyle="None"
+  TextOptions.TextFormattingMode="Ideal"
+  TextOptions.TextHintingMode="Auto"
+  TextOptions.TextRenderingMode="ClearType"
   >
   
   <!-- Windowをメトロ風に書き換える -->

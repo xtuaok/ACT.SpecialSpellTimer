@@ -149,7 +149,10 @@
         {
             this.EnsureGeometry();
 
-            drawingContext.DrawGeometry(this.Fill, new Pen(this.Stroke, this.StrokeThickness), this.TextGeometry);
+            drawingContext.DrawGeometry(
+                this.Fill, 
+                new Pen(this.Stroke, this.StrokeThickness), 
+                this.TextGeometry);
         }
 
         protected override Size MeasureOverride(Size availableSize)
@@ -214,9 +217,11 @@
                 this.Text,
                 CultureInfo.CurrentUICulture,
                 this.FlowDirection,
-                new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, FontStretches.Normal),
+                new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, this.FontStretch),
                 this.FontSize,
-                Brushes.Black);
+                Brushes.Black,
+                new NumberSubstitution(),
+                TextFormattingMode.Ideal);
 
             this.UpdateFormattedText();
         }
@@ -243,7 +248,9 @@
         private void EnsureGeometry()
         {
             if (this.TextGeometry != null)
+            {
                 return;
+            }
 
             this.EnsureFormattedText();
 

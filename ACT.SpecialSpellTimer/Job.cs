@@ -49,9 +49,9 @@
             list.Add(new Job() { JobId = 16, JobName = "MIN", Role = JobRoles.Gatherer });
             list.Add(new Job() { JobId = 17, JobName = "BOT", Role = JobRoles.Gatherer });
             list.Add(new Job() { JobId = 18, JobName = "FSH", Role = JobRoles.Gatherer });
-            list.Add(new Job() { JobId = 19, JobName = "WAR", Role = JobRoles.Tank });
+            list.Add(new Job() { JobId = 19, JobName = "PLD", Role = JobRoles.Tank });
             list.Add(new Job() { JobId = 20, JobName = "MNK", Role = JobRoles.MeleeDPS });
-            list.Add(new Job() { JobId = 21, JobName = "PLD", Role = JobRoles.Tank });
+            list.Add(new Job() { JobId = 21, JobName = "WAR", Role = JobRoles.Tank });
             list.Add(new Job() { JobId = 22, JobName = "DRG", Role = JobRoles.MeleeDPS });
             list.Add(new Job() { JobId = 23, JobName = "BRD", Role = JobRoles.RangeDPS });
             list.Add(new Job() { JobId = 24, JobName = "WHM", Role = JobRoles.Healer });
