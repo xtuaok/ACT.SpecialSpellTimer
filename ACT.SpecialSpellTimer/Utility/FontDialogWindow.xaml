@@ -13,7 +13,7 @@
   WindowStartupLocation="CenterOwner"
   AllowsTransparency="True" Background="Transparent" WindowStyle="None"
   TextOptions.TextFormattingMode="Ideal"
-  TextOptions.TextHintingMode="Auto"
+  TextOptions.TextHintingMode="Animated"
   TextOptions.TextRenderingMode="ClearType"
   >
   

@@ -23,7 +23,9 @@
         /// </summary>
         public SpellTimerControl()
         {
+#if DEBUG
             Debug.WriteLine("Spell");
+#endif
             this.InitializeComponent();
         }
 
@@ -139,7 +141,7 @@
                 tb.SetFontInfo(font);
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
-                tb.StrokeThickness = (tb.FontSize / 100d) * 3.5d;
+                tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
             }
 
             // リキャスト時間を描画する
@@ -153,7 +155,7 @@
                 tb.SetFontInfo(font);
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
-                tb.StrokeThickness = (tb.FontSize / 100d) * 3.5d;
+                tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
             }
 
             // ProgressBarを描画する

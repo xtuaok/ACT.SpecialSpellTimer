@@ -163,7 +163,7 @@
             {
                 this.FormattedText.MaxTextWidth = Math.Min(3579139, availableSize.Width);
                 this.FormattedText.MaxTextHeight = availableSize.Height > 0.0d ? availableSize.Height : 1.0d;
-                return new Size(this.FormattedText.Width, this.FormattedText.Height);
+                return new Size(this.FormattedText.Width + 1.0d, this.FormattedText.Height);
             }
             else
             {
@@ -256,7 +256,7 @@
 
             if (this.FormattedText != null)
             {
-                this.TextGeometry = this.FormattedText.BuildGeometry(new Point());
+                this.TextGeometry = this.FormattedText.BuildGeometry(new Point(1.0d, 0.0d));
             }
         }
     }

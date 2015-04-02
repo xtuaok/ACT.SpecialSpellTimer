@@ -30,7 +30,9 @@
                 if (instance == null)
                 {
                     instance = new SpellTimerCore();
+#if DEBUG
                     Debug.WriteLine("SpellTimerCore");
+#endif
                 }
 
                 return instance;

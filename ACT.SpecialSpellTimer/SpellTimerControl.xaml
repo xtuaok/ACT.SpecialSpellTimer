@@ -9,7 +9,7 @@
   d:DesignHeight="32" d:DesignWidth="300" 
   Background="Transparent"
   TextOptions.TextFormattingMode="Ideal"
-  TextOptions.TextHintingMode="Auto"
+  TextOptions.TextHintingMode="Animated"
   TextOptions.TextRenderingMode="ClearType"
   >
 
@@ -19,13 +19,8 @@
       <RowDefinition/>
     </Grid.RowDefinitions>
 
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition x:Name="TitleColumn" Width="68*"/>
-      <ColumnDefinition x:Name="RecastTimeColumn" Width="32*"/>
-    </Grid.ColumnDefinitions>
-
     <Canvas 
-      Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+      Grid.Row="1"
       Name="ProgressBarCanvas"
       Margin="0,2,0,10"
       VerticalAlignment="Top" 
@@ -44,41 +39,47 @@
       <Rectangle x:Name="BarOutlineRectangle" />
     </Canvas>
 
-    <Utility:OutlineTextBlock 
-      Grid.Column="0" Grid.Row="0"
-      x:Name="SpellTitleTextBlock" 
-      HorizontalAlignment="Left" 
-      VerticalAlignment="Top"
-      Margin="0,0,0,0" 
-      TextWrapping="NoWrap"
-      >
-      <Utility:OutlineTextBlock.Effect>
-        <DropShadowEffect
-          Direction="0" 
-          ShadowDepth="0" 
-          BlurRadius="11" 
-          RenderingBias="Performance"
-          Color="{Binding ElementName=RecastTimeTextBlock, Path=Fill.Color, Mode=OneWay}" />
-      </Utility:OutlineTextBlock.Effect>
-    </Utility:OutlineTextBlock>
+    <DockPanel Grid.Row="0">
+      <Utility:OutlineTextBlock 
+        x:Name="SpellTitleTextBlock" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Top"
+        TextWrapping="NoWrap"
+        Fill="AliceBlue"
+        Stroke="Blue"
+        Text="Sample Spell"
+        >
+        <Utility:OutlineTextBlock.Effect>
+          <DropShadowEffect
+            Direction="0" 
+            ShadowDepth="0" 
+            BlurRadius="3" 
+            RenderingBias="Performance"
+            Color="{Binding ElementName=RecastTimeTextBlock, Path=Stroke.Color, Mode=OneWay}" />
+        </Utility:OutlineTextBlock.Effect>
+      </Utility:OutlineTextBlock>
 
-    <Utility:OutlineTextBlock 
-      Grid.Column="1" Grid.Row="0"
-      x:Name="RecastTimeTextBlock" 
-      HorizontalAlignment="Right" 
-      VerticalAlignment="Top"
-      TextAlignment="Right"
-      Margin="0,0,3,0" 
-      TextWrapping="NoWrap"
-      >
-      <Utility:OutlineTextBlock.Effect>
-        <DropShadowEffect
-          Direction="0" 
-          ShadowDepth="0" 
-          BlurRadius="11" 
-          RenderingBias="Performance"
-          Color="{Binding ElementName=RecastTimeTextBlock, Path=Fill.Color, Mode=OneWay}" />
-      </Utility:OutlineTextBlock.Effect>
-    </Utility:OutlineTextBlock>
+      <Utility:OutlineTextBlock 
+        x:Name="RecastTimeTextBlock" 
+        HorizontalAlignment="Right" 
+        VerticalAlignment="Top"
+        TextAlignment="Right"
+        TextWrapping="NoWrap"
+        Margin="0,0,3,0"
+        Fill="AliceBlue"
+        Stroke="Blue"
+        Text="3.0"
+        >
+        <Utility:OutlineTextBlock.Effect>
+          <DropShadowEffect
+            Direction="0" 
+            ShadowDepth="0" 
+            BlurRadius="3" 
+            RenderingBias="Performance"
+            Color="{Binding ElementName=RecastTimeTextBlock, Path=Stroke.Color, Mode=OneWay}" />
+        </Utility:OutlineTextBlock.Effect>
+      </Utility:OutlineTextBlock>
+    </DockPanel>
+    
   </Grid>
 </UserControl>

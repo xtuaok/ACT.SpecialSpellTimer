@@ -56,7 +56,9 @@
         /// </summary>
         public OnePointTelopWindow()
         {
+#if DEBUG
             Debug.WriteLine("Telop");
+#endif
             this.InitializeComponent();
 
             this.MessageTextBlock.Text = string.Empty;
@@ -69,7 +71,9 @@
                 if (mouse.LeftButton == MouseButtonState.Pressed)
                 {
                     this.IsDragging = true;
+#if DEBUG
                     Debug.WriteLine("Drag On");
+#endif
                 }
             });
 
@@ -78,7 +82,9 @@
                 if (mouse.LeftButton == MouseButtonState.Released)
                 {
                     this.IsDragging = false;
+#if DEBUG
                     Debug.WriteLine("Drag Off");
+#endif
                 }
             });
 
@@ -198,7 +204,7 @@
                 this.MessageTextBlock.SetFontInfo(this.DataSource.Font);
                 this.MessageTextBlock.Fill = this.FontBrush;
                 this.MessageTextBlock.Stroke = this.FontOutlineBrush;
-                this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 3.5d);
+                this.MessageTextBlock.StrokeThickness = 0.5d * this.MessageTextBlock.FontSize / 13.0d;
             }
 
             // プログレスバーを表示しない？

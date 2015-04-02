@@ -94,7 +94,9 @@
                     ptmember.Clear();
                 }
 
+#if DEBUG
                 Debug.WriteLine("Logをクリアしました");
+#endif
             }
         }
 
@@ -150,7 +152,9 @@
             if (player != null)
             {
                 var jobName = Job.GetJobName(player.Job);
+#if DEBUG
                 Debug.WriteLine("JOB NAME!! " + jobName);
+#endif
                 if (jobName == "巴術士" || jobName == "ARC" ||
                     jobName == "学者" || jobName == "SCH" ||
                     jobName == "召喚士" || jobName == "SMN")
@@ -287,8 +291,9 @@
 
             if (enabledPartyMemberPlaceHolder)
             {
+#if DEBUG
                 Debug.WriteLine("PT: Refresh");
-
+#endif
                 // プレイヤー情報を取得する
                 var player = FF14PluginHelper.GetPlayer();
                 if (player == null)
@@ -316,7 +321,9 @@
                 foreach (var name in sorted)
                 {
                     ptmember.Add(name);
+#if DEBUG
                     Debug.WriteLine("<-  " + name);
+#endif
                 }
             }
         }
