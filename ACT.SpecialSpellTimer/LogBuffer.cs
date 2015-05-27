@@ -246,7 +246,8 @@
             // ジョブ名プレースホルダを置換する
             // ex. <PLD>, <PLD1> ...
             if (ptmemberCombatant != null &&
-                ptmemberCombatant.Count > 0)
+                ptmemberCombatant.Count > 0 &&
+                player != null)
             {
                 foreach (var job in Job.GetJobList())
                 {
@@ -256,6 +257,7 @@
                         where
                         x.Job == job.JobId
                         orderby
+                        x.ID == player.ID ? 0 : 1,
                         x.Name
                         select
                         x).ToArray();
