@@ -245,15 +245,17 @@
 
             // ジョブ名プレースホルダを置換する
             // ex. <PLD>, <PLD1> ...
-            if (ptmemberCombatant != null &&
-                ptmemberCombatant.Count > 0 &&
-                player != null)
+            if (player != null)
             {
+                var partyList =
+                    ptmemberCombatant ??
+                    new List<Combatant>(new Combatant[] { player });
+
                 foreach (var job in Job.GetJobList())
                 {
                     // このジョブに該当するパーティメンバを抽出する
                     var combatants = (
-                        from x in ptmemberCombatant
+                        from x in partyList
                         where
                         x.Job == job.JobId
                         orderby
@@ -284,12 +286,12 @@
                     // <JOB>形式を置換する
                     // ただし、この場合は正規表現のグループ形式とする
                     // また、グループ名にはジョブの略称を設定する
-                    // ex. <PLD> → (?<pld>Taro Paladin|Jiro Paladin)
+                    // ex. <PLD> → (?<PLDs>Taro Paladin|Jiro Paladin)
                     var names = string.Join("|", combatants.Select(x => x.Name).ToArray());
                     var oldValue = string.Format("<{0}>", job.JobName);
                     var newValue = string.Format(
-                        "(?<{0}>{1})",
-                        job.JobName.ToLower(),
+                        "(?<{0}s>{1})",
+                        job.JobName.ToUpper(),
                         names);
 
                     sb.Replace(oldValue.ToUpper(), newValue);
