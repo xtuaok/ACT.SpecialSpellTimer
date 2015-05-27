@@ -205,6 +205,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Astrologian に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AST {
+            get {
+                return ResourceManager.GetString("AST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Reverse sorting に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AutoSortReverseCheckbox {
@@ -547,6 +556,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Dark Knight に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DRK {
+            get {
+                return ResourceManager.GetString("DRK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Duration に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Duration {
@@ -768,6 +786,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string MatchLogLabel {
             get {
                 return ResourceManager.GetString("MatchLogLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Machinist に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MCN {
+            get {
+                return ResourceManager.GetString("MCN", resourceCulture);
             }
         }
         

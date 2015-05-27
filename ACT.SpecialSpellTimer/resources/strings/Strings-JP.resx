@@ -801,4 +801,16 @@
     <value>スペルタイマの秒数を整数表示にする</value>
     <comment>Recast time of spell timers is indicated by an integer.</comment>
   </data>
+  <data name="AST" xml:space="preserve">
+    <value>占星術師</value>
+    <comment>Astrologian</comment>
+  </data>
+  <data name="DRK" xml:space="preserve">
+    <value>暗黒騎士</value>
+    <comment>Dark Knight</comment>
+  </data>
+  <data name="MCN" xml:space="preserve">
+    <value>機工士</value>
+    <comment>Machinist</comment>
+  </data>
 </root>

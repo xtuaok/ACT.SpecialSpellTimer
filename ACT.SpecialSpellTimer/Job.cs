@@ -61,6 +61,9 @@
             list.Add(new Job() { JobId = 28, JobName = "SCH", Role = JobRoles.Healer });
             list.Add(new Job() { JobId = 29, JobName = "ROG", Role = JobRoles.MeleeDPS });
             list.Add(new Job() { JobId = 30, JobName = "NIN", Role = JobRoles.MeleeDPS });
+            list.Add(new Job() { JobId = 31, JobName = "DRK", Role = JobRoles.Tank });
+            list.Add(new Job() { JobId = 32, JobName = "AST", Role = JobRoles.Healer });
+            list.Add(new Job() { JobId = 33, JobName = "MCN", Role = JobRoles.RangeDPS });
 
             return list.ToArray();
         }
