@@ -32,9 +32,9 @@
         private static List<string> ptmember;
 
         /// <summary>
-        /// パーティメンバ（Combant情報）またプレイヤを含む
+        /// ジョブ代名詞による置換文字列セットのリスト
         /// </summary>
-        private static List<Combatant> ptmemberCombatant;
+        private static List<KeyValuePair<string, string>> replacementsByJobs;
 
         /// <summary>
         /// ペットのID
@@ -124,13 +124,15 @@
             var logLine = logInfo.logLine.Trim();
 
             // ジョブに変化あり？
-            if (logLine.Contains("にチェンジした。") || logLine.Contains("You change to "))
+            if (logLine.Contains("にチェンジした。") ||
+                logLine.Contains("You change to "))
             {
                 FF14PluginHelper.RefreshPlayer();
             }
 
             // パーティに変化あり？
             if (ptmember == null ||
+                replacementsByJobs == null ||
                 logLine.Contains("パーティを解散しました。") ||
                 logLine.Contains("がパーティに参加しました。") ||
                 logLine.Contains("がパーティから離脱しました。") ||
@@ -164,7 +166,8 @@
                     jobName == "学者" || jobName == "SCH" ||
                     jobName == "召喚士" || jobName == "SMN")
                 {
-                    if (logLine.Contains(player.Name + "の「サモン") || logLine.Contains("You cast Summon"))
+                    if (logLine.Contains(player.Name + "の「サモン") ||
+                        logLine.Contains("You cast Summon"))
                     {
                         Task.Run(() =>
                         {
@@ -245,57 +248,11 @@
 
             // ジョブ名プレースホルダを置換する
             // ex. <PLD>, <PLD1> ...
-            if (player != null)
+            if (replacementsByJobs != null)
             {
-                var partyList =
-                    ptmemberCombatant ??
-                    new List<Combatant>(new Combatant[] { player });
-
-                foreach (var job in Job.GetJobList())
+                foreach (var replacement in replacementsByJobs)
                 {
-                    // このジョブに該当するパーティメンバを抽出する
-                    var combatants = (
-                        from x in partyList
-                        where
-                        x.Job == job.JobId
-                        orderby
-                        x.ID == player.ID ? 0 : 1,
-                        x.Name
-                        select
-                        x).ToArray();
-
-                    if (!combatants.Any())
-                    {
-                        continue;
-                    }
-
-                    // <JOBn>形式を置換する
-                    // ex. <PLD1> → Taro Paladin
-                    // ex. <PLD2> → Jiro Paladin
-                    for (int i = 0; i < combatants.Length; i++)
-                    {
-                        var placeholder = string.Format(
-                            "<{0}{1}>",
-                            job.JobName,
-                            i + 1);
-
-                        sb.Replace(placeholder.ToUpper(), combatants[i].Name);
-                        sb.Replace(placeholder.ToLower(), combatants[i].Name);
-                    }
-
-                    // <JOB>形式を置換する
-                    // ただし、この場合は正規表現のグループ形式とする
-                    // また、グループ名にはジョブの略称を設定する
-                    // ex. <PLD> → (?<PLDs>Taro Paladin|Jiro Paladin)
-                    var names = string.Join("|", combatants.Select(x => x.Name).ToArray());
-                    var oldValue = string.Format("<{0}>", job.JobName);
-                    var newValue = string.Format(
-                        "(?<{0}s>{1})",
-                        job.JobName.ToUpper(),
-                        names);
-
-                    sb.Replace(oldValue.ToUpper(), newValue);
-                    sb.Replace(oldValue.ToLower(), newValue);
+                    sb.Replace(replacement.Key, replacement.Value);
                 }
             }
 
@@ -350,6 +307,15 @@
                 ptmember.Clear();
             }
 
+            if (replacementsByJobs == null)
+            {
+                replacementsByJobs = new List<KeyValuePair<string, string>>();
+            }
+            else
+            {
+                replacementsByJobs.Clear();
+            }
+
             if (enabledPartyMemberPlaceHolder)
             {
 #if DEBUG
@@ -363,11 +329,11 @@
                 }
 
                 // PTメンバの名前を記録しておく
-                ptmemberCombatant = FF14PluginHelper.GetCombatantListParty();
+                var combatants = FF14PluginHelper.GetCombatantListParty();
 
                 // FF14内部のPTメンバ自動ソート順で並び替える
                 var sorted =
-                    from x in ptmemberCombatant
+                    from x in combatants
                     join y in Job.GetJobList() on
                         x.Job equals y.JobId
                     where
@@ -385,6 +351,60 @@
 #if DEBUG
                     Debug.WriteLine("<-  " + name);
 #endif
+                }
+
+                // パーティメンバが空だったら自分を補完しておく
+                if (!combatants.Any())
+                {
+                    combatants.Add(player);
+                }
+
+                // ジョブ名によるプレースホルダを登録する
+                foreach (var job in Job.GetJobList())
+                {
+                    // このジョブに該当するパーティメンバを抽出する
+                    var combatantsByJob = (
+                        from x in combatants
+                        where
+                        x.Job == job.JobId
+                        orderby
+                        x.ID == player.ID ? 0 : 1,
+                        x.ID
+                        select
+                        x).ToArray();
+
+                    if (!combatantsByJob.Any())
+                    {
+                        continue;
+                    }
+
+                    // <JOBn>形式を置換する
+                    // ex. <PLD1> → Taro Paladin
+                    // ex. <PLD2> → Jiro Paladin
+                    for (int i = 0; i < combatantsByJob.Length; i++)
+                    {
+                        var placeholder = string.Format(
+                            "<{0}{1}>",
+                            job.JobName,
+                            i + 1);
+
+                        replacementsByJobs.Add(new KeyValuePair<string, string>(placeholder.ToUpper(), combatantsByJob[i].Name));
+                        replacementsByJobs.Add(new KeyValuePair<string, string>(placeholder.ToLower(), combatantsByJob[i].Name));
+                    }
+
+                    // <JOB>形式を置換する
+                    // ただし、この場合は正規表現のグループ形式とする
+                    // また、グループ名にはジョブの略称を設定する
+                    // ex. <PLD> → (?<PLDs>Taro Paladin|Jiro Paladin)
+                    var names = string.Join("|", combatantsByJob.Select(x => x.Name).ToArray());
+                    var oldValue = string.Format("<{0}>", job.JobName);
+                    var newValue = string.Format(
+                        "(?<{0}s>{1})",
+                        job.JobName.ToUpper(),
+                        names);
+
+                    replacementsByJobs.Add(new KeyValuePair<string, string>(oldValue.ToUpper(), newValue));
+                    replacementsByJobs.Add(new KeyValuePair<string, string>(oldValue.ToLower(), newValue));
                 }
             }
         }
