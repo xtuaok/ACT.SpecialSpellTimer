@@ -204,7 +204,7 @@
                     // 通常マッチ
                     if (regex == null)
                     {
-                        var keyword = LogBuffer.MakeKeyword(telop.Keyword);
+                        var keyword = telop.KeywordReplaced;
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
                             if (log.ToUpper().Contains(
@@ -270,7 +270,7 @@
                     // 通常マッチ(強制非表示)
                     if (regexToHide == null)
                     {
-                        var keyword = LogBuffer.MakeKeyword(telop.KeywordToHide);
+                        var keyword = telop.KeywordToHideReplaced;
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
                             if (log.ToUpper().Contains(

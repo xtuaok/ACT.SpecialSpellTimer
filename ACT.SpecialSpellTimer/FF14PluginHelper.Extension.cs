@@ -68,7 +68,7 @@
 
             // パーティメンバのIDリストを取得する
             int partyCount;
-            var partyListById = FF14PluginHelper.GetCurrentPartyList(out partyCount);
+            var partyListById = FF14PluginHelper.GetCurrentPartyList(out partyCount).Take(8);
 
             var combatListParty = new List<Combatant>();
 

@@ -80,6 +80,11 @@
                 // コンパイル済みの正規表現をセットする
                 foreach (var spell in spellsFilteredJob)
                 {
+                    if (string.IsNullOrWhiteSpace(spell.KeywordReplaced))
+                    {
+                        spell.KeywordReplaced = LogBuffer.MakeKeyword(spell.Keyword);
+                    }
+
                     if (!spell.RegexEnabled)
                     {
                         spell.RegexPattern = string.Empty;
@@ -87,7 +92,7 @@
                         continue;
                     }
 
-                    var pattern = LogBuffer.MakeKeywordToRegex(spell.Keyword);
+                    var pattern = ".*" + spell.KeywordReplaced + ".*";
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
@@ -108,6 +113,17 @@
                 }
 
                 return spellsFilteredJob.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// 置換後のキーワードをクリアする
+        /// </summary>
+        public static void ClearReplacedKeywords()
+        {
+            foreach (var item in Table)
+            {
+                item.KeywordReplaced = string.Empty;
             }
         }
 
@@ -374,6 +390,7 @@
             this.RegexPattern = string.Empty;
             this.JobFilter = string.Empty;
             this.Font = new FontInfo();
+            this.KeywordReplaced = string.Empty;
         }
 
         public long ID { get; set; }
@@ -423,5 +440,7 @@
         public Regex Regex { get; set; }
         [XmlIgnore]
         public string RegexPattern { get; set; }
+        [XmlIgnore]
+        public string KeywordReplaced { get; set; }
     }
 }

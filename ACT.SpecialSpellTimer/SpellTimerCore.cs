@@ -360,7 +360,7 @@
                     if (!spell.RegexEnabled ||
                         regex == null)
                     {
-                        var keyword = LogBuffer.MakeKeyword(spell.Keyword);
+                        var keyword = spell.KeywordReplaced;
                         if (string.IsNullOrWhiteSpace(keyword))
                         {
                             continue;

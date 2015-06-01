@@ -102,6 +102,16 @@
                 // コンパイル済みの正規表現をセットする
                 foreach (var spell in spellsFilteredJob)
                 {
+                    if (string.IsNullOrWhiteSpace(spell.KeywordReplaced))
+                    {
+                        spell.KeywordReplaced = LogBuffer.MakeKeyword(spell.Keyword);
+                    }
+
+                    if (string.IsNullOrWhiteSpace(spell.KeywordToHideReplaced))
+                    {
+                        spell.KeywordToHideReplaced = LogBuffer.MakeKeyword(spell.KeywordToHide);
+                    }
+
                     if (!spell.RegexEnabled)
                     {
                         spell.RegexPattern = string.Empty;
@@ -111,7 +121,7 @@
                         continue;
                     }
 
-                    var pattern = LogBuffer.MakeKeywordToRegex(spell.Keyword);
+                    var pattern = ".*" + spell.KeywordReplaced + ".*";
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
@@ -130,7 +140,7 @@
                         spell.Regex = null;
                     }
 
-                    var patternToHide = LogBuffer.MakeKeywordToRegex(spell.KeywordToHide);
+                    var patternToHide = ".*" + spell.KeywordToHideReplaced + ".*";
 
                     if (!string.IsNullOrWhiteSpace(patternToHide))
                     {
@@ -154,6 +164,17 @@
             }
         }
 
+        /// <summary>
+        /// 置換後のキーワードをクリアする
+        /// </summary>
+        public void ClearReplacedKeywords()
+        {
+            foreach (var item in this.Table)
+            {
+                item.KeywordReplaced = string.Empty;
+                item.KeywordToHideReplaced = string.Empty;
+            }
+        }
 
         /// <summary>
         /// デフォルトのファイル
@@ -395,6 +416,8 @@
             this.RegexPatternToHide = string.Empty;
             this.JobFilter = string.Empty;
             this.Font = new FontInfo();
+            this.KeywordReplaced = string.Empty;
+            this.KeywordToHideReplaced = string.Empty;
         }
 
         public long ID { get; set; }
@@ -442,5 +465,9 @@
         public Regex RegexToHide { get; set; }
         [XmlIgnore]
         public bool ForceHide { get; set; }
+        [XmlIgnore]
+        public string KeywordReplaced { get; set; }
+        [XmlIgnore]
+        public string KeywordToHideReplaced { get; set; }
     }
 }
