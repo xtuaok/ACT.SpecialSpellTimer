@@ -128,6 +128,7 @@
                 logLine.Contains("You change to "))
             {
                 FF14PluginHelper.RefreshPlayer();
+                RefreshPTList();
             }
 
             // パーティに変化あり？
