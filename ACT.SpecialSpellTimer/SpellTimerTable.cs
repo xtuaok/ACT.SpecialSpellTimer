@@ -25,6 +25,16 @@
         private static List<SpellTimer> table;
 
         /// <summary>
+        /// 有効なテーブル
+        /// </summary>
+        private static SpellTimer[] enabledTable;
+
+        /// <summary>
+        /// 有効なテーブルのタイムスタンプ
+        /// </summary>
+        private static DateTime enabledTableTimestamp;
+
+        /// <summary>
         /// SpellTimerデータテーブル
         /// </summary>
         public static List<SpellTimer> Table
@@ -48,6 +58,12 @@
         {
             get
             {
+                if (enabledTable != null &&
+                    (DateTime.Now - enabledTableTimestamp).TotalSeconds < 10.0d)
+                {
+                    return enabledTable;
+                }
+
                 var spells =
                     from x in Table
                     where
@@ -112,7 +128,10 @@
                     }
                 }
 
-                return spellsFilteredJob.ToArray();
+                enabledTable = spellsFilteredJob.ToArray();
+                enabledTableTimestamp = DateTime.Now;
+
+                return enabledTable;
             }
         }
 

@@ -45,6 +45,16 @@
         private List<OnePointTelop> table = new List<OnePointTelop>();
 
         /// <summary>
+        /// 有効なテーブル
+        /// </summary>
+        private OnePointTelop[] enabledTable;
+
+        /// <summary>
+        /// 有効なテーブルのタイムスタンプ
+        /// </summary>
+        private DateTime enabledTableTimestamp;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public OnePointTelopTable()
@@ -70,6 +80,12 @@
         {
             get
             {
+                if (enabledTable != null &&
+                    (DateTime.Now - enabledTableTimestamp).TotalSeconds < 10.0d)
+                {
+                    return enabledTable;
+                }
+
                 var spells =
                     from x in this.table
                     where
@@ -160,7 +176,10 @@
                     }
                 }
 
-                return spellsFilteredJob.ToArray();
+                enabledTable = spellsFilteredJob.ToArray();
+                enabledTableTimestamp = DateTime.Now;
+
+                return enabledTable;
             }
         }
 
