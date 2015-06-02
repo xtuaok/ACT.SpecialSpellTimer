@@ -256,6 +256,9 @@
             Debug.WriteLine("Refresh MatchSpell ->" + sw4.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
 #endif
 
+#if DEBUG
+            var swC = Stopwatch.StartNew();
+#endif
             // コマンドとマッチングする
             TextCommandController.MatchCommand(
                 logLines);
@@ -267,6 +270,10 @@
                 OnePointTelopController.HideTelops();
                 return;
             }
+#if DEBUG
+            swC.Stop();
+            Debug.WriteLine("Match Command ->" + swC.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+#endif
 
             // テロップWindowを表示する
 #if DEBUG

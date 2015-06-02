@@ -108,7 +108,9 @@
                         continue;
                     }
 
-                    var pattern = ".*" + spell.KeywordReplaced + ".*";
+                    var pattern = !string.IsNullOrWhiteSpace(spell.KeywordReplaced) ?
+                        ".*" + spell.KeywordReplaced + ".*" :
+                        string.Empty;
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {

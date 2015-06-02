@@ -137,7 +137,9 @@
                         continue;
                     }
 
-                    var pattern = ".*" + spell.KeywordReplaced + ".*";
+                    var pattern = !string.IsNullOrWhiteSpace(spell.KeywordReplaced) ?
+                        ".*" + spell.KeywordReplaced + ".*" :
+                        string.Empty;
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
@@ -156,7 +158,9 @@
                         spell.Regex = null;
                     }
 
-                    var patternToHide = ".*" + spell.KeywordToHideReplaced + ".*";
+                    var patternToHide = !string.IsNullOrWhiteSpace(spell.KeywordToHideReplaced) ?
+                        ".*" + spell.KeywordToHideReplaced + ".*" :
+                        string.Empty;
 
                     if (!string.IsNullOrWhiteSpace(patternToHide))
                     {
