@@ -135,7 +135,6 @@
             {
                 if (ptmember == null ||
                     replacementsByJobs == null ||
-                    replacementsByJobs.Count < 1 ||
                     logLine.Contains("パーティを解散しました。") ||
                     logLine.Contains("がパーティに参加しました。") ||
                     logLine.Contains("がパーティから離脱しました。") ||

@@ -9,6 +9,16 @@
     public class Job
     {
         /// <summary>
+        /// ジョブリスト
+        /// </summary>
+        private static Job[] jobList;
+
+        /// <summary>
+        /// ジョブ辞書
+        /// </summary>
+        private static Dictionary<int, Job> jobDictinary;
+
+        /// <summary>
         /// JobId
         /// </summary>
         public int JobId { get; set; }
@@ -30,42 +40,47 @@
         /// ジョブリスト</returns>
         public static Job[] GetJobList()
         {
-            var list = new List<Job>();
-            list.Add(new Job() { JobId = 1, JobName = "GLD", Role = JobRoles.Tank });
-            list.Add(new Job() { JobId = 2, JobName = "PUG", Role = JobRoles.MeleeDPS });
-            list.Add(new Job() { JobId = 3, JobName = "MRD", Role = JobRoles.Tank });
-            list.Add(new Job() { JobId = 4, JobName = "LNC", Role = JobRoles.MeleeDPS });
-            list.Add(new Job() { JobId = 5, JobName = "ARC", Role = JobRoles.RangeDPS });
-            list.Add(new Job() { JobId = 6, JobName = "CNJ", Role = JobRoles.Healer });
-            list.Add(new Job() { JobId = 7, JobName = "THM", Role = JobRoles.RangeDPS });
-            list.Add(new Job() { JobId = 8, JobName = "CRP", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 9, JobName = "BSM", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 10, JobName = "ARM", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 11, JobName = "GSM", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 12, JobName = "LTW", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 13, JobName = "WVR", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 14, JobName = "ALC", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 15, JobName = "CUL", Role = JobRoles.Crafter });
-            list.Add(new Job() { JobId = 16, JobName = "MIN", Role = JobRoles.Gatherer });
-            list.Add(new Job() { JobId = 17, JobName = "BOT", Role = JobRoles.Gatherer });
-            list.Add(new Job() { JobId = 18, JobName = "FSH", Role = JobRoles.Gatherer });
-            list.Add(new Job() { JobId = 19, JobName = "PLD", Role = JobRoles.Tank });
-            list.Add(new Job() { JobId = 20, JobName = "MNK", Role = JobRoles.MeleeDPS });
-            list.Add(new Job() { JobId = 21, JobName = "WAR", Role = JobRoles.Tank });
-            list.Add(new Job() { JobId = 22, JobName = "DRG", Role = JobRoles.MeleeDPS });
-            list.Add(new Job() { JobId = 23, JobName = "BRD", Role = JobRoles.RangeDPS });
-            list.Add(new Job() { JobId = 24, JobName = "WHM", Role = JobRoles.Healer });
-            list.Add(new Job() { JobId = 25, JobName = "BLM", Role = JobRoles.RangeDPS });
-            list.Add(new Job() { JobId = 26, JobName = "ACN", Role = JobRoles.RangeDPS });
-            list.Add(new Job() { JobId = 27, JobName = "SMN", Role = JobRoles.RangeDPS });
-            list.Add(new Job() { JobId = 28, JobName = "SCH", Role = JobRoles.Healer });
-            list.Add(new Job() { JobId = 29, JobName = "ROG", Role = JobRoles.MeleeDPS });
-            list.Add(new Job() { JobId = 30, JobName = "NIN", Role = JobRoles.MeleeDPS });
-            list.Add(new Job() { JobId = 31, JobName = "DRK", Role = JobRoles.Tank });
-            list.Add(new Job() { JobId = 32, JobName = "AST", Role = JobRoles.Healer });
-            list.Add(new Job() { JobId = 33, JobName = "MCN", Role = JobRoles.RangeDPS });
+            if (jobList == null)
+            {
+                var list = new List<Job>();
+                list.Add(new Job() { JobId = 1, JobName = "GLD", Role = JobRoles.Tank });
+                list.Add(new Job() { JobId = 2, JobName = "PUG", Role = JobRoles.MeleeDPS });
+                list.Add(new Job() { JobId = 3, JobName = "MRD", Role = JobRoles.Tank });
+                list.Add(new Job() { JobId = 4, JobName = "LNC", Role = JobRoles.MeleeDPS });
+                list.Add(new Job() { JobId = 5, JobName = "ARC", Role = JobRoles.RangeDPS });
+                list.Add(new Job() { JobId = 6, JobName = "CNJ", Role = JobRoles.Healer });
+                list.Add(new Job() { JobId = 7, JobName = "THM", Role = JobRoles.RangeDPS });
+                list.Add(new Job() { JobId = 8, JobName = "CRP", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 9, JobName = "BSM", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 10, JobName = "ARM", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 11, JobName = "GSM", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 12, JobName = "LTW", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 13, JobName = "WVR", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 14, JobName = "ALC", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 15, JobName = "CUL", Role = JobRoles.Crafter });
+                list.Add(new Job() { JobId = 16, JobName = "MIN", Role = JobRoles.Gatherer });
+                list.Add(new Job() { JobId = 17, JobName = "BOT", Role = JobRoles.Gatherer });
+                list.Add(new Job() { JobId = 18, JobName = "FSH", Role = JobRoles.Gatherer });
+                list.Add(new Job() { JobId = 19, JobName = "PLD", Role = JobRoles.Tank });
+                list.Add(new Job() { JobId = 20, JobName = "MNK", Role = JobRoles.MeleeDPS });
+                list.Add(new Job() { JobId = 21, JobName = "WAR", Role = JobRoles.Tank });
+                list.Add(new Job() { JobId = 22, JobName = "DRG", Role = JobRoles.MeleeDPS });
+                list.Add(new Job() { JobId = 23, JobName = "BRD", Role = JobRoles.RangeDPS });
+                list.Add(new Job() { JobId = 24, JobName = "WHM", Role = JobRoles.Healer });
+                list.Add(new Job() { JobId = 25, JobName = "BLM", Role = JobRoles.RangeDPS });
+                list.Add(new Job() { JobId = 26, JobName = "ACN", Role = JobRoles.RangeDPS });
+                list.Add(new Job() { JobId = 27, JobName = "SMN", Role = JobRoles.RangeDPS });
+                list.Add(new Job() { JobId = 28, JobName = "SCH", Role = JobRoles.Healer });
+                list.Add(new Job() { JobId = 29, JobName = "ROG", Role = JobRoles.MeleeDPS });
+                list.Add(new Job() { JobId = 30, JobName = "NIN", Role = JobRoles.MeleeDPS });
+                list.Add(new Job() { JobId = 31, JobName = "DRK", Role = JobRoles.Tank });
+                list.Add(new Job() { JobId = 32, JobName = "AST", Role = JobRoles.Healer });
+                list.Add(new Job() { JobId = 33, JobName = "MCN", Role = JobRoles.RangeDPS });
 
-            return list.ToArray();
+                jobList = list.ToArray();
+            }
+
+            return jobList;
         }
 
         /// <summary>
@@ -76,11 +91,23 @@
         public static string GetJobName(
             int jobID)
         {
-            var jobList = GetJobList();
-            return jobList
-                .Where(x => x.JobId == jobID)
-                .Select(x => x.JobName)
-                .FirstOrDefault() ?? string.Empty;
+            if (jobDictinary == null)
+            {
+                jobDictinary = new Dictionary<int, Job>();
+                foreach (var job in GetJobList())
+                {
+                    jobDictinary.Add(job.JobId, job);
+                }
+            }
+
+            if (jobDictinary.ContainsKey(jobID))
+            {
+                return jobDictinary[jobID].JobName;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         /// <summary>
