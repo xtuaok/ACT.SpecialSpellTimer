@@ -332,7 +332,7 @@
                     orderby
                     y.Role,
                     x.Job,
-                    x.ID
+                    x.ID descending
                     select
                     x.Name.Trim();
 
