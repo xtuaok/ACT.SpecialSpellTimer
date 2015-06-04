@@ -101,42 +101,40 @@
                 var spellsFilteredJob = new List<OnePointTelop>();
                 foreach (var spell in spells)
                 {
-                    var enabled = false;
+                    var enabledByJob = false;
+                    var enabledByZone = false;
 
                     // ジョブフィルタをかける
                     if (player == null ||
                         string.IsNullOrWhiteSpace(spell.JobFilter))
                     {
-                        enabled = true;
+                        enabledByJob = true;
                     }
                     else
                     {
                         var jobs = spell.JobFilter.Split(',');
                         if (jobs.Any(x => x == player.Job.ToString()))
                         {
-                            enabled = true;
+                            enabledByJob = true;
                         }
                     }
 
                     // ゾーンフィルタをかける
-                    if (enabled)
+                    if (currentZoneID == 0 ||
+                        string.IsNullOrWhiteSpace(spell.ZoneFilter))
                     {
-                        if (currentZoneID == 0 ||
-                            string.IsNullOrWhiteSpace(spell.ZoneFilter))
+                        enabledByZone = true;
+                    }
+                    else
+                    {
+                        var zoneIDs = spell.ZoneFilter.Split(',');
+                        if (zoneIDs.Any(x => x == currentZoneID.ToString()))
                         {
-                            enabled = true;
-                        }
-                        else
-                        {
-                            var zoneIDs = spell.ZoneFilter.Split(',');
-                            if (zoneIDs.Any(x => x == currentZoneID.ToString()))
-                            {
-                                enabled = true;
-                            }
+                            enabledByZone = true;
                         }
                     }
 
-                    if (enabled)
+                    if (enabledByJob && enabledByZone)
                     {
                         spellsFilteredJob.Add(spell);
                     }

@@ -70,9 +70,9 @@
         private void OKButton_Click(object sender, EventArgs e)
         {
             var items = new List<string>();
-            foreach (KeyValuePair<int, string> item in this.ZonesCheckedListBox.CheckedItems)
+            foreach (Zone item in this.ZonesCheckedListBox.CheckedItems)
             {
-                items.Add(item.Key.ToString());
+                items.Add(item.ID.ToString());
             }
 
             this.ZoneFilter = string.Join(
