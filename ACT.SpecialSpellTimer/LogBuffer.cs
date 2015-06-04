@@ -360,7 +360,7 @@
                         x.Job == job.JobId
                         orderby
                         x.ID == player.ID ? 0 : 1,
-                        x.ID
+                        x.ID descending
                         select
                         x).ToArray();
 
