@@ -1267,6 +1267,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   ゾーンを限定する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SelectZoneButton {
+            get {
+                return ResourceManager.GetString("SelectZoneButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   対象のゾーンを選択して下さい に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SelectZoneTitle {
+            get {
+                return ResourceManager.GetString("SelectZoneTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   このログを経過秒の起点にする に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SetLogOrigin {

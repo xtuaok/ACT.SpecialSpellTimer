@@ -1,9 +1,12 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
     using System.Reflection;
-
+    using System.Xml.Linq;
     using Advanced_Combat_Tracker;
 
     public static partial class FF14PluginHelper
@@ -13,6 +16,8 @@
         private static object pluginMemory;
         private static dynamic pluginConfig;
         private static dynamic pluginScancombat;
+        private static string pluginFileName;
+        private static List<Zone> zoneList;
 
         public static void Initialize()
         {
@@ -31,6 +36,7 @@
                             item.lblPluginStatus.Text.ToUpper() == "FFXIV Plugin Started.".ToUpper())
                         {
                             plugin = item.pluginObj;
+                            pluginFileName = item.pluginFile.FullName;
                             break;
                         }
                     }
@@ -172,6 +178,60 @@
 
             return partyList;
         }
+
+        public static List<Zone> GetZoneList()
+        {
+            if (zoneList != null)
+            {
+                return zoneList;
+            }
+
+            Initialize();
+
+            if (string.IsNullOrWhiteSpace(pluginFileName))
+            {
+                return zoneList;
+            }
+
+            if (!File.Exists(pluginFileName))
+            {
+                return zoneList;
+            }
+
+            var asm = Assembly.LoadFrom(pluginFileName);
+            using (var stream = asm.GetManifestResourceStream("FFXIV_ACT_Plugin.Resources.zones.xml"))
+            {
+                var doc = XDocument.Load(stream);
+                zoneList = new List<Zone>((
+                    from XElement x in doc.Element("ZoneList").Elements("zone")
+                    select new Zone
+                    {
+                        ID = x.Attribute("id") != null ? Convert.ToInt32(x.Attribute("id").Value, 16) : 0,
+                        Name = x.Attribute("name1") != null ? x.Attribute("name1").Value : string.Empty,
+                    }));
+            }
+
+            return zoneList;
+        }
+
+        public static int GetCurrentZoneID()
+        {
+            var zoneList = GetZoneList();
+
+            if (zoneList == null ||
+                zoneList.Count < 1)
+            {
+                return 0;
+            }
+
+            var currentZoneName = ActGlobals.oFormActMain.CurrentZone;
+            return (
+                from x in zoneList
+                where
+                x.Name.ToLower() == currentZoneName.ToLower()
+                select
+                x.ID).FirstOrDefault();
+        }
     }
 
     public class Combatant
@@ -188,5 +248,16 @@
         public int CurrentMP;
         public int MaxMP;
         public int CurrentTP;
+    }
+
+    public class Zone
+    {
+        public int ID;
+        public string Name;
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

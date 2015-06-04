@@ -73,21 +73,48 @@
                     select
                     x;
 
-                // ジョブフィルタをかける
+                var player = FF14PluginHelper.GetPlayer();
+                var currentZoneID = FF14PluginHelper.GetCurrentZoneID();
+
                 var spellsFilteredJob = new List<SpellTimer>();
                 foreach (var spell in spells)
                 {
-                    var player = FF14PluginHelper.GetPlayer();
+                    var enabled = false;
 
+                    // ジョブフィルタをかける
                     if (player == null ||
                         string.IsNullOrWhiteSpace(spell.JobFilter))
                     {
-                        spellsFilteredJob.Add(spell);
-                        continue;
+                        enabled = true;
+                    }
+                    else
+                    {
+                        var jobs = spell.JobFilter.Split(',');
+                        if (jobs.Any(x => x == player.Job.ToString()))
+                        {
+                            enabled = true;
+                        }
                     }
 
-                    var jobs = spell.JobFilter.Split(',');
-                    if (jobs.Any(x => x == player.Job.ToString()))
+                    // ゾーンフィルタをかける
+                    if (enabled)
+                    {
+                        if (currentZoneID == 0 ||
+                            string.IsNullOrWhiteSpace(spell.ZoneFilter))
+                        {
+                            enabled = true;
+                        }
+                        else
+                        {
+                            var zoneIDs = spell.ZoneFilter.Split(',');
+                            if (zoneIDs.Any(x => x == currentZoneID.ToString()))
+                            {
+                                enabled = true;
+                            }
+                        }
+                    }
+
+                    if (enabled)
                     {
                         spellsFilteredJob.Add(spell);
                     }
@@ -410,6 +437,7 @@
             this.MatchedLog = string.Empty;
             this.RegexPattern = string.Empty;
             this.JobFilter = string.Empty;
+            this.ZoneFilter = string.Empty;
             this.Font = new FontInfo();
             this.KeywordReplaced = string.Empty;
         }
@@ -446,6 +474,7 @@
         public bool DontHide { get; set; }
         public bool RegexEnabled { get; set; }
         public string JobFilter { get; set; }
+        public string ZoneFilter { get; set; }
         public bool Enabled { get; set; }
 
         [XmlIgnore]

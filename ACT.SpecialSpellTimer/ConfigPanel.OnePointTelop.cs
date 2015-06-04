@@ -84,6 +84,22 @@
                 }
             };
 
+            this.TelopSelectZoneButton.Click += (s1, e1) =>
+            {
+                var src = this.TelopDetailGroupBox.Tag as OnePointTelop;
+                if (src != null)
+                {
+                    using (var f = new SelectZoneForm())
+                    {
+                        f.ZoneFilter = src.ZoneFilter;
+                        if (f.ShowDialog(this) == DialogResult.OK)
+                        {
+                            src.ZoneFilter = f.ZoneFilter;
+                        }
+                    }
+                }
+            };
+
             this.TelopExportButton.Click += this.TelopExportButton_Click;
             this.TelopImportButton.Click += this.TelopImportButton_Click;
             this.TelopClearAllButton.Click += this.TelopClearAllButton_Click;
@@ -174,6 +190,7 @@
             nr.Left = 10.0d;
             nr.Top = 10.0d;
             nr.JobFilter = string.Empty;
+            nr.ZoneFilter = string.Empty;
 
             // 現在選択しているノードの情報を一部コピーする
             if (this.TelopTreeView.SelectedNode != null)
@@ -204,6 +221,7 @@
                     nr.Left = baseRow.Left;
                     nr.Top = baseRow.Top;
                     nr.JobFilter = baseRow.JobFilter;
+                    nr.ZoneFilter = baseRow.ZoneFilter;
                 }
             }
 

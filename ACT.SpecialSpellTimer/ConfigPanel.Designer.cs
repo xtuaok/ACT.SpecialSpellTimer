@@ -198,6 +198,8 @@
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
+            this.SelectZoneButton = new System.Windows.Forms.Button();
+            this.TelopSelectZoneButton = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
@@ -364,6 +366,7 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.SelectZoneButton);
             this.DetailGroupBox.Controls.Add(this.SpellVisualSetting);
             this.DetailGroupBox.Controls.Add(this.SelectJobButton);
             this.DetailGroupBox.Controls.Add(this.RegexEnabledCheckBox);
@@ -900,6 +903,7 @@
             this.TelopDetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopDetailGroupBox.Controls.Add(this.TelopSelectZoneButton);
             this.TelopDetailGroupBox.Controls.Add(this.TelopVisualSetting);
             this.TelopDetailGroupBox.Controls.Add(this.TelopSelectJobButton);
             this.TelopDetailGroupBox.Controls.Add(this.TelopProgressBarEnabledCheckBox);
@@ -2030,6 +2034,26 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
+            // SelectZoneButton
+            // 
+            this.SelectZoneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SelectZoneButton.Location = new System.Drawing.Point(156, 631);
+            this.SelectZoneButton.Name = "SelectZoneButton";
+            this.SelectZoneButton.Size = new System.Drawing.Size(144, 25);
+            this.SelectZoneButton.TabIndex = 29;
+            this.SelectZoneButton.Text = "SelectZoneButton";
+            this.SelectZoneButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopSelectZoneButton
+            // 
+            this.TelopSelectZoneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopSelectZoneButton.Location = new System.Drawing.Point(156, 631);
+            this.TelopSelectZoneButton.Name = "TelopSelectZoneButton";
+            this.TelopSelectZoneButton.Size = new System.Drawing.Size(144, 25);
+            this.TelopSelectZoneButton.TabIndex = 46;
+            this.TelopSelectZoneButton.Text = "SelectZoneButton";
+            this.TelopSelectZoneButton.UseVisualStyleBackColor = true;
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2248,5 +2272,7 @@
         private System.Windows.Forms.CheckBox EnabledSpellTimerNoDecimalCheckBox;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.CheckBox EnabledSpellTimerNoDecimal;
+        private System.Windows.Forms.Button SelectZoneButton;
+        private System.Windows.Forms.Button TelopSelectZoneButton;
     }
 }

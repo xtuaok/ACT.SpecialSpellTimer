@@ -146,6 +146,22 @@
                 }
             };
 
+            this.SelectZoneButton.Click += (s1, e1) =>
+            {
+                var src = this.DetailGroupBox.Tag as SpellTimer;
+                if (src != null)
+                {
+                    using (var f = new SelectZoneForm())
+                    {
+                        f.ZoneFilter = src.ZoneFilter;
+                        if (f.ShowDialog(this) == DialogResult.OK)
+                        {
+                            src.ZoneFilter = f.ZoneFilter;
+                        }
+                    }
+                }
+            };
+
             // オプションのロードメソッドを呼ぶ
             this.LoadOption();
 
@@ -184,6 +200,7 @@
                 nr.BarHeight = Settings.Default.ProgressBarSize.Height;
                 nr.BackgroundColor = Settings.Default.BackgroundColor.ToHTML();
                 nr.JobFilter = string.Empty;
+                nr.ZoneFilter = string.Empty;
 
                 // 現在選択しているノードの情報を一部コピーする
                 if (this.SpellTimerTreeView.SelectedNode != null)
@@ -216,6 +233,7 @@
                         nr.BackgroundColor = baseRow.BackgroundColor;
                         nr.BackgroundAlpha = baseRow.BackgroundAlpha;
                         nr.JobFilter = baseRow.JobFilter;
+                        nr.ZoneFilter = baseRow.ZoneFilter;
                     }
                 }
 

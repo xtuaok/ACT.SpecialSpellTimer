@@ -103,6 +103,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings-JP.resx</DependentUpon>
     </Compile>
+    <Compile Include="SelectZoneForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectZoneForm.Designer.cs">
+      <DependentUpon>SelectZoneForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelectJobForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +279,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings-JP.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectZoneForm.resx">
+      <DependentUpon>SelectZoneForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectJobForm.resx">
       <DependentUpon>SelectJobForm.cs</DependentUpon>

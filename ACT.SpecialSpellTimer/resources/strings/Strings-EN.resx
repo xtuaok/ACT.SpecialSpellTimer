@@ -813,4 +813,12 @@
     <value>Machinist</value>
     <comment>機工士</comment>
   </data>
+  <data name="SelectZoneButton" xml:space="preserve">
+    <value>Zone Filter...</value>
+    <comment>ゾーンを限定する</comment>
+  </data>
+  <data name="SelectZoneTitle" xml:space="preserve">
+    <value>Please select zones</value>
+    <comment>対象のゾーンを選択して下さい</comment>
+  </data>
 </root>
