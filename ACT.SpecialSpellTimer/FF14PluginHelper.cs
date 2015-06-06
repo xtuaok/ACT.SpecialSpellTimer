@@ -16,7 +16,6 @@
         private static object pluginMemory;
         private static dynamic pluginConfig;
         private static dynamic pluginScancombat;
-        private static string pluginFileName;
         private static List<Zone> zoneList;
 
         public static void Initialize()
@@ -36,7 +35,6 @@
                             item.lblPluginStatus.Text.ToUpper() == "FFXIV Plugin Started.".ToUpper())
                         {
                             plugin = item.pluginObj;
-                            pluginFileName = item.pluginFile.FullName;
                             break;
                         }
                     }
@@ -188,17 +186,12 @@
 
             Initialize();
 
-            if (string.IsNullOrWhiteSpace(pluginFileName))
+            if (plugin == null)
             {
                 return zoneList;
             }
 
-            if (!File.Exists(pluginFileName))
-            {
-                return zoneList;
-            }
-
-            var asm = Assembly.LoadFrom(pluginFileName);
+            var asm = plugin.GetType().Assembly;
             using (var stream = asm.GetManifestResourceStream("FFXIV_ACT_Plugin.Resources.zones.xml"))
             {
                 var doc = XDocument.Load(stream);
