@@ -59,7 +59,7 @@
             get
             {
                 if (enabledTable != null &&
-                    (DateTime.Now - enabledTableTimestamp).TotalSeconds < 10.0d)
+                    (DateTime.Now - enabledTableTimestamp).TotalSeconds < 5.0d)
                 {
                     return enabledTable;
                 }
