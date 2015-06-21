@@ -792,9 +792,9 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         /// <summary>
         ///   Machinist に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string MCN {
+        internal static string MCH {
             get {
-                return ResourceManager.GetString("MCN", resourceCulture);
+                return ResourceManager.GetString("MCH", resourceCulture);
             }
         }
         
