@@ -821,4 +821,12 @@
     <value>対象のゾーンを選択して下さい</value>
     <comment>Please select zones</comment>
   </data>
+  <data name="MatchingLogWordToExpandLabel" xml:space="preserve">
+    <value>延長するマッチングワード</value>
+    <comment>Matching log text for extending</comment>
+  </data>
+  <data name="SecondsLabel" xml:space="preserve">
+    <value>秒延長する</value>
+    <comment>Seconds</comment>
+  </data>
 </root>

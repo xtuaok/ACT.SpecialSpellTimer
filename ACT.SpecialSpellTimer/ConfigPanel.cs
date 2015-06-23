@@ -214,8 +214,10 @@
                         nr.Panel = baseRow.Panel;
                         nr.SpellTitle = baseRow.SpellTitle + " New";
                         nr.Keyword = baseRow.Keyword;
+                        nr.KeywordForExpand = baseRow.KeywordForExpand;
                         nr.RegexEnabled = baseRow.RegexEnabled;
                         nr.RecastTime = baseRow.RecastTime;
+                        nr.RecastTimeExpanding = baseRow.RecastTimeExpanding;
                         nr.RepeatEnabled = baseRow.RepeatEnabled;
                         nr.ProgressBarVisible = baseRow.ProgressBarVisible;
                         nr.IsReverse = baseRow.IsReverse;
@@ -319,8 +321,10 @@
                     src.SpellTitle = this.SpellTitleTextBox.Text;
                     src.DisplayNo = (int)this.DisplayNoNumericUpDown.Value;
                     src.Keyword = this.KeywordTextBox.Text;
+                    src.KeywordForExpand = this.KeywordToExpandTextBox.Text;
                     src.RegexEnabled = this.RegexEnabledCheckBox.Checked;
-                    src.RecastTime = (int)this.RecastTimeNumericUpDown.Value;
+                    src.RecastTime = (long)this.RecastTimeNumericUpDown.Value;
+                    src.RecastTimeExpanding = (long)this.ExpandSecoundsNumericUpDown.Value;
                     src.RepeatEnabled = this.RepeatCheckBox.Checked;
                     src.ProgressBarVisible = this.ShowProgressBarCheckBox.Checked;
 
@@ -337,7 +341,7 @@
                     src.IsReverse = this.IsReverseCheckBox.Checked;
                     src.DontHide = this.DontHideCheckBox.Checked;
 
-                    src.Font = this.SpellVisualSetting.FontInfo;
+                    src.Font = this.SpellVisualSetting.GetFontInfo();
                     src.FontColor = this.SpellVisualSetting.FontColor.ToHTML();
                     src.FontOutlineColor = this.SpellVisualSetting.FontOutlineColor.ToHTML();
                     src.BarColor = this.SpellVisualSetting.BarColor.ToHTML();
@@ -557,8 +561,10 @@
             this.SpellTitleTextBox.Text = src.SpellTitle;
             this.DisplayNoNumericUpDown.Value = src.DisplayNo;
             this.KeywordTextBox.Text = src.Keyword;
+            this.KeywordToExpandTextBox.Text = src.KeywordForExpand;
             this.RegexEnabledCheckBox.Checked = src.RegexEnabled;
             this.RecastTimeNumericUpDown.Value = src.RecastTime;
+            this.ExpandSecoundsNumericUpDown.Value = src.RecastTimeExpanding;
             this.RepeatCheckBox.Checked = src.RepeatEnabled;
             this.ShowProgressBarCheckBox.Checked = src.ProgressBarVisible;
 
@@ -575,7 +581,7 @@
             this.IsReverseCheckBox.Checked = src.IsReverse;
             this.DontHideCheckBox.Checked = src.DontHide;
 
-            this.SpellVisualSetting.FontInfo = src.Font;
+            this.SpellVisualSetting.SetFontInfo(src.Font);
             this.SpellVisualSetting.BarColor = string.IsNullOrWhiteSpace(src.BarColor) ?
                 Settings.Default.ProgressBarColor :
                 src.BarColor.FromHTML();

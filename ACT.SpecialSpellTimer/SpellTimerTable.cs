@@ -110,13 +110,21 @@
                         spell.KeywordReplaced = LogBuffer.MakeKeyword(spell.Keyword);
                     }
 
+                    if (string.IsNullOrWhiteSpace(spell.KeywordForExpandReplaced))
+                    {
+                        spell.KeywordForExpandReplaced = LogBuffer.MakeKeyword(spell.KeywordForExpand);
+                    }
+
                     if (!spell.RegexEnabled)
                     {
                         spell.RegexPattern = string.Empty;
                         spell.Regex = null;
+                        spell.RegexForExpandPattern = string.Empty;
+                        spell.RegexForExpand = null;
                         continue;
                     }
 
+                    // マッチングキーワードの正規表現を生成する
                     var pattern = !string.IsNullOrWhiteSpace(spell.KeywordReplaced) ?
                         ".*" + spell.KeywordReplaced + ".*" :
                         string.Empty;
@@ -137,6 +145,28 @@
                         spell.RegexPattern = string.Empty;
                         spell.Regex = null;
                     }
+
+                    // 延長するためのマッチングキーワードの正規表現を生成する
+                    pattern = !string.IsNullOrWhiteSpace(spell.KeywordForExpandReplaced) ?
+                        ".*" + spell.KeywordForExpandReplaced + ".*" :
+                        string.Empty;
+
+                    if (!string.IsNullOrWhiteSpace(pattern))
+                    {
+                        if (spell.RegexForExpand == null ||
+                            spell.RegexForExpandPattern != pattern)
+                        {
+                            spell.RegexForExpandPattern = pattern;
+                            spell.RegexForExpand = new Regex(
+                                pattern,
+                                RegexOptions.Compiled);
+                        }
+                    }
+                    else
+                    {
+                        spell.RegexForExpandPattern = string.Empty;
+                        spell.RegexForExpand = null;
+                    }
                 }
 
                 return spellsFilteredJob.ToArray();
@@ -151,6 +181,7 @@
             foreach (var item in Table)
             {
                 item.KeywordReplaced = string.Empty;
+                item.KeywordForExpandReplaced = string.Empty;
             }
         }
 
@@ -184,6 +215,10 @@
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
+                row.RegexForExpand = null;
+                row.RegexForExpandPattern = string.Empty;
+                row.KeywordReplaced = string.Empty;
+                row.KeywordForExpandReplaced = string.Empty;
 
                 row.MatchSound = !string.IsNullOrWhiteSpace(row.MatchSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.MatchSound)) :
@@ -400,6 +435,7 @@
             this.Panel = string.Empty;
             this.SpellTitle = string.Empty;
             this.Keyword = string.Empty;
+            this.KeywordForExpand = string.Empty;
             this.MatchSound = string.Empty;
             this.MatchTextToSpeak = string.Empty;
             this.OverSound = string.Empty;
@@ -425,7 +461,9 @@
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
         public string Keyword { get; set; }
+        public string KeywordForExpand { get; set; }
         public long RecastTime { get; set; }
+        public long RecastTimeExpanding { get; set; }
         public bool RepeatEnabled { get; set; }
         public bool ProgressBarVisible { get; set; }
         public string MatchSound { get; set; }
@@ -471,5 +509,13 @@
         public string RegexPattern { get; set; }
         [XmlIgnore]
         public string KeywordReplaced { get; set; }
+        [XmlIgnore]
+        public long RecastTimeActive { get; set; }
+        [XmlIgnore]
+        public Regex RegexForExpand { get; set; }
+        [XmlIgnore]
+        public string RegexForExpandPattern { get; set; }
+        [XmlIgnore]
+        public string KeywordForExpandReplaced { get; set; }
     }
 }

@@ -772,6 +772,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Matching log text for extending に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string MatchingLogWordToExpandLabel {
+            get {
+                return ResourceManager.GetString("MatchingLogWordToExpandLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Matching log text to hide に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string MatchingWordsToHide {
@@ -1218,6 +1227,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string ScreenUpdateTimeLabel {
             get {
                 return ResourceManager.GetString("ScreenUpdateTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Seconds に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SecondsLabel {
+            get {
+                return ResourceManager.GetString("SecondsLabel", resourceCulture);
             }
         }
         

@@ -59,7 +59,7 @@
             this.InitializeComponent();
 
             this.components.Add(this.alphaDialog);
-            this.FontInfo = Settings.Default.Font.ToFontInfo();
+            this.SetFontInfo(Settings.Default.Font.ToFontInfo());
             this.FontColor = Settings.Default.FontColor;
             this.FontOutlineColor = Settings.Default.FontOutlineColor;
             this.BarColor = Settings.Default.ProgressBarColor;
@@ -90,10 +90,10 @@
                 var f = new FontDialogWindow();
                 f.SetOwner(this.ParentForm);
 
-                f.FontInfo = this.FontInfo;
+                f.FontInfo = this.GetFontInfo();
                 if (f.ShowDialog().Value)
                 {
-                    this.FontInfo = f.FontInfo;
+                    this.SetFontInfo(f.FontInfo);
                     this.RefreshSampleImage();
                 }
             };
@@ -236,7 +236,7 @@
             {
                 foreach (var s in SpellTimerTable.Table)
                 {
-                    s.Font = this.FontInfo;
+                    s.Font = this.GetFontInfo();
                 }
 
                 SpellTimerCore.Default.ClosePanels();
@@ -275,7 +275,7 @@
             {
                 foreach (var s in OnePointTelopTable.Default.Table)
                 {
-                    s.Font = this.FontInfo;
+                    s.Font = this.GetFontInfo();
                 }
 
                 OnePointTelopController.CloseTelops();
@@ -297,7 +297,18 @@
             };
         }
 
-        public FontInfo FontInfo { get; set; }
+        private FontInfo fontInfo;
+
+        public FontInfo GetFontInfo()
+        {
+            return fontInfo;
+        }
+
+        public void SetFontInfo(
+            FontInfo fontInfo)
+        {
+            this.fontInfo = fontInfo;
+        }
 
         public Color FontColor { get; set; }
 
@@ -372,7 +383,7 @@
         /// </summary>
         public void RefreshSampleImage()
         {
-            var font = this.FontInfo.ToFontForWindowsForm();
+            var font = this.GetFontInfo().ToFontForWindowsForm();
             var fontColor = this.FontColor;
             var fontOutlineColor = this.FontOutlineColor;
             var barColor = this.BarColor;

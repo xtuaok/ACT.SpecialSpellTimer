@@ -359,6 +359,7 @@
             Parallel.ForEach(spells, (spell) =>
             {
                 var regex = spell.Regex;
+                var regexForExpand = spell.RegexForExpand;
 
                 // マッチする？
                 foreach (var logLine in logLines)
@@ -384,36 +385,66 @@
                             spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
                             spell.TimeupDone = false;
+                            spell.RecastTimeActive = spell.RecastTime;
 
                             // マッチ時点のサウンドを再生する
                             this.Play(spell.MatchSound);
                             this.Play(spell.MatchTextToSpeak);
                         }
+                    }
+                    else
+                    {
+                        // 正規表現でマッチングする
+                        var match = regex.Match(logLine);
+                        if (match.Success)
+                        {
+                            // ヒットしたログを格納する
+                            spell.MatchedLog = logLine;
 
-                        continue;
+                            // 置換したスペル名を格納する
+                            spell.SpellTitleReplaced = match.Result(spell.SpellTitle);
+
+                            spell.MatchDateTime = DateTime.Now;
+                            spell.OverDone = false;
+                            spell.TimeupDone = false;
+                            spell.RecastTimeActive = spell.RecastTime;
+
+                            // マッチ時点のサウンドを再生する
+                            this.Play(spell.MatchSound);
+
+                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                            {
+                                var tts = match.Result(spell.MatchTextToSpeak);
+                                this.Play(tts);
+                            }
+                        }
                     }
 
-                    // 正規表現でマッチングする
-                    var match = regex.Match(logLine);
-                    if (match.Success)
+                    // リキャストタイムの延長をマッチングする
+                    if (spell.MatchDateTime > DateTime.MinValue)
                     {
-                        // ヒットしたログを格納する
-                        spell.MatchedLog = logLine;
-
-                        // 置換したスペル名を格納する
-                        spell.SpellTitleReplaced = match.Result(spell.SpellTitle);
-
-                        spell.MatchDateTime = DateTime.Now;
-                        spell.OverDone = false;
-                        spell.TimeupDone = false;
-
-                        // マッチ時点のサウンドを再生する
-                        this.Play(spell.MatchSound);
-
-                        if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                        if (!spell.RegexEnabled ||
+                            regexForExpand == null)
                         {
-                            var tts = match.Result(spell.MatchTextToSpeak);
-                            this.Play(tts);
+                            var keyword = spell.KeywordForExpand;
+                            if (string.IsNullOrWhiteSpace(keyword))
+                            {
+                                continue;
+                            }
+
+                            if (logLine.ToUpper().Contains(
+                                keyword.ToUpper()))
+                            {
+                                spell.RecastTimeActive += spell.RecastTimeExpanding;
+                            }
+                        }
+                        else
+                        {
+                            var match = regexForExpand.Match(logLine);
+                            if (match.Success)
+                            {
+                                spell.RecastTimeActive += spell.RecastTimeExpanding;
+                            }
                         }
                     }
                 }
@@ -422,7 +453,7 @@
                 if (spell.RepeatEnabled &&
                     spell.MatchDateTime > DateTime.MinValue)
                 {
-                    if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
+                    if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTimeActive))
                     {
                         spell.MatchDateTime = DateTime.Now;
                         spell.OverDone = false;
@@ -453,11 +484,11 @@
                 }
 
                 // リキャスト完了のSoundを再生する
-                if (spell.RecastTime > 0 &&
+                if (spell.RecastTimeActive > 0 &&
                     !spell.TimeupDone &&
                     spell.MatchDateTime > DateTime.MinValue)
                 {
-                    var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
+                    var recast = spell.MatchDateTime.AddSeconds(spell.RecastTimeActive);
                     if (DateTime.Now >= recast)
                     {
                         this.Play(spell.TimeupSound);

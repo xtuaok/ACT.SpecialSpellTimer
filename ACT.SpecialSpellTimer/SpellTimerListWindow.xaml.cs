@@ -153,7 +153,7 @@
                     from x in spells
                     where
                     x.DontHide ||
-                    (DateTime.Now - x.MatchDateTime.AddSeconds(x.RecastTime)).TotalSeconds <= Settings.Default.TimeOfHideSpell
+                    (DateTime.Now - x.MatchDateTime.AddSeconds(x.RecastTimeActive)).TotalSeconds <= Settings.Default.TimeOfHideSpell
                     select
                     x;
             }
@@ -173,7 +173,7 @@
                     spells =
                         from x in spells
                         orderby
-                        x.MatchDateTime.AddSeconds(x.RecastTime),
+                        x.MatchDateTime.AddSeconds(x.RecastTimeActive),
                         x.DisplayNo
                         select
                         x;
@@ -183,7 +183,7 @@
                     spells =
                         from x in spells
                         orderby
-                        x.MatchDateTime.AddSeconds(x.RecastTime) descending,
+                        x.MatchDateTime.AddSeconds(x.RecastTimeActive) descending,
                         x.DisplayNo
                         select
                         x;
@@ -264,7 +264,7 @@
 
                 if (spell.MatchDateTime > DateTime.MinValue)
                 {
-                    var nextDateTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
+                    var nextDateTime = spell.MatchDateTime.AddSeconds(spell.RecastTimeActive);
 
                     c.RecastTime = (nextDateTime - DateTime.Now).TotalSeconds;
                     if (c.RecastTime < 0)
@@ -272,8 +272,8 @@
                         c.RecastTime = 0;
                     }
 
-                    c.Progress = spell.RecastTime != 0 ?
-                        (spell.RecastTime - c.RecastTime) / spell.RecastTime :
+                    c.Progress = spell.RecastTimeActive != 0 ?
+                        (spell.RecastTimeActive - c.RecastTime) / spell.RecastTimeActive :
                         1.0d;
                     if (c.Progress > 1.0d)
                     {

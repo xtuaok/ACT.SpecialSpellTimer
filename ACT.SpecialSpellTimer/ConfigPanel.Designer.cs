@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigPanel));
             this.TabControl = new System.Windows.Forms.TabControl();
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.DetailPanelGroupBox = new System.Windows.Forms.GroupBox();
@@ -41,7 +40,11 @@
             this.UpdatePanelButton = new System.Windows.Forms.Button();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.label51 = new System.Windows.Forms.Label();
+            this.ExpandSecoundsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.KeywordToExpandTextBox = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.SelectZoneButton = new System.Windows.Forms.Button();
             this.SelectJobButton = new System.Windows.Forms.Button();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
@@ -90,7 +93,7 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.TelopSelectZoneButton = new System.Windows.Forms.Button();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
@@ -192,20 +195,21 @@
             this.label18 = new System.Windows.Forms.Label();
             this.SwitchOverlayButton = new System.Windows.Forms.Button();
             this.ShokikaButton = new System.Windows.Forms.Button();
-            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
-            this.SelectZoneButton = new System.Windows.Forms.Button();
-            this.TelopSelectZoneButton = new System.Windows.Forms.Button();
+            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PanelTopNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PanelLeftNumericUpDown)).BeginInit();
             this.DetailGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecoundsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OverTimeNumericUpDown)).BeginInit();
@@ -366,6 +370,10 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.label51);
+            this.DetailGroupBox.Controls.Add(this.ExpandSecoundsNumericUpDown);
+            this.DetailGroupBox.Controls.Add(this.KeywordToExpandTextBox);
+            this.DetailGroupBox.Controls.Add(this.label50);
             this.DetailGroupBox.Controls.Add(this.SelectZoneButton);
             this.DetailGroupBox.Controls.Add(this.SpellVisualSetting);
             this.DetailGroupBox.Controls.Add(this.SelectJobButton);
@@ -396,19 +404,64 @@
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
             // 
-            // SpellVisualSetting
+            // label51
             // 
-            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.BarEnabled = true;
-            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 124);
-            this.SpellVisualSetting.Name = "SpellVisualSetting";
-            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.SpellVisualSetting.TabIndex = 28;
+            this.label51.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(769, 126);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(75, 12);
+            this.label51.TabIndex = 33;
+            this.label51.Text = "SecondsLabel";
+            // 
+            // ExpandSecoundsNumericUpDown
+            // 
+            this.ExpandSecoundsNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExpandSecoundsNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.ExpandSecoundsNumericUpDown.Location = new System.Drawing.Point(692, 124);
+            this.ExpandSecoundsNumericUpDown.Margin = new System.Windows.Forms.Padding(6);
+            this.ExpandSecoundsNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.ExpandSecoundsNumericUpDown.Minimum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            -2147483648});
+            this.ExpandSecoundsNumericUpDown.Name = "ExpandSecoundsNumericUpDown";
+            this.ExpandSecoundsNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.ExpandSecoundsNumericUpDown.TabIndex = 32;
+            this.ExpandSecoundsNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // KeywordToExpandTextBox
+            // 
+            this.KeywordToExpandTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.KeywordToExpandTextBox.Location = new System.Drawing.Point(187, 124);
+            this.KeywordToExpandTextBox.Name = "KeywordToExpandTextBox";
+            this.KeywordToExpandTextBox.Size = new System.Drawing.Size(496, 19);
+            this.KeywordToExpandTextBox.TabIndex = 31;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(6, 127);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(171, 12);
+            this.label50.TabIndex = 30;
+            this.label50.Text = "MatchingLogWordToExpandLabel";
+            // 
+            // SelectZoneButton
+            // 
+            this.SelectZoneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SelectZoneButton.Location = new System.Drawing.Point(156, 631);
+            this.SelectZoneButton.Name = "SelectZoneButton";
+            this.SelectZoneButton.Size = new System.Drawing.Size(144, 25);
+            this.SelectZoneButton.TabIndex = 29;
+            this.SelectZoneButton.Text = "SelectZoneButton";
+            this.SelectZoneButton.UseVisualStyleBackColor = true;
             // 
             // SelectJobButton
             // 
@@ -434,7 +487,7 @@
             // DontHideCheckBox
             // 
             this.DontHideCheckBox.AutoSize = true;
-            this.DontHideCheckBox.Location = new System.Drawing.Point(511, 173);
+            this.DontHideCheckBox.Location = new System.Drawing.Point(511, 210);
             this.DontHideCheckBox.Name = "DontHideCheckBox";
             this.DontHideCheckBox.Size = new System.Drawing.Size(123, 16);
             this.DontHideCheckBox.TabIndex = 11;
@@ -476,7 +529,7 @@
             // IsReverseCheckBox
             // 
             this.IsReverseCheckBox.AutoSize = true;
-            this.IsReverseCheckBox.Location = new System.Drawing.Point(511, 151);
+            this.IsReverseCheckBox.Location = new System.Drawing.Point(511, 188);
             this.IsReverseCheckBox.Name = "IsReverseCheckBox";
             this.IsReverseCheckBox.Size = new System.Drawing.Size(162, 16);
             this.IsReverseCheckBox.TabIndex = 8;
@@ -515,7 +568,7 @@
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.OverSoundComboBox);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(6, 282);
+            this.groupBox3.Location = new System.Drawing.Point(6, 319);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(838, 96);
             this.groupBox3.TabIndex = 20;
@@ -610,7 +663,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.TimeupSoundComboBox);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Location = new System.Drawing.Point(6, 387);
+            this.groupBox2.Location = new System.Drawing.Point(6, 424);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(838, 75);
@@ -683,7 +736,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.MatchSoundComboBox);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Location = new System.Drawing.Point(6, 201);
+            this.groupBox1.Location = new System.Drawing.Point(6, 238);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(838, 75);
             this.groupBox1.TabIndex = 12;
@@ -748,7 +801,7 @@
             // ShowProgressBarCheckBox
             // 
             this.ShowProgressBarCheckBox.AutoSize = true;
-            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(511, 129);
+            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(511, 166);
             this.ShowProgressBarCheckBox.Name = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.Size = new System.Drawing.Size(166, 16);
             this.ShowProgressBarCheckBox.TabIndex = 7;
@@ -938,19 +991,15 @@
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
             // 
-            // TelopVisualSetting
+            // TelopSelectZoneButton
             // 
-            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.BarEnabled = false;
-            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
-            this.TelopVisualSetting.Name = "TelopVisualSetting";
-            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.TelopVisualSetting.TabIndex = 6;
+            this.TelopSelectZoneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopSelectZoneButton.Location = new System.Drawing.Point(156, 631);
+            this.TelopSelectZoneButton.Name = "TelopSelectZoneButton";
+            this.TelopSelectZoneButton.Size = new System.Drawing.Size(144, 25);
+            this.TelopSelectZoneButton.TabIndex = 46;
+            this.TelopSelectZoneButton.Text = "SelectZoneButton";
+            this.TelopSelectZoneButton.UseVisualStyleBackColor = true;
             // 
             // TelopSelectJobButton
             // 
@@ -1988,20 +2037,6 @@
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
             // 
-            // DefaultVisualSetting
-            // 
-            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.BarEnabled = true;
-            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
-            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
-            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.DefaultVisualSetting.TabIndex = 37;
-            // 
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
@@ -2034,25 +2069,47 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
-            // SelectZoneButton
+            // SpellVisualSetting
             // 
-            this.SelectZoneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.SelectZoneButton.Location = new System.Drawing.Point(156, 631);
-            this.SelectZoneButton.Name = "SelectZoneButton";
-            this.SelectZoneButton.Size = new System.Drawing.Size(144, 25);
-            this.SelectZoneButton.TabIndex = 29;
-            this.SelectZoneButton.Text = "SelectZoneButton";
-            this.SelectZoneButton.UseVisualStyleBackColor = true;
+            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.BarEnabled = true;
+            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 161);
+            this.SpellVisualSetting.Name = "SpellVisualSetting";
+            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.SpellVisualSetting.TabIndex = 28;
             // 
-            // TelopSelectZoneButton
+            // TelopVisualSetting
             // 
-            this.TelopSelectZoneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TelopSelectZoneButton.Location = new System.Drawing.Point(156, 631);
-            this.TelopSelectZoneButton.Name = "TelopSelectZoneButton";
-            this.TelopSelectZoneButton.Size = new System.Drawing.Size(144, 25);
-            this.TelopSelectZoneButton.TabIndex = 46;
-            this.TelopSelectZoneButton.Text = "SelectZoneButton";
-            this.TelopSelectZoneButton.UseVisualStyleBackColor = true;
+            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.BarEnabled = false;
+            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
+            this.TelopVisualSetting.Name = "TelopVisualSetting";
+            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.TelopVisualSetting.TabIndex = 6;
+            // 
+            // DefaultVisualSetting
+            // 
+            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.BarEnabled = true;
+            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
+            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
+            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.DefaultVisualSetting.TabIndex = 37;
             // 
             // ConfigPanel
             // 
@@ -2069,6 +2126,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PanelLeftNumericUpDown)).EndInit();
             this.DetailGroupBox.ResumeLayout(false);
             this.DetailGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecoundsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -2274,5 +2332,9 @@
         private System.Windows.Forms.CheckBox EnabledSpellTimerNoDecimal;
         private System.Windows.Forms.Button SelectZoneButton;
         private System.Windows.Forms.Button TelopSelectZoneButton;
+        private System.Windows.Forms.TextBox KeywordToExpandTextBox;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.NumericUpDown ExpandSecoundsNumericUpDown;
     }
 }
