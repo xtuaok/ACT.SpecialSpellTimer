@@ -248,6 +248,7 @@
                 nr.RegexPattern = string.Empty;
                 SpellTimerTable.Table.Add(nr);
 
+                SpellTimerTable.ClearReplacedKeywords();
                 SpellTimerTable.Save();
 
                 // 新しいノードを生成する
@@ -357,6 +358,7 @@
                         s.BackgroundColor = src.BackgroundColor;
                     }
 
+                    SpellTimerTable.ClearReplacedKeywords();
                     SpellTimerTable.Save();
                     this.LoadSpellTimerTable();
 
@@ -398,6 +400,7 @@
                 if (src != null)
                 {
                     SpellTimerTable.Table.Remove(src);
+                    SpellTimerTable.ClearReplacedKeywords();
                     SpellTimerTable.Save();
 
                     this.DetailGroupBox.Visible = false;

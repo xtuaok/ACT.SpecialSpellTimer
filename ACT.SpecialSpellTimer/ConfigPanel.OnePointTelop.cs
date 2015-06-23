@@ -234,6 +234,7 @@
 
             OnePointTelopTable.Default.Table.Add(nr);
 
+            OnePointTelopTable.Default.ClearReplacedKeywords();
             OnePointTelopTable.Default.Save();
 
             // 新しいノードを生成する
@@ -299,6 +300,7 @@
                         src.Top);
                 }
 
+                OnePointTelopTable.Default.ClearReplacedKeywords();
                 OnePointTelopTable.Default.Save();
                 this.LoadTelopTable();
 
@@ -333,6 +335,7 @@
                 if (src != null)
                 {
                     OnePointTelopTable.Default.Table.Remove(src);
+                    OnePointTelopTable.Default.ClearReplacedKeywords();
                     OnePointTelopTable.Default.Save();
 
                     OnePointTelopController.CloseTelops();
