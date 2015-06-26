@@ -829,4 +829,8 @@
     <value>Seconds</value>
     <comment>秒延長する</comment>
   </data>
+  <data name="ExtendBeyondOriginalRecastTimeCheckBox" xml:space="preserve">
+    <value>Extend beyond the original recast time</value>
+    <comment>元のリキャストタイムを超えて延長する</comment>
+  </data>
 </root>

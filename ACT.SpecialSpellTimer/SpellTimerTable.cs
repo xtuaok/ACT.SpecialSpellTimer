@@ -110,17 +110,17 @@
                         spell.KeywordReplaced = LogBuffer.MakeKeyword(spell.Keyword);
                     }
 
-                    if (string.IsNullOrWhiteSpace(spell.KeywordForExpandReplaced))
+                    if (string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced))
                     {
-                        spell.KeywordForExpandReplaced = LogBuffer.MakeKeyword(spell.KeywordForExpand);
+                        spell.KeywordForExtendReplaced = LogBuffer.MakeKeyword(spell.KeywordForExtend);
                     }
 
                     if (!spell.RegexEnabled)
                     {
                         spell.RegexPattern = string.Empty;
                         spell.Regex = null;
-                        spell.RegexForExpandPattern = string.Empty;
-                        spell.RegexForExpand = null;
+                        spell.RegexForExtendPattern = string.Empty;
+                        spell.RegexForExtend = null;
                         continue;
                     }
 
@@ -147,25 +147,25 @@
                     }
 
                     // 延長するためのマッチングキーワードの正規表現を生成する
-                    pattern = !string.IsNullOrWhiteSpace(spell.KeywordForExpandReplaced) ?
-                        ".*" + spell.KeywordForExpandReplaced + ".*" :
+                    pattern = !string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced) ?
+                        ".*" + spell.KeywordForExtendReplaced + ".*" :
                         string.Empty;
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
-                        if (spell.RegexForExpand == null ||
-                            spell.RegexForExpandPattern != pattern)
+                        if (spell.RegexForExtend == null ||
+                            spell.RegexForExtendPattern != pattern)
                         {
-                            spell.RegexForExpandPattern = pattern;
-                            spell.RegexForExpand = new Regex(
+                            spell.RegexForExtendPattern = pattern;
+                            spell.RegexForExtend = new Regex(
                                 pattern,
                                 RegexOptions.Compiled);
                         }
                     }
                     else
                     {
-                        spell.RegexForExpandPattern = string.Empty;
-                        spell.RegexForExpand = null;
+                        spell.RegexForExtendPattern = string.Empty;
+                        spell.RegexForExtend = null;
                     }
                 }
 
@@ -181,7 +181,7 @@
             foreach (var item in Table)
             {
                 item.KeywordReplaced = string.Empty;
-                item.KeywordForExpandReplaced = string.Empty;
+                item.KeywordForExtendReplaced = string.Empty;
             }
         }
 
@@ -215,10 +215,10 @@
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
-                row.RegexForExpand = null;
-                row.RegexForExpandPattern = string.Empty;
+                row.RegexForExtend = null;
+                row.RegexForExtendPattern = string.Empty;
                 row.KeywordReplaced = string.Empty;
-                row.KeywordForExpandReplaced = string.Empty;
+                row.KeywordForExtendReplaced = string.Empty;
 
                 row.MatchSound = !string.IsNullOrWhiteSpace(row.MatchSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.MatchSound)) :
@@ -435,7 +435,7 @@
             this.Panel = string.Empty;
             this.SpellTitle = string.Empty;
             this.Keyword = string.Empty;
-            this.KeywordForExpand = string.Empty;
+            this.KeywordForExtend = string.Empty;
             this.MatchSound = string.Empty;
             this.MatchTextToSpeak = string.Empty;
             this.OverSound = string.Empty;
@@ -461,9 +461,10 @@
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
         public string Keyword { get; set; }
-        public string KeywordForExpand { get; set; }
+        public string KeywordForExtend { get; set; }
         public long RecastTime { get; set; }
-        public long RecastTimeExpanding { get; set; }
+        public long RecastTimeExtending { get; set; }
+        public bool ExtendBeyondOriginalRecastTime { get; set; }
         public bool RepeatEnabled { get; set; }
         public bool ProgressBarVisible { get; set; }
         public string MatchSound { get; set; }
@@ -512,10 +513,10 @@
         [XmlIgnore]
         public long RecastTimeActive { get; set; }
         [XmlIgnore]
-        public Regex RegexForExpand { get; set; }
+        public Regex RegexForExtend { get; set; }
         [XmlIgnore]
-        public string RegexForExpandPattern { get; set; }
+        public string RegexForExtendPattern { get; set; }
         [XmlIgnore]
-        public string KeywordForExpandReplaced { get; set; }
+        public string KeywordForExtendReplaced { get; set; }
     }
 }

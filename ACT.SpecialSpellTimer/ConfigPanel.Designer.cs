@@ -45,6 +45,7 @@
             this.KeywordToExpandTextBox = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
             this.SelectZoneButton = new System.Windows.Forms.Button();
+            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.SelectJobButton = new System.Windows.Forms.Button();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
@@ -94,6 +95,7 @@
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
             this.TelopSelectZoneButton = new System.Windows.Forms.Button();
+            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
@@ -195,14 +197,13 @@
             this.label18 = new System.Windows.Forms.Label();
             this.SwitchOverlayButton = new System.Windows.Forms.Button();
             this.ShokikaButton = new System.Windows.Forms.Button();
+            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
-            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
-            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
-            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.ExtendBeyondOriginalRecastTimeCheckBox = new System.Windows.Forms.CheckBox();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
@@ -370,6 +371,7 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.ExtendBeyondOriginalRecastTimeCheckBox);
             this.DetailGroupBox.Controls.Add(this.label51);
             this.DetailGroupBox.Controls.Add(this.ExpandSecoundsNumericUpDown);
             this.DetailGroupBox.Controls.Add(this.KeywordToExpandTextBox);
@@ -463,6 +465,20 @@
             this.SelectZoneButton.Text = "SelectZoneButton";
             this.SelectZoneButton.UseVisualStyleBackColor = true;
             // 
+            // SpellVisualSetting
+            // 
+            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.BarEnabled = true;
+            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 175);
+            this.SpellVisualSetting.Name = "SpellVisualSetting";
+            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.SpellVisualSetting.TabIndex = 28;
+            // 
             // SelectJobButton
             // 
             this.SelectJobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -487,7 +503,7 @@
             // DontHideCheckBox
             // 
             this.DontHideCheckBox.AutoSize = true;
-            this.DontHideCheckBox.Location = new System.Drawing.Point(511, 210);
+            this.DontHideCheckBox.Location = new System.Drawing.Point(511, 224);
             this.DontHideCheckBox.Name = "DontHideCheckBox";
             this.DontHideCheckBox.Size = new System.Drawing.Size(123, 16);
             this.DontHideCheckBox.TabIndex = 11;
@@ -529,7 +545,7 @@
             // IsReverseCheckBox
             // 
             this.IsReverseCheckBox.AutoSize = true;
-            this.IsReverseCheckBox.Location = new System.Drawing.Point(511, 188);
+            this.IsReverseCheckBox.Location = new System.Drawing.Point(511, 202);
             this.IsReverseCheckBox.Name = "IsReverseCheckBox";
             this.IsReverseCheckBox.Size = new System.Drawing.Size(162, 16);
             this.IsReverseCheckBox.TabIndex = 8;
@@ -568,7 +584,7 @@
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.OverSoundComboBox);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(6, 319);
+            this.groupBox3.Location = new System.Drawing.Point(6, 333);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(838, 96);
             this.groupBox3.TabIndex = 20;
@@ -663,7 +679,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.TimeupSoundComboBox);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Location = new System.Drawing.Point(6, 424);
+            this.groupBox2.Location = new System.Drawing.Point(6, 438);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(838, 75);
@@ -736,7 +752,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.MatchSoundComboBox);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Location = new System.Drawing.Point(6, 238);
+            this.groupBox1.Location = new System.Drawing.Point(6, 252);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(838, 75);
             this.groupBox1.TabIndex = 12;
@@ -801,7 +817,7 @@
             // ShowProgressBarCheckBox
             // 
             this.ShowProgressBarCheckBox.AutoSize = true;
-            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(511, 166);
+            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(511, 180);
             this.ShowProgressBarCheckBox.Name = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.Size = new System.Drawing.Size(166, 16);
             this.ShowProgressBarCheckBox.TabIndex = 7;
@@ -1000,6 +1016,20 @@
             this.TelopSelectZoneButton.TabIndex = 46;
             this.TelopSelectZoneButton.Text = "SelectZoneButton";
             this.TelopSelectZoneButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopVisualSetting
+            // 
+            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.BarEnabled = false;
+            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
+            this.TelopVisualSetting.Name = "TelopVisualSetting";
+            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.TelopVisualSetting.TabIndex = 6;
             // 
             // TelopSelectJobButton
             // 
@@ -2037,6 +2067,20 @@
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
             // 
+            // DefaultVisualSetting
+            // 
+            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.BarEnabled = true;
+            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
+            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
+            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.DefaultVisualSetting.TabIndex = 37;
+            // 
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
@@ -2069,47 +2113,15 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
-            // SpellVisualSetting
+            // ExtendBeyondOriginalRecastTimeCheckBox
             // 
-            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.BarEnabled = true;
-            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 161);
-            this.SpellVisualSetting.Name = "SpellVisualSetting";
-            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.SpellVisualSetting.TabIndex = 28;
-            // 
-            // TelopVisualSetting
-            // 
-            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.BarEnabled = false;
-            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
-            this.TelopVisualSetting.Name = "TelopVisualSetting";
-            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.TelopVisualSetting.TabIndex = 6;
-            // 
-            // DefaultVisualSetting
-            // 
-            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.BarEnabled = true;
-            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
-            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
-            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.DefaultVisualSetting.TabIndex = 37;
+            this.ExtendBeyondOriginalRecastTimeCheckBox.AutoSize = true;
+            this.ExtendBeyondOriginalRecastTimeCheckBox.Location = new System.Drawing.Point(187, 149);
+            this.ExtendBeyondOriginalRecastTimeCheckBox.Name = "ExtendBeyondOriginalRecastTimeCheckBox";
+            this.ExtendBeyondOriginalRecastTimeCheckBox.Size = new System.Drawing.Size(249, 16);
+            this.ExtendBeyondOriginalRecastTimeCheckBox.TabIndex = 34;
+            this.ExtendBeyondOriginalRecastTimeCheckBox.Text = "ExtendBeyondOriginalRecastTimeCheckBox";
+            this.ExtendBeyondOriginalRecastTimeCheckBox.UseVisualStyleBackColor = true;
             // 
             // ConfigPanel
             // 
@@ -2336,5 +2348,6 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.NumericUpDown ExpandSecoundsNumericUpDown;
+        private System.Windows.Forms.CheckBox ExtendBeyondOriginalRecastTimeCheckBox;
     }
 }

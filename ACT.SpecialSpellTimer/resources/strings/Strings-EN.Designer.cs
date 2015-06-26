@@ -619,6 +619,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Extend beyond the original recast time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExtendBeyondOriginalRecastTimeCheckBox {
+            get {
+                return ResourceManager.GetString("ExtendBeyondOriginalRecastTimeCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Fisher に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string FSH {

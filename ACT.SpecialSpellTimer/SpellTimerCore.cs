@@ -359,7 +359,7 @@
             Parallel.ForEach(spells, (spell) =>
             {
                 var regex = spell.Regex;
-                var regexForExpand = spell.RegexForExpand;
+                var regexForExpand = spell.RegexForExtend;
 
                 // マッチする？
                 foreach (var logLine in logLines)
@@ -426,7 +426,7 @@
                         if (!spell.RegexEnabled ||
                             regexForExpand == null)
                         {
-                            var keyword = spell.KeywordForExpand;
+                            var keyword = spell.KeywordForExtend;
                             if (string.IsNullOrWhiteSpace(keyword))
                             {
                                 continue;
@@ -435,7 +435,17 @@
                             if (logLine.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
-                                spell.RecastTimeActive += spell.RecastTimeExpanding;
+                                if (spell.ExtendBeyondOriginalRecastTime)
+                                {
+                                    spell.RecastTimeActive += spell.RecastTimeExtending;
+                                }
+                                else
+                                {
+                                    var recastTime = spell.RecastTimeActive + spell.RecastTimeExtending;
+                                    spell.RecastTimeActive = recastTime < spell.RecastTime ?
+                                        recastTime :
+                                        spell.RecastTime;
+                                }
                             }
                         }
                         else
@@ -443,7 +453,17 @@
                             var match = regexForExpand.Match(logLine);
                             if (match.Success)
                             {
-                                spell.RecastTimeActive += spell.RecastTimeExpanding;
+                                if (spell.ExtendBeyondOriginalRecastTime)
+                                {
+                                    spell.RecastTimeActive += spell.RecastTimeExtending;
+                                }
+                                else
+                                {
+                                    var recastTime = spell.RecastTimeActive + spell.RecastTimeExtending;
+                                    spell.RecastTimeActive = recastTime < spell.RecastTime ?
+                                        recastTime :
+                                        spell.RecastTime;
+                                }
                             }
                         }
                     }
