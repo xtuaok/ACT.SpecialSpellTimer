@@ -496,6 +496,8 @@
         public bool Enabled { get; set; }
 
         [XmlIgnore]
+        public DateTime CompleteScheduledTime { get; set; }
+        [XmlIgnore]
         public bool OverDone { get; set; }
         [XmlIgnore]
         public bool TimeupDone { get; set; }
@@ -510,8 +512,6 @@
         public string RegexPattern { get; set; }
         [XmlIgnore]
         public string KeywordReplaced { get; set; }
-        [XmlIgnore]
-        public long RecastTimeActive { get; set; }
         [XmlIgnore]
         public Regex RegexForExtend { get; set; }
         [XmlIgnore]

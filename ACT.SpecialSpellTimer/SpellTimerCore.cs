@@ -385,7 +385,7 @@
                             spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
                             spell.TimeupDone = false;
-                            spell.RecastTimeActive = spell.RecastTime;
+                            spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
 
                             // マッチ時点のサウンドを再生する
                             this.Play(spell.MatchSound);
@@ -407,7 +407,7 @@
                             spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
                             spell.TimeupDone = false;
-                            spell.RecastTimeActive = spell.RecastTime;
+                            spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
 
                             // マッチ時点のサウンドを再生する
                             this.Play(spell.MatchSound);
@@ -435,16 +435,23 @@
                             if (logLine.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
+                                var newSchedule = spell.CompleteScheduledTime.AddSeconds(spell.RecastTimeExtending);
+
                                 if (spell.ExtendBeyondOriginalRecastTime)
                                 {
-                                    spell.RecastTimeActive += spell.RecastTimeExtending;
+                                    spell.CompleteScheduledTime = newSchedule;
                                 }
                                 else
                                 {
-                                    var recastTime = spell.RecastTimeActive + spell.RecastTimeExtending;
-                                    spell.RecastTimeActive = recastTime < spell.RecastTime ?
-                                        recastTime :
-                                        spell.RecastTime;
+                                    var newRecastTime = (newSchedule - DateTime.Now).TotalSeconds;
+                                    if (newRecastTime > (double)spell.RecastTime)
+                                    {
+                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(newRecastTime * -1);
+                                    }
+                                    else
+                                    {
+                                        spell.CompleteScheduledTime = newSchedule;
+                                    }
                                 }
                             }
                         }
@@ -453,16 +460,23 @@
                             var match = regexForExpand.Match(logLine);
                             if (match.Success)
                             {
+                                var newSchedule = spell.CompleteScheduledTime.AddSeconds(spell.RecastTimeExtending);
+
                                 if (spell.ExtendBeyondOriginalRecastTime)
                                 {
-                                    spell.RecastTimeActive += spell.RecastTimeExtending;
+                                    spell.CompleteScheduledTime = newSchedule;
                                 }
                                 else
                                 {
-                                    var recastTime = spell.RecastTimeActive + spell.RecastTimeExtending;
-                                    spell.RecastTimeActive = recastTime < spell.RecastTime ?
-                                        recastTime :
-                                        spell.RecastTime;
+                                    var newRecastTime = (newSchedule - DateTime.Now).TotalSeconds;
+                                    if (newRecastTime > (double)spell.RecastTime)
+                                    {
+                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(newRecastTime * -1);
+                                    }
+                                    else
+                                    {
+                                        spell.CompleteScheduledTime = newSchedule;
+                                    }
                                 }
                             }
                         }
@@ -473,7 +487,7 @@
                 if (spell.RepeatEnabled &&
                     spell.MatchDateTime > DateTime.MinValue)
                 {
-                    if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTimeActive))
+                    if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
                     {
                         spell.MatchDateTime = DateTime.Now;
                         spell.OverDone = false;
@@ -504,11 +518,11 @@
                 }
 
                 // リキャスト完了のSoundを再生する
-                if (spell.RecastTimeActive > 0 &&
+                if (spell.RecastTime > 0 &&
                     !spell.TimeupDone &&
                     spell.MatchDateTime > DateTime.MinValue)
                 {
-                    var recast = spell.MatchDateTime.AddSeconds(spell.RecastTimeActive);
+                    var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
                     if (DateTime.Now >= recast)
                     {
                         this.Play(spell.TimeupSound);

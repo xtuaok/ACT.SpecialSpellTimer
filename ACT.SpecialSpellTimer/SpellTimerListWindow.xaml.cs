@@ -153,7 +153,7 @@
                     from x in spells
                     where
                     x.DontHide ||
-                    (DateTime.Now - x.MatchDateTime.AddSeconds(x.RecastTimeActive)).TotalSeconds <= Settings.Default.TimeOfHideSpell
+                    (DateTime.Now - x.CompleteScheduledTime).TotalSeconds <= Settings.Default.TimeOfHideSpell
                     select
                     x;
             }
@@ -173,7 +173,7 @@
                     spells =
                         from x in spells
                         orderby
-                        x.MatchDateTime.AddSeconds(x.RecastTimeActive),
+                        x.CompleteScheduledTime,
                         x.DisplayNo
                         select
                         x;
@@ -183,7 +183,7 @@
                     spells =
                         from x in spells
                         orderby
-                        x.MatchDateTime.AddSeconds(x.RecastTimeActive) descending,
+                        x.CompleteScheduledTime descending,
                         x.DisplayNo
                         select
                         x;
@@ -264,16 +264,15 @@
 
                 if (spell.MatchDateTime > DateTime.MinValue)
                 {
-                    var nextDateTime = spell.MatchDateTime.AddSeconds(spell.RecastTimeActive);
-
-                    c.RecastTime = (nextDateTime - DateTime.Now).TotalSeconds;
+                    c.RecastTime = (spell.CompleteScheduledTime - DateTime.Now).TotalSeconds;
                     if (c.RecastTime < 0)
                     {
                         c.RecastTime = 0;
                     }
 
-                    c.Progress = spell.RecastTimeActive != 0 ?
-                        (spell.RecastTimeActive - c.RecastTime) / spell.RecastTimeActive :
+                    var totalRecastTime = (spell.CompleteScheduledTime - spell.MatchDateTime).TotalSeconds;
+                    c.Progress = totalRecastTime != 0 ?
+                        (totalRecastTime - c.RecastTime) / totalRecastTime :
                         1.0d;
                     if (c.Progress > 1.0d)
                     {
