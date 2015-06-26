@@ -124,7 +124,8 @@
 
             // ジョブに変化あり？
             if (logLine.Contains("にチェンジした。") ||
-                logLine.Contains("You change to "))
+                logLine.Contains("You change to ") ||
+                logLine.Contains("Welcome to"))
             {
                 FF14PluginHelper.RefreshPlayer();
                 RefreshPTList();

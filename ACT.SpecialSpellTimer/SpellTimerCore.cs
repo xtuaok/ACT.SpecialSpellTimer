@@ -446,7 +446,8 @@
                                     var newRecastTime = (newSchedule - DateTime.Now).TotalSeconds;
                                     if (newRecastTime > (double)spell.RecastTime)
                                     {
-                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(newRecastTime * -1);
+                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(
+                                            (newRecastTime - (double)spell.RecastTime) * -1);
                                     }
                                     else
                                     {
@@ -471,7 +472,8 @@
                                     var newRecastTime = (newSchedule - DateTime.Now).TotalSeconds;
                                     if (newRecastTime > (double)spell.RecastTime)
                                     {
-                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(newRecastTime * -1);
+                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(
+                                            (newRecastTime - (double)spell.RecastTime) * -1);
                                     }
                                     else
                                     {
