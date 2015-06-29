@@ -133,6 +133,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Alarm and TTS に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AlarmTab {
+            get {
+                return ResourceManager.GetString("AlarmTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Alchemist に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ALC {
@@ -633,6 +642,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string FSH {
             get {
                 return ResourceManager.GetString("FSH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   General に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string GeneralTab {
+            get {
+                return ResourceManager.GetString("GeneralTab", resourceCulture);
             }
         }
         
@@ -1348,6 +1366,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Play sound before complete, before N seconds に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SoundEffectBeforeComplete {
+            get {
+                return ResourceManager.GetString("SoundEffectBeforeComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   An exception occurred in the regeneration of ACT.SpecialSpellTimer Sound. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SoundError {
@@ -1362,6 +1389,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string SoundInSeconds {
             get {
                 return ResourceManager.GetString("SoundInSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Before seconds に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SoundInSecondsBefore {
+            get {
+                return ResourceManager.GetString("SoundInSecondsBefore", resourceCulture);
             }
         }
         

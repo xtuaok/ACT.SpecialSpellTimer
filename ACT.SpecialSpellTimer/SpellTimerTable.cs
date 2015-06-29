@@ -226,6 +226,9 @@
                 row.OverSound = !string.IsNullOrWhiteSpace(row.OverSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.OverSound)) :
                     string.Empty;
+                row.BeforeSound = !string.IsNullOrWhiteSpace(row.BeforeSound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.BeforeSound)) :
+                    string.Empty;
                 row.TimeupSound = !string.IsNullOrWhiteSpace(row.TimeupSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.TimeupSound)) :
                     string.Empty;
@@ -359,6 +362,9 @@
                 item.OverSound = !string.IsNullOrWhiteSpace(item.OverSound) ?
                     Path.GetFileName(item.OverSound) :
                     string.Empty;
+                item.BeforeSound = !string.IsNullOrWhiteSpace(item.BeforeSound) ?
+                    Path.GetFileName(item.BeforeSound) :
+                    string.Empty;
                 item.TimeupSound = !string.IsNullOrWhiteSpace(item.TimeupSound) ?
                     Path.GetFileName(item.TimeupSound) :
                     string.Empty;
@@ -386,6 +392,9 @@
                     string.Empty;
                 item.OverSound = !string.IsNullOrWhiteSpace(item.OverSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.OverSound)) :
+                    string.Empty;
+                item.BeforeSound = !string.IsNullOrWhiteSpace(item.BeforeSound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.BeforeSound)) :
                     string.Empty;
                 item.TimeupSound = !string.IsNullOrWhiteSpace(item.TimeupSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.TimeupSound)) :
@@ -472,6 +481,9 @@
         public string OverSound { get; set; }
         public string OverTextToSpeak { get; set; }
         public long OverTime { get; set; }
+        public string BeforeSound { get; set; }
+        public string BeforeTextToSpeak { get; set; }
+        public long BeforeTime { get; set; }
         public string TimeupSound { get; set; }
         public string TimeupTextToSpeak { get; set; }
         public DateTime MatchDateTime { get; set; }
@@ -499,6 +511,8 @@
         public DateTime CompleteScheduledTime { get; set; }
         [XmlIgnore]
         public bool OverDone { get; set; }
+        [XmlIgnore]
+        public bool BeforeDone { get; set; }
         [XmlIgnore]
         public bool TimeupDone { get; set; }
         [XmlIgnore]

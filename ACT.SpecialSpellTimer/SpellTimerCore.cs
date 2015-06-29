@@ -384,6 +384,7 @@
                             spell.SpellTitleReplaced = spell.SpellTitle;
                             spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
+                            spell.BeforeDone = false;
                             spell.TimeupDone = false;
                             spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
 
@@ -406,6 +407,7 @@
 
                             spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
+                            spell.BeforeDone = false;
                             spell.TimeupDone = false;
                             spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
 
@@ -436,6 +438,7 @@
                                 keyword.ToUpper()))
                             {
                                 var newSchedule = spell.CompleteScheduledTime.AddSeconds(spell.RecastTimeExtending);
+                                spell.BeforeDone = false;
 
                                 if (spell.ExtendBeyondOriginalRecastTime)
                                 {
@@ -462,6 +465,7 @@
                             if (match.Success)
                             {
                                 var newSchedule = spell.CompleteScheduledTime.AddSeconds(spell.RecastTimeExtending);
+                                spell.BeforeDone = false;
 
                                 if (spell.ExtendBeyondOriginalRecastTime)
                                 {
@@ -516,6 +520,31 @@
                         }
 
                         spell.OverDone = true;
+                    }
+                }
+
+                // リキャストｎ秒前のSoundを再生する
+                if (spell.BeforeTime > 0 &&
+                    !spell.BeforeDone &&
+                    spell.MatchDateTime > DateTime.MinValue)
+                {
+                    if (spell.CompleteScheduledTime > DateTime.MinValue)
+                    {
+                        var before = spell.CompleteScheduledTime.AddSeconds(spell.BeforeTime * -1);
+
+                        if (DateTime.Now >= before)
+                        {
+                            this.Play(spell.BeforeSound);
+                            if (!string.IsNullOrWhiteSpace(spell.BeforeTextToSpeak))
+                            {
+                                var tts = spell.RegexEnabled && regex != null ?
+                                    regex.Replace(spell.MatchedLog, spell.BeforeTextToSpeak) :
+                                    spell.BeforeTextToSpeak;
+                                this.Play(tts);
+                            }
+
+                            spell.BeforeDone = true;
+                        }
                     }
                 }
 

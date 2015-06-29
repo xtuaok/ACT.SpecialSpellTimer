@@ -68,6 +68,10 @@
             this.OverSoundComboBox.ValueMember = "FullPath";
             this.OverSoundComboBox.DisplayMember = "Name";
 
+            this.BeforeSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
+            this.BeforeSoundComboBox.ValueMember = "FullPath";
+            this.BeforeSoundComboBox.DisplayMember = "Name";
+
             this.TimeupSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
             this.TimeupSoundComboBox.ValueMember = "FullPath";
             this.TimeupSoundComboBox.DisplayMember = "Name";
@@ -93,6 +97,11 @@
                 SoundController.Default.Play((string)this.TimeupSoundComboBox.SelectedValue ?? string.Empty);
             };
 
+            this.Play4Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play((string)this.BeforeSoundComboBox.SelectedValue ?? string.Empty);
+            };
+
             this.Speak1Button.Click += (s1, e1) =>
             {
                 SoundController.Default.Play(this.MatchTextToSpeakTextBox.Text);
@@ -106,6 +115,11 @@
             this.Speak3Button.Click += (s1, e1) =>
             {
                 SoundController.Default.Play(this.TimeupTextToSpeakTextBox.Text);
+            };
+
+            this.Speak4Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play(this.BeforeTextToSpeakTextBox.Text);
             };
 
             this.SpellTimerTreeView.AfterCheck += (s1, e1) =>
@@ -337,6 +351,10 @@
                     src.OverSound = (string)this.OverSoundComboBox.SelectedValue ?? string.Empty;
                     src.OverTextToSpeak = this.OverTextToSpeakTextBox.Text;
                     src.OverTime = (int)this.OverTimeNumericUpDown.Value;
+
+                    src.BeforeSound = (string)this.BeforeSoundComboBox.SelectedValue ?? string.Empty;
+                    src.BeforeTextToSpeak = this.BeforeTextToSpeakTextBox.Text;
+                    src.BeforeTime = (int)this.BeforeTimeNumericUpDown.Value;
 
                     src.TimeupSound = (string)this.TimeupSoundComboBox.SelectedValue ?? string.Empty;
                     src.TimeupTextToSpeak = this.TimeupTextToSpeakTextBox.Text;
@@ -580,6 +598,10 @@
             this.OverSoundComboBox.SelectedValue = src.OverSound;
             this.OverTextToSpeakTextBox.Text = src.OverTextToSpeak;
             this.OverTimeNumericUpDown.Value = src.OverTime;
+
+            this.BeforeSoundComboBox.SelectedValue = src.BeforeSound;
+            this.BeforeTextToSpeakTextBox.Text = src.BeforeTextToSpeak;
+            this.BeforeTimeNumericUpDown.Value = src.BeforeTime;
 
             this.TimeupSoundComboBox.SelectedValue = src.TimeupSound;
             this.TimeupTextToSpeakTextBox.Text = src.TimeupTextToSpeak;

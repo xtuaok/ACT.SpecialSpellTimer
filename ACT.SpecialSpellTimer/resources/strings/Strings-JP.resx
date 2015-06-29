@@ -833,4 +833,20 @@
     <value>元のリキャストタイムを超えて延長する</value>
     <comment>Extend beyond the original recast time</comment>
   </data>
+  <data name="AlarmTab" xml:space="preserve">
+    <value>アラーム及びTTS</value>
+    <comment>Alarm and TTS</comment>
+  </data>
+  <data name="GeneralTab" xml:space="preserve">
+    <value>全般</value>
+    <comment>General</comment>
+  </data>
+  <data name="SoundEffectBeforeComplete" xml:space="preserve">
+    <value>リキャスト完了ｎ秒前に鳴らすサウンド</value>
+    <comment>Play sound before complete, before N seconds</comment>
+  </data>
+  <data name="SoundInSecondsBefore" xml:space="preserve">
+    <value>秒前に鳴らす</value>
+    <comment>Before seconds</comment>
+  </data>
 </root>
