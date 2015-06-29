@@ -524,8 +524,8 @@
                     !spell.TimeupDone &&
                     spell.MatchDateTime > DateTime.MinValue)
                 {
-                    var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
-                    if (DateTime.Now >= recast)
+                    if (spell.CompleteScheduledTime > DateTime.MinValue &&
+                        DateTime.Now >= spell.CompleteScheduledTime)
                     {
                         this.Play(spell.TimeupSound);
                         if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
