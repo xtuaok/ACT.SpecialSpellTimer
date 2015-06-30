@@ -430,6 +430,10 @@
                 {
                     petid = Convert.ToString((long)((ulong)pet.ID), 16).ToUpper();
                     petidZone = ActGlobals.oFormActMain.CurrentZone;
+
+                    // 置換後のマッチングキーワードを消去する
+                    SpellTimerTable.ClearReplacedKeywords();
+                    OnePointTelopTable.Default.ClearReplacedKeywords();
                 }
             }
         }
