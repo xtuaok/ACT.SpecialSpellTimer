@@ -228,11 +228,14 @@
                         nr.Panel = baseRow.Panel;
                         nr.SpellTitle = baseRow.SpellTitle + " New";
                         nr.Keyword = baseRow.Keyword;
-                        nr.KeywordForExtend = baseRow.KeywordForExtend;
                         nr.RegexEnabled = baseRow.RegexEnabled;
                         nr.RecastTime = baseRow.RecastTime;
-                        nr.RecastTimeExtending = baseRow.RecastTimeExtending;
+                        nr.KeywordForExtend1 = baseRow.KeywordForExtend1;
+                        nr.RecastTimeExtending1 = baseRow.RecastTimeExtending1;
+                        nr.KeywordForExtend2 = baseRow.KeywordForExtend2;
+                        nr.RecastTimeExtending2 = baseRow.RecastTimeExtending2;
                         nr.ExtendBeyondOriginalRecastTime = baseRow.ExtendBeyondOriginalRecastTime;
+                        nr.UpperLimitOfExtension = baseRow.UpperLimitOfExtension;
                         nr.RepeatEnabled = baseRow.RepeatEnabled;
                         nr.ProgressBarVisible = baseRow.ProgressBarVisible;
                         nr.IsReverse = baseRow.IsReverse;
@@ -337,13 +340,17 @@
                     src.SpellTitle = this.SpellTitleTextBox.Text;
                     src.DisplayNo = (int)this.DisplayNoNumericUpDown.Value;
                     src.Keyword = this.KeywordTextBox.Text;
-                    src.KeywordForExtend = this.KeywordToExpandTextBox.Text;
                     src.RegexEnabled = this.RegexEnabledCheckBox.Checked;
                     src.RecastTime = (long)this.RecastTimeNumericUpDown.Value;
-                    src.RecastTimeExtending = (long)this.ExpandSecoundsNumericUpDown.Value;
-                    src.ExtendBeyondOriginalRecastTime = this.ExtendBeyondOriginalRecastTimeCheckBox.Checked;
                     src.RepeatEnabled = this.RepeatCheckBox.Checked;
                     src.ProgressBarVisible = this.ShowProgressBarCheckBox.Checked;
+
+                    src.KeywordForExtend1 = this.KeywordToExpand1TextBox.Text;
+                    src.RecastTimeExtending1 = (long)this.ExpandSecounds1NumericUpDown.Value;
+                    src.KeywordForExtend2 = this.KeywordToExpand2TextBox.Text;
+                    src.RecastTimeExtending2 = (long)this.ExpandSecounds2NumericUpDown.Value;
+                    src.ExtendBeyondOriginalRecastTime = this.ExtendBeyondOriginalRecastTimeCheckBox.Checked;
+                    src.UpperLimitOfExtension = (long)this.UpperLimitOfExtensionNumericUpDown.Value;
 
                     src.MatchSound = (string)this.MatchSoundComboBox.SelectedValue ?? string.Empty;
                     src.MatchTextToSpeak = this.MatchTextToSpeakTextBox.Text;
@@ -584,13 +591,17 @@
             this.SpellTitleTextBox.Text = src.SpellTitle;
             this.DisplayNoNumericUpDown.Value = src.DisplayNo;
             this.KeywordTextBox.Text = src.Keyword;
-            this.KeywordToExpandTextBox.Text = src.KeywordForExtend;
             this.RegexEnabledCheckBox.Checked = src.RegexEnabled;
             this.RecastTimeNumericUpDown.Value = src.RecastTime;
-            this.ExpandSecoundsNumericUpDown.Value = src.RecastTimeExtending;
-            this.ExtendBeyondOriginalRecastTimeCheckBox.Checked = src.ExtendBeyondOriginalRecastTime;
             this.RepeatCheckBox.Checked = src.RepeatEnabled;
             this.ShowProgressBarCheckBox.Checked = src.ProgressBarVisible;
+
+            this.KeywordToExpand1TextBox.Text = src.KeywordForExtend1;
+            this.ExpandSecounds1NumericUpDown.Value = src.RecastTimeExtending1;
+            this.KeywordToExpand2TextBox.Text = src.KeywordForExtend2;
+            this.ExpandSecounds2NumericUpDown.Value = src.RecastTimeExtending2;
+            this.ExtendBeyondOriginalRecastTimeCheckBox.Checked = src.ExtendBeyondOriginalRecastTime;
+            this.UpperLimitOfExtensionNumericUpDown.Value = src.UpperLimitOfExtension;
 
             this.MatchSoundComboBox.SelectedValue = src.MatchSound;
             this.MatchTextToSpeakTextBox.Text = src.MatchTextToSpeak;

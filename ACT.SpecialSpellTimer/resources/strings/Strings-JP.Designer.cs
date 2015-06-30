@@ -637,6 +637,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   秒を上限とする に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExtendLimitLabel {
+            get {
+                return ResourceManager.GetString("ExtendLimitLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   漁師 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string FSH {
@@ -912,6 +921,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string NIN {
             get {
                 return ResourceManager.GetString("NIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   1 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string No1Label {
+            get {
+                return ResourceManager.GetString("No1Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   2 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string No2Label {
+            get {
+                return ResourceManager.GetString("No2Label", resourceCulture);
             }
         }
         

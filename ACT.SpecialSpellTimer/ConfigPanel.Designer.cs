@@ -42,10 +42,18 @@
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label59 = new System.Windows.Forms.Label();
+            this.UpperLimitOfExtensionNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.ExpandSecounds2NumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.KeywordToExpand2TextBox = new System.Windows.Forms.TextBox();
             this.ExtendBeyondOriginalRecastTimeCheckBox = new System.Windows.Forms.CheckBox();
             this.label51 = new System.Windows.Forms.Label();
-            this.ExpandSecoundsNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.KeywordToExpandTextBox = new System.Windows.Forms.TextBox();
+            this.ExpandSecounds1NumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.KeywordToExpand1TextBox = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
             this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
@@ -224,7 +232,9 @@
             this.DetailGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecoundsNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpperLimitOfExtensionNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds2NumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds1NumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -414,10 +424,18 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label59);
+            this.tabPage1.Controls.Add(this.UpperLimitOfExtensionNumericUpDown);
+            this.tabPage1.Controls.Add(this.label58);
+            this.tabPage1.Controls.Add(this.label57);
+            this.tabPage1.Controls.Add(this.label56);
+            this.tabPage1.Controls.Add(this.label55);
+            this.tabPage1.Controls.Add(this.ExpandSecounds2NumericUpDown);
+            this.tabPage1.Controls.Add(this.KeywordToExpand2TextBox);
             this.tabPage1.Controls.Add(this.ExtendBeyondOriginalRecastTimeCheckBox);
             this.tabPage1.Controls.Add(this.label51);
-            this.tabPage1.Controls.Add(this.ExpandSecoundsNumericUpDown);
-            this.tabPage1.Controls.Add(this.KeywordToExpandTextBox);
+            this.tabPage1.Controls.Add(this.ExpandSecounds1NumericUpDown);
+            this.tabPage1.Controls.Add(this.KeywordToExpand1TextBox);
             this.tabPage1.Controls.Add(this.label50);
             this.tabPage1.Controls.Add(this.SpellVisualSetting);
             this.tabPage1.Controls.Add(this.RegexEnabledCheckBox);
@@ -444,10 +462,101 @@
             this.tabPage1.Text = "GeneralTab";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(273, 195);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(92, 12);
+            this.label59.TabIndex = 64;
+            this.label59.Text = "ExtendLimitLabel";
+            // 
+            // UpperLimitOfExtensionNumericUpDown
+            // 
+            this.UpperLimitOfExtensionNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.UpperLimitOfExtensionNumericUpDown.Location = new System.Drawing.Point(195, 193);
+            this.UpperLimitOfExtensionNumericUpDown.Margin = new System.Windows.Forms.Padding(6);
+            this.UpperLimitOfExtensionNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.UpperLimitOfExtensionNumericUpDown.Name = "UpperLimitOfExtensionNumericUpDown";
+            this.UpperLimitOfExtensionNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.UpperLimitOfExtensionNumericUpDown.TabIndex = 63;
+            this.UpperLimitOfExtensionNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(178, 145);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(52, 12);
+            this.label58.TabIndex = 62;
+            this.label58.Text = "No2Label";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(6, 145);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(171, 12);
+            this.label57.TabIndex = 61;
+            this.label57.Text = "MatchingLogWordToExpandLabel";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(178, 120);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(52, 12);
+            this.label56.TabIndex = 60;
+            this.label56.Text = "No1Label";
+            // 
+            // label55
+            // 
+            this.label55.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(707, 144);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(75, 12);
+            this.label55.TabIndex = 59;
+            this.label55.Text = "SecondsLabel";
+            // 
+            // ExpandSecounds2NumericUpDown
+            // 
+            this.ExpandSecounds2NumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExpandSecounds2NumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.ExpandSecounds2NumericUpDown.Location = new System.Drawing.Point(630, 142);
+            this.ExpandSecounds2NumericUpDown.Margin = new System.Windows.Forms.Padding(6);
+            this.ExpandSecounds2NumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.ExpandSecounds2NumericUpDown.Minimum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            -2147483648});
+            this.ExpandSecounds2NumericUpDown.Name = "ExpandSecounds2NumericUpDown";
+            this.ExpandSecounds2NumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.ExpandSecounds2NumericUpDown.TabIndex = 58;
+            this.ExpandSecounds2NumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // KeywordToExpand2TextBox
+            // 
+            this.KeywordToExpand2TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.KeywordToExpand2TextBox.Location = new System.Drawing.Point(195, 142);
+            this.KeywordToExpand2TextBox.Name = "KeywordToExpand2TextBox";
+            this.KeywordToExpand2TextBox.Size = new System.Drawing.Size(426, 19);
+            this.KeywordToExpand2TextBox.TabIndex = 57;
+            // 
             // ExtendBeyondOriginalRecastTimeCheckBox
             // 
             this.ExtendBeyondOriginalRecastTimeCheckBox.AutoSize = true;
-            this.ExtendBeyondOriginalRecastTimeCheckBox.Location = new System.Drawing.Point(187, 142);
+            this.ExtendBeyondOriginalRecastTimeCheckBox.Location = new System.Drawing.Point(195, 168);
             this.ExtendBeyondOriginalRecastTimeCheckBox.Name = "ExtendBeyondOriginalRecastTimeCheckBox";
             this.ExtendBeyondOriginalRecastTimeCheckBox.Size = new System.Drawing.Size(249, 16);
             this.ExtendBeyondOriginalRecastTimeCheckBox.TabIndex = 56;
@@ -458,41 +567,41 @@
             // 
             this.label51.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(699, 120);
+            this.label51.Location = new System.Drawing.Point(707, 120);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(75, 12);
             this.label51.TabIndex = 55;
             this.label51.Text = "SecondsLabel";
             // 
-            // ExpandSecoundsNumericUpDown
+            // ExpandSecounds1NumericUpDown
             // 
-            this.ExpandSecoundsNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExpandSecoundsNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.ExpandSecoundsNumericUpDown.Location = new System.Drawing.Point(622, 118);
-            this.ExpandSecoundsNumericUpDown.Margin = new System.Windows.Forms.Padding(6);
-            this.ExpandSecoundsNumericUpDown.Maximum = new decimal(new int[] {
+            this.ExpandSecounds1NumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExpandSecounds1NumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.ExpandSecounds1NumericUpDown.Location = new System.Drawing.Point(630, 118);
+            this.ExpandSecounds1NumericUpDown.Margin = new System.Windows.Forms.Padding(6);
+            this.ExpandSecounds1NumericUpDown.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
-            this.ExpandSecoundsNumericUpDown.Minimum = new decimal(new int[] {
+            this.ExpandSecounds1NumericUpDown.Minimum = new decimal(new int[] {
             65535,
             0,
             0,
             -2147483648});
-            this.ExpandSecoundsNumericUpDown.Name = "ExpandSecoundsNumericUpDown";
-            this.ExpandSecoundsNumericUpDown.Size = new System.Drawing.Size(68, 19);
-            this.ExpandSecoundsNumericUpDown.TabIndex = 54;
-            this.ExpandSecoundsNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ExpandSecounds1NumericUpDown.Name = "ExpandSecounds1NumericUpDown";
+            this.ExpandSecounds1NumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.ExpandSecounds1NumericUpDown.TabIndex = 54;
+            this.ExpandSecounds1NumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // KeywordToExpandTextBox
+            // KeywordToExpand1TextBox
             // 
-            this.KeywordToExpandTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.KeywordToExpand1TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.KeywordToExpandTextBox.Location = new System.Drawing.Point(187, 117);
-            this.KeywordToExpandTextBox.Name = "KeywordToExpandTextBox";
-            this.KeywordToExpandTextBox.Size = new System.Drawing.Size(426, 19);
-            this.KeywordToExpandTextBox.TabIndex = 53;
+            this.KeywordToExpand1TextBox.Location = new System.Drawing.Point(195, 117);
+            this.KeywordToExpand1TextBox.Name = "KeywordToExpand1TextBox";
+            this.KeywordToExpand1TextBox.Size = new System.Drawing.Size(426, 19);
+            this.KeywordToExpand1TextBox.TabIndex = 53;
             // 
             // label50
             // 
@@ -512,7 +621,7 @@
             this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
             this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
             this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 168);
+            this.SpellVisualSetting.Location = new System.Drawing.Point(195, 239);
             this.SpellVisualSetting.Name = "SpellVisualSetting";
             this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
             this.SpellVisualSetting.TabIndex = 51;
@@ -521,7 +630,7 @@
             // 
             this.RegexEnabledCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RegexEnabledCheckBox.AutoSize = true;
-            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(696, 63);
+            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(704, 63);
             this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
             this.RegexEnabledCheckBox.Size = new System.Drawing.Size(76, 16);
             this.RegexEnabledCheckBox.TabIndex = 41;
@@ -531,7 +640,7 @@
             // DontHideCheckBox
             // 
             this.DontHideCheckBox.AutoSize = true;
-            this.DontHideCheckBox.Location = new System.Drawing.Point(511, 217);
+            this.DontHideCheckBox.Location = new System.Drawing.Point(519, 288);
             this.DontHideCheckBox.Name = "DontHideCheckBox";
             this.DontHideCheckBox.Size = new System.Drawing.Size(123, 16);
             this.DontHideCheckBox.TabIndex = 48;
@@ -541,7 +650,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(694, 39);
+            this.label27.Location = new System.Drawing.Point(702, 39);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(106, 12);
             this.label27.TabIndex = 50;
@@ -550,7 +659,7 @@
             // DisplayNoNumericUpDown
             // 
             this.DisplayNoNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.DisplayNoNumericUpDown.Location = new System.Drawing.Point(620, 36);
+            this.DisplayNoNumericUpDown.Location = new System.Drawing.Point(628, 36);
             this.DisplayNoNumericUpDown.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -564,7 +673,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(557, 39);
+            this.label19.Location = new System.Drawing.Point(565, 39);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(98, 12);
             this.label19.TabIndex = 49;
@@ -573,7 +682,7 @@
             // IsReverseCheckBox
             // 
             this.IsReverseCheckBox.AutoSize = true;
-            this.IsReverseCheckBox.Location = new System.Drawing.Point(511, 195);
+            this.IsReverseCheckBox.Location = new System.Drawing.Point(519, 266);
             this.IsReverseCheckBox.Name = "IsReverseCheckBox";
             this.IsReverseCheckBox.Size = new System.Drawing.Size(162, 16);
             this.IsReverseCheckBox.TabIndex = 47;
@@ -583,7 +692,7 @@
             // ShowProgressBarCheckBox
             // 
             this.ShowProgressBarCheckBox.AutoSize = true;
-            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(511, 173);
+            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(519, 244);
             this.ShowProgressBarCheckBox.Name = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.Size = new System.Drawing.Size(166, 16);
             this.ShowProgressBarCheckBox.TabIndex = 46;
@@ -593,7 +702,7 @@
             // RepeatCheckBox
             // 
             this.RepeatCheckBox.AutoSize = true;
-            this.RepeatCheckBox.Location = new System.Drawing.Point(261, 90);
+            this.RepeatCheckBox.Location = new System.Drawing.Point(269, 90);
             this.RepeatCheckBox.Name = "RepeatCheckBox";
             this.RepeatCheckBox.Size = new System.Drawing.Size(112, 16);
             this.RepeatCheckBox.TabIndex = 44;
@@ -612,7 +721,7 @@
             // RecastTimeNumericUpDown
             // 
             this.RecastTimeNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(187, 89);
+            this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(195, 89);
             this.RecastTimeNumericUpDown.Margin = new System.Windows.Forms.Padding(6);
             this.RecastTimeNumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -637,14 +746,14 @@
             // 
             this.KeywordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.KeywordTextBox.Location = new System.Drawing.Point(187, 61);
+            this.KeywordTextBox.Location = new System.Drawing.Point(195, 61);
             this.KeywordTextBox.Name = "KeywordTextBox";
             this.KeywordTextBox.Size = new System.Drawing.Size(503, 19);
             this.KeywordTextBox.TabIndex = 40;
             // 
             // SpellTitleTextBox
             // 
-            this.SpellTitleTextBox.Location = new System.Drawing.Point(187, 35);
+            this.SpellTitleTextBox.Location = new System.Drawing.Point(195, 35);
             this.SpellTitleTextBox.Name = "SpellTitleTextBox";
             this.SpellTitleTextBox.Size = new System.Drawing.Size(364, 19);
             this.SpellTitleTextBox.TabIndex = 37;
@@ -660,7 +769,7 @@
             // 
             // PanelNameTextBox
             // 
-            this.PanelNameTextBox.Location = new System.Drawing.Point(187, 10);
+            this.PanelNameTextBox.Location = new System.Drawing.Point(195, 10);
             this.PanelNameTextBox.Name = "PanelNameTextBox";
             this.PanelNameTextBox.Size = new System.Drawing.Size(364, 19);
             this.PanelNameTextBox.TabIndex = 36;
@@ -2289,7 +2398,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecoundsNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UpperLimitOfExtensionNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds2NumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds1NumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -2463,8 +2574,8 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox ExtendBeyondOriginalRecastTimeCheckBox;
         private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.NumericUpDown ExpandSecoundsNumericUpDown;
-        private System.Windows.Forms.TextBox KeywordToExpandTextBox;
+        private System.Windows.Forms.NumericUpDown ExpandSecounds1NumericUpDown;
+        private System.Windows.Forms.TextBox KeywordToExpand1TextBox;
         private System.Windows.Forms.Label label50;
         private VisualSettingControl SpellVisualSetting;
         private System.Windows.Forms.CheckBox RegexEnabledCheckBox;
@@ -2516,5 +2627,13 @@
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.ComboBox BeforeSoundComboBox;
         private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.NumericUpDown ExpandSecounds2NumericUpDown;
+        private System.Windows.Forms.TextBox KeywordToExpand2TextBox;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.NumericUpDown UpperLimitOfExtensionNumericUpDown;
     }
 }

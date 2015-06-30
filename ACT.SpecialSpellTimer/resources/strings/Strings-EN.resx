@@ -849,4 +849,16 @@
     <value>Before seconds</value>
     <comment>秒前に鳴らす</comment>
   </data>
+  <data name="ExtendLimitLabel" xml:space="preserve">
+    <value>Upper limit of the extension (in seconds)</value>
+    <comment>秒を上限とする</comment>
+  </data>
+  <data name="No1Label" xml:space="preserve">
+    <value>1</value>
+    <comment>1</comment>
+  </data>
+  <data name="No2Label" xml:space="preserve">
+    <value>2</value>
+    <comment>2</comment>
+  </data>
 </root>

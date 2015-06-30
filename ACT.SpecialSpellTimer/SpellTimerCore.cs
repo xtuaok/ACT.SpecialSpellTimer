@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
-
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
     using Advanced_Combat_Tracker;
@@ -359,7 +359,6 @@
             Parallel.ForEach(spells, (spell) =>
             {
                 var regex = spell.Regex;
-                var regexForExpand = spell.RegexForExtend;
 
                 // マッチする？
                 foreach (var logLine in logLines)
@@ -422,72 +421,72 @@
                         }
                     }
 
-                    // リキャストタイムの延長をマッチングする
+                    // 延長をマッチングする
                     if (spell.MatchDateTime > DateTime.MinValue)
                     {
-                        if (!spell.RegexEnabled ||
-                            regexForExpand == null)
+                        var keywords = new string[] { spell.KeywordForExtendReplaced1, spell.KeywordForExtendReplaced2 };
+                        var regexes = new Regex[] { spell.RegexForExtend1, spell.RegexForExtend2 };
+                        var timeToExtends = new long[] { spell.RecastTimeExtending1, spell.RecastTimeExtending2 };
+
+                        for (int i = 0; i < 2; i++)
                         {
-                            var keyword = spell.KeywordForExtend;
-                            if (string.IsNullOrWhiteSpace(keyword))
+                            var keywordToExtend = keywords[i];
+                            var regexToExtend = regexes[i];
+                            var timeToExtend = timeToExtends[i];
+
+                            // マッチングする
+                            var match = false;
+
+                            if (!spell.RegexEnabled ||
+                                regexToExtend == null)
+                            {
+                                if (!string.IsNullOrWhiteSpace(keywordToExtend))
+                                {
+                                    match = logLine.ToUpper().Contains(keywordToExtend.ToUpper());
+                                }
+                            }
+                            else
+                            {
+                                match = regexToExtend.Match(logLine).Success;
+                            }
+
+                            if (!match)
                             {
                                 continue;
                             }
 
-                            if (logLine.ToUpper().Contains(
-                                keyword.ToUpper()))
-                            {
-                                var newSchedule = spell.CompleteScheduledTime.AddSeconds(spell.RecastTimeExtending);
-                                spell.BeforeDone = false;
+                            // リキャストタイムを延長する
+                            var newSchedule = spell.CompleteScheduledTime.AddSeconds(timeToExtend);
+                            spell.BeforeDone = false;
 
-                                if (spell.ExtendBeyondOriginalRecastTime)
+                            if (spell.ExtendBeyondOriginalRecastTime)
+                            {
+                                if (spell.UpperLimitOfExtension > 0)
                                 {
-                                    spell.CompleteScheduledTime = newSchedule;
-                                }
-                                else
-                                {
-                                    var newRecastTime = (newSchedule - DateTime.Now).TotalSeconds;
-                                    if (newRecastTime > (double)spell.RecastTime)
+                                    var newDuration = (newSchedule - DateTime.Now).TotalSeconds;
+                                    if (newDuration > (double)spell.UpperLimitOfExtension)
                                     {
-                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(
-                                            (newRecastTime - (double)spell.RecastTime) * -1);
-                                    }
-                                    else
-                                    {
-                                        spell.CompleteScheduledTime = newSchedule;
+                                        newSchedule = newSchedule.AddSeconds(
+                                            (newDuration - (double)spell.UpperLimitOfExtension) * -1);
                                     }
                                 }
                             }
-                        }
-                        else
-                        {
-                            var match = regexForExpand.Match(logLine);
-                            if (match.Success)
+                            else
                             {
-                                var newSchedule = spell.CompleteScheduledTime.AddSeconds(spell.RecastTimeExtending);
-                                spell.BeforeDone = false;
-
-                                if (spell.ExtendBeyondOriginalRecastTime)
+                                var newDuration = (newSchedule - DateTime.Now).TotalSeconds;
+                                if (newDuration > (double)spell.RecastTime)
                                 {
-                                    spell.CompleteScheduledTime = newSchedule;
-                                }
-                                else
-                                {
-                                    var newRecastTime = (newSchedule - DateTime.Now).TotalSeconds;
-                                    if (newRecastTime > (double)spell.RecastTime)
-                                    {
-                                        spell.CompleteScheduledTime = newSchedule.AddSeconds(
-                                            (newRecastTime - (double)spell.RecastTime) * -1);
-                                    }
-                                    else
-                                    {
-                                        spell.CompleteScheduledTime = newSchedule;
-                                    }
+                                    newSchedule = newSchedule.AddSeconds(
+                                        (newDuration - (double)spell.RecastTime) * -1);
                                 }
                             }
+
+                            spell.CompleteScheduledTime = newSchedule;
                         }
                     }
+                    // end if 延長マッチング
                 }
+                // end foreach マッチング
 
                 // Repeat対象のSpellを更新する
                 if (spell.RepeatEnabled &&

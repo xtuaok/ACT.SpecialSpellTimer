@@ -110,17 +110,24 @@
                         spell.KeywordReplaced = LogBuffer.MakeKeyword(spell.Keyword);
                     }
 
-                    if (string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced))
+                    if (string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced1))
                     {
-                        spell.KeywordForExtendReplaced = LogBuffer.MakeKeyword(spell.KeywordForExtend);
+                        spell.KeywordForExtendReplaced1 = LogBuffer.MakeKeyword(spell.KeywordForExtend1);
+                    }
+
+                    if (string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced2))
+                    {
+                        spell.KeywordForExtendReplaced2 = LogBuffer.MakeKeyword(spell.KeywordForExtend2);
                     }
 
                     if (!spell.RegexEnabled)
                     {
                         spell.RegexPattern = string.Empty;
                         spell.Regex = null;
-                        spell.RegexForExtendPattern = string.Empty;
-                        spell.RegexForExtend = null;
+                        spell.RegexForExtendPattern1 = string.Empty;
+                        spell.RegexForExtend1 = null;
+                        spell.RegexForExtendPattern2 = string.Empty;
+                        spell.RegexForExtend2 = null;
                         continue;
                     }
 
@@ -146,26 +153,48 @@
                         spell.Regex = null;
                     }
 
-                    // 延長するためのマッチングキーワードの正規表現を生成する
-                    pattern = !string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced) ?
-                        ".*" + spell.KeywordForExtendReplaced + ".*" :
+                    // 延長するためのマッチングキーワードの正規表現を生成する1
+                    pattern = !string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced1) ?
+                        ".*" + spell.KeywordForExtendReplaced1 + ".*" :
                         string.Empty;
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
-                        if (spell.RegexForExtend == null ||
-                            spell.RegexForExtendPattern != pattern)
+                        if (spell.RegexForExtend1 == null ||
+                            spell.RegexForExtendPattern1 != pattern)
                         {
-                            spell.RegexForExtendPattern = pattern;
-                            spell.RegexForExtend = new Regex(
+                            spell.RegexForExtendPattern1 = pattern;
+                            spell.RegexForExtend1 = new Regex(
                                 pattern,
                                 RegexOptions.Compiled);
                         }
                     }
                     else
                     {
-                        spell.RegexForExtendPattern = string.Empty;
-                        spell.RegexForExtend = null;
+                        spell.RegexForExtendPattern1 = string.Empty;
+                        spell.RegexForExtend1 = null;
+                    }
+
+                    // 延長するためのマッチングキーワードの正規表現を生成する2
+                    pattern = !string.IsNullOrWhiteSpace(spell.KeywordForExtendReplaced2) ?
+                        ".*" + spell.KeywordForExtendReplaced2 + ".*" :
+                        string.Empty;
+
+                    if (!string.IsNullOrWhiteSpace(pattern))
+                    {
+                        if (spell.RegexForExtend2 == null ||
+                            spell.RegexForExtendPattern2 != pattern)
+                        {
+                            spell.RegexForExtendPattern2 = pattern;
+                            spell.RegexForExtend2 = new Regex(
+                                pattern,
+                                RegexOptions.Compiled);
+                        }
+                    }
+                    else
+                    {
+                        spell.RegexForExtendPattern2 = string.Empty;
+                        spell.RegexForExtend2 = null;
                     }
                 }
 
@@ -181,7 +210,8 @@
             foreach (var item in Table)
             {
                 item.KeywordReplaced = string.Empty;
-                item.KeywordForExtendReplaced = string.Empty;
+                item.KeywordForExtendReplaced1 = string.Empty;
+                item.KeywordForExtendReplaced2 = string.Empty;
             }
         }
 
@@ -215,10 +245,13 @@
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
-                row.RegexForExtend = null;
-                row.RegexForExtendPattern = string.Empty;
                 row.KeywordReplaced = string.Empty;
-                row.KeywordForExtendReplaced = string.Empty;
+                row.RegexForExtend1 = null;
+                row.RegexForExtendPattern1 = string.Empty;
+                row.KeywordForExtendReplaced1 = string.Empty;
+                row.RegexForExtend2 = null;
+                row.RegexForExtendPattern2 = string.Empty;
+                row.KeywordForExtendReplaced2 = string.Empty;
 
                 row.MatchSound = !string.IsNullOrWhiteSpace(row.MatchSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.MatchSound)) :
@@ -444,7 +477,8 @@
             this.Panel = string.Empty;
             this.SpellTitle = string.Empty;
             this.Keyword = string.Empty;
-            this.KeywordForExtend = string.Empty;
+            this.KeywordForExtend1 = string.Empty;
+            this.KeywordForExtend2 = string.Empty;
             this.MatchSound = string.Empty;
             this.MatchTextToSpeak = string.Empty;
             this.OverSound = string.Empty;
@@ -464,16 +498,21 @@
             this.ZoneFilter = string.Empty;
             this.Font = new FontInfo();
             this.KeywordReplaced = string.Empty;
+            this.KeywordForExtendReplaced1 = string.Empty;
+            this.KeywordForExtendReplaced2 = string.Empty;
         }
 
         public long ID { get; set; }
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
         public string Keyword { get; set; }
-        public string KeywordForExtend { get; set; }
+        public string KeywordForExtend1 { get; set; }
+        public string KeywordForExtend2 { get; set; }
         public long RecastTime { get; set; }
-        public long RecastTimeExtending { get; set; }
+        public long RecastTimeExtending1 { get; set; }
+        public long RecastTimeExtending2 { get; set; }
         public bool ExtendBeyondOriginalRecastTime { get; set; }
+        public long UpperLimitOfExtension { get; set; }
         public bool RepeatEnabled { get; set; }
         public bool ProgressBarVisible { get; set; }
         public string MatchSound { get; set; }
@@ -527,10 +566,16 @@
         [XmlIgnore]
         public string KeywordReplaced { get; set; }
         [XmlIgnore]
-        public Regex RegexForExtend { get; set; }
+        public Regex RegexForExtend1 { get; set; }
         [XmlIgnore]
-        public string RegexForExtendPattern { get; set; }
+        public string RegexForExtendPattern1 { get; set; }
         [XmlIgnore]
-        public string KeywordForExtendReplaced { get; set; }
+        public string KeywordForExtendReplaced1 { get; set; }
+        [XmlIgnore]
+        public Regex RegexForExtend2 { get; set; }
+        [XmlIgnore]
+        public string RegexForExtendPattern2 { get; set; }
+        [XmlIgnore]
+        public string KeywordForExtendReplaced2 { get; set; }
     }
 }
