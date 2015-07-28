@@ -2232,7 +2232,7 @@
             this.TimeOfHideNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.TimeOfHideNumericUpDown.Location = new System.Drawing.Point(293, 261);
             this.TimeOfHideNumericUpDown.Maximum = new decimal(new int[] {
-            20,
+            65535,
             0,
             0,
             0});

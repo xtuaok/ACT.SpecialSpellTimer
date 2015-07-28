@@ -455,6 +455,8 @@
                                 continue;
                             }
 
+                            var now = DateTime.Now;
+
                             // リキャストタイムを延長する
                             var newSchedule = spell.CompleteScheduledTime.AddSeconds(timeToExtend);
                             spell.BeforeDone = false;
@@ -463,7 +465,7 @@
                             {
                                 if (spell.UpperLimitOfExtension > 0)
                                 {
-                                    var newDuration = (newSchedule - DateTime.Now).TotalSeconds;
+                                    var newDuration = (newSchedule - now).TotalSeconds;
                                     if (newDuration > (double)spell.UpperLimitOfExtension)
                                     {
                                         newSchedule = newSchedule.AddSeconds(
@@ -473,7 +475,7 @@
                             }
                             else
                             {
-                                var newDuration = (newSchedule - DateTime.Now).TotalSeconds;
+                                var newDuration = (newSchedule - now).TotalSeconds;
                                 if (newDuration > (double)spell.RecastTime)
                                 {
                                     newSchedule = newSchedule.AddSeconds(
@@ -481,6 +483,7 @@
                                 }
                             }
 
+                            spell.MatchDateTime = now;
                             spell.CompleteScheduledTime = newSchedule;
                         }
                     }
