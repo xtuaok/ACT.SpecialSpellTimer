@@ -10,17 +10,22 @@ ACT.SpecialSpellTimer [![Analytics](https://ga-beacon.appspot.com/UA-58705151-1/
 
 使い方
 --------------
+1) 準備  
+.NET Framework 4.6 をインストールします。  
+**[Microsoft .NET Framework 4.6](https://www.microsoft.com/ja-jp/download/details.aspx?id=48130)**  
+  
+2) インストール  
 resources  
 ACT.SpecialSpellTimer.dll  
 をACTのインストールディレクトリにコピーします  
 その後、プラグインとしてACT.SpecialSpellTimer.dllを追加してください  
   
-1) DoTの開始にヒットさせてDoT継続時間を可視化したい  
+3) DoTの開始にヒットさせてDoT継続時間を可視化したい  
 [エフェクトを受けた人の名前] gains the effect of フラクチャー from [エフェクトを与えた人の名前]  
 ACTが吐き出すログには上記のような独自のログがあります  
 これに対して正規表現を設定して、自身が与えたDoT（その他デバフも可）の開始を検出してください  
   
-2) ゲーム内のプレースホルダは使えないの？  
+4) ゲーム内のプレースホルダは使えないの？  
 一部は使えるように対応しています  
 <table>
 <tr>
@@ -60,7 +65,7 @@ FF14が内部のオブジェクトに割当てている一意なIDに置換さ�
 </tr>
 </table>
   
-3) 俺の歌を聞かせたい    
+5) 俺の歌を聞かせたい    
 resources/wav にwaveファイルを投入するとスペスペで使用できるようになります  
 
 テキストコマンド
