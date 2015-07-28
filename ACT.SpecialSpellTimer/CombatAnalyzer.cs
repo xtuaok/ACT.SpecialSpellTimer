@@ -20,11 +20,11 @@
         private static readonly string[] AddedKeywords = new string[] { "Added new combatant" };
 
         private static readonly Regex CastRegex = new Regex(
-            @"\[.+?\] ..:.+?:(?<actor>.+?)は「(?<skill>.+?)」(を唱えた。|の構え。)$",
+            @"\[.+?\] 00:2[89a]..:(?<actor>.+?)は「(?<skill>.+?)」(を唱えた。|の構え。)$",
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         private static readonly Regex ActionRegex = new Regex(
-            @"\[.+?\] ..:.+?:(?<actor>.+?)の「(?<skill>.+?)」$",
+            @"\[.+?\] 00:2[89a]..:(?<actor>.+?)の「(?<skill>.+?)」$",
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         private static readonly Regex HPRateRegex = new Regex(
@@ -32,7 +32,7 @@
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         private static readonly Regex AddedRegex = new Regex(
-            @"\[.+?\] ..:Added new combatant (?<actor>.+)\.  ",
+            @"\[.+?\] 03:Added new combatant (?<actor>.+)\.  ",
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         /// <summary>
