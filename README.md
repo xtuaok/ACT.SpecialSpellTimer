@@ -11,9 +11,9 @@ ACT.SpecialSpellTimer [![Analytics](https://ga-beacon.appspot.com/UA-58705151-1/
 使い方
 --------------
 1) 準備  
-.NET Framework 4.6 をインストールします。  
-**[Microsoft .NET Framework 4.6](https://www.microsoft.com/ja-jp/download/details.aspx?id=48130)**  
-  
+**[.NET Framework 4.6](https://www.microsoft.com/ja-jp/download/details.aspx?id=48130)** をインストールします。  
+※スペスペの動作には.NET Framework 4.6 以降が必須です。  
+
 2) インストール  
 resources  
 ACT.SpecialSpellTimer.dll  
