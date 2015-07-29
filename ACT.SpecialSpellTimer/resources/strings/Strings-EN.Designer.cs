@@ -628,6 +628,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Export... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExportCSVButton {
+            get {
+                return ResourceManager.GetString("ExportCSVButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Extend beyond the original recast time に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ExtendBeyondOriginalRecastTimeCheckBox {

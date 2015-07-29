@@ -224,6 +224,7 @@
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
+            this.ExportCSVButton = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
@@ -1761,6 +1762,7 @@
             // CombatAnalyzerTabPage
             // 
             this.CombatAnalyzerTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.CombatAnalyzerTabPage.Controls.Add(this.ExportCSVButton);
             this.CombatAnalyzerTabPage.Controls.Add(this.CombatLogListView);
             this.CombatAnalyzerTabPage.Controls.Add(this.label6);
             this.CombatAnalyzerTabPage.Controls.Add(this.label5);
@@ -1965,7 +1967,7 @@
             // 
             this.CombatAnalyzingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CombatAnalyzingLabel.AutoSize = true;
-            this.CombatAnalyzingLabel.Location = new System.Drawing.Point(951, 646);
+            this.CombatAnalyzingLabel.Location = new System.Drawing.Point(841, 646);
             this.CombatAnalyzingLabel.Name = "CombatAnalyzingLabel";
             this.CombatAnalyzingLabel.Size = new System.Drawing.Size(93, 12);
             this.CombatAnalyzingLabel.TabIndex = 14;
@@ -1974,7 +1976,7 @@
             // AnalyzeCombatButton
             // 
             this.AnalyzeCombatButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AnalyzeCombatButton.Location = new System.Drawing.Point(1078, 637);
+            this.AnalyzeCombatButton.Location = new System.Drawing.Point(968, 637);
             this.AnalyzeCombatButton.Name = "AnalyzeCombatButton";
             this.AnalyzeCombatButton.Size = new System.Drawing.Size(102, 25);
             this.AnalyzeCombatButton.TabIndex = 1;
@@ -2381,6 +2383,17 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
+            // ExportCSVButton
+            // 
+            this.ExportCSVButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExportCSVButton.Location = new System.Drawing.Point(1078, 637);
+            this.ExportCSVButton.Name = "ExportCSVButton";
+            this.ExportCSVButton.Size = new System.Drawing.Size(95, 25);
+            this.ExportCSVButton.TabIndex = 20;
+            this.ExportCSVButton.Text = "ExportCSVButton";
+            this.ExportCSVButton.UseVisualStyleBackColor = true;
+            this.ExportCSVButton.Click += new System.EventHandler(this.ExportCSVButton_Click);
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2635,5 +2648,6 @@
         private System.Windows.Forms.TextBox KeywordToExpand2TextBox;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.NumericUpDown UpperLimitOfExtensionNumericUpDown;
+        internal System.Windows.Forms.Button ExportCSVButton;
     }
 }

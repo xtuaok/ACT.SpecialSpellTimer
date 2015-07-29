@@ -861,4 +861,8 @@
     <value>2</value>
     <comment>2</comment>
   </data>
+  <data name="ExportCSVButton" xml:space="preserve">
+    <value>Export...</value>
+    <comment>CSV保存</comment>
+  </data>
 </root>
