@@ -10,6 +10,7 @@
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
+    using System.IO;
 
     /// <summary>
     /// 設定Panel
@@ -700,6 +701,29 @@
                 }
 
                 this.LoadSpellTimerTable();
+            }
+        }
+
+        private void ExportCSVButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.DefaultExt = "csv";
+            dialog.Filter = "CSV File (*.csv) | *.csv";
+            dialog.OverwritePrompt = true;
+            dialog.CreatePrompt = false;
+            dialog.Title = "Export to CSV file";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = dialog.FileName;
+                using (StreamWriter sw = new StreamWriter(filename))
+                {
+                    foreach (ListViewItem item in this.CombatLogListView.Items)
+                    {
+                        var row = item.SubItems.OfType<ListViewItem.ListViewSubItem>().Skip(1).Select(s => s.Text).ToArray();
+                        sw.WriteLine(String.Join(",", row));
+                    }
+                }
             }
         }
     }
