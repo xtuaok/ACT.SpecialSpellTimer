@@ -21,6 +21,8 @@
 
         private List<CombatLog> bindedCombatLogList = new List<CombatLog>();
 
+        private SaveFileDialog combatAnalysisCSVExportSaveFileDialog = new SaveFileDialog();
+
         /// <summary>
         /// ExportCSVButton Click
         /// </summary>
@@ -28,7 +30,7 @@
         /// <param name="e">イベント引数</param>
         private void ExportCSVButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
+            var dialog = this.combatAnalysisCSVExportSaveFileDialog;
             dialog.RestoreDirectory = true;
             dialog.DefaultExt = "csv";
             dialog.Filter = "CSV File (*.csv) | *.csv";
@@ -39,12 +41,12 @@
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string filename = dialog.FileName;
-                using (StreamWriter sw = new StreamWriter(filename))
+                using (var sw = new StreamWriter(filename))
                 {
                     foreach (ListViewItem item in this.CombatLogListView.Items)
                     {
                         var row = item.SubItems.OfType<ListViewItem.ListViewSubItem>().Skip(1).Select(s => s.Text).ToArray();
-                        sw.WriteLine(String.Join(",", row));
+                        sw.WriteLine(string.Join(",", row));
                     }
                 }
             }
