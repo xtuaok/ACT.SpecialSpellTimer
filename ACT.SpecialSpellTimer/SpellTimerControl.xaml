@@ -50,7 +50,7 @@
       <Image x:Name="SpellIconImage"></Image>
     </DockPanel>
 
-    <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+    <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom">
       <Utility:OutlineTextBlock 
         x:Name="SpellTitleTextBlock" 
         HorizontalAlignment="Left" 
@@ -71,7 +71,7 @@
       </Utility:OutlineTextBlock>
     </DockPanel>
 
-    <DockPanel x:Name="RecastTimePanel" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+    <DockPanel x:Name="RecastTimePanel" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
       <Utility:OutlineTextBlock
         x:Name="RecastTimeTextBlock" 
         HorizontalAlignment="Right" 

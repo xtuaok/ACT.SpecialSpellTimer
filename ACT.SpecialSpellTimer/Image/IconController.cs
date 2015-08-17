@@ -66,6 +66,11 @@
 
         public IconFile getIconFile(String relativePath)
         {
+            if (relativePath == string.Empty || relativePath == null)
+            {
+                return null;
+            }
+
             var iconPath = Path.Combine(this.IconDirectory, relativePath);
             if (File.Exists(iconPath))
             {
@@ -90,7 +95,8 @@
             // 未選択用のダミーをセットしておく
             list.Add(new IconFile()
             {
-                FullPath = string.Empty
+                FullPath = string.Empty,
+                RelativePath = string.Empty
             });
 
             if (Directory.Exists(this.IconDirectory))

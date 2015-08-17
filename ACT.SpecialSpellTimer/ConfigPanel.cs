@@ -181,6 +181,30 @@
                 }
             };
 
+            this.SpellIconComboBox.SelectionChangeCommitted += (s1, e1) =>
+            {
+                this.SpellVisualSetting.SpellIcon = (string)this.SpellIconComboBox.SelectedValue;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
+            this.SpellIconSizeUpDown.ValueChanged += (s1, e1) =>
+            {
+                this.SpellVisualSetting.SpellIconSize = (int)this.SpellIconSizeUpDown.Value;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
+            this.HideSpellNameCheckBox.CheckedChanged += (s1, e1) =>
+            {
+                this.SpellVisualSetting.HideSpellName = this.HideSpellNameCheckBox.Checked;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
+            this.OverlapRecastTimeCheckBox.CheckedChanged += (s1, e1) =>
+            {
+                this.SpellVisualSetting.OverlapRecastTime = this.OverlapRecastTimeCheckBox.Checked;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
             // オプションのロードメソッドを呼ぶ
             this.LoadOption();
 
@@ -207,6 +231,7 @@
                     1;
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
+                nr.SpellIcon = string.Empty;
                 nr.SpellIconSize = 24;
                 nr.ProgressBarVisible = true;
                 nr.FontColor = Settings.Default.FontColor.ToHTML();
@@ -655,6 +680,11 @@
             this.SpellVisualSetting.BackgroundColor = string.IsNullOrWhiteSpace(src.BackgroundColor) ?
                 Settings.Default.BackgroundColor :
                 Color.FromArgb(src.BackgroundAlpha, src.BackgroundColor.FromHTML());
+
+            this.SpellVisualSetting.SpellIcon = src.SpellIcon;
+            this.SpellVisualSetting.SpellIconSize = src.SpellIconSize;
+            this.SpellVisualSetting.HideSpellName = src.HideSpellName;
+            this.SpellVisualSetting.OverlapRecastTime = src.OverlapRecastTime;
 
             this.SpellVisualSetting.RefreshSampleImage();
 

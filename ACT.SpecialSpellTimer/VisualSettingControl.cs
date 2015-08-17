@@ -12,6 +12,8 @@
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
+    using ACT.SpecialSpellTimer.Image;
+    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// 見た目設定用コントロール
@@ -65,6 +67,8 @@
             this.BarColor = Settings.Default.ProgressBarColor;
             this.BarOutlineColor = Settings.Default.ProgressBarOutlineColor;
             this.BarSize = Settings.Default.ProgressBarSize;
+
+            this.SpellIcon = "";
 
             this.BarEnabled = true;
 
@@ -310,6 +314,14 @@
             this.fontInfo = fontInfo;
         }
 
+        public String SpellIcon { get; set; }
+
+        public int SpellIconSize { get; set; }
+
+        public bool HideSpellName { get; set; }
+
+        public bool OverlapRecastTime { get; set; }
+
         public Color FontColor { get; set; }
 
         public Color FontOutlineColor { get; set; }
@@ -429,13 +441,26 @@
                     outlinePen.Dispose();
                 }
 
+                // アイコンを描く
+                var hasIcon = false;
+                if (this.BarEnabled)
+                {
+                    var spellIcon = IconController.Default.getIconFile(this.SpellIcon);
+                    if (spellIcon != null) {
+                        var image = System.Drawing.Image.FromFile(spellIcon.FullPath);
+                        g.DrawImage(image, barLocation.X, barLocation.Y - this.SpellIconSize, (float)this.SpellIconSize, (float)this.SpellIconSize);
+                        hasIcon = true;
+                    }
+                }
+ 
                 // フォントのペンを生成する
                 var fontBrush = new SolidBrush(fontColor);
                 var fontOutlinePen = new Pen(fontOutlineColor, 0.2f);
+                var fontHeight = font.Size * 2; // 正しくない計算
                 var fontRect = new Rectangle(
-                    barLocation.X,
-                    6,
-                    barSize.Width,
+                    hasIcon ? barLocation.X + this.SpellIconSize : barLocation.X,
+                    barLocation.Y - 2 - (int)fontHeight,
+                    hasIcon ? barSize.Width - this.SpellIconSize : barSize.Width,
                     barLocation.Y - 2);
 
                 if (!this.BarEnabled)
@@ -455,7 +480,7 @@
 
                 var recastSf = new StringFormat()
                 {
-                    Alignment = StringAlignment.Far
+                    Alignment = this.OverlapRecastTime ? StringAlignment.Near : StringAlignment.Far
                 };
 
                 var telopSf = new StringFormat()
@@ -467,14 +492,21 @@
 
                 if (this.BarEnabled)
                 {
-                    path.AddString(
-                        Translate.Get("SampleSpell"),
-                        font.FontFamily,
-                        (int)font.Style,
-                        (float)font.ToFontSizeWPF(),
-                        fontRect,
-                        spellSf);
+                    if (!this.HideSpellName)
+                    {
+                        path.AddString(
+                            Translate.Get("SampleSpell"),
+                            font.FontFamily,
+                            (int)font.Style,
+                            (float)font.ToFontSizeWPF(),
+                            fontRect,
+                            spellSf);
+                    }
 
+                    if (this.OverlapRecastTime)
+                    {
+                        fontRect.X = barLocation.X;
+                    }
                     path.AddString(
                         "120.0",
                         font.FontFamily,
