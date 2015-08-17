@@ -18,9 +18,16 @@
       <RowDefinition/>
       <RowDefinition/>
     </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
 
     <Canvas 
       Grid.Row="1"
+      Grid.Column="0"
+      Grid.ColumnSpan="3"
       Name="ProgressBarCanvas"
       Margin="0,2,0,10"
       VerticalAlignment="Top" 
@@ -39,8 +46,11 @@
       <Rectangle x:Name="BarOutlineRectangle" />
     </Canvas>
 
-    <DockPanel Grid.Row="0">
+    <DockPanel Grid.Row="0" Grid.Column="0" Panel.ZIndex="-1">
       <Image x:Name="SpellIconImage"></Image>
+    </DockPanel>
+
+    <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
       <Utility:OutlineTextBlock 
         x:Name="SpellTitleTextBlock" 
         HorizontalAlignment="Left" 
@@ -59,8 +69,10 @@
             Color="{Binding ElementName=RecastTimeTextBlock, Path=Stroke.Color, Mode=OneWay}" />
         </Utility:OutlineTextBlock.Effect>
       </Utility:OutlineTextBlock>
+    </DockPanel>
 
-      <Utility:OutlineTextBlock 
+    <DockPanel x:Name="RecastTimePanel" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+      <Utility:OutlineTextBlock
         x:Name="RecastTimeTextBlock" 
         HorizontalAlignment="Right" 
         VerticalAlignment="Top"

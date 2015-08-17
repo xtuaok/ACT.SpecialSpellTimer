@@ -62,6 +62,16 @@
         public bool IsReverse { get; set; }
 
         /// <summary>
+        /// スペル名を非表示とするか？
+        /// </summary>
+        public bool HideSpellName { get; set; }
+        
+        /// <summary>
+        /// リキャストタイムを重ねて表示するか？
+        /// </summary>
+        public bool OverlapRecastTime { get; set; }
+
+        /// <summary>
         /// バーの色
         /// </summary>
         public string BarColor { get; set; }
@@ -164,6 +174,10 @@
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
             }
+            if (this.HideSpellName)
+            {
+                tb.Visibility = System.Windows.Visibility.Collapsed;
+            }
 
             // リキャスト時間を描画する
             tb = this.RecastTimeTextBlock;
@@ -177,6 +191,11 @@
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
+            }
+            if (this.OverlapRecastTime)
+            {
+                this.RecastTimePanel.SetValue(Grid.ColumnProperty, 0);
+                this.RecastTimePanel.SetValue(HorizontalAlignmentProperty, System.Windows.HorizontalAlignment.Center);
             }
 
             // ProgressBarを描画する

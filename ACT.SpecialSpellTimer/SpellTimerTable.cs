@@ -544,6 +544,8 @@
         public string BackgroundColor { get; set; }
         public int BackgroundAlpha { get; set; }
         public bool DontHide { get; set; }
+        public bool HideSpellName { get; set; }
+        public bool OverlapRecastTime { get; set; }
         public bool RegexEnabled { get; set; }
         public string JobFilter { get; set; }
         public string ZoneFilter { get; set; }

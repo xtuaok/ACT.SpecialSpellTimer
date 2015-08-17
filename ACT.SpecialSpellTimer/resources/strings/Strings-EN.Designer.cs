@@ -691,6 +691,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Hide Spell Name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string HideSpellNameCheckBox {
+            get {
+                return ResourceManager.GetString("HideSpellNameCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   HP に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string HPHeader {
@@ -984,6 +993,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string OptionTabPageTitle {
             get {
                 return ResourceManager.GetString("OptionTabPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Overlap Recast Time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string OverlapRecastTimeCheckBox {
+            get {
+                return ResourceManager.GetString("OverlapRecastTimeCheckBox", resourceCulture);
             }
         }
         

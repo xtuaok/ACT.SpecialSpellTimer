@@ -253,6 +253,8 @@
                 c.SpellIcon = spell.SpellIcon;
                 c.SpellIconSize = spell.SpellIconSize;
                 c.IsReverse = spell.IsReverse;
+                c.HideSpellName = spell.HideSpellName;
+                c.OverlapRecastTime = spell.OverlapRecastTime;
                 c.RecastTime = 0;
                 c.Progress = 1.0d;
 
