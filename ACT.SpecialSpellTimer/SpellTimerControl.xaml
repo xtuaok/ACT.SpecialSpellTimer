@@ -40,6 +40,7 @@
     </Canvas>
 
     <DockPanel Grid.Row="0">
+      <Image x:Name="SpellIconImage"></Image>
       <Utility:OutlineTextBlock 
         x:Name="SpellTitleTextBlock" 
         HorizontalAlignment="Left" 

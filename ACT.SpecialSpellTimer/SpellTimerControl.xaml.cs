@@ -6,6 +6,8 @@
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
+    using ACT.SpecialSpellTimer.Image;
+    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// SpellTimerControl
@@ -33,6 +35,16 @@
         /// スペルのTitle
         /// </summary>
         public string SpellTitle { get; set; }
+
+        /// <summary>
+        /// スペルのIcon
+        /// </summary>
+        public string SpellIcon { get; set; }
+
+        /// <summary>
+        /// スペルIconサイズ
+        /// </summary>
+        public int SpellIconSize { get; set; }
 
         /// <summary>
         /// 残りリキャストTime(秒数)
@@ -132,6 +144,15 @@
             var tb = default(OutlineTextBlock);
             var font = this.FontInfo;
 
+            // アイコンを描画する
+            var image = this.SpellIconImage;
+            if (image.Source == null && this.SpellIcon != "")
+            {
+                image.Source = new BitmapImage(new System.Uri(IconController.Default.getIconFile(this.SpellIcon).FullPath));
+                image.Height = this.SpellIconSize;
+                image.Width = this.SpellIconSize;
+            }
+            
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
             var title = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;

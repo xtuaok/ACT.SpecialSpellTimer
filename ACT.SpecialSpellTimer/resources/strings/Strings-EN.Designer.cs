@@ -1474,6 +1474,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Spell Icon に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SpellIconLabel {
+            get {
+                return ResourceManager.GetString("SpellIconLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Size of Spell Icon に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SpellIconSizeLabel {
+            get {
+                return ResourceManager.GetString("SpellIconSizeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Spell name に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SpellNameLabel {

@@ -476,6 +476,7 @@
         {
             this.Panel = string.Empty;
             this.SpellTitle = string.Empty;
+            this.SpellIcon = string.Empty;
             this.Keyword = string.Empty;
             this.KeywordForExtend1 = string.Empty;
             this.KeywordForExtend2 = string.Empty;
@@ -505,6 +506,8 @@
         public long ID { get; set; }
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
+        public string SpellIcon { get; set; }
+        public int SpellIconSize { get; set; }
         public string Keyword { get; set; }
         public string KeywordForExtend1 { get; set; }
         public string KeywordForExtend2 { get; set; }

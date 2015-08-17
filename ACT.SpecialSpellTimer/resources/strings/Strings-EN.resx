@@ -865,4 +865,12 @@
     <value>Export...</value>
     <comment>CSV保存</comment>
   </data>
+  <data name="SpellIconLabel" xml:space="preserve">
+    <value>Spell Icon</value>
+    <comment>スペルのアイコン</comment>
+  </data>
+  <data name="SpellIconSizeLabel" xml:space="preserve">
+    <value>Size of Spell Icon</value>
+    <comment>スペルアイコンのサイズ</comment>
+  </data>
 </root>

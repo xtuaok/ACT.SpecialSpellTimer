@@ -7,6 +7,7 @@
     using System.Reflection;
     using System.Windows.Forms;
 
+    using ACT.SpecialSpellTimer.Image;
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
@@ -75,6 +76,10 @@
             this.TimeupSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
             this.TimeupSoundComboBox.ValueMember = "FullPath";
             this.TimeupSoundComboBox.DisplayMember = "Name";
+
+            this.SpellIconComboBox.DataSource = IconController.Default.EnumlateIcon();
+            this.SpellIconComboBox.ValueMember = "RelativePath";
+            this.SpellIconComboBox.DisplayMember = "RelativePath";
 
             // イベントを設定する
             this.SpellTimerTreeView.AfterSelect += this.SpellTimerTreeView_AfterSelect;
@@ -202,6 +207,7 @@
                     1;
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
+                nr.SpellIconSize = 24;
                 nr.ProgressBarVisible = true;
                 nr.FontColor = Settings.Default.FontColor.ToHTML();
                 nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
@@ -227,6 +233,8 @@
                     {
                         nr.Panel = baseRow.Panel;
                         nr.SpellTitle = baseRow.SpellTitle + " New";
+                        nr.SpellIcon = baseRow.SpellIcon;
+                        nr.SpellIconSize = baseRow.SpellIconSize;
                         nr.Keyword = baseRow.Keyword;
                         nr.RegexEnabled = baseRow.RegexEnabled;
                         nr.RecastTime = baseRow.RecastTime;
@@ -338,6 +346,8 @@
                 {
                     src.Panel = this.PanelNameTextBox.Text;
                     src.SpellTitle = this.SpellTitleTextBox.Text;
+                    src.SpellIcon = (string)this.SpellIconComboBox.SelectedValue ?? string.Empty;
+                    src.SpellIconSize = (int)this.SpellIconSizeUpDown.Value;
                     src.DisplayNo = (int)this.DisplayNoNumericUpDown.Value;
                     src.Keyword = this.KeywordTextBox.Text;
                     src.RegexEnabled = this.RegexEnabledCheckBox.Checked;
@@ -589,6 +599,8 @@
 
             this.PanelNameTextBox.Text = src.Panel;
             this.SpellTitleTextBox.Text = src.SpellTitle;
+            this.SpellIconComboBox.SelectedValue = src.SpellIcon;
+            this.SpellIconSizeUpDown.Value = src.SpellIconSize;
             this.DisplayNoNumericUpDown.Value = src.DisplayNo;
             this.KeywordTextBox.Text = src.Keyword;
             this.RegexEnabledCheckBox.Checked = src.RegexEnabled;
