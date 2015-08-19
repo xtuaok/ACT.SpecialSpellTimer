@@ -42,6 +42,12 @@
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.OverlapRecastTimeCheckBox = new System.Windows.Forms.CheckBox();
+            this.HideSpellNameCheckBox = new System.Windows.Forms.CheckBox();
+            this.SpellIconSizeUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label61 = new System.Windows.Forms.Label();
+            this.SpellIconComboBox = new System.Windows.Forms.ComboBox();
+            this.label60 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
             this.UpperLimitOfExtensionNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label58 = new System.Windows.Forms.Label();
@@ -55,7 +61,6 @@
             this.ExpandSecounds1NumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.KeywordToExpand1TextBox = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
-            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -116,7 +121,6 @@
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
             this.TelopSelectZoneButton = new System.Windows.Forms.Button();
-            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
@@ -162,6 +166,7 @@
             this.TelopExportButton = new System.Windows.Forms.Button();
             this.TelopTreeView = new System.Windows.Forms.TreeView();
             this.CombatAnalyzerTabPage = new System.Windows.Forms.TabPage();
+            this.ExportCSVButton = new System.Windows.Forms.Button();
             this.CombatLogListView = new System.Windows.Forms.ListView();
             this.DummyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.NoColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -218,13 +223,14 @@
             this.label18 = new System.Windows.Forms.Label();
             this.SwitchOverlayButton = new System.Windows.Forms.Button();
             this.ShokikaButton = new System.Windows.Forms.Button();
-            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
-            this.ExportCSVButton = new System.Windows.Forms.Button();
+            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
@@ -233,6 +239,7 @@
             this.DetailGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpellIconSizeUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpperLimitOfExtensionNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds2NumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds1NumericUpDown)).BeginInit();
@@ -425,6 +432,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.OverlapRecastTimeCheckBox);
+            this.tabPage1.Controls.Add(this.HideSpellNameCheckBox);
+            this.tabPage1.Controls.Add(this.SpellIconSizeUpDown);
+            this.tabPage1.Controls.Add(this.label61);
+            this.tabPage1.Controls.Add(this.SpellIconComboBox);
+            this.tabPage1.Controls.Add(this.label60);
             this.tabPage1.Controls.Add(this.label59);
             this.tabPage1.Controls.Add(this.UpperLimitOfExtensionNumericUpDown);
             this.tabPage1.Controls.Add(this.label58);
@@ -463,10 +476,72 @@
             this.tabPage1.Text = "GeneralTab";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // OverlapRecastTimeCheckBox
+            // 
+            this.OverlapRecastTimeCheckBox.AutoSize = true;
+            this.OverlapRecastTimeCheckBox.Location = new System.Drawing.Point(519, 355);
+            this.OverlapRecastTimeCheckBox.Name = "OverlapRecastTimeCheckBox";
+            this.OverlapRecastTimeCheckBox.Size = new System.Drawing.Size(176, 16);
+            this.OverlapRecastTimeCheckBox.TabIndex = 71;
+            this.OverlapRecastTimeCheckBox.Text = "OverlapRecastTimeCheckBox";
+            this.OverlapRecastTimeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // HideSpellNameCheckBox
+            // 
+            this.HideSpellNameCheckBox.AutoSize = true;
+            this.HideSpellNameCheckBox.Location = new System.Drawing.Point(519, 333);
+            this.HideSpellNameCheckBox.Name = "HideSpellNameCheckBox";
+            this.HideSpellNameCheckBox.Size = new System.Drawing.Size(153, 16);
+            this.HideSpellNameCheckBox.TabIndex = 70;
+            this.HideSpellNameCheckBox.Text = "HideSpellNameCheckBox";
+            this.HideSpellNameCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // SpellIconSizeUpDown
+            // 
+            this.SpellIconSizeUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.SpellIconSizeUpDown.Location = new System.Drawing.Point(574, 60);
+            this.SpellIconSizeUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.SpellIconSizeUpDown.Name = "SpellIconSizeUpDown";
+            this.SpellIconSizeUpDown.Size = new System.Drawing.Size(68, 19);
+            this.SpellIconSizeUpDown.TabIndex = 68;
+            this.SpellIconSizeUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(460, 62);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(99, 12);
+            this.label61.TabIndex = 67;
+            this.label61.Text = "SpellIconSizeLabel";
+            // 
+            // SpellIconComboBox
+            // 
+            this.SpellIconComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SpellIconComboBox.FormattingEnabled = true;
+            this.SpellIconComboBox.Location = new System.Drawing.Point(195, 59);
+            this.SpellIconComboBox.MaxDropDownItems = 16;
+            this.SpellIconComboBox.Name = "SpellIconComboBox";
+            this.SpellIconComboBox.Size = new System.Drawing.Size(243, 20);
+            this.SpellIconComboBox.TabIndex = 66;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(6, 62);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(78, 12);
+            this.label60.TabIndex = 65;
+            this.label60.Text = "SpellIconLabel";
+            // 
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(273, 195);
+            this.label59.Location = new System.Drawing.Point(273, 218);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(92, 12);
             this.label59.TabIndex = 64;
@@ -475,7 +550,7 @@
             // UpperLimitOfExtensionNumericUpDown
             // 
             this.UpperLimitOfExtensionNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.UpperLimitOfExtensionNumericUpDown.Location = new System.Drawing.Point(195, 193);
+            this.UpperLimitOfExtensionNumericUpDown.Location = new System.Drawing.Point(195, 216);
             this.UpperLimitOfExtensionNumericUpDown.Margin = new System.Windows.Forms.Padding(6);
             this.UpperLimitOfExtensionNumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -490,7 +565,7 @@
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(178, 145);
+            this.label58.Location = new System.Drawing.Point(178, 168);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(52, 12);
             this.label58.TabIndex = 62;
@@ -499,7 +574,7 @@
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(6, 145);
+            this.label57.Location = new System.Drawing.Point(6, 168);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(171, 12);
             this.label57.TabIndex = 61;
@@ -508,7 +583,7 @@
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(178, 120);
+            this.label56.Location = new System.Drawing.Point(178, 143);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(52, 12);
             this.label56.TabIndex = 60;
@@ -518,7 +593,7 @@
             // 
             this.label55.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(707, 144);
+            this.label55.Location = new System.Drawing.Point(707, 167);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(75, 12);
             this.label55.TabIndex = 59;
@@ -528,7 +603,7 @@
             // 
             this.ExpandSecounds2NumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ExpandSecounds2NumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.ExpandSecounds2NumericUpDown.Location = new System.Drawing.Point(630, 142);
+            this.ExpandSecounds2NumericUpDown.Location = new System.Drawing.Point(630, 165);
             this.ExpandSecounds2NumericUpDown.Margin = new System.Windows.Forms.Padding(6);
             this.ExpandSecounds2NumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -549,7 +624,7 @@
             // 
             this.KeywordToExpand2TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.KeywordToExpand2TextBox.Location = new System.Drawing.Point(195, 142);
+            this.KeywordToExpand2TextBox.Location = new System.Drawing.Point(195, 165);
             this.KeywordToExpand2TextBox.Name = "KeywordToExpand2TextBox";
             this.KeywordToExpand2TextBox.Size = new System.Drawing.Size(426, 19);
             this.KeywordToExpand2TextBox.TabIndex = 57;
@@ -557,7 +632,7 @@
             // ExtendBeyondOriginalRecastTimeCheckBox
             // 
             this.ExtendBeyondOriginalRecastTimeCheckBox.AutoSize = true;
-            this.ExtendBeyondOriginalRecastTimeCheckBox.Location = new System.Drawing.Point(195, 168);
+            this.ExtendBeyondOriginalRecastTimeCheckBox.Location = new System.Drawing.Point(195, 191);
             this.ExtendBeyondOriginalRecastTimeCheckBox.Name = "ExtendBeyondOriginalRecastTimeCheckBox";
             this.ExtendBeyondOriginalRecastTimeCheckBox.Size = new System.Drawing.Size(249, 16);
             this.ExtendBeyondOriginalRecastTimeCheckBox.TabIndex = 56;
@@ -568,7 +643,7 @@
             // 
             this.label51.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(707, 120);
+            this.label51.Location = new System.Drawing.Point(707, 143);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(75, 12);
             this.label51.TabIndex = 55;
@@ -578,7 +653,7 @@
             // 
             this.ExpandSecounds1NumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ExpandSecounds1NumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.ExpandSecounds1NumericUpDown.Location = new System.Drawing.Point(630, 118);
+            this.ExpandSecounds1NumericUpDown.Location = new System.Drawing.Point(630, 141);
             this.ExpandSecounds1NumericUpDown.Margin = new System.Windows.Forms.Padding(6);
             this.ExpandSecounds1NumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -599,7 +674,7 @@
             // 
             this.KeywordToExpand1TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.KeywordToExpand1TextBox.Location = new System.Drawing.Point(195, 117);
+            this.KeywordToExpand1TextBox.Location = new System.Drawing.Point(195, 140);
             this.KeywordToExpand1TextBox.Name = "KeywordToExpand1TextBox";
             this.KeywordToExpand1TextBox.Size = new System.Drawing.Size(426, 19);
             this.KeywordToExpand1TextBox.TabIndex = 53;
@@ -607,31 +682,17 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(6, 120);
+            this.label50.Location = new System.Drawing.Point(6, 143);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(171, 12);
             this.label50.TabIndex = 52;
             this.label50.Text = "MatchingLogWordToExpandLabel";
             // 
-            // SpellVisualSetting
-            // 
-            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.BarEnabled = true;
-            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.Location = new System.Drawing.Point(195, 239);
-            this.SpellVisualSetting.Name = "SpellVisualSetting";
-            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.SpellVisualSetting.TabIndex = 51;
-            // 
             // RegexEnabledCheckBox
             // 
             this.RegexEnabledCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RegexEnabledCheckBox.AutoSize = true;
-            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(704, 63);
+            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(704, 86);
             this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
             this.RegexEnabledCheckBox.Size = new System.Drawing.Size(76, 16);
             this.RegexEnabledCheckBox.TabIndex = 41;
@@ -641,7 +702,7 @@
             // DontHideCheckBox
             // 
             this.DontHideCheckBox.AutoSize = true;
-            this.DontHideCheckBox.Location = new System.Drawing.Point(519, 288);
+            this.DontHideCheckBox.Location = new System.Drawing.Point(519, 311);
             this.DontHideCheckBox.Name = "DontHideCheckBox";
             this.DontHideCheckBox.Size = new System.Drawing.Size(123, 16);
             this.DontHideCheckBox.TabIndex = 48;
@@ -683,7 +744,7 @@
             // IsReverseCheckBox
             // 
             this.IsReverseCheckBox.AutoSize = true;
-            this.IsReverseCheckBox.Location = new System.Drawing.Point(519, 266);
+            this.IsReverseCheckBox.Location = new System.Drawing.Point(519, 289);
             this.IsReverseCheckBox.Name = "IsReverseCheckBox";
             this.IsReverseCheckBox.Size = new System.Drawing.Size(162, 16);
             this.IsReverseCheckBox.TabIndex = 47;
@@ -693,7 +754,7 @@
             // ShowProgressBarCheckBox
             // 
             this.ShowProgressBarCheckBox.AutoSize = true;
-            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(519, 244);
+            this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(519, 267);
             this.ShowProgressBarCheckBox.Name = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.Size = new System.Drawing.Size(166, 16);
             this.ShowProgressBarCheckBox.TabIndex = 46;
@@ -703,7 +764,7 @@
             // RepeatCheckBox
             // 
             this.RepeatCheckBox.AutoSize = true;
-            this.RepeatCheckBox.Location = new System.Drawing.Point(269, 90);
+            this.RepeatCheckBox.Location = new System.Drawing.Point(269, 113);
             this.RepeatCheckBox.Name = "RepeatCheckBox";
             this.RepeatCheckBox.Size = new System.Drawing.Size(112, 16);
             this.RepeatCheckBox.TabIndex = 44;
@@ -713,7 +774,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 91);
+            this.label4.Location = new System.Drawing.Point(6, 114);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 12);
             this.label4.TabIndex = 45;
@@ -722,7 +783,7 @@
             // RecastTimeNumericUpDown
             // 
             this.RecastTimeNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(195, 89);
+            this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(195, 112);
             this.RecastTimeNumericUpDown.Margin = new System.Windows.Forms.Padding(6);
             this.RecastTimeNumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -737,7 +798,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 64);
+            this.label3.Location = new System.Drawing.Point(6, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 12);
             this.label3.TabIndex = 42;
@@ -747,7 +808,7 @@
             // 
             this.KeywordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.KeywordTextBox.Location = new System.Drawing.Point(195, 61);
+            this.KeywordTextBox.Location = new System.Drawing.Point(195, 84);
             this.KeywordTextBox.Name = "KeywordTextBox";
             this.KeywordTextBox.Size = new System.Drawing.Size(503, 19);
             this.KeywordTextBox.TabIndex = 40;
@@ -1286,20 +1347,6 @@
             this.TelopSelectZoneButton.Text = "SelectZoneButton";
             this.TelopSelectZoneButton.UseVisualStyleBackColor = true;
             // 
-            // TelopVisualSetting
-            // 
-            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.BarEnabled = false;
-            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
-            this.TelopVisualSetting.Name = "TelopVisualSetting";
-            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.TelopVisualSetting.TabIndex = 6;
-            // 
             // TelopSelectJobButton
             // 
             this.TelopSelectJobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1776,6 +1823,17 @@
             this.CombatAnalyzerTabPage.TabIndex = 3;
             this.CombatAnalyzerTabPage.Text = "CombatAnalyzerTabTitle";
             // 
+            // ExportCSVButton
+            // 
+            this.ExportCSVButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExportCSVButton.Location = new System.Drawing.Point(1078, 637);
+            this.ExportCSVButton.Name = "ExportCSVButton";
+            this.ExportCSVButton.Size = new System.Drawing.Size(95, 25);
+            this.ExportCSVButton.TabIndex = 20;
+            this.ExportCSVButton.Text = "ExportCSVButton";
+            this.ExportCSVButton.UseVisualStyleBackColor = true;
+            this.ExportCSVButton.Click += new System.EventHandler(this.ExportCSVButton_Click);
+            // 
             // CombatLogListView
             // 
             this.CombatLogListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1870,26 +1928,26 @@
             this.toolStripSeparator2,
             this.CASetOriginItem});
             this.CombatAnalyzerContextMenuStrip.Name = "CombatAnalyzerContextMenuStrip";
-            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(264, 104);
+            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(242, 104);
             // 
             // CASelectAllItem
             // 
             this.CASelectAllItem.Name = "CASelectAllItem";
             this.CASelectAllItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.CASelectAllItem.Size = new System.Drawing.Size(263, 22);
+            this.CASelectAllItem.Size = new System.Drawing.Size(241, 22);
             this.CASelectAllItem.Text = "SelectAll";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(260, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(238, 6);
             // 
             // CACopyLogItem
             // 
             this.CACopyLogItem.Name = "CACopyLogItem";
             this.CACopyLogItem.ShortcutKeyDisplayString = "";
             this.CACopyLogItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.CACopyLogItem.Size = new System.Drawing.Size(263, 22);
+            this.CACopyLogItem.Size = new System.Drawing.Size(241, 22);
             this.CACopyLogItem.Text = "CopyLog";
             // 
             // CACopyLogDetailItem
@@ -1897,19 +1955,19 @@
             this.CACopyLogDetailItem.Name = "CACopyLogDetailItem";
             this.CACopyLogDetailItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.CACopyLogDetailItem.Size = new System.Drawing.Size(263, 22);
+            this.CACopyLogDetailItem.Size = new System.Drawing.Size(241, 22);
             this.CACopyLogDetailItem.Text = "CopyLogDetail";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(260, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(238, 6);
             // 
             // CASetOriginItem
             // 
             this.CASetOriginItem.Name = "CASetOriginItem";
             this.CASetOriginItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.CASetOriginItem.Size = new System.Drawing.Size(263, 22);
+            this.CASetOriginItem.Size = new System.Drawing.Size(241, 22);
             this.CASetOriginItem.Text = "SetLogOrigin";
             // 
             // label6
@@ -2337,20 +2395,6 @@
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
             // 
-            // DefaultVisualSetting
-            // 
-            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.BarEnabled = true;
-            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
-            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
-            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.DefaultVisualSetting.TabIndex = 37;
-            // 
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
@@ -2383,16 +2427,59 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
-            // ExportCSVButton
+            // SpellVisualSetting
             // 
-            this.ExportCSVButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExportCSVButton.Location = new System.Drawing.Point(1078, 637);
-            this.ExportCSVButton.Name = "ExportCSVButton";
-            this.ExportCSVButton.Size = new System.Drawing.Size(95, 25);
-            this.ExportCSVButton.TabIndex = 20;
-            this.ExportCSVButton.Text = "ExportCSVButton";
-            this.ExportCSVButton.UseVisualStyleBackColor = true;
-            this.ExportCSVButton.Click += new System.EventHandler(this.ExportCSVButton_Click);
+            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.BarEnabled = true;
+            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.HideSpellName = false;
+            this.SpellVisualSetting.Location = new System.Drawing.Point(195, 262);
+            this.SpellVisualSetting.Name = "SpellVisualSetting";
+            this.SpellVisualSetting.OverlapRecastTime = false;
+            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 109);
+            this.SpellVisualSetting.SpellIcon = "";
+            this.SpellVisualSetting.SpellIconSize = 0;
+            this.SpellVisualSetting.TabIndex = 51;
+            // 
+            // TelopVisualSetting
+            // 
+            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.BarEnabled = false;
+            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.HideSpellName = false;
+            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
+            this.TelopVisualSetting.Name = "TelopVisualSetting";
+            this.TelopVisualSetting.OverlapRecastTime = false;
+            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.TelopVisualSetting.SpellIcon = "";
+            this.TelopVisualSetting.SpellIconSize = 0;
+            this.TelopVisualSetting.TabIndex = 6;
+            // 
+            // DefaultVisualSetting
+            // 
+            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.BarEnabled = true;
+            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.HideSpellName = false;
+            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
+            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
+            this.DefaultVisualSetting.OverlapRecastTime = false;
+            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.DefaultVisualSetting.SpellIcon = "";
+            this.DefaultVisualSetting.SpellIconSize = 0;
+            this.DefaultVisualSetting.TabIndex = 37;
             // 
             // ConfigPanel
             // 
@@ -2411,6 +2498,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpellIconSizeUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpperLimitOfExtensionNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds2NumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpandSecounds1NumericUpDown)).EndInit();
@@ -2649,5 +2737,11 @@
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.NumericUpDown UpperLimitOfExtensionNumericUpDown;
         internal System.Windows.Forms.Button ExportCSVButton;
+        private System.Windows.Forms.ComboBox SpellIconComboBox;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.NumericUpDown SpellIconSizeUpDown;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.CheckBox OverlapRecastTimeCheckBox;
+        private System.Windows.Forms.CheckBox HideSpellNameCheckBox;
     }
 }

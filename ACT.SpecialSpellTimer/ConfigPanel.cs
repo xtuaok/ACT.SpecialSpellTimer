@@ -7,6 +7,7 @@
     using System.Reflection;
     using System.Windows.Forms;
 
+    using ACT.SpecialSpellTimer.Image;
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
@@ -75,6 +76,10 @@
             this.TimeupSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
             this.TimeupSoundComboBox.ValueMember = "FullPath";
             this.TimeupSoundComboBox.DisplayMember = "Name";
+
+            this.SpellIconComboBox.DataSource = IconController.Default.EnumlateIcon();
+            this.SpellIconComboBox.ValueMember = "RelativePath";
+            this.SpellIconComboBox.DisplayMember = "RelativePath";
 
             // イベントを設定する
             this.SpellTimerTreeView.AfterSelect += this.SpellTimerTreeView_AfterSelect;
@@ -176,6 +181,30 @@
                 }
             };
 
+            this.SpellIconComboBox.SelectionChangeCommitted += (s1, e1) =>
+            {
+                this.SpellVisualSetting.SpellIcon = (string)this.SpellIconComboBox.SelectedValue;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
+            this.SpellIconSizeUpDown.ValueChanged += (s1, e1) =>
+            {
+                this.SpellVisualSetting.SpellIconSize = (int)this.SpellIconSizeUpDown.Value;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
+            this.HideSpellNameCheckBox.CheckedChanged += (s1, e1) =>
+            {
+                this.SpellVisualSetting.HideSpellName = this.HideSpellNameCheckBox.Checked;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
+            this.OverlapRecastTimeCheckBox.CheckedChanged += (s1, e1) =>
+            {
+                this.SpellVisualSetting.OverlapRecastTime = this.OverlapRecastTimeCheckBox.Checked;
+                this.SpellVisualSetting.RefreshSampleImage();
+            };
+
             // オプションのロードメソッドを呼ぶ
             this.LoadOption();
 
@@ -202,6 +231,8 @@
                     1;
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
+                nr.SpellIcon = string.Empty;
+                nr.SpellIconSize = 24;
                 nr.ProgressBarVisible = true;
                 nr.FontColor = Settings.Default.FontColor.ToHTML();
                 nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
@@ -227,6 +258,8 @@
                     {
                         nr.Panel = baseRow.Panel;
                         nr.SpellTitle = baseRow.SpellTitle + " New";
+                        nr.SpellIcon = baseRow.SpellIcon;
+                        nr.SpellIconSize = baseRow.SpellIconSize;
                         nr.Keyword = baseRow.Keyword;
                         nr.RegexEnabled = baseRow.RegexEnabled;
                         nr.RecastTime = baseRow.RecastTime;
@@ -244,6 +277,8 @@
                         nr.BarColor = baseRow.BarColor;
                         nr.BarOutlineColor = baseRow.BarOutlineColor;
                         nr.DontHide = baseRow.DontHide;
+                        nr.HideSpellName = baseRow.HideSpellName;
+                        nr.OverlapRecastTime = baseRow.OverlapRecastTime;
                         nr.FontFamily = baseRow.FontFamily;
                         nr.FontSize = baseRow.FontSize;
                         nr.FontStyle = baseRow.FontStyle;
@@ -338,6 +373,8 @@
                 {
                     src.Panel = this.PanelNameTextBox.Text;
                     src.SpellTitle = this.SpellTitleTextBox.Text;
+                    src.SpellIcon = (string)this.SpellIconComboBox.SelectedValue ?? string.Empty;
+                    src.SpellIconSize = (int)this.SpellIconSizeUpDown.Value;
                     src.DisplayNo = (int)this.DisplayNoNumericUpDown.Value;
                     src.Keyword = this.KeywordTextBox.Text;
                     src.RegexEnabled = this.RegexEnabledCheckBox.Checked;
@@ -368,6 +405,8 @@
 
                     src.IsReverse = this.IsReverseCheckBox.Checked;
                     src.DontHide = this.DontHideCheckBox.Checked;
+                    src.HideSpellName = this.HideSpellNameCheckBox.Checked;
+                    src.OverlapRecastTime = this.OverlapRecastTimeCheckBox.Checked;
 
                     src.Font = this.SpellVisualSetting.GetFontInfo();
                     src.FontColor = this.SpellVisualSetting.FontColor.ToHTML();
@@ -589,6 +628,8 @@
 
             this.PanelNameTextBox.Text = src.Panel;
             this.SpellTitleTextBox.Text = src.SpellTitle;
+            this.SpellIconComboBox.SelectedValue = src.SpellIcon;
+            this.SpellIconSizeUpDown.Value = src.SpellIconSize;
             this.DisplayNoNumericUpDown.Value = src.DisplayNo;
             this.KeywordTextBox.Text = src.Keyword;
             this.RegexEnabledCheckBox.Checked = src.RegexEnabled;
@@ -619,6 +660,8 @@
 
             this.IsReverseCheckBox.Checked = src.IsReverse;
             this.DontHideCheckBox.Checked = src.DontHide;
+            this.HideSpellNameCheckBox.Checked = src.HideSpellName;
+            this.OverlapRecastTimeCheckBox.Checked = src.OverlapRecastTime;
 
             this.SpellVisualSetting.SetFontInfo(src.Font);
             this.SpellVisualSetting.BarColor = string.IsNullOrWhiteSpace(src.BarColor) ?
@@ -637,6 +680,11 @@
             this.SpellVisualSetting.BackgroundColor = string.IsNullOrWhiteSpace(src.BackgroundColor) ?
                 Settings.Default.BackgroundColor :
                 Color.FromArgb(src.BackgroundAlpha, src.BackgroundColor.FromHTML());
+
+            this.SpellVisualSetting.SpellIcon = src.SpellIcon;
+            this.SpellVisualSetting.SpellIconSize = src.SpellIconSize;
+            this.SpellVisualSetting.HideSpellName = src.HideSpellName;
+            this.SpellVisualSetting.OverlapRecastTime = src.OverlapRecastTime;
 
             this.SpellVisualSetting.RefreshSampleImage();
 

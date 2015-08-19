@@ -865,4 +865,20 @@
     <value>CSV保存</value>
     <comment>Export to CSV</comment>
   </data>
+  <data name="SpellIconLabel" xml:space="preserve">
+    <value>スペルのアイコン</value>
+    <comment>Spell Icon</comment>
+  </data>
+  <data name="SpellIconSizeLabel" xml:space="preserve">
+    <value>スペルアイコンのサイズ</value>
+    <comment>Size of Spell Icon</comment>
+  </data>
+  <data name="HideSpellNameCheckBox" xml:space="preserve">
+    <value>スペル名を表示しない</value>
+    <comment>Hide Spell Name</comment>
+  </data>
+  <data name="OverlapRecastTimeCheckBox" xml:space="preserve">
+    <value>リキャストタイムを重ねる</value>
+    <comment>Overlap Recast time </comment>
+  </data>
 </root>

@@ -71,7 +71,7 @@
             this.SamplePictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SamplePictureBox.Location = new System.Drawing.Point(3, 3);
             this.SamplePictureBox.Name = "SamplePictureBox";
-            this.SamplePictureBox.Size = new System.Drawing.Size(300, 50);
+            this.SamplePictureBox.Size = new System.Drawing.Size(300, 53);
             this.SamplePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.SamplePictureBox.TabIndex = 0;
             this.SamplePictureBox.TabStop = false;
@@ -97,105 +97,105 @@
             this.LoadColorSetItem,
             this.SaveColorSetItem});
             this.VisualSettingContextMenuStrip.Name = "ContextMenuStrip";
-            this.VisualSettingContextMenuStrip.Size = new System.Drawing.Size(229, 330);
+            this.VisualSettingContextMenuStrip.Size = new System.Drawing.Size(218, 330);
             // 
             // ChangeFontItem
             // 
             this.ChangeFontItem.Name = "ChangeFontItem";
-            this.ChangeFontItem.Size = new System.Drawing.Size(228, 22);
+            this.ChangeFontItem.Size = new System.Drawing.Size(217, 22);
             this.ChangeFontItem.Text = "ChangeFont";
             // 
             // ChangeFontColorItem
             // 
             this.ChangeFontColorItem.Name = "ChangeFontColorItem";
-            this.ChangeFontColorItem.Size = new System.Drawing.Size(228, 22);
+            this.ChangeFontColorItem.Size = new System.Drawing.Size(217, 22);
             this.ChangeFontColorItem.Text = "ChangeFontColor";
             // 
             // ChangeFontOutlineColorItem
             // 
             this.ChangeFontOutlineColorItem.Name = "ChangeFontOutlineColorItem";
-            this.ChangeFontOutlineColorItem.Size = new System.Drawing.Size(228, 22);
+            this.ChangeFontOutlineColorItem.Size = new System.Drawing.Size(217, 22);
             this.ChangeFontOutlineColorItem.Text = "ChangeFontOutlineColor";
             // 
             // ChangeBarColorItem
             // 
             this.ChangeBarColorItem.Name = "ChangeBarColorItem";
-            this.ChangeBarColorItem.Size = new System.Drawing.Size(228, 22);
+            this.ChangeBarColorItem.Size = new System.Drawing.Size(217, 22);
             this.ChangeBarColorItem.Text = "ChangeBarColor";
             // 
             // ChangeBarOutlineColorItem
             // 
             this.ChangeBarOutlineColorItem.Name = "ChangeBarOutlineColorItem";
-            this.ChangeBarOutlineColorItem.Size = new System.Drawing.Size(228, 22);
+            this.ChangeBarOutlineColorItem.Size = new System.Drawing.Size(217, 22);
             this.ChangeBarOutlineColorItem.Text = "ChangeBarOutlineColor";
             // 
             // ChangeBackgoundColorItem
             // 
             this.ChangeBackgoundColorItem.Name = "ChangeBackgoundColorItem";
-            this.ChangeBackgoundColorItem.Size = new System.Drawing.Size(228, 22);
+            this.ChangeBackgoundColorItem.Size = new System.Drawing.Size(217, 22);
             this.ChangeBackgoundColorItem.Text = "ChangeBackgroundColor";
             // 
             // ChangeBackgroundAlphaItem
             // 
             this.ChangeBackgroundAlphaItem.Name = "ChangeBackgroundAlphaItem";
-            this.ChangeBackgroundAlphaItem.Size = new System.Drawing.Size(228, 22);
+            this.ChangeBackgroundAlphaItem.Size = new System.Drawing.Size(217, 22);
             this.ChangeBackgroundAlphaItem.Text = "ChangeBackgroundAlpha";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(214, 6);
             // 
             // ResetSpellFontItem
             // 
             this.ResetSpellFontItem.Name = "ResetSpellFontItem";
-            this.ResetSpellFontItem.Size = new System.Drawing.Size(228, 22);
+            this.ResetSpellFontItem.Size = new System.Drawing.Size(217, 22);
             this.ResetSpellFontItem.Text = "ResetSpellFont";
             // 
             // ResetSpellBarSizeItem
             // 
             this.ResetSpellBarSizeItem.Name = "ResetSpellBarSizeItem";
-            this.ResetSpellBarSizeItem.Size = new System.Drawing.Size(228, 22);
+            this.ResetSpellBarSizeItem.Size = new System.Drawing.Size(217, 22);
             this.ResetSpellBarSizeItem.Text = "ResetSpellBarSize";
             // 
             // ResetSpellColorItem
             // 
             this.ResetSpellColorItem.Name = "ResetSpellColorItem";
-            this.ResetSpellColorItem.Size = new System.Drawing.Size(228, 22);
+            this.ResetSpellColorItem.Size = new System.Drawing.Size(217, 22);
             this.ResetSpellColorItem.Text = "ResetSpellColor";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
             // 
             // ResetTelopFontItem
             // 
             this.ResetTelopFontItem.Name = "ResetTelopFontItem";
-            this.ResetTelopFontItem.Size = new System.Drawing.Size(228, 22);
+            this.ResetTelopFontItem.Size = new System.Drawing.Size(217, 22);
             this.ResetTelopFontItem.Text = "ResetTelopFont";
             // 
             // ResetTelopColorItem
             // 
             this.ResetTelopColorItem.Name = "ResetTelopColorItem";
-            this.ResetTelopColorItem.Size = new System.Drawing.Size(228, 22);
+            this.ResetTelopColorItem.Size = new System.Drawing.Size(217, 22);
             this.ResetTelopColorItem.Text = "ResetTelopColor";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(214, 6);
             // 
             // LoadColorSetItem
             // 
             this.LoadColorSetItem.Name = "LoadColorSetItem";
-            this.LoadColorSetItem.Size = new System.Drawing.Size(228, 22);
+            this.LoadColorSetItem.Size = new System.Drawing.Size(217, 22);
             this.LoadColorSetItem.Text = "LoadColorSet";
             // 
             // SaveColorSetItem
             // 
             this.SaveColorSetItem.Name = "SaveColorSetItem";
-            this.SaveColorSetItem.Size = new System.Drawing.Size(228, 22);
+            this.SaveColorSetItem.Size = new System.Drawing.Size(217, 22);
             this.SaveColorSetItem.Text = "SaveColorSet";
             // 
             // BarSizeLabel

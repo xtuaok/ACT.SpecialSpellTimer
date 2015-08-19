@@ -6,6 +6,8 @@
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
+    using ACT.SpecialSpellTimer.Image;
+    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// SpellTimerControl
@@ -35,6 +37,16 @@
         public string SpellTitle { get; set; }
 
         /// <summary>
+        /// スペルのIcon
+        /// </summary>
+        public string SpellIcon { get; set; }
+
+        /// <summary>
+        /// スペルIconサイズ
+        /// </summary>
+        public int SpellIconSize { get; set; }
+
+        /// <summary>
         /// 残りリキャストTime(秒数)
         /// </summary>
         public double RecastTime { get; set; }
@@ -48,6 +60,16 @@
         /// プログレスバーを逆にするか？
         /// </summary>
         public bool IsReverse { get; set; }
+
+        /// <summary>
+        /// スペル名を非表示とするか？
+        /// </summary>
+        public bool HideSpellName { get; set; }
+        
+        /// <summary>
+        /// リキャストタイムを重ねて表示するか？
+        /// </summary>
+        public bool OverlapRecastTime { get; set; }
 
         /// <summary>
         /// バーの色
@@ -132,6 +154,15 @@
             var tb = default(OutlineTextBlock);
             var font = this.FontInfo;
 
+            // アイコンを描画する
+            var image = this.SpellIconImage;
+            if (image.Source == null && this.SpellIcon != "")
+            {
+                image.Source = new BitmapImage(new System.Uri(IconController.Default.getIconFile(this.SpellIcon).FullPath));
+                image.Height = this.SpellIconSize;
+                image.Width = this.SpellIconSize;
+            }
+            
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
             var title = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;
@@ -142,6 +173,10 @@
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
+            }
+            if (this.HideSpellName)
+            {
+                tb.Visibility = System.Windows.Visibility.Collapsed;
             }
 
             // リキャスト時間を描画する
@@ -156,6 +191,12 @@
                 tb.Fill = this.FontBrush;
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
+            }
+            if (this.OverlapRecastTime)
+            {
+                this.RecastTimePanel.SetValue(Grid.ColumnProperty, 0);
+                this.RecastTimePanel.SetValue(HorizontalAlignmentProperty, System.Windows.HorizontalAlignment.Center);
+                this.RecastTimePanel.SetValue(VerticalAlignmentProperty, System.Windows.VerticalAlignment.Center);
             }
 
             // ProgressBarを描画する
