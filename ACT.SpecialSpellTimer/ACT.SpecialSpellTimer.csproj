@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="FF14PluginHelper.cs" />
     <Compile Include="FF14PluginHelper.Extension.cs" />
+    <Compile Include="Image\IconController.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="LogBuffer.cs" />
     <Compile Include="OnePointTelopController.cs" />
