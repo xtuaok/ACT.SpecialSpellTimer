@@ -80,6 +80,7 @@
                     RelativePath = relativePath
                 };
             }
+
             return null;
         }
 
@@ -103,6 +104,7 @@
             {
                 list.AddRange(EmulateIcon(this.IconDirectory, ""));
             }
+
             return list.ToArray();
         }
 

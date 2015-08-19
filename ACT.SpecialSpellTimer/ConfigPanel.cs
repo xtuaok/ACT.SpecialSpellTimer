@@ -77,7 +77,9 @@
             this.TimeupSoundComboBox.ValueMember = "FullPath";
             this.TimeupSoundComboBox.DisplayMember = "Name";
 
-            this.SpellIconComboBox.DataSource = IconController.Default.EnumlateIcon();
+            this.SpellIconComboBox.DataSource = IconController.Default.EnumlateIcon()
+                .OrderBy(x => x.RelativePath)
+                .ToArray();
             this.SpellIconComboBox.ValueMember = "RelativePath";
             this.SpellIconComboBox.DisplayMember = "RelativePath";
 
