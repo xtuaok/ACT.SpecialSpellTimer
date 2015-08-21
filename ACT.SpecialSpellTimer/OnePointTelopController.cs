@@ -194,13 +194,13 @@
             OnePointTelop[] telops,
             string[] logLines)
         {
-            Parallel.ForEach(logLines, (log) =>
+            Parallel.ForEach(telops, (telop) =>
             {
-                foreach (var telop in telops)
-                {
-                    var regex = telop.Regex;
-                    var regexToHide = telop.RegexToHide;
+                var regex = telop.Regex;
+                var regexToHide = telop.RegexToHide;
 
+                foreach (var log in logLines)
+                {
                     // 通常マッチ
                     if (regex == null)
                     {
@@ -291,25 +291,25 @@
                             continue;
                         }
                     }
+                }   // end loop logLines
 
-                    // ディレイ時間が経過した？
-                    if (!telop.Delayed &&
-                        telop.MatchDateTime > DateTime.MinValue &&
-                        telop.Delay > 0)
+                // ディレイ時間が経過した？
+                if (!telop.Delayed &&
+                    telop.MatchDateTime > DateTime.MinValue &&
+                    telop.Delay > 0)
+                {
+                    var delayed = telop.MatchDateTime.AddSeconds(telop.Delay);
+                    if (DateTime.Now >= delayed)
                     {
-                        var delayed = telop.MatchDateTime.AddSeconds(telop.Delay);
-                        if (DateTime.Now >= delayed)
-                        {
-                            telop.Delayed = true;
-                            SoundController.Default.Play(telop.DelaySound);
-                            var tts = regex != null && !string.IsNullOrWhiteSpace(telop.DelayTextToSpeak) ?
-                                regex.Replace(telop.MatchedLog, telop.DelayTextToSpeak) :
-                                telop.DelayTextToSpeak;
-                            SoundController.Default.Play(tts);
-                        }
+                        telop.Delayed = true;
+                        SoundController.Default.Play(telop.DelaySound);
+                        var tts = regex != null && !string.IsNullOrWhiteSpace(telop.DelayTextToSpeak) ?
+                            regex.Replace(telop.MatchedLog, telop.DelayTextToSpeak) :
+                            telop.DelayTextToSpeak;
+                        SoundController.Default.Play(tts);
                     }
-                }   // end foreach in telops.
-            }); // end foreach in logLines.
+                }
+            }); // end loop telops
         }
 
         /// <summary>
