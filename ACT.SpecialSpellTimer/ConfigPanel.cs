@@ -538,6 +538,20 @@
             this.PanelLeftNumericUpDown.Value = (int)left;
             this.PanelTopNumericUpDown.Value = (int)top;
 
+            int margin;
+            SpellTimerCore.Default.GetSpellMargin(
+                panelName,
+                out margin);
+            this.MarginUpDown.Value = margin;
+
+            bool horizontal, fixedPositionSpell;
+            SpellTimerCore.Default.GetPanelLayout(
+                panelName,
+                out horizontal,
+                out fixedPositionSpell);
+            this.HorizontalLayoutCheckBox.Checked = horizontal;
+            this.FixedPositionSpellCheckBox.Checked = fixedPositionSpell;
+
             // 更新ボタンの挙動をセットする
             if (this.UpdatePanelButton.Tag == null ||
                 !(bool)(this.UpdatePanelButton.Tag))
@@ -546,6 +560,9 @@
                 {
                     left = (double)this.PanelLeftNumericUpDown.Value;
                     top = (double)this.PanelTopNumericUpDown.Value;
+                    margin = (int)this.MarginUpDown.Value;
+                    horizontal = this.HorizontalLayoutCheckBox.Checked;
+                    fixedPositionSpell = this.FixedPositionSpellCheckBox.Checked;
 
                     if (this.DetailPanelGroupBox.Tag != null)
                     {
@@ -554,6 +571,13 @@
                             panelNameToUpdate,
                             left,
                             top);
+                        SpellTimerCore.Default.SetSpellMargin(
+                            panelNameToUpdate,
+                            margin);
+                        SpellTimerCore.Default.SetPanelLayout(
+                            panelNameToUpdate,
+                            horizontal,
+                            fixedPositionSpell);
                     }
                 });
 

@@ -73,6 +73,21 @@
         public string PanelName { get; set; }
 
         /// <summary>
+        /// 扱うSpellTimer間のマージン
+        /// </summary>
+        public int SpellMargin { get; set; }
+
+        /// <summary>
+        /// 水平レイアウトか？
+        /// </summary>
+        public bool IsHorizontal { get; set; }
+
+        /// <summary>
+        /// SpellTimerを固定位置に表示するか？
+        /// </summary>
+        public bool SpellPositionFixed { get; set; }
+
+        /// <summary>
         /// 扱うSpellTimerのリスト
         /// </summary>
         public SpellTimer[] SpellTimers { get; set; }
@@ -116,6 +131,9 @@
             {
                 this.Left = setting.Left;
                 this.Top = setting.Top;
+                this.SpellMargin = setting.Margin;
+                this.IsHorizontal = setting.Horizontal;
+                this.SpellPositionFixed = setting.FixedPositionSpell;
             }
 
             this.RefreshSpellTimer();
@@ -147,7 +165,7 @@
                 x;
 
             // タイムアップしたものを除外する
-            if (Settings.Default.TimeOfHideSpell > 0.0d)
+            if ((Settings.Default.TimeOfHideSpell > 0.0d) && !this.SpellPositionFixed)
             {
                 spells =
                     from x in spells
@@ -165,7 +183,7 @@
             }
 
             // リキャストの近いもの順でソートする
-            if (Settings.Default.AutoSortEnabled)
+            if (Settings.Default.AutoSortEnabled && !this.SpellPositionFixed)
             {
                 // 昇順？
                 if (!Settings.Default.AutoSortReverse)
@@ -218,8 +236,14 @@
                 }
             }
 
+            // 水平レイアウト時のマージンを調整する
+            var m = this.BaseGrid.Margin;
+            m.Bottom = this.IsHorizontal ? 0 : 6;
+            this.BaseGrid.Margin = m;
+
             // スペルタイマコントロールのリストを生成する
             var displayList = new List<SpellTimerControl>();
+            var timeupList = new List<SpellTimerControl>();
             foreach (var spell in spells)
             {
                 SpellTimerControl c;
@@ -241,10 +265,11 @@
                     c.Margin = new Thickness(0, 0, 0, 0);
 
                     this.BaseGrid.RowDefinitions.Add(new RowDefinition());
+                    this.BaseGrid.ColumnDefinitions.Add(new ColumnDefinition());
                     this.BaseGrid.Children.Add(c);
 
                     c.SetValue(Grid.ColumnProperty, 0);
-                    c.SetValue(Grid.RowProperty, this.BaseGrid.Children.Count - 1);
+                    c.SetValue(Grid.RowProperty, 0);
                 }
 
                 c.SpellTitle = string.IsNullOrWhiteSpace(spell.SpellTitleReplaced) ?
@@ -287,33 +312,55 @@
                 c.Refresh();
 
                 displayList.Add(c);
-            }
 
-            // 表示するスペル数と行数が同じ？
-            if (displayList.Count == this.BaseGrid.RowDefinitions.Count)
-            {
-                // 空行を加える
-                this.BaseGrid.RowDefinitions.Add(new RowDefinition());
+                if ((Settings.Default.TimeOfHideSpell > 0.0d) && this.SpellPositionFixed)
+                {
+                    if (!spell.DontHide &&
+                        (DateTime.Now - spell.CompleteScheduledTime).TotalSeconds > Settings.Default.TimeOfHideSpell)
+                    {
+                        timeupList.Add(c);
+                    }
+                }
             }
 
             // 今回表示しないスペルを隠す
-            // 非表示にして一番下の行に追いやる
             foreach (var c in this.SpellTimerControls)
             {
                 if (!spells.Any(x => x.ID == c.Key))
                 {
                     c.Value.Visibility = Visibility.Collapsed;
-                    c.Value.SetValue(Grid.RowProperty, this.BaseGrid.RowDefinitions.Count - 1);
                 }
             }
 
-            // スペルの表示順を設定する
+            // スペルの表示順とマージンを設定する
             var index = 0;
             foreach (var displaySpell in displayList)
             {
-                displaySpell.SetValue(Grid.RowProperty, index);
+                var margin = displaySpell.Margin;
+                if (index != 0)
+                {
+                    margin.Left = this.IsHorizontal ? this.SpellMargin : 0;
+                    margin.Top = this.IsHorizontal ? 0 : this.SpellMargin;
+                }
+                else
+                {
+                    margin.Left = 0;
+                    margin.Top = 0;
+                }
+                displaySpell.Margin = margin;
+
+                displaySpell.VerticalAlignment = this.IsHorizontal ? VerticalAlignment.Bottom : VerticalAlignment.Top;
+
+                displaySpell.SetValue(Grid.RowProperty, this.IsHorizontal ? 0 : index);
+                displaySpell.SetValue(Grid.ColumnProperty, this.IsHorizontal ? index : 0);
                 displaySpell.Visibility = Visibility.Visible;
                 index++;
+            }
+
+            // タイムアップしたものは非表示とする
+            foreach (var c in timeupList)
+            {
+                c.Visibility = Visibility.Hidden;
             }
 
             if (spells.Count() > 0)
