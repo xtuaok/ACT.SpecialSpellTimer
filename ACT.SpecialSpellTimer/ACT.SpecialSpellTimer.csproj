@@ -257,7 +257,7 @@
     <None Include="SpellTimerDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SpellTimerDataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>SpellTimerDataSet.Designer.cs</LastGenOutput>
     </None>
     <None Include="SpellTimerDataSet.xss">
       <DependentUpon>SpellTimerDataSet.xsd</DependentUpon>
