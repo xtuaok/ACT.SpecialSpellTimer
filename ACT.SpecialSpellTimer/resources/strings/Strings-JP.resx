@@ -881,4 +881,16 @@
     <value>リキャストタイムを重ねる</value>
     <comment>Overlap Recast time </comment>
   </data>
+  <data name="Margin" xml:space="preserve">
+    <value>マージン</value>
+    <comment>Margin</comment>
+  </data>
+  <data name="HorizontalLayout" xml:space="preserve">
+    <value>水平レイアウト</value>
+    <comment>Horizontal Layout</comment>
+  </data>
+  <data name="FixedPositionSpell" xml:space="preserve">
+    <value>スペル位置を固定する</value>
+    <comment>Fix spell position</comment>
+  </data>
 </root>

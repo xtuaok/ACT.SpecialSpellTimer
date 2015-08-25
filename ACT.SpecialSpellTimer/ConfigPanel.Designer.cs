@@ -32,6 +32,9 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.DetailPanelGroupBox = new System.Windows.Forms.GroupBox();
+            this.HorizontalLayoutCheckBox = new System.Windows.Forms.CheckBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.MarginUpDown = new System.Windows.Forms.NumericUpDown();
             this.PanelTopNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -231,9 +234,11 @@
             this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.FixedPositionSpellCheckBox = new System.Windows.Forms.CheckBox();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MarginUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PanelTopNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PanelLeftNumericUpDown)).BeginInit();
             this.DetailGroupBox.SuspendLayout();
@@ -303,6 +308,10 @@
             // 
             // DetailPanelGroupBox
             // 
+            this.DetailPanelGroupBox.Controls.Add(this.FixedPositionSpellCheckBox);
+            this.DetailPanelGroupBox.Controls.Add(this.HorizontalLayoutCheckBox);
+            this.DetailPanelGroupBox.Controls.Add(this.label62);
+            this.DetailPanelGroupBox.Controls.Add(this.MarginUpDown);
             this.DetailPanelGroupBox.Controls.Add(this.PanelTopNumericUpDown);
             this.DetailPanelGroupBox.Controls.Add(this.label13);
             this.DetailPanelGroupBox.Controls.Add(this.label15);
@@ -314,6 +323,44 @@
             this.DetailPanelGroupBox.Size = new System.Drawing.Size(296, 269);
             this.DetailPanelGroupBox.TabIndex = 6;
             this.DetailPanelGroupBox.TabStop = false;
+            // 
+            // HorizontalLayoutCheckBox
+            // 
+            this.HorizontalLayoutCheckBox.AutoSize = true;
+            this.HorizontalLayoutCheckBox.Location = new System.Drawing.Point(9, 88);
+            this.HorizontalLayoutCheckBox.Name = "HorizontalLayoutCheckBox";
+            this.HorizontalLayoutCheckBox.Size = new System.Drawing.Size(109, 16);
+            this.HorizontalLayoutCheckBox.TabIndex = 46;
+            this.HorizontalLayoutCheckBox.Text = "HorizontalLayout";
+            this.HorizontalLayoutCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(125, 44);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(39, 12);
+            this.label62.TabIndex = 45;
+            this.label62.Text = "Margin";
+            // 
+            // MarginUpDown
+            // 
+            this.MarginUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.MarginUpDown.Location = new System.Drawing.Point(170, 42);
+            this.MarginUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.MarginUpDown.Minimum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            -2147483648});
+            this.MarginUpDown.Name = "MarginUpDown";
+            this.MarginUpDown.Size = new System.Drawing.Size(68, 19);
+            this.MarginUpDown.TabIndex = 44;
+            this.MarginUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // PanelTopNumericUpDown
             // 
@@ -2481,6 +2528,16 @@
             this.DefaultVisualSetting.SpellIconSize = 0;
             this.DefaultVisualSetting.TabIndex = 37;
             // 
+            // FixedPositionSpellCheckBox
+            // 
+            this.FixedPositionSpellCheckBox.AutoSize = true;
+            this.FixedPositionSpellCheckBox.Location = new System.Drawing.Point(9, 110);
+            this.FixedPositionSpellCheckBox.Name = "FixedPositionSpellCheckBox";
+            this.FixedPositionSpellCheckBox.Size = new System.Drawing.Size(118, 16);
+            this.FixedPositionSpellCheckBox.TabIndex = 47;
+            this.FixedPositionSpellCheckBox.Text = "FixedPositionSpell";
+            this.FixedPositionSpellCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2492,6 +2549,7 @@
             this.SpecialSpellTabPage.ResumeLayout(false);
             this.DetailPanelGroupBox.ResumeLayout(false);
             this.DetailPanelGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MarginUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PanelTopNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PanelLeftNumericUpDown)).EndInit();
             this.DetailGroupBox.ResumeLayout(false);
@@ -2743,5 +2801,9 @@
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.CheckBox OverlapRecastTimeCheckBox;
         private System.Windows.Forms.CheckBox HideSpellNameCheckBox;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.NumericUpDown MarginUpDown;
+        private System.Windows.Forms.CheckBox HorizontalLayoutCheckBox;
+        private System.Windows.Forms.CheckBox FixedPositionSpellCheckBox;
     }
 }

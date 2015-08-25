@@ -695,6 +695,149 @@
         }
 
         /// <summary>
+        /// SpellTimer間のマージンを設定する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        /// <param name="marign">マージン</param>
+        public void SetSpellMargin(
+            string panelName,
+            int margin)
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                var panel = this.FindPanelByName(panelName);
+                if (panel != null)
+                {
+                    panel.SpellMargin = margin;
+                }
+
+                var setting = this.FindPanelSettingByName(panelName);
+                if (setting != null)
+                {
+                    setting.Margin = margin;
+                }
+            }
+        }
+
+        /// <summary>
+        /// SpellTimer間のマージンを取得する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        /// <param name="margin">マージン</param>
+        public void GetSpellMargin(
+            string panelName,
+            out int margin)
+        {
+            margin = 0;
+            
+            if (this.SpellTimerPanels != null)
+            {
+                var panel = this.FindPanelByName(panelName);
+                if (panel != null)
+                {
+                    margin = panel.SpellMargin;
+                }
+                else
+                {
+                    var setting = this.FindPanelSettingByName(panelName);
+                    margin = setting.Margin;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Panelのレイアウトを設定する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        /// <param name="horizontal">水平レイアウトか？</param>
+        /// <param name="fixedPositionSpell">スペル位置を固定するか？</param>
+        public void SetPanelLayout(
+            string panelName,
+            bool horizontal,
+            bool fixedPositionSpell)
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                var panel = this.FindPanelByName(panelName);
+                if (panel != null)
+                {
+                    panel.IsHorizontal = horizontal;
+                    panel.SpellPositionFixed = fixedPositionSpell;
+                }
+
+                var setting = this.FindPanelSettingByName(panelName);
+                if (setting != null)
+                {
+                    setting.Horizontal = horizontal;
+                    setting.FixedPositionSpell = fixedPositionSpell;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Panelのレイアウトを取得する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        /// <param name="horizontal">水平レイアウトか？</param>
+        /// <param name="fixedPositionSpell">スペル位置を固定するか？</param>
+        public void GetPanelLayout(
+            string panelName,
+            out bool horizontal,
+            out bool fixedPositionSpell)
+        {
+            horizontal = false;
+            fixedPositionSpell = false;
+
+            if (this.SpellTimerPanels != null)
+            {
+                var panel = this.FindPanelByName(panelName);
+                if (panel != null)
+                {
+                    horizontal = panel.IsHorizontal;
+                    fixedPositionSpell = panel.SpellPositionFixed;
+                }
+                else
+                {
+                    var setting = this.FindPanelSettingByName(panelName);
+                    horizontal = setting.Horizontal;
+                    fixedPositionSpell = setting.FixedPositionSpell;
+                }
+            }
+        }
+
+        /// <summary>
+        /// SpellTimerListWindowを取得する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        private SpellTimerListWindow FindPanelByName(string panelName)
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                return this.SpellTimerPanels
+                    .Where(x => x.PanelName == panelName)
+                    .FirstOrDefault();
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// PanelSettingsRowを取得する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        private SpellTimerDataSet.PanelSettingsRow FindPanelSettingByName(string panelName)
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                return PanelSettings.Default.SettingsTable
+                    .Where(x => x.PanelName == panelName)
+                    .FirstOrDefault();
+            }
+            
+            return null;
+        }
+
+        /// <summary>
         /// Panelをアクティブ化する
         /// </summary>
         public void ActivatePanels()

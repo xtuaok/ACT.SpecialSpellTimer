@@ -655,6 +655,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Fix spell position に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string FixedPositionSpell {
+            get {
+                return ResourceManager.GetString("FixedPositionSpell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Fisher に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string FSH {
@@ -696,6 +705,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string HideSpellNameCheckBox {
             get {
                 return ResourceManager.GetString("HideSpellNameCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Horizontal Layout に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string HorizontalLayout {
+            get {
+                return ResourceManager.GetString("HorizontalLayout", resourceCulture);
             }
         }
         
@@ -804,6 +822,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string LTW {
             get {
                 return ResourceManager.GetString("LTW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Margin に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Margin {
+            get {
+                return ResourceManager.GetString("Margin", resourceCulture);
             }
         }
         
