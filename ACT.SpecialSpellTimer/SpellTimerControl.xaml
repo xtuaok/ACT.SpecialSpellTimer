@@ -71,7 +71,7 @@
       </Utility:OutlineTextBlock>
     </DockPanel>
 
-    <DockPanel x:Name="RecastTimePanel" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+    <Viewbox x:Name="RecastTimePanel" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" StretchDirection="DownOnly" Stretch="Uniform">
       <Utility:OutlineTextBlock
         x:Name="RecastTimeTextBlock" 
         HorizontalAlignment="Right" 
@@ -92,7 +92,7 @@
             Color="{Binding ElementName=RecastTimeTextBlock, Path=Stroke.Color, Mode=OneWay}" />
         </Utility:OutlineTextBlock.Effect>
       </Utility:OutlineTextBlock>
-    </DockPanel>
+    </Viewbox>
     
   </Grid>
 </UserControl>

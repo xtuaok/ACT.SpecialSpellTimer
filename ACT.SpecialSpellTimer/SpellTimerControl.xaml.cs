@@ -197,6 +197,13 @@
                 this.RecastTimePanel.SetValue(Grid.ColumnProperty, 0);
                 this.RecastTimePanel.SetValue(HorizontalAlignmentProperty, System.Windows.HorizontalAlignment.Center);
                 this.RecastTimePanel.SetValue(VerticalAlignmentProperty, System.Windows.VerticalAlignment.Center);
+                this.RecastTimePanel.Width = this.SpellIconSize - 6;
+                this.RecastTimePanel.Height = this.SpellIconSize - 6;
+            }
+            else
+            {
+                this.RecastTimePanel.Width = double.NaN;
+                this.RecastTimePanel.Height = double.NaN;
             }
 
             // ProgressBarを描画する
