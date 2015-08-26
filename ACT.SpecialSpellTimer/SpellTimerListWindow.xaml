@@ -10,7 +10,6 @@
   >
 
   <Grid Name="BackgroundColorGrid">
-
     <Canvas
       Margin="0,0,0,0">
       <Rectangle
@@ -26,6 +25,12 @@
     </Canvas>
 
     <Grid Name="BaseGrid" Margin="8,6,6,6">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
     </Grid>
 
   </Grid>

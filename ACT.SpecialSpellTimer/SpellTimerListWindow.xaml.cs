@@ -264,8 +264,6 @@
                     c.VerticalAlignment = VerticalAlignment.Top;
                     c.Margin = new Thickness(0, 0, 0, 0);
 
-                    this.BaseGrid.RowDefinitions.Add(new RowDefinition());
-                    this.BaseGrid.ColumnDefinitions.Add(new ColumnDefinition());
                     this.BaseGrid.Children.Add(c);
 
                     c.SetValue(Grid.ColumnProperty, 0);
@@ -280,6 +278,7 @@
                 c.IsReverse = spell.IsReverse;
                 c.HideSpellName = spell.HideSpellName;
                 c.OverlapRecastTime = spell.OverlapRecastTime;
+                c.ReduceIconBrightness = spell.ReduceIconBrightness;
                 c.RecastTime = 0;
                 c.Progress = 1.0d;
 
@@ -329,6 +328,37 @@
                 if (!spells.Any(x => x.ID == c.Key))
                 {
                     c.Value.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            // 行・列の個数がスペル表示数より小さい場合に拡張する
+            // また不要な行・列を削除する
+            if (this.IsHorizontal)
+            {
+                if (this.BaseGrid.RowDefinitions.Count > 1)
+                {
+                    this.BaseGrid.RowDefinitions.RemoveRange(1, this.BaseGrid.RowDefinitions.Count - 1);
+                }
+
+                for (int i = 0; i < (displayList.Count - this.BaseGrid.ColumnDefinitions.Count); i++)
+                {
+                    var column = new ColumnDefinition();
+                    column.Width = GridLength.Auto;
+                    this.BaseGrid.ColumnDefinitions.Add(column);
+                }
+            }
+            else
+            {
+                if (this.BaseGrid.ColumnDefinitions.Count > 1)
+                {
+                    this.BaseGrid.ColumnDefinitions.RemoveRange(1, this.BaseGrid.ColumnDefinitions.Count - 1);
+                }
+
+                for (int i = 0; i < (displayList.Count - this.BaseGrid.RowDefinitions.Count); i++)
+                {
+                    var row = new RowDefinition();
+                    row.Height = GridLength.Auto;
+                    this.BaseGrid.RowDefinitions.Add(row);
                 }
             }
 

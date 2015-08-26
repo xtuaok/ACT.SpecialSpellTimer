@@ -72,6 +72,11 @@
         public bool OverlapRecastTime { get; set; }
 
         /// <summary>
+        /// リキャスト中にアイコンの明度を下げるか？
+        /// </summary>
+        public bool ReduceIconBrightness { get; set; }
+
+        /// <summary>
         /// バーの色
         /// </summary>
         public string BarColor { get; set; }
@@ -156,13 +161,34 @@
 
             // アイコンを描画する
             var image = this.SpellIconImage;
-            if (image.Source == null && this.SpellIcon != "")
+            var iconFile = IconController.Default.getIconFile(this.SpellIcon);
+            if (image.Source == null && iconFile != null)
             {
-                image.Source = new BitmapImage(new System.Uri(IconController.Default.getIconFile(this.SpellIcon).FullPath));
+                var bitmap = new BitmapImage(new System.Uri(iconFile.FullPath));
+                image.Source = bitmap;
                 image.Height = this.SpellIconSize;
                 image.Width = this.SpellIconSize;
+
+                this.SpellIconPanel.OpacityMask = new ImageBrush(bitmap);
             }
-            
+
+            // アイコンの不透明度を設定する
+            if (this.ReduceIconBrightness)
+            {
+                if (this.RecastTime > 0)
+                {
+                    image.Opacity = this.IsReverse ? 1.0 : 0.6;
+                }
+                else
+                {
+                    image.Opacity = this.IsReverse ? 0.6 : 1.0;
+                }
+            }
+            else
+            {
+                image.Opacity = 1.0;
+            }
+
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
             var title = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;
@@ -197,6 +223,13 @@
                 this.RecastTimePanel.SetValue(Grid.ColumnProperty, 0);
                 this.RecastTimePanel.SetValue(HorizontalAlignmentProperty, System.Windows.HorizontalAlignment.Center);
                 this.RecastTimePanel.SetValue(VerticalAlignmentProperty, System.Windows.VerticalAlignment.Center);
+                this.RecastTimePanel.Width = this.SpellIconSize - 6;
+                this.RecastTimePanel.Height = this.SpellIconSize - 6;
+            }
+            else
+            {
+                this.RecastTimePanel.Width = double.NaN;
+                this.RecastTimePanel.Height = double.NaN;
             }
 
             // ProgressBarを描画する
