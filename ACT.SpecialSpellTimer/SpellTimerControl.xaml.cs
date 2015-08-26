@@ -156,9 +156,10 @@
 
             // アイコンを描画する
             var image = this.SpellIconImage;
-            if (image.Source == null && this.SpellIcon != "")
+            var iconFile = IconController.Default.getIconFile(this.SpellIcon);
+            if (image.Source == null && iconFile != null)
             {
-                image.Source = new BitmapImage(new System.Uri(IconController.Default.getIconFile(this.SpellIcon).FullPath));
+                image.Source = new BitmapImage(new System.Uri(iconFile.FullPath));
                 image.Height = this.SpellIconSize;
                 image.Width = this.SpellIconSize;
             }
