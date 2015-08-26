@@ -1195,6 +1195,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   リキャスト中はアイコンを暗くする に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ReduceIconBrightnessCheckBox {
+            get {
+                return ResourceManager.GetString("ReduceIconBrightnessCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   正規表現が無効でも部分一致は既定で有効となっています\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string RegularExpressionExplanationTooltip {

@@ -893,4 +893,8 @@
     <value>スペル位置を固定する</value>
     <comment>Fix spell position</comment>
   </data>
+  <data name="ReduceIconBrightnessCheckBox" xml:space="preserve">
+    <value>リキャスト中はアイコンを暗くする</value>
+    <comment>During the recast time reduce brightness of icon</comment>
+  </data>
 </root>

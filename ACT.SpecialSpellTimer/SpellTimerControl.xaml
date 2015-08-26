@@ -46,7 +46,7 @@
       <Rectangle x:Name="BarOutlineRectangle" />
     </Canvas>
 
-    <DockPanel Grid.Row="0" Grid.Column="0" Panel.ZIndex="-1">
+    <DockPanel x:Name="SpellIconPanel" Grid.Column="0" Panel.ZIndex="-1" Background="Black">
       <Image x:Name="SpellIconImage"></Image>
     </DockPanel>
 

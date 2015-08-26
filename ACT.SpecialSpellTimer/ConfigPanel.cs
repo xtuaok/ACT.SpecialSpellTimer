@@ -281,6 +281,7 @@
                         nr.DontHide = baseRow.DontHide;
                         nr.HideSpellName = baseRow.HideSpellName;
                         nr.OverlapRecastTime = baseRow.OverlapRecastTime;
+                        nr.ReduceIconBrightness = baseRow.ReduceIconBrightness;
                         nr.FontFamily = baseRow.FontFamily;
                         nr.FontSize = baseRow.FontSize;
                         nr.FontStyle = baseRow.FontStyle;
@@ -409,6 +410,7 @@
                     src.DontHide = this.DontHideCheckBox.Checked;
                     src.HideSpellName = this.HideSpellNameCheckBox.Checked;
                     src.OverlapRecastTime = this.OverlapRecastTimeCheckBox.Checked;
+                    src.ReduceIconBrightness = this.ReduceIconBrightnessCheckBox.Checked;
 
                     src.Font = this.SpellVisualSetting.GetFontInfo();
                     src.FontColor = this.SpellVisualSetting.FontColor.ToHTML();
@@ -688,6 +690,7 @@
             this.DontHideCheckBox.Checked = src.DontHide;
             this.HideSpellNameCheckBox.Checked = src.HideSpellName;
             this.OverlapRecastTimeCheckBox.Checked = src.OverlapRecastTime;
+            this.ReduceIconBrightnessCheckBox.Checked = src.ReduceIconBrightness;
 
             this.SpellVisualSetting.SetFontInfo(src.Font);
             this.SpellVisualSetting.BarColor = string.IsNullOrWhiteSpace(src.BarColor) ?

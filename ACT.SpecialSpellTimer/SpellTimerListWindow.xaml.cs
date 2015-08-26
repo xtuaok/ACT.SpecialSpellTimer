@@ -280,6 +280,7 @@
                 c.IsReverse = spell.IsReverse;
                 c.HideSpellName = spell.HideSpellName;
                 c.OverlapRecastTime = spell.OverlapRecastTime;
+                c.ReduceIconBrightness = spell.ReduceIconBrightness;
                 c.RecastTime = 0;
                 c.Progress = 1.0d;
 
