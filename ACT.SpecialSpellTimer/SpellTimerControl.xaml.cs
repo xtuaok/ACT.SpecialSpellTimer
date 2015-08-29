@@ -1,13 +1,15 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
+    using System;
     using System.Diagnostics;
+    using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
+    using ACT.SpecialSpellTimer.Image;
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
-    using ACT.SpecialSpellTimer.Image;
-    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// SpellTimerControl
@@ -17,7 +19,7 @@
         /// <summary>
         /// リキャスト秒数の書式
         /// </summary>
-        private static string recastTimeFormat = 
+        private static string recastTimeFormat =
             Settings.Default.EnabledSpellTimerNoDecimal ? "N0" : "N1";
 
         /// <summary>
@@ -65,7 +67,7 @@
         /// スペル名を非表示とするか？
         /// </summary>
         public bool HideSpellName { get; set; }
-        
+
         /// <summary>
         /// リキャストタイムを重ねて表示するか？
         /// </summary>
@@ -164,7 +166,7 @@
             var iconFile = IconController.Default.getIconFile(this.SpellIcon);
             if (image.Source == null && iconFile != null)
             {
-                var bitmap = new BitmapImage(new System.Uri(iconFile.FullPath));
+                var bitmap = new BitmapImage(new Uri(iconFile.FullPath));
                 image.Source = bitmap;
                 image.Height = this.SpellIconSize;
                 image.Width = this.SpellIconSize;
@@ -200,9 +202,10 @@
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
             }
+
             if (this.HideSpellName)
             {
-                tb.Visibility = System.Windows.Visibility.Collapsed;
+                tb.Visibility = Visibility.Collapsed;
             }
 
             // リキャスト時間を描画する
@@ -218,11 +221,12 @@
                 tb.Stroke = this.FontOutlineBrush;
                 tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
             }
+
             if (this.OverlapRecastTime)
             {
                 this.RecastTimePanel.SetValue(Grid.ColumnProperty, 0);
-                this.RecastTimePanel.SetValue(HorizontalAlignmentProperty, System.Windows.HorizontalAlignment.Center);
-                this.RecastTimePanel.SetValue(VerticalAlignmentProperty, System.Windows.VerticalAlignment.Center);
+                this.RecastTimePanel.SetValue(HorizontalAlignmentProperty, HorizontalAlignment.Center);
+                this.RecastTimePanel.SetValue(VerticalAlignmentProperty, VerticalAlignment.Center);
                 this.RecastTimePanel.Width = this.SpellIconSize - 6;
                 this.RecastTimePanel.Height = this.SpellIconSize - 6;
             }

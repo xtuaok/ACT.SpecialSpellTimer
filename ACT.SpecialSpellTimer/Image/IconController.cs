@@ -3,15 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
 
-    using ACT.SpecialSpellTimer.Utility;
-    using Advanced_Combat_Tracker;
-
-    class IconController
+    public class IconController
     {
         /// <summary>
         /// シングルトンinstance

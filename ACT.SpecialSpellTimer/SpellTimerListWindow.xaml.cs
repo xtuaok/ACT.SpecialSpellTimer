@@ -377,13 +377,14 @@
                     margin.Left = 0;
                     margin.Top = 0;
                 }
-                displaySpell.Margin = margin;
 
+                displaySpell.Margin = margin;
                 displaySpell.VerticalAlignment = this.IsHorizontal ? VerticalAlignment.Bottom : VerticalAlignment.Top;
 
                 displaySpell.SetValue(Grid.RowProperty, this.IsHorizontal ? 0 : index);
                 displaySpell.SetValue(Grid.ColumnProperty, this.IsHorizontal ? index : 0);
                 displaySpell.Visibility = Visibility.Visible;
+
                 index++;
             }
 
