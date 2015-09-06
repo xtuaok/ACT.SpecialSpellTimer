@@ -741,7 +741,10 @@
                 else
                 {
                     var setting = this.FindPanelSettingByName(panelName);
-                    margin = setting.Margin;
+                    if (setting != null)
+                    {
+                        margin = setting.Margin;
+                    }
                 }
             }
         }
@@ -800,8 +803,11 @@
                 else
                 {
                     var setting = this.FindPanelSettingByName(panelName);
-                    horizontal = setting.Horizontal;
-                    fixedPositionSpell = setting.FixedPositionSpell;
+                    if (setting != null)
+                    {
+                        horizontal = setting.Horizontal;
+                        fixedPositionSpell = setting.FixedPositionSpell;
+                    }
                 }
             }
         }
