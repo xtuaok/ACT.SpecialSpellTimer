@@ -167,6 +167,10 @@
             this.RefreshIntervalNumericUpDown.Value = Settings.Default.RefreshInterval;
             this.EnabledPTPlaceholderCheckBox.Checked = Settings.Default.EnabledPartyMemberPlaceholder;
             this.EnabledSpellTimerNoDecimalCheckBox.Checked = Settings.Default.EnabledSpellTimerNoDecimal;
+            this.EnabledNotifyNormalSpellTimerCheckBox.Checked = Settings.Default.EnabledNotifyNormalSpellTimer;
+
+            // 標準のスペルタイマーへ設定を反映する
+            SpellTimerCore.Default.applyToNormalSpellTimer();
         }
 
         /// <summary>
@@ -192,6 +196,18 @@
             Settings.Default.RefreshInterval = (long)this.RefreshIntervalNumericUpDown.Value;
             Settings.Default.EnabledPartyMemberPlaceholder = this.EnabledPTPlaceholderCheckBox.Checked;
             Settings.Default.EnabledSpellTimerNoDecimal = this.EnabledSpellTimerNoDecimalCheckBox.Checked;
+
+            // 有効状態から無効状態に変化する場合は、標準のスペルタイマーから設定を削除する
+            if (Settings.Default.EnabledNotifyNormalSpellTimer &&
+                !this.EnabledNotifyNormalSpellTimerCheckBox.Checked)
+            {
+                SpellTimerCore.Default.clearNormalSpellTimer(true);
+            }
+
+            Settings.Default.EnabledNotifyNormalSpellTimer = this.EnabledNotifyNormalSpellTimerCheckBox.Checked;
+
+            // 標準のスペルタイマーへ設定を反映する
+            SpellTimerCore.Default.applyToNormalSpellTimer();
 
             // 設定を保存する
             Settings.Default.Save();

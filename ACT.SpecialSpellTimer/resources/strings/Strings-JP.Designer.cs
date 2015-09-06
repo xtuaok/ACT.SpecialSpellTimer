@@ -988,6 +988,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   ※ログマッチ時に標準のスペルタイマーへの通知が行われます（試験的な機能） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string NotifyNormalSpellTimerExplainLabel {
+            get {
+                return ResourceManager.GetString("NotifyNormalSpellTimerExplainLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   標準のスペルタイマーに通知する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string NotifyNormalSpellTimerLabel {
+            get {
+                return ResourceManager.GetString("NotifyNormalSpellTimerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   No に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string NumberHeader {

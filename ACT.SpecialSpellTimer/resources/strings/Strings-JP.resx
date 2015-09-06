@@ -897,4 +897,12 @@
     <value>リキャスト中はアイコンを暗くする</value>
     <comment>During the recast time reduce brightness of icon</comment>
   </data>
+  <data name="NotifyNormalSpellTimerExplainLabel" xml:space="preserve">
+    <value>※ログマッチ時に標準のスペルタイマーへの通知が行われます（試験的な機能）</value>
+    <comment>※ Notify ACT's SpellTimer when log matched. (Experimental)</comment>
+  </data>
+  <data name="NotifyNormalSpellTimerLabel" xml:space="preserve">
+    <value>標準のスペルタイマーに通知する</value>
+    <comment>Notify ACT's SpellTimer</comment>
+  </data>
 </root>
