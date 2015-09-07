@@ -198,6 +198,7 @@
             {
                 var regex = telop.Regex;
                 var regexToHide = telop.RegexToHide;
+                var notifyNeeded = false;
 
                 foreach (var log in logLines)
                 {
@@ -229,6 +230,7 @@
                                 SoundController.Default.Play(telop.MatchSound);
                                 SoundController.Default.Play(telop.MatchTextToSpeak);
 
+                                notifyNeeded = true;
                                 continue;
                             }
                         }
@@ -263,6 +265,7 @@
                                 SoundController.Default.Play(tts);
                             }
 
+                            notifyNeeded = true;
                             continue;
                         }
                     }
@@ -277,6 +280,7 @@
                                 keyword.ToUpper()))
                             {
                                 telop.ForceHide = true;
+                                notifyNeeded = true;
                                 continue;
                             }
                         }
@@ -288,6 +292,7 @@
                         if (regexToHide.IsMatch(log))
                         {
                             telop.ForceHide = true;
+                            notifyNeeded = true;
                             continue;
                         }
                     }
@@ -308,6 +313,12 @@
                             telop.DelayTextToSpeak;
                         SoundController.Default.Play(tts);
                     }
+                }
+
+                if (notifyNeeded)
+                {
+                    SpellTimerCore.Default.updateNormalSpellTimerForTelop(telop, telop.ForceHide);
+                    SpellTimerCore.Default.notifyNormalSpellTimerForTelop(telop.Title);
                 }
             }); // end loop telops
         }

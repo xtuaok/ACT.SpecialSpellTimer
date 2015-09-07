@@ -150,7 +150,7 @@
                     }
                 }
 
-                // スペルの有効・無効が変化した際に、標準のスペルタイマーに反映するさせる
+                // スペルの有効・無効が変化した際に、標準のスペルタイマーに反映する
                 SpellTimerCore.Default.applyToNormalSpellTimer();
             };
 

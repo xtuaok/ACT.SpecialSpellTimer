@@ -878,6 +878,12 @@
                 updateNormalSpellTimer(spell, true);
             }
 
+            var telops = OnePointTelopTable.Default.Table.Where(x => x.Enabled);
+            foreach (var telop  in telops)
+            {
+                updateNormalSpellTimerForTelop(telop, false);
+            }
+
             // ACTのスペルタイマーに変更を反映する
             Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.RebuildSpellTreeView();
         }
@@ -904,6 +910,43 @@
             timerData.RemoveValue = (int)-Settings.Default.TimeOfHideSpell;
             timerData.WarningValue = 0;
             timerData.OnlyMasterTicks = true;
+            timerData.Tooltip = spellTimer.SpellTitleReplaced;
+
+            timerData.Panel1Display = false;
+            timerData.Panel2Display = false;
+
+            timerData.WarningSoundData = "none"; // disable warning sound
+
+            // initialize other parameters
+            timerData.RestrictToMe = false;
+            timerData.AbsoluteTiming = false;
+            timerData.RestrictToCategory = false;
+
+            Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.AddEditTimerDef(timerData);
+        }
+
+        /// <summary>
+        /// ACT標準のスペルタイマーの設定を追加・更新する（テロップ用）
+        /// </summary>
+        /// <param name="spellTimer">元になるテロップ</param>
+        /// <param name="forceHide">強制非表示か？</param>
+        public void updateNormalSpellTimerForTelop(OnePointTelop telop, bool forceHide)
+        {
+            if (!Settings.Default.EnabledNotifyNormalSpellTimer)
+            {
+                return;
+            }
+
+            var prefix = Settings.Default.NotifyNormalSpellTimerPrefix;
+            var spellName = prefix + "telop_" + telop.Title;
+            var categoryName = prefix + "telops";
+
+            var timerData = new Advanced_Combat_Tracker.TimerData(spellName, categoryName);
+            timerData.TimerValue = forceHide ? 1 : (int)(telop.DisplayTime + telop.Delay);
+            timerData.RemoveValue = forceHide ? -timerData.TimerValue : 0;
+            timerData.WarningValue = (int)telop.DisplayTime;
+            timerData.OnlyMasterTicks = telop.AddMessageEnabled ? false : true;
+            timerData.Tooltip = telop.MessageReplaced;
 
             timerData.Panel1Display = false;
             timerData.Panel2Display = false;
@@ -931,6 +974,22 @@
 
             var prefix = Settings.Default.NotifyNormalSpellTimerPrefix;
             var spellName = prefix + "spell_" + spellTimer.SpellTitle;
+            Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.NotifySpell("attacker", spellName, false, "victim", false);
+        }
+
+        /// <summary>
+        /// ACT標準のスペルタイマーに通知する（テロップ用）
+        /// </summary>
+        /// <param name="telopTitle">通知先に対応するテロップ名</param>
+        public void notifyNormalSpellTimerForTelop(string telopTitle)
+        {
+            if (!Settings.Default.EnabledNotifyNormalSpellTimer)
+            {
+                return;
+            }
+
+            var prefix = Settings.Default.NotifyNormalSpellTimerPrefix;
+            var spellName = prefix + "telop_" + telopTitle;
             Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.NotifySpell("attacker", spellName, false, "victim", false);
         }
 
