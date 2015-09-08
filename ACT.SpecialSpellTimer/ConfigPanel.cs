@@ -149,6 +149,9 @@
                         node.Checked = e1.Node.Checked;
                     }
                 }
+
+                // スペルの有効・無効が変化した際に、標準のスペルタイマーに反映する
+                SpellTimerCore.Default.applyToNormalSpellTimer();
             };
 
             this.SelectJobButton.Click += (s1, e1) =>
@@ -338,6 +341,9 @@
                     this.SpellTimerTreeView.SelectedNode = node;
                 }
             }
+
+            // 標準のスペルタイマーへ変更を反映する
+            SpellTimerCore.Default.applyToNormalSpellTimer();
         }
 
         /// <summary>
@@ -500,6 +506,9 @@
                     targetNode.Parent.Remove();
                 }
             }
+
+            // 標準のスペルタイマーへ変更を反映する
+            SpellTimerCore.Default.applyToNormalSpellTimer();
         }
 
         /// <summary>
@@ -629,6 +638,9 @@
 
                     this.SpellTimerTreeView.Nodes.Add(n);
                 }
+
+                // 標準のスペルタイマーへ変更を反映する
+                SpellTimerCore.Default.applyToNormalSpellTimer();
 
                 this.SpellTimerTreeView.ExpandAll();
             }

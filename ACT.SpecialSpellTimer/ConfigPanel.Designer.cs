@@ -199,6 +199,9 @@
             this.CombatAnalyzingLabel = new System.Windows.Forms.Label();
             this.AnalyzeCombatButton = new System.Windows.Forms.Button();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
+            this.label64 = new System.Windows.Forms.Label();
+            this.EnabledNotifyNormalSpellTimerCheckBox = new System.Windows.Forms.CheckBox();
+            this.label63 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.EnabledSpellTimerNoDecimalCheckBox = new System.Windows.Forms.CheckBox();
@@ -2149,6 +2152,9 @@
             // OptionTabPage
             // 
             this.OptionTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.OptionTabPage.Controls.Add(this.label64);
+            this.OptionTabPage.Controls.Add(this.EnabledNotifyNormalSpellTimerCheckBox);
+            this.OptionTabPage.Controls.Add(this.label63);
             this.OptionTabPage.Controls.Add(this.label49);
             this.OptionTabPage.Controls.Add(this.label31);
             this.OptionTabPage.Controls.Add(this.EnabledSpellTimerNoDecimalCheckBox);
@@ -2187,6 +2193,34 @@
             this.OptionTabPage.Size = new System.Drawing.Size(1186, 668);
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "OptionTabPageTitle";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(357, 358);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(190, 12);
+            this.label64.TabIndex = 47;
+            this.label64.Text = "NotifyNormalSpellTimerExplainLabel";
+            // 
+            // EnabledNotifyNormalSpellTimerCheckBox
+            // 
+            this.EnabledNotifyNormalSpellTimerCheckBox.AutoSize = true;
+            this.EnabledNotifyNormalSpellTimerCheckBox.Location = new System.Drawing.Point(293, 357);
+            this.EnabledNotifyNormalSpellTimerCheckBox.Name = "EnabledNotifyNormalSpellTimerCheckBox";
+            this.EnabledNotifyNormalSpellTimerCheckBox.Size = new System.Drawing.Size(64, 16);
+            this.EnabledNotifyNormalSpellTimerCheckBox.TabIndex = 46;
+            this.EnabledNotifyNormalSpellTimerCheckBox.Text = "Enabled";
+            this.EnabledNotifyNormalSpellTimerCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(6, 358);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(153, 12);
+            this.label63.TabIndex = 45;
+            this.label63.Text = "NotifyNormalSpellTimerLabel";
             // 
             // label49
             // 
@@ -2818,5 +2852,8 @@
         private System.Windows.Forms.CheckBox HorizontalLayoutCheckBox;
         private System.Windows.Forms.CheckBox FixedPositionSpellCheckBox;
         private System.Windows.Forms.CheckBox ReduceIconBrightnessCheckBox;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.CheckBox EnabledNotifyNormalSpellTimerCheckBox;
+        private System.Windows.Forms.Label label63;
     }
 }

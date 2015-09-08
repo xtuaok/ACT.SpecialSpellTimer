@@ -60,6 +60,9 @@
                 {
                     source.Enabled = e1.Node.Checked;
                 }
+
+                // テロップの有効・無効が変化した際に、標準のスペルタイマーに反映する
+                SpellTimerCore.Default.applyToNormalSpellTimer();
             };
 
             this.TelopTreeView.AfterSelect += (s1, e1) =>
@@ -247,6 +250,9 @@
 
             this.TelopTreeView.Nodes.Add(node);
             this.TelopTreeView.SelectedNode = node;
+
+            // 標準のスペルタイマーへ変更を反映する
+            SpellTimerCore.Default.applyToNormalSpellTimer();
         }
 
         /// <summary>
@@ -358,6 +364,9 @@
                     this.TelopTreeView.SelectedNode = prevNode;
                 }
             }
+
+            // 標準のスペルタイマーへ変更を反映する
+            SpellTimerCore.Default.applyToNormalSpellTimer();
         }
 
         /// <summary>
@@ -383,6 +392,9 @@
 
                     this.TelopTreeView.Nodes.Add(n);
                 }
+
+                // 標準のスペルタイマーへ変更を反映する
+                SpellTimerCore.Default.applyToNormalSpellTimer();
 
                 this.TelopTreeView.ExpandAll();
             }
