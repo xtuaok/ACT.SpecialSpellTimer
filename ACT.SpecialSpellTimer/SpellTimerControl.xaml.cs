@@ -98,6 +98,17 @@
         public int BarHeight { get; set; }
 
         /// <summary>
+        /// スペル表示領域の幅
+        /// </summary>
+        public int SpellWidth
+        {
+            get
+            {
+                return BarWidth > SpellIconSize ? BarWidth : SpellIconSize;
+            }
+        }
+
+        /// <summary>
         /// フォント
         /// </summary>
         public FontInfo FontInfo { get; set; }
@@ -135,7 +146,7 @@
 #if false
             var sw = Stopwatch.StartNew();
 #endif
-            this.Width = this.BarWidth;
+            this.Width = this.SpellWidth;
 
             // Brushを生成する
             var fontColor = string.IsNullOrWhiteSpace(this.FontColor) ?
