@@ -212,7 +212,7 @@
             tb = this.RecastTimeTextBlock;
             var recast = this.RecastTime > 0 ?
                 this.RecastTime.ToString(recastTimeFormat) :
-                this.IsReverse ? "Over" : "Ready";
+                this.IsReverse ? Settings.Default.OverText : Settings.Default.ReadyText;
             if (tb.Text != recast)
             {
                 tb.Text = recast;

@@ -197,6 +197,9 @@
             Settings.Default.EnabledPartyMemberPlaceholder = this.EnabledPTPlaceholderCheckBox.Checked;
             Settings.Default.EnabledSpellTimerNoDecimal = this.EnabledSpellTimerNoDecimalCheckBox.Checked;
 
+            Settings.Default.ReadyText = Settings.Default.ReadyText;
+            Settings.Default.OverText = Settings.Default.OverText;
+
             // 有効状態から無効状態に変化する場合は、標準のスペルタイマーから設定を削除する
             if (Settings.Default.EnabledNotifyNormalSpellTimer &&
                 !this.EnabledNotifyNormalSpellTimerCheckBox.Checked)

@@ -322,5 +322,29 @@ namespace ACT.SpecialSpellTimer.Properties {
                 this["NotifyNormalSpellTimerPrefix"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ready")]
+        public string ReadyText {
+            get {
+                return ((string)(this["ReadyText"]));
+            }
+            set {
+                this["ReadyText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Over")]
+        public string OverText {
+            get {
+                return ((string)(this["OverText"]));
+            }
+            set {
+                this["OverText"] = value;
+            }
+        }
     }
 }
