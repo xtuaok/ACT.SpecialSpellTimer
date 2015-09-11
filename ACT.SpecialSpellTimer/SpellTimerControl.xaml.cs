@@ -190,11 +190,11 @@
             {
                 if (this.RecastTime > 0)
                 {
-                    image.Opacity = this.IsReverse ? 1.0 : 0.6;
+                    image.Opacity = this.IsReverse ? 1.0 : 0.55;
                 }
                 else
                 {
-                    image.Opacity = this.IsReverse ? 0.6 : 1.0;
+                    image.Opacity = this.IsReverse ? 0.55 : 1.0;
                 }
             }
             else
