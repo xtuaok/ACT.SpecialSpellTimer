@@ -406,6 +406,9 @@
                 (this.SamplePictureBox.Width / 2) - (barSize.Width / 2),
                 this.SamplePictureBox.Height - barSize.Height - 12);
 
+            var spellWidth = barSize.Width > this.SpellIconSize ? barSize.Width : this.SpellIconSize;
+            var spellX = barSize.Width > this.SpellIconSize ? barLocation.X : (this.SamplePictureBox.Size.Width / 2) - (this.SpellIconSize / 2);
+
             var bmp = new Bitmap(this.SamplePictureBox.Width, this.SamplePictureBox.Height);
             using (var g = Graphics.FromImage(bmp))
             {
@@ -450,7 +453,7 @@
                         var image = System.Drawing.Image.FromFile(spellIcon.FullPath);
                         g.DrawImage(
                             image,
-                            barLocation.X,
+                            spellX,
                             barLocation.Y - this.SpellIconSize,
                             (float)this.SpellIconSize,
                             (float)this.SpellIconSize);
@@ -463,9 +466,9 @@
                 var fontOutlinePen = new Pen(fontOutlineColor, 0.2f);
                 var fontHeight = font.Size * 2; // 正しくない計算
                 var fontRect = new Rectangle(
-                    hasIcon ? barLocation.X + this.SpellIconSize : barLocation.X,
+                    hasIcon ? spellX + this.SpellIconSize : spellX,
                     barLocation.Y - 2 - (int)fontHeight,
-                    hasIcon ? barSize.Width - this.SpellIconSize : barSize.Width,
+                    hasIcon ? spellWidth - this.SpellIconSize : spellWidth,
                     barLocation.Y - 2);
 
                 if (!this.BarEnabled)
@@ -510,11 +513,13 @@
 
                     if (this.OverlapRecastTime)
                     {
-                        fontRect.X = barLocation.X;
+                        fontRect.X = spellX;
+                        fontRect.Width = this.SpellIconSize;
+                        recastSf.Alignment = StringAlignment.Center;
                     }
 
                     path.AddString(
-                        "120.0",
+                        Settings.Default.EnabledSpellTimerNoDecimal ? "120" : "120.0",
                         font.FontFamily,
                         (int)font.Style,
                         (float)font.ToFontSizeWPF(),

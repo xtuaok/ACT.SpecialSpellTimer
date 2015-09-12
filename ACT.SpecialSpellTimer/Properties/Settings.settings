@@ -77,5 +77,11 @@
     <Setting Name="NotifyNormalSpellTimerPrefix" Type="System.String" Scope="User">
       <Value Profile="(Default)">spespe_</Value>
     </Setting>
+    <Setting Name="ReadyText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ready</Value>
+    </Setting>
+    <Setting Name="OverText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Over</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

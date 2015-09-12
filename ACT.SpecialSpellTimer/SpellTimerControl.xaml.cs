@@ -98,6 +98,17 @@
         public int BarHeight { get; set; }
 
         /// <summary>
+        /// スペル表示領域の幅
+        /// </summary>
+        public int SpellWidth
+        {
+            get
+            {
+                return BarWidth > SpellIconSize ? BarWidth : SpellIconSize;
+            }
+        }
+
+        /// <summary>
         /// フォント
         /// </summary>
         public FontInfo FontInfo { get; set; }
@@ -135,7 +146,7 @@
 #if false
             var sw = Stopwatch.StartNew();
 #endif
-            this.Width = this.BarWidth;
+            this.Width = this.SpellWidth;
 
             // Brushを生成する
             var fontColor = string.IsNullOrWhiteSpace(this.FontColor) ?
@@ -179,11 +190,11 @@
             {
                 if (this.RecastTime > 0)
                 {
-                    image.Opacity = this.IsReverse ? 1.0 : 0.6;
+                    image.Opacity = this.IsReverse ? 1.0 : 0.55;
                 }
                 else
                 {
-                    image.Opacity = this.IsReverse ? 0.6 : 1.0;
+                    image.Opacity = this.IsReverse ? 0.55 : 1.0;
                 }
             }
             else
@@ -212,7 +223,7 @@
             tb = this.RecastTimeTextBlock;
             var recast = this.RecastTime > 0 ?
                 this.RecastTime.ToString(recastTimeFormat) :
-                this.IsReverse ? "Over" : "Ready";
+                this.IsReverse ? Settings.Default.OverText : Settings.Default.ReadyText;
             if (tb.Text != recast)
             {
                 tb.Text = recast;
