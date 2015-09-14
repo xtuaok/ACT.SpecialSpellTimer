@@ -316,6 +316,11 @@
             Debug.WriteLine("Refresh GetLog ->" + sw2.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
 #endif
 
+            if (logLines.Length < 1)
+            {
+                return;
+            }
+
             var task1 = Task.Run(() =>
             {
                 // テロップとマッチングする
