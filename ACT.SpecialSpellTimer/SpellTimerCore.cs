@@ -316,29 +316,35 @@
             Debug.WriteLine("Refresh GetLog ->" + sw2.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
 #endif
 
-            // テロップとマッチングする
+            var task1 = Task.Run(() =>
+            {
+                // テロップとマッチングする
 #if DEBUG
-            var sw3 = Stopwatch.StartNew();
+                var sw3 = Stopwatch.StartNew();
 #endif
-            OnePointTelopController.Match(
-                telopArray,
-                logLines);
+                OnePointTelopController.Match(
+                    telopArray,
+                    logLines);
 #if DEBUG
-            sw3.Stop();
-            Debug.WriteLine("Refresh MatchTelop ->" + sw3.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+                sw3.Stop();
+                Debug.WriteLine("Refresh MatchTelop ->" + sw3.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
 #endif
+            });
 
-            // スペルリストとマッチングする
+            var task2 = Task.Run(() =>
+            {
+                // スペルリストとマッチングする
 #if DEBUG
-            var sw4 = Stopwatch.StartNew();
+                var sw4 = Stopwatch.StartNew();
 #endif
-            this.MatchSpells(
-                spellArray,
-                logLines);
+                this.MatchSpells(
+                    spellArray,
+                    logLines);
 #if DEBUG
-            sw4.Stop();
-            Debug.WriteLine("Refresh MatchSpell ->" + sw4.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+                sw4.Stop();
+                Debug.WriteLine("Refresh MatchSpell ->" + sw4.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
 #endif
+            });
 
 #if DEBUG
             var swC = Stopwatch.StartNew();
@@ -351,6 +357,9 @@
             swC.Stop();
             Debug.WriteLine("Match Command ->" + swC.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
 #endif
+
+            task1.Wait();
+            task2.Wait();
         }
 
         /// <summary>
