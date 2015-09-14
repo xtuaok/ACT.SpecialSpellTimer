@@ -48,7 +48,7 @@
         /// <summary>
         /// 内部バッファ
         /// </summary>
-        private List<LogLine> buffer = new List<LogLine>();
+        private List<string> buffer = new List<string>();
 
         /// <summary>
         /// コンストラクタ
@@ -74,7 +74,7 @@
         /// </summary>
         /// <returns>
         /// ログ行の配列</returns>
-        public LogLine[] GetLogLines()
+        public string[] GetLogLines()
         {
             lock (this.buffer)
             {
@@ -119,8 +119,8 @@
 #if false
             Debug.WriteLine(logInfo.logLine);
 #endif
-            var logLineObject = new LogLine(logInfo.logLine.Trim(), logInfo.detectedTime);
-            var logLine = logLineObject.Text;
+
+            var logLine = logInfo.logLine.Trim();
 
             // ジョブに変化あり？
             if (logLine.Contains("にチェンジした。") ||
@@ -207,7 +207,7 @@
 
             lock (this.buffer)
             {
-                this.buffer.Add(logLineObject);
+                this.buffer.Add(logLine);
             }
         }
 
@@ -435,18 +435,6 @@
                     SpellTimerTable.ClearReplacedKeywords();
                     OnePointTelopTable.Default.ClearReplacedKeywords();
                 }
-            }
-        }
-
-        public struct LogLine
-        {
-            public String Text;
-            public DateTime DetectedTime;
-
-            public LogLine(String text, DateTime detectedTime)
-            {
-                this.Text = text;
-                this.DetectedTime = detectedTime;
             }
         }
     }
