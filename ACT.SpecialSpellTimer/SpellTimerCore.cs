@@ -269,7 +269,7 @@
 
 #if DEBUG
             sw1.Stop();
-            Debug.WriteLine("Refresh ClosePanels ->" + sw1.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
+            Debug.WriteLine("Refresh get spells & telops ->" + sw1.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
 #endif
 
             // ACTが起動していない？
@@ -955,7 +955,7 @@
             }
 
             // ACTのスペルタイマーに変更を反映する
-            Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.RebuildSpellTreeView();
+            ActGlobals.oFormSpellTimers.RebuildSpellTreeView();
         }
 
         /// <summary>
@@ -975,7 +975,7 @@
             var categoryName = prefix + spellTimer.Panel;
             var recastTime = useRecastTime ? spellTimer.RecastTime : (spellTimer.CompleteScheduledTime - DateTime.Now).TotalSeconds;
 
-            var timerData = new Advanced_Combat_Tracker.TimerData(spellName, categoryName);
+            var timerData = new TimerData(spellName, categoryName);
             timerData.TimerValue = (int)recastTime;
             timerData.RemoveValue = (int)-Settings.Default.TimeOfHideSpell;
             timerData.WarningValue = 0;
@@ -992,7 +992,7 @@
             timerData.AbsoluteTiming = false;
             timerData.RestrictToCategory = false;
 
-            Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.AddEditTimerDef(timerData);
+            ActGlobals.oFormSpellTimers.AddEditTimerDef(timerData);
         }
 
         /// <summary>
@@ -1011,7 +1011,7 @@
             var spellName = prefix + "telop_" + telop.Title;
             var categoryName = prefix + "telops";
 
-            var timerData = new Advanced_Combat_Tracker.TimerData(spellName, categoryName);
+            var timerData = new TimerData(spellName, categoryName);
             timerData.TimerValue = forceHide ? 1 : (int)(telop.DisplayTime + telop.Delay);
             timerData.RemoveValue = forceHide ? -timerData.TimerValue : 0;
             timerData.WarningValue = (int)telop.DisplayTime;
@@ -1028,7 +1028,7 @@
             timerData.AbsoluteTiming = false;
             timerData.RestrictToCategory = false;
 
-            Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.AddEditTimerDef(timerData);
+            ActGlobals.oFormSpellTimers.AddEditTimerDef(timerData);
         }
 
         /// <summary>
@@ -1044,7 +1044,7 @@
 
             var prefix = Settings.Default.NotifyNormalSpellTimerPrefix;
             var spellName = prefix + "spell_" + spellTimer.SpellTitle;
-            Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.NotifySpell("attacker", spellName, false, "victim", false);
+            ActGlobals.oFormSpellTimers.NotifySpell("attacker", spellName, false, "victim", false);
         }
 
         /// <summary>
@@ -1060,7 +1060,7 @@
 
             var prefix = Settings.Default.NotifyNormalSpellTimerPrefix;
             var spellName = prefix + "telop_" + telopTitle;
-            Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.NotifySpell("attacker", spellName, false, "victim", false);
+            ActGlobals.oFormSpellTimers.NotifySpell("attacker", spellName, false, "victim", false);
         }
 
         /// <summary>
@@ -1070,19 +1070,19 @@
         public void clearNormalSpellTimer(bool immediate=false)
         {
             var prefix = Settings.Default.NotifyNormalSpellTimerPrefix;
-            var timerDefs = Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.TimerDefs
+            var timerDefs = ActGlobals.oFormSpellTimers.TimerDefs
                 .Where(p => p.Key.StartsWith(prefix))
                 .Select(x => x.Value)
                 .ToList();
             foreach (var timerDef in timerDefs)
             {
-                Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.RemoveTimerDef(timerDef);
+                ActGlobals.oFormSpellTimers.RemoveTimerDef(timerDef);
             }
 
             // ACTのスペルタイマーに変更を反映する
             if (immediate)
             {
-                Advanced_Combat_Tracker.ActGlobals.oFormSpellTimers.RebuildSpellTreeView();
+                ActGlobals.oFormSpellTimers.RebuildSpellTreeView();
             }
         }
 
