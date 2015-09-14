@@ -24,18 +24,18 @@
         /// <param name="logLines">
         /// ログ行</param>
         public static void MatchCommand(
-            string[] logLines)
+            LogBuffer.LogLine[] logLines)
         {
             var commandDone = false;
             foreach (var log in logLines)
             {
                 // 正規表現の前にキーワードがなければ抜けてしまう
-                if (!log.ToLower().Contains("/spespe"))
+                if (!log.Text.ToLower().Contains("/spespe"))
                 {
                     continue;
                 }
 
-                var match = regexCommand.Match(log);
+                var match = regexCommand.Match(log.Text);
                 if (!match.Success)
                 {
                     continue;
