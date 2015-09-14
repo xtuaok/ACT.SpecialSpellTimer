@@ -380,7 +380,7 @@
         /// <param name="logLines">ログ</param>
         private void MatchSpells(
             SpellTimer[] spells,
-            string[] logLines)
+            LogBuffer.LogLine[] logLines)
         {
             Parallel.ForEach(spells, (spell) =>
             {
@@ -401,14 +401,14 @@
                         }
 
                         // キーワードが含まれるか？
-                        if (logLine.ToUpper().Contains(
+                        if (logLine.Text.ToUpper().Contains(
                             keyword.ToUpper()))
                         {
                             // ヒットしたログを格納する
-                            spell.MatchedLog = logLine;
+                            spell.MatchedLog = logLine.Text;
 
                             spell.SpellTitleReplaced = spell.SpellTitle;
-                            spell.MatchDateTime = DateTime.Now;
+                            spell.MatchDateTime = logLine.DetectedTime;
                             spell.OverDone = false;
                             spell.BeforeDone = false;
                             spell.TimeupDone = false;
@@ -424,16 +424,16 @@
                     else
                     {
                         // 正規表現でマッチングする
-                        var match = regex.Match(logLine);
+                        var match = regex.Match(logLine.Text);
                         if (match.Success)
                         {
                             // ヒットしたログを格納する
-                            spell.MatchedLog = logLine;
+                            spell.MatchedLog = logLine.Text;
 
                             // 置換したスペル名を格納する
                             spell.SpellTitleReplaced = match.Result(spell.SpellTitle);
 
-                            spell.MatchDateTime = DateTime.Now;
+                            spell.MatchDateTime = logLine.DetectedTime;
                             spell.OverDone = false;
                             spell.BeforeDone = false;
                             spell.TimeupDone = false;
@@ -473,12 +473,12 @@
                             {
                                 if (!string.IsNullOrWhiteSpace(keywordToExtend))
                                 {
-                                    match = logLine.ToUpper().Contains(keywordToExtend.ToUpper());
+                                    match = logLine.Text.ToUpper().Contains(keywordToExtend.ToUpper());
                                 }
                             }
                             else
                             {
-                                match = regexToExtend.Match(logLine).Success;
+                                match = regexToExtend.Match(logLine.Text).Success;
                             }
 
                             if (!match)
@@ -486,7 +486,7 @@
                                 continue;
                             }
 
-                            var now = DateTime.Now;
+                            var now = logLine.DetectedTime;
 
                             // リキャストタイムを延長する
                             var newSchedule = spell.CompleteScheduledTime.AddSeconds(timeToExtend);
