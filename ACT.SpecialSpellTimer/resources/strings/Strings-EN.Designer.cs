@@ -1078,6 +1078,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Text to display when the timer is complete (Over) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string OverTextLabel {
+            get {
+                return ResourceManager.GetString("OverTextLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Panel name に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PanelNameLabel {
@@ -1191,6 +1200,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string PUG {
             get {
                 return ResourceManager.GetString("PUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Text to display when the timer is complete (Ready) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ReadyTextLabel {
+            get {
+                return ResourceManager.GetString("ReadyTextLabel", resourceCulture);
             }
         }
         

@@ -905,4 +905,12 @@
     <value>Notify ACT's SpellTimer</value>
     <comment>標準のスペルタイマーに通知する</comment>
   </data>
+  <data name="OverTextLabel" xml:space="preserve">
+    <value>Text to display when the timer is complete (Over)</value>
+    <comment>スペルタイマが完了した時のテキスト(Over)</comment>
+  </data>
+  <data name="ReadyTextLabel" xml:space="preserve">
+    <value>Text to display when the timer is complete (Ready)</value>
+    <comment>スペルタイマが完了した時のテキスト(Ready)</comment>
+  </data>
 </root>

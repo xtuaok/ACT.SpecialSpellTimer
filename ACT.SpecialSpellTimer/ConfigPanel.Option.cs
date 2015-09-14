@@ -169,6 +169,9 @@
             this.EnabledSpellTimerNoDecimalCheckBox.Checked = Settings.Default.EnabledSpellTimerNoDecimal;
             this.EnabledNotifyNormalSpellTimerCheckBox.Checked = Settings.Default.EnabledNotifyNormalSpellTimer;
 
+            this.ReadyTextBox.Text = Settings.Default.ReadyText;
+            this.OverTextBox.Text = Settings.Default.OverText;
+
             // 標準のスペルタイマーへ設定を反映する
             SpellTimerCore.Default.applyToNormalSpellTimer();
         }
@@ -197,8 +200,8 @@
             Settings.Default.EnabledPartyMemberPlaceholder = this.EnabledPTPlaceholderCheckBox.Checked;
             Settings.Default.EnabledSpellTimerNoDecimal = this.EnabledSpellTimerNoDecimalCheckBox.Checked;
 
-            Settings.Default.ReadyText = Settings.Default.ReadyText;
-            Settings.Default.OverText = Settings.Default.OverText;
+            Settings.Default.ReadyText = this.ReadyTextBox.Text;
+            Settings.Default.OverText = this.OverTextBox.Text;
 
             // 有効状態から無効状態に変化する場合は、標準のスペルタイマーから設定を削除する
             if (Settings.Default.EnabledNotifyNormalSpellTimer &&
