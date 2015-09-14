@@ -260,22 +260,11 @@
         /// </summary>
         private void WatchLog()
         {
-#if DEBUG
-            var sw1 = Stopwatch.StartNew();
-#endif
             // 有効なスペルとテロップのリストを取得する
             var spellArray = SpellTimerTable.EnabledTable;
             var telopArray = OnePointTelopTable.Default.EnabledTable;
 
-#if DEBUG
-            sw1.Stop();
-            Debug.WriteLine("Refresh get spells & telops ->" + sw1.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
-#endif
-
             // ACTが起動していない？
-#if DEBUG
-            var sw7 = Stopwatch.StartNew();
-#endif
             if (ActGlobals.oFormActMain == null ||
                 !ActGlobals.oFormActMain.Visible)
             {
@@ -301,21 +290,9 @@
 
             // タイマの間隔を標準に戻す
             this.RefreshInterval = Settings.Default.RefreshInterval;
-#if DEBUG
-            sw7.Stop();
-            Debug.WriteLine("Refresh Exists FF14 ->" + sw7.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
-#endif
 
             // ログを取り出す
-#if DEBUG
-            var sw2 = Stopwatch.StartNew();
-#endif
             var logLines = this.LogBuffer.GetLogLines();
-#if DEBUG
-            sw2.Stop();
-            Debug.WriteLine("Refresh GetLog ->" + sw2.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
-#endif
-
             if (logLines.Length < 1)
             {
                 return;
@@ -324,44 +301,22 @@
             var task1 = Task.Run(() =>
             {
                 // テロップとマッチングする
-#if DEBUG
-                var sw3 = Stopwatch.StartNew();
-#endif
                 OnePointTelopController.Match(
                     telopArray,
                     logLines);
-#if DEBUG
-                sw3.Stop();
-                Debug.WriteLine("Refresh MatchTelop ->" + sw3.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
-#endif
             });
 
             var task2 = Task.Run(() =>
             {
                 // スペルリストとマッチングする
-#if DEBUG
-                var sw4 = Stopwatch.StartNew();
-#endif
                 this.MatchSpells(
                     spellArray,
                     logLines);
-#if DEBUG
-                sw4.Stop();
-                Debug.WriteLine("Refresh MatchSpell ->" + sw4.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
-#endif
             });
 
-#if DEBUG
-            var swC = Stopwatch.StartNew();
-#endif
             // コマンドとマッチングする
             TextCommandController.MatchCommand(
                 logLines);
-
-#if DEBUG
-            swC.Stop();
-            Debug.WriteLine("Match Command ->" + swC.Elapsed.TotalMilliseconds.ToString("N4") + "ms");
-#endif
 
             task1.Wait();
             task2.Wait();
