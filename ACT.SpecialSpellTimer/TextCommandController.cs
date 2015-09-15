@@ -21,21 +21,21 @@
         /// <summary>
         /// Commandとマッチングする
         /// </summary>
-        /// <param name="logInfos">
+        /// <param name="logLines">
         /// ログ行</param>
         public static void MatchCommand(
-            LogInfo[] logInfos)
+            string[] logLines)
         {
             var commandDone = false;
-            foreach (var log in logInfos)
+            foreach (var log in logLines)
             {
                 // 正規表現の前にキーワードがなければ抜けてしまう
-                if (!log.LogLine.ToLower().Contains("/spespe"))
+                if (!log.ToLower().Contains("/spespe"))
                 {
                     continue;
                 }
 
-                var match = regexCommand.Match(log.LogLine);
+                var match = regexCommand.Match(log);
                 if (!match.Success)
                 {
                     continue;

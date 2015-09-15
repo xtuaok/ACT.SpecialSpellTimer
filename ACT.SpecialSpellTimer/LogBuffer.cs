@@ -48,7 +48,7 @@
         /// <summary>
         /// 内部バッファ
         /// </summary>
-        private List<LogInfo> buffer = new List<LogInfo>();
+        private List<string> buffer = new List<string>();
 
         /// <summary>
         /// コンストラクタ
@@ -74,13 +74,13 @@
         /// </summary>
         /// <returns>
         /// ログ行の配列</returns>
-        public LogInfo[] GetLogLines()
+        public string[] GetLogLines()
         {
             lock (this.buffer)
             {
-                var logInfos = this.buffer.ToArray();
+                var logLines = this.buffer.ToArray();
                 this.buffer.Clear();
-                return logInfos;
+                return logLines;
             }
         }
 
@@ -120,16 +120,12 @@
             Debug.WriteLine(logInfo.logLine);
 #endif
 
-            var log = new LogInfo()
-            {
-                DetectedDateTime = DateTime.Now,
-                LogLine = logInfo.logLine.Trim(),
-            };
+            var logLine = logInfo.logLine.Trim();
 
             // ジョブに変化あり？
-            if (log.LogLine.Contains("にチェンジした。") ||
-                log.LogLine.Contains("You change to ") ||
-                log.LogLine.Contains("Welcome to"))
+            if (logLine.Contains("にチェンジした。") ||
+                logLine.Contains("You change to ") ||
+                logLine.Contains("Welcome to"))
             {
                 FF14PluginHelper.RefreshPlayer();
                 RefreshPTList();
@@ -140,19 +136,19 @@
             {
                 if (ptmember == null ||
                     replacementsByJobs == null ||
-                    log.LogLine.Contains("パーティを解散しました。") ||
-                    log.LogLine.Contains("がパーティに参加しました。") ||
-                    log.LogLine.Contains("がパーティから離脱しました。") ||
-                    log.LogLine.Contains("をパーティから離脱させました。") ||
-                    log.LogLine.Contains("の攻略を開始した。") ||
-                    log.LogLine.Contains("の攻略を終了した。") ||
-                    (log.LogLine.Contains("You join ") && log.LogLine.Contains("'s party.")) ||
-                    log.LogLine.Contains("You left the party.") ||
-                    log.LogLine.Contains("You dissolve the party.") ||
-                    log.LogLine.Contains("The party has been disbanded.") ||
-                    log.LogLine.Contains("joins the party.") ||
-                    log.LogLine.Contains("has left the party.") ||
-                    log.LogLine.Contains("was removed from the party."))
+                    logLine.Contains("パーティを解散しました。") ||
+                    logLine.Contains("がパーティに参加しました。") ||
+                    logLine.Contains("がパーティから離脱しました。") ||
+                    logLine.Contains("をパーティから離脱させました。") ||
+                    logLine.Contains("の攻略を開始した。") ||
+                    logLine.Contains("の攻略を終了した。") ||
+                    (logLine.Contains("You join ") && logLine.Contains("'s party.")) ||
+                    logLine.Contains("You left the party.") ||
+                    logLine.Contains("You dissolve the party.") ||
+                    logLine.Contains("The party has been disbanded.") ||
+                    logLine.Contains("joins the party.") ||
+                    logLine.Contains("has left the party.") ||
+                    logLine.Contains("was removed from the party."))
                 {
                     Task.Run(() =>
                     {
@@ -174,8 +170,8 @@
                     jobName == "学者" || jobName == "SCH" ||
                     jobName == "召喚士" || jobName == "SMN")
                 {
-                    if (log.LogLine.Contains(player.Name + "の「サモン") ||
-                        log.LogLine.Contains("You cast Summon"))
+                    if (logLine.Contains(player.Name + "の「サモン") ||
+                        logLine.Contains("You cast Summon"))
                     {
                         Task.Run(() =>
                         {
@@ -211,7 +207,7 @@
 
             lock (this.buffer)
             {
-                this.buffer.Add(log);
+                this.buffer.Add(logLine);
             }
         }
 
@@ -441,15 +437,5 @@
                 }
             }
         }
-    }
-
-    /// <summary>
-    /// ログ情報
-    /// </summary>
-    [Serializable]
-    public class LogInfo
-    {
-        public DateTime DetectedDateTime { get; set; }
-        public string LogLine { get; set; }
     }
 }

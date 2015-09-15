@@ -292,8 +292,8 @@
             this.RefreshInterval = Settings.Default.RefreshInterval;
 
             // ログを取り出す
-            var logInfos = this.LogBuffer.GetLogLines();
-            if (logInfos.Length < 1)
+            var logLines = this.LogBuffer.GetLogLines();
+            if (logLines.Length < 1)
             {
                 return;
             }
@@ -303,7 +303,7 @@
                 // テロップとマッチングする
                 OnePointTelopController.Match(
                     telopArray,
-                    logInfos);
+                    logLines);
             });
 
             var task2 = Task.Run(() =>
@@ -311,12 +311,12 @@
                 // スペルリストとマッチングする
                 this.MatchSpells(
                     spellArray,
-                    logInfos);
+                    logLines);
             });
 
             // コマンドとマッチングする
             TextCommandController.MatchCommand(
-                logInfos);
+                logLines);
 
             task1.Wait();
             task2.Wait();
@@ -377,10 +377,10 @@
         /// Spellをマッチングする
         /// </summary>
         /// <param name="spells">Spell</param>
-        /// <param name="logInfos">ログ</param>
+        /// <param name="logLines">ログ</param>
         private void MatchSpells(
             SpellTimer[] spells,
-            LogInfo[] logInfos)
+            string[] logLines)
         {
             Parallel.ForEach(spells, (spell) =>
             {
@@ -388,7 +388,7 @@
                 var notifyNeeded = false;
 
                 // マッチする？
-                foreach (var logInfo in logInfos)
+                foreach (var logLine in logLines)
                 {
                     // 正規表現が無効？
                     if (!spell.RegexEnabled ||
@@ -401,14 +401,14 @@
                         }
 
                         // キーワードが含まれるか？
-                        if (logInfo.LogLine.ToUpper().Contains(
+                        if (logLine.ToUpper().Contains(
                             keyword.ToUpper()))
                         {
                             // ヒットしたログを格納する
-                            spell.MatchedLog = logInfo.LogLine;
+                            spell.MatchedLog = logLine;
 
                             spell.SpellTitleReplaced = spell.SpellTitle;
-                            spell.MatchDateTime = logInfo.DetectedDateTime;
+                            spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
                             spell.BeforeDone = false;
                             spell.TimeupDone = false;
@@ -424,16 +424,16 @@
                     else
                     {
                         // 正規表現でマッチングする
-                        var match = regex.Match(logInfo.LogLine);
+                        var match = regex.Match(logLine);
                         if (match.Success)
                         {
                             // ヒットしたログを格納する
-                            spell.MatchedLog = logInfo.LogLine;
+                            spell.MatchedLog = logLine;
 
                             // 置換したスペル名を格納する
                             spell.SpellTitleReplaced = match.Result(spell.SpellTitle);
 
-                            spell.MatchDateTime = logInfo.DetectedDateTime;
+                            spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
                             spell.BeforeDone = false;
                             spell.TimeupDone = false;
@@ -473,12 +473,12 @@
                             {
                                 if (!string.IsNullOrWhiteSpace(keywordToExtend))
                                 {
-                                    match = logInfo.LogLine.ToUpper().Contains(keywordToExtend.ToUpper());
+                                    match = logLine.ToUpper().Contains(keywordToExtend.ToUpper());
                                 }
                             }
                             else
                             {
-                                match = regexToExtend.Match(logInfo.LogLine).Success;
+                                match = regexToExtend.Match(logLine).Success;
                             }
 
                             if (!match)
