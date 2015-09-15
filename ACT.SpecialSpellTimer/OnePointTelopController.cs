@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
@@ -189,10 +189,10 @@
         /// ログとマッチングする
         /// </summary>
         /// <param name="telops">Telops</param>
-        /// <param name="logLines">ログ行</param>
+        /// <param name="logInfos">ログ行</param>
         public static void Match(
             OnePointTelop[] telops,
-            string[] logLines)
+            LogInfo[] logInfos)
         {
             Parallel.ForEach(telops, (telop) =>
             {
@@ -200,7 +200,7 @@
                 var regexToHide = telop.RegexToHide;
                 var notifyNeeded = false;
 
-                foreach (var log in logLines)
+                foreach (var log in logInfos)
                 {
                     // 通常マッチ
                     if (regex == null)
@@ -208,7 +208,7 @@
                         var keyword = telop.KeywordReplaced;
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
-                            if (log.ToUpper().Contains(
+                            if (log.LogLine.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
                                 if (!telop.AddMessageEnabled)
@@ -222,9 +222,9 @@
                                         Environment.NewLine + telop.Message;
                                 }
 
-                                telop.MatchDateTime = DateTime.Now;
+                                telop.MatchDateTime = log.DetectedDateTime;
                                 telop.Delayed = false;
-                                telop.MatchedLog = log;
+                                telop.MatchedLog = log.LogLine;
                                 telop.ForceHide = false;
 
                                 SoundController.Default.Play(telop.MatchSound);
@@ -239,7 +239,7 @@
                     // 正規表現マッチ
                     if (regex != null)
                     {
-                        var match = regex.Match(log);
+                        var match = regex.Match(log.LogLine);
                         if (match.Success)
                         {
                             if (!telop.AddMessageEnabled)
@@ -253,9 +253,9 @@
                                     Environment.NewLine + match.Result(telop.Message);
                             }
 
-                            telop.MatchDateTime = DateTime.Now;
+                            telop.MatchDateTime = log.DetectedDateTime;
                             telop.Delayed = false;
-                            telop.MatchedLog = log;
+                            telop.MatchedLog = log.LogLine;
                             telop.ForceHide = false;
 
                             SoundController.Default.Play(telop.MatchSound);
@@ -276,7 +276,7 @@
                         var keyword = telop.KeywordToHideReplaced;
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
-                            if (log.ToUpper().Contains(
+                            if (log.LogLine.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
                                 telop.ForceHide = true;
@@ -289,7 +289,7 @@
                     // 正規表現マッチ(強制非表示)
                     if (regexToHide != null)
                     {
-                        if (regexToHide.IsMatch(log))
+                        if (regexToHide.IsMatch(log.LogLine))
                         {
                             telop.ForceHide = true;
                             notifyNeeded = true;

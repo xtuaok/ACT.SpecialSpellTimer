@@ -48,7 +48,7 @@
         /// <summary>
         /// 内部バッファ
         /// </summary>
-        private List<string> buffer = new List<string>();
+        private List<LogInfo> buffer = new List<LogInfo>();
 
         /// <summary>
         /// コンストラクタ
@@ -74,13 +74,13 @@
         /// </summary>
         /// <returns>
         /// ログ行の配列</returns>
-        public string[] GetLogLines()
+        public LogInfo[] GetLogLines()
         {
             lock (this.buffer)
             {
-                var logLines = this.buffer.ToArray();
+                var logInfos = this.buffer.ToArray();
                 this.buffer.Clear();
-                return logLines;
+                return logInfos;
             }
         }
 
@@ -207,7 +207,11 @@
 
             lock (this.buffer)
             {
-                this.buffer.Add(logLine);
+                this.buffer.Add(new LogInfo()
+                {
+                    DetectedDateTime = DateTime.Now,
+                    LogLine = logLine,
+                });
             }
         }
 
@@ -437,5 +441,15 @@
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// ログ情報
+    /// </summary>
+    [Serializable]
+    public class LogInfo
+    {
+        public DateTime DetectedDateTime { get; set; }
+        public string LogLine { get; set; }
     }
 }
