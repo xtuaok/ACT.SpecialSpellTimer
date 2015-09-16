@@ -293,10 +293,6 @@
 
             // ログを取り出す
             var logLines = this.LogBuffer.GetLogLines();
-            if (logLines.Length < 1)
-            {
-                return;
-            }
 
             var task1 = Task.Run(() =>
             {
