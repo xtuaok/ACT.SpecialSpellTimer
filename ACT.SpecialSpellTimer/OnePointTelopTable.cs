@@ -44,6 +44,10 @@
         /// </summary>
         private List<OnePointTelop> table = new List<OnePointTelop>();
 
+        private OnePointTelop[] enabledTable;
+
+        private DateTime enabledTableTimeStamp;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -67,6 +71,24 @@
         /// 有効なエントリのリスト
         /// </summary>
         public OnePointTelop[] EnabledTable
+        {
+            get
+            {
+                if (enabledTable == null ||
+                    (DateTime.Now - enabledTableTimeStamp).TotalSeconds >= 5.0d)
+                {
+                    enabledTableTimeStamp = DateTime.Now;
+                    enabledTable = EnabledTableCore;
+                }
+
+                return enabledTable;
+            }
+        }
+
+        /// <summary>
+        /// 有効なエントリのリスト
+        /// </summary>
+        private OnePointTelop[] EnabledTableCore
         {
             get
             {

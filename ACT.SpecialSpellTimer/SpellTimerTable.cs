@@ -24,6 +24,10 @@
         /// </summary>
         private static List<SpellTimer> table;
 
+        private static SpellTimer[] enabledTable;
+
+        private static DateTime enabledTableTimeStamp;
+
         /// <summary>
         /// SpellTimerデータテーブル
         /// </summary>
@@ -45,6 +49,24 @@
         /// 有効なSpellTimerデータテーブル
         /// </summary>
         public static SpellTimer[] EnabledTable
+        {
+            get
+            {
+                if (enabledTable == null ||
+                    (DateTime.Now - enabledTableTimeStamp).TotalSeconds >= 5.0d)
+                {
+                    enabledTableTimeStamp = DateTime.Now;
+                    enabledTable = EnabledTableCore;
+                }
+
+                return enabledTable;
+            }
+        }
+
+        /// <summary>
+        /// 有効なSpellTimerデータテーブル
+        /// </summary>
+        private static SpellTimer[] EnabledTableCore
         {
             get
             {

@@ -194,7 +194,7 @@
             OnePointTelop[] telops,
             string[] logLines)
         {
-            Parallel.ForEach(telops, (telop) =>
+            foreach (var telop in telops)
             {
                 var regex = telop.Regex;
                 var regexToHide = telop.RegexToHide;
@@ -320,7 +320,12 @@
                     SpellTimerCore.Default.updateNormalSpellTimerForTelop(telop, telop.ForceHide);
                     SpellTimerCore.Default.notifyNormalSpellTimerForTelop(telop.Title);
                 }
+            }
+#if false
+            Parallel.ForEach(telops, (telop) =>
+            {
             }); // end loop telops
+#endif
         }
 
         /// <summary>
