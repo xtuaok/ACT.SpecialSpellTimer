@@ -346,5 +346,17 @@ namespace ACT.SpecialSpellTimer.Properties {
                 this["OverText"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int MaxFPS {
+            get {
+                return ((int)(this["MaxFPS"]));
+            }
+            set {
+                this["MaxFPS"] = value;
+            }
+        }
     }
 }

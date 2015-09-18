@@ -135,6 +135,7 @@
                 if (source != null)
                 {
                     source.Enabled = e1.Node.Checked;
+                    source.UpdateDone = false;
                 }
                 else
                 {
@@ -299,6 +300,7 @@
                 }
 
                 nr.MatchDateTime = DateTime.MinValue;
+                nr.UpdateDone = false;
                 nr.Enabled = true;
                 nr.DisplayNo = SpellTimerTable.Table.Any() ?
                     SpellTimerTable.Table.Max(x => x.DisplayNo) + 1 :
@@ -637,6 +639,12 @@
                     n.Checked = children.Any(x => x.Checked);
 
                     this.SpellTimerTreeView.Nodes.Add(n);
+
+                    // バー表示の初期化が必要なことを記録
+                    foreach (var spell in spells)
+                    {
+                        spell.UpdateDone = false;
+                    }
                 }
 
                 // 標準のスペルタイマーへ変更を反映する

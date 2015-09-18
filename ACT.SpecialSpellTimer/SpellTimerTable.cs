@@ -577,6 +577,8 @@
         [XmlIgnore]
         public DateTime CompleteScheduledTime { get; set; }
         [XmlIgnore]
+        public volatile bool UpdateDone;
+        [XmlIgnore]
         public bool OverDone { get; set; }
         [XmlIgnore]
         public bool BeforeDone { get; set; }

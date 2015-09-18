@@ -83,5 +83,8 @@
     <Setting Name="OverText" Type="System.String" Scope="User">
       <Value Profile="(Default)">Over</Value>
     </Setting>
+    <Setting Name="MaxFPS" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

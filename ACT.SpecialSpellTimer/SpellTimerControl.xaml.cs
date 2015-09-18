@@ -10,6 +10,7 @@
     using ACT.SpecialSpellTimer.Image;
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
+    using System.Windows.Media.Animation;
 
     /// <summary>
     /// SpellTimerControl
@@ -138,10 +139,51 @@
         /// <summary>バーのアウトラインのBrush</summary>
         private SolidColorBrush BarOutlineBrush { get; set; }
 
+        /// <summary>バーのアニメーション用DoubleAnimation</summary>
+        private DoubleAnimation BarAnimation { get; set; }
+
         /// <summary>
         /// 描画を更新する
         /// </summary>
         public void Refresh()
+        {
+            // アイコンの不透明度を設定する
+            var image = this.SpellIconImage;
+            if (this.ReduceIconBrightness)
+            {
+                if (this.RecastTime > 0)
+                {
+                    image.Opacity = this.IsReverse ? 1.0 : 0.55;
+                }
+                else
+                {
+                    image.Opacity = this.IsReverse ? 0.55 : 1.0;
+                }
+            }
+            else
+            {
+                image.Opacity = 1.0;
+            }
+
+            // リキャスト時間を描画する
+            var tb = this.RecastTimeTextBlock;
+            var recast = this.RecastTime > 0 ?
+                this.RecastTime.ToString(recastTimeFormat) :
+                this.IsReverse ? Settings.Default.OverText : Settings.Default.ReadyText;
+            if (tb.Text != recast)
+            {
+                tb.Text = recast;
+                tb.SetFontInfo(this.FontInfo);
+                tb.Fill = this.FontBrush;
+                tb.Stroke = this.FontOutlineBrush;
+                tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
+            }
+        }
+
+        /// <summary>
+        /// 描画設定を更新する
+        /// </summary>
+        public void Update()
         {
 #if false
             var sw = Stopwatch.StartNew();
@@ -185,23 +227,6 @@
                 this.SpellIconPanel.OpacityMask = new ImageBrush(bitmap);
             }
 
-            // アイコンの不透明度を設定する
-            if (this.ReduceIconBrightness)
-            {
-                if (this.RecastTime > 0)
-                {
-                    image.Opacity = this.IsReverse ? 1.0 : 0.55;
-                }
-                else
-                {
-                    image.Opacity = this.IsReverse ? 0.55 : 1.0;
-                }
-            }
-            else
-            {
-                image.Opacity = 1.0;
-            }
-
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
             var title = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;
@@ -219,20 +244,6 @@
                 tb.Visibility = Visibility.Collapsed;
             }
 
-            // リキャスト時間を描画する
-            tb = this.RecastTimeTextBlock;
-            var recast = this.RecastTime > 0 ?
-                this.RecastTime.ToString(recastTimeFormat) :
-                this.IsReverse ? Settings.Default.OverText : Settings.Default.ReadyText;
-            if (tb.Text != recast)
-            {
-                tb.Text = recast;
-                tb.SetFontInfo(font);
-                tb.Fill = this.FontBrush;
-                tb.Stroke = this.FontOutlineBrush;
-                tb.StrokeThickness = 0.5d * tb.FontSize / 13.0d;
-            }
-
             if (this.OverlapRecastTime)
             {
                 this.RecastTimePanel.SetValue(Grid.ColumnProperty, 0);
@@ -248,12 +259,12 @@
             }
 
             // ProgressBarを描画する
+            this.BarCanvas.Width = this.BarWidth;
+
             var foreRect = this.BarRectangle;
             foreRect.Stroke = this.BarBrush;
             foreRect.Fill = this.BarBrush;
-            foreRect.Width = this.IsReverse ?
-                (double)(this.BarWidth * (1.0d - this.Progress)) :
-                (double)(this.BarWidth * this.Progress);
+            foreRect.Width = this.BarWidth;
             foreRect.Height = this.BarHeight;
             foreRect.RadiusX = 2.0d;
             foreRect.RadiusY = 2.0d;
@@ -264,7 +275,7 @@
             backRect.Stroke = this.BarBackBrush;
             backRect.Fill = this.BarBackBrush;
             backRect.Width = this.BarWidth;
-            backRect.Height = foreRect.Height;
+            backRect.Height = this.BarHeight;
             backRect.RadiusX = 2.0d;
             backRect.RadiusY = 2.0d;
             Canvas.SetLeft(backRect, 0);
@@ -273,8 +284,8 @@
             var outlineRect = this.BarOutlineRectangle;
             outlineRect.Stroke = this.BarOutlineBrush;
             outlineRect.StrokeThickness = 1.0d;
-            outlineRect.Width = backRect.Width;
-            outlineRect.Height = foreRect.Height;
+            outlineRect.Width = this.BarWidth;
+            outlineRect.Height = this.BarHeight;
             outlineRect.RadiusX = 2.0d;
             outlineRect.RadiusY = 2.0d;
             Canvas.SetLeft(outlineRect, 0);
@@ -290,6 +301,48 @@
             sw.Stop();
             Debug.WriteLine("Spell Refresh -> " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
 #endif
+        }
+
+        /// <summary>
+        /// バーのアニメーションを開始する
+        /// </summary>
+        public void StartBarAnimation()
+        {
+            if (this.BarWidth == 0)
+            {
+                return;
+            }
+
+            if (this.BarAnimation == null)
+            {
+                this.BarAnimation = new DoubleAnimation();
+                this.BarAnimation.AutoReverse = false;
+            }
+
+            var fps = (int)Math.Ceiling(this.BarWidth / this.RecastTime);
+            if (fps <= 0 || fps > Settings.Default.MaxFPS)
+            {
+                fps = Settings.Default.MaxFPS;
+            }
+            Timeline.SetDesiredFrameRate(this.BarAnimation, fps);
+
+            var currentWidth = this.IsReverse ?
+                (double)(this.BarWidth * (1.0d - this.Progress)) :
+                (double)(this.BarWidth * this.Progress);
+            if (this.IsReverse)
+            {
+                this.BarAnimation.From = currentWidth / this.BarWidth;
+                this.BarAnimation.To = 0;
+            }
+            else
+            {
+                this.BarAnimation.From = currentWidth / this.BarWidth;
+                this.BarAnimation.To = 1.0;
+            }
+            this.BarAnimation.Duration = new Duration(TimeSpan.FromSeconds(this.RecastTime));
+
+            this.BarScale.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            this.BarScale.BeginAnimation(ScaleTransform.ScaleXProperty, this.BarAnimation);
         }
     }
 }

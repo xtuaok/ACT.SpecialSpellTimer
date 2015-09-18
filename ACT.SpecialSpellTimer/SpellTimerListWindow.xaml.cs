@@ -290,7 +290,17 @@
                 c.BarColor = spell.BarColor;
                 c.BarOutlineColor = spell.BarOutlineColor;
 
-                if (spell.MatchDateTime > DateTime.MinValue)
+                // 一度もログにマッチしていない時はバーを初期化する
+                if (spell.MatchDateTime == DateTime.MinValue && !spell.UpdateDone)
+                {
+                    c.Progress = 1.0;
+                    c.RecastTime = 0;
+                    c.Update();
+                    c.StartBarAnimation();
+
+                    spell.UpdateDone = true;
+                }
+                else
                 {
                     c.RecastTime = (spell.CompleteScheduledTime - DateTime.Now).TotalSeconds;
                     if (c.RecastTime < 0)
@@ -305,6 +315,14 @@
                     if (c.Progress > 1.0d)
                     {
                         c.Progress = 1.0d;
+                    }
+
+                    if (!spell.UpdateDone)
+                    {
+                        c.Update();
+                        c.StartBarAnimation();
+
+                        spell.UpdateDone = true;
                     }
                 }
 
