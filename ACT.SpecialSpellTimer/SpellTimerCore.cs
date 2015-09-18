@@ -93,7 +93,7 @@
             // RefreshWindowタイマを開始する
             this.RefreshWindowTimer = new System.Windows.Threading.DispatcherTimer()
             {
-                Interval = new TimeSpan(0, 0, 0, 0, 10),
+                Interval = new TimeSpan(0, 0, 0, 0, 100),
             };
 
             this.RefreshWindowTimer.Tick += this.RefreshWindowTimerOnTick;
