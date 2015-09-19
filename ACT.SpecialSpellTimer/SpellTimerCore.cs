@@ -220,8 +220,6 @@
 
                     if ((DateTime.Now - this.LastFFXIVProcessDateTime).TotalSeconds >= 5.0d)
                     {
-                        this.LastFFXIVProcessDateTime = DateTime.Now;
-
                         // FF14が起動していない？
                         if (FF14PluginHelper.GetFFXIVProcess == null)
                         {
@@ -230,10 +228,11 @@
                                 this.ClosePanels();
                                 OnePointTelopController.CloseTelops();
 
-                                Thread.Sleep(1000);
                                 return;
                             }
                         }
+
+                        this.LastFFXIVProcessDateTime = DateTime.Now;
                     }
 
                     // オーバーレイが非表示？
