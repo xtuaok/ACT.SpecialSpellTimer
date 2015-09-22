@@ -238,6 +238,17 @@
         }
 
         /// <summary>
+        /// スペルの再描画フラグをクリアする
+        /// </summary>
+        public static void ClearUpdateFlags()
+        {
+            foreach (var item in Table)
+            {
+                item.UpdateDone = false;
+            }
+        }
+
+        /// <summary>
         /// デフォルトのファイル
         /// </summary>
         public static string DefaultFile

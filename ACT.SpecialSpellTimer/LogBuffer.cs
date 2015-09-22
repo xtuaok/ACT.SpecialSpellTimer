@@ -401,6 +401,9 @@
             // 置換後のマッチングキーワードを消去する
             SpellTimerTable.ClearReplacedKeywords();
             OnePointTelopTable.Default.ClearReplacedKeywords();
+
+            // スペルタイマーの再描画を行う
+            SpellTimerTable.ClearUpdateFlags();
         }
 
         /// <summary>
