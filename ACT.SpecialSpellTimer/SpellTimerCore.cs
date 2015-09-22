@@ -389,6 +389,7 @@
 
                             spell.SpellTitleReplaced = spell.SpellTitle;
                             spell.MatchDateTime = DateTime.Now;
+                            spell.UpdateDone = false;
                             spell.OverDone = false;
                             spell.BeforeDone = false;
                             spell.TimeupDone = false;
@@ -414,6 +415,7 @@
                             spell.SpellTitleReplaced = match.Result(spell.SpellTitle);
 
                             spell.MatchDateTime = DateTime.Now;
+                            spell.UpdateDone = false;
                             spell.OverDone = false;
                             spell.BeforeDone = false;
                             spell.TimeupDone = false;
@@ -471,6 +473,7 @@
                             // リキャストタイムを延長する
                             var newSchedule = spell.CompleteScheduledTime.AddSeconds(timeToExtend);
                             spell.BeforeDone = false;
+                            spell.UpdateDone = false;
 
                             if (spell.ExtendBeyondOriginalRecastTime)
                             {
@@ -518,6 +521,7 @@
                     if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
                     {
                         spell.MatchDateTime = DateTime.Now;
+                        spell.UpdateDone = false;
                         spell.OverDone = false;
                         spell.TimeupDone = false;
                     }
