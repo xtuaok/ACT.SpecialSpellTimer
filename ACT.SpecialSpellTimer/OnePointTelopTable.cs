@@ -225,6 +225,9 @@
                 item.KeywordReplaced = string.Empty;
                 item.KeywordToHideReplaced = string.Empty;
             }
+
+            // 有効SpellTimerのキャッシュを無効にする
+            enabledTableTimeStamp = DateTime.MinValue;
         }
 
         /// <summary>

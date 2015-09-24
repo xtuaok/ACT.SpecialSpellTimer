@@ -235,10 +235,13 @@
                 item.KeywordForExtendReplaced1 = string.Empty;
                 item.KeywordForExtendReplaced2 = string.Empty;
             }
+
+            // 有効SpellTimerのキャッシュを無効にする
+            enabledTableTimeStamp = DateTime.MinValue;
         }
 
         /// <summary>
-        /// スペルの再描画フラグをクリアする
+        /// スペルの描画済みフラグをクリアする
         /// </summary>
         public static void ClearUpdateFlags()
         {

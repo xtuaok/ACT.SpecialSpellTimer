@@ -36,6 +36,11 @@
         private static List<KeyValuePair<string, string>> replacementsByJobs;
 
         /// <summary>
+        /// カスタム代名詞による置換文字列のセット
+        /// </summary>
+        private static Dictionary<string, string> customPlaceholders = new Dictionary<string, string>();
+
+        /// <summary>
         /// ペットのID
         /// </summary>
         private static string petid;
@@ -266,6 +271,13 @@
                 }
             }
 
+            // カスタムプレースホルダを置換する
+            // ex. <C1>, <C2> <focus> <ターゲット>...
+            foreach (var p in customPlaceholders)
+            {
+                keyword = keyword.Replace("<" + p.Key + ">", p.Value);
+            }
+
             return keyword;
         }
 
@@ -439,6 +451,45 @@
                     OnePointTelopTable.Default.ClearReplacedKeywords();
                 }
             }
+        }
+
+        /// <summary>
+        /// カスタムプレースホルダーに追加する
+        /// <param name="name">追加するプレースホルダーの名称</param>
+        /// <param name="value">置換する文字列</param>
+        /// </summary>
+        public static void SetCustomPlaceholder(string name, string value)
+        {
+            customPlaceholders[name] = value;
+
+            // 置換後のマッチングキーワードを消去する
+            SpellTimerTable.ClearReplacedKeywords();
+            OnePointTelopTable.Default.ClearReplacedKeywords();
+        }
+
+        /// <summary>
+        /// カスタムプレースホルダーを削除する
+        /// <param name="name">削除するプレースホルダーの名称</param>
+        /// </summary>
+        public static void ClearCustomPlaceholder(string name)
+        {
+            customPlaceholders.Remove(name);
+
+            // 置換後のマッチングキーワードを消去する
+            SpellTimerTable.ClearReplacedKeywords();
+            OnePointTelopTable.Default.ClearReplacedKeywords();
+        }
+
+        /// <summary>
+        /// カスタムプレースホルダーを全て削除する
+        /// </summary>
+        public static void ClearCustomPlaceholderAll()
+        {
+            customPlaceholders.Clear();
+
+            // 置換後のマッチングキーワードを消去する
+            SpellTimerTable.ClearReplacedKeywords();
+            OnePointTelopTable.Default.ClearReplacedKeywords();
         }
     }
 }

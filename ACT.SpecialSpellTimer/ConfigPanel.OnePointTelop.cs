@@ -61,6 +61,9 @@
                     source.Enabled = e1.Node.Checked;
                 }
 
+                // キャッシュを無効にする
+                OnePointTelopTable.Default.ClearReplacedKeywords();
+
                 // テロップの有効・無効が変化した際に、標準のスペルタイマーに反映する
                 SpellTimerCore.Default.applyToNormalSpellTimer();
             };

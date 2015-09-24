@@ -14,7 +14,7 @@
         /// コマンド解析用の正規表現
         /// </summary>
         private static Regex regexCommand = new Regex(
-            @".*/spespe (?<command>refresh|changeenabled|analyze) (?<target>spells|telops|me|pt|pet|on|off)( (?<windowname>"".*""|all) (?<value>.*))*",
+            @".*/spespe (?<command>refresh|changeenabled|analyze|set|clear) (?<target>spells|telops|me|pt|pet|on|off|placeholder) ?(?<windowname>"".*""|all) ?(?<value>.*)",
             RegexOptions.Compiled |
             RegexOptions.IgnoreCase);
 
@@ -43,8 +43,8 @@
 
                 var command = match.Groups["command"].ToString().ToLower();
                 var target = match.Groups["target"].ToString().ToLower();
-                var windowname = match.Groups["windowname"].ToString().ToLower().Replace(@"""", string.Empty);
-                var valueAsText = match.Groups["value"].ToString().ToLower();
+                var windowname = match.Groups["windowname"].ToString().Replace(@"""", string.Empty);
+                var valueAsText = match.Groups["value"].ToString();
                 var value = false;
                 if (!bool.TryParse(valueAsText, out value))
                 {
@@ -149,6 +149,43 @@
                                     commandDone = true;
                                 }
 
+                                break;
+                        }
+
+                        break;
+
+                    case "set":
+                        switch (target)
+                        {
+                            case "placeholder":
+                                if (windowname.Trim().ToLower() != "all" &&
+                                    windowname.Trim() != string.Empty &&
+                                    valueAsText.Trim() != string.Empty)
+                                {
+                                    LogBuffer.SetCustomPlaceholder(windowname.Trim(), valueAsText.Trim());
+
+                                    commandDone = true;
+                                }
+                                break;
+                        }
+
+                        break;
+
+                    case "clear":
+                        switch (target)
+                        {
+                            case "placeholder":
+                                if (windowname.Trim().ToLower() == "all")
+                                {
+                                    LogBuffer.ClearCustomPlaceholderAll();
+
+                                    commandDone = true;
+                                } else if (windowname.Trim() != string.Empty)
+                                {
+                                    LogBuffer.ClearCustomPlaceholder(windowname.Trim());
+
+                                    commandDone = true;
+                                }
                                 break;
                         }
 

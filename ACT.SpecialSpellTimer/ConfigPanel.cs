@@ -151,6 +151,9 @@
                     }
                 }
 
+                // キャッシュを無効にする
+                SpellTimerTable.ClearReplacedKeywords();
+
                 // スペルの有効・無効が変化した際に、標準のスペルタイマーに反映する
                 SpellTimerCore.Default.applyToNormalSpellTimer();
             };
@@ -639,13 +642,10 @@
                     n.Checked = children.Any(x => x.Checked);
 
                     this.SpellTimerTreeView.Nodes.Add(n);
-
-                    // バー表示の初期化が必要なことを記録
-                    foreach (var spell in spells)
-                    {
-                        spell.UpdateDone = false;
-                    }
                 }
+
+                // スペルの再描画を行わせる
+                SpellTimerTable.ClearUpdateFlags();
 
                 // 標準のスペルタイマーへ変更を反映する
                 SpellTimerCore.Default.applyToNormalSpellTimer();
