@@ -639,6 +639,12 @@
                         w.ToTransparentWindow();
                     }
 
+                    /// このパネルに属するスペルを再描画させる
+                    foreach (var spell in panel)
+                    {
+                        spell.UpdateDone = false;
+                    }
+                    
                     w.Show();
                 }
 

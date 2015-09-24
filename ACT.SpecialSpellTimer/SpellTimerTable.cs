@@ -241,7 +241,7 @@
         }
 
         /// <summary>
-        /// スペルの再描画フラグをクリアする
+        /// スペルの描画済みフラグをクリアする
         /// </summary>
         public static void ClearUpdateFlags()
         {
