@@ -169,6 +169,9 @@
                         if (f.ShowDialog(this) == DialogResult.OK)
                         {
                             src.JobFilter = f.JobFilter;
+
+                            // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
+                            this.SelectJobButton.ForeColor = src.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
                         }
                     }
                 }
@@ -185,6 +188,9 @@
                         if (f.ShowDialog(this) == DialogResult.OK)
                         {
                             src.ZoneFilter = f.ZoneFilter;
+
+                            // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
+                            this.SelectZoneButton.ForeColor = src.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
                         }
                     }
                 }
@@ -345,6 +351,12 @@
                     this.SpellTimerTreeView.Nodes.Add(parentNode);
                     this.SpellTimerTreeView.SelectedNode = node;
                 }
+
+                // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
+                this.SelectZoneButton.ForeColor = nr.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+                // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
+                this.SelectJobButton.ForeColor = nr.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
             }
 
             // 標準のスペルタイマーへ変更を反映する
@@ -739,6 +751,12 @@
 
             // データソースをタグに突っ込んでおく
             this.DetailGroupBox.Tag = src;
+
+            // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
+            this.SelectZoneButton.ForeColor = src.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+            // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
+            this.SelectJobButton.ForeColor = src.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
         }
 
         /// <summary>
