@@ -85,6 +85,9 @@
                         if (f.ShowDialog(this) == DialogResult.OK)
                         {
                             src.JobFilter = f.JobFilter;
+
+                            // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
+                            this.TelopSelectJobButton.ForeColor = src.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
                         }
                     }
                 }
@@ -101,6 +104,9 @@
                         if (f.ShowDialog(this) == DialogResult.OK)
                         {
                             src.ZoneFilter = f.ZoneFilter;
+
+                            // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
+                            this.TelopSelectZoneButton.ForeColor = src.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
                         }
                     }
                 }
@@ -253,6 +259,12 @@
 
             this.TelopTreeView.Nodes.Add(node);
             this.TelopTreeView.SelectedNode = node;
+
+            // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
+            this.TelopSelectJobButton.ForeColor = nr.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+            // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
+            this.TelopSelectZoneButton.ForeColor = nr.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
 
             // 標準のスペルタイマーへ変更を反映する
             SpellTimerCore.Default.applyToNormalSpellTimer();
@@ -475,6 +487,12 @@
 
             // データソースをタグに突っ込んでおく
             this.TelopDetailGroupBox.Tag = src;
+
+            // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
+            this.TelopSelectJobButton.ForeColor = src.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+            // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
+            this.TelopSelectZoneButton.ForeColor = src.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
         }
     }
 }

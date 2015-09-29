@@ -162,9 +162,7 @@
     <Compile Include="Utility\ColorUtility.cs" />
     <Compile Include="Utility\FontUtility.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="resources\icon\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="resources\color\サンプル灰色系.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -185,6 +183,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\color\回復風緑系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icon\_blank.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\wav\alarm.wav" />
