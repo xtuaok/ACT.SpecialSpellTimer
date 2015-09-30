@@ -754,6 +754,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   稼働中 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string IsRunning {
+            get {
+                return ResourceManager.GetString("IsRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   停止中 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string IsStopping {
+            get {
+                return ResourceManager.GetString("IsStopping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   言語 (Language) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LanguageLabel {
@@ -1452,6 +1470,24 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string SelectZoneTitle {
             get {
                 return ResourceManager.GetString("SelectZoneTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   開始条件を設定する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SetConditionForStartButton {
+            get {
+                return ResourceManager.GetString("SetConditionForStartButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   条件を設定して下さい に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SetConditionTitle {
+            get {
+                return ResourceManager.GetString("SetConditionTitle", resourceCulture);
             }
         }
         

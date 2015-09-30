@@ -105,6 +105,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings-JP.resx</DependentUpon>
     </Compile>
+    <Compile Include="SetConditionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetConditionForm.Designer.cs">
+      <DependentUpon>SetConditionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelectZoneForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,7 @@
     <Compile Include="Utility\CaptionButtonPanel.xaml.cs">
       <DependentUpon>CaptionButtonPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ConditionUtility.cs" />
     <Compile Include="Utility\FontDialogWindow.xaml.cs">
       <DependentUpon>FontDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -282,6 +289,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings-JP.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetConditionForm.resx">
+      <DependentUpon>SetConditionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectZoneForm.resx">
       <DependentUpon>SelectZoneForm.cs</DependentUpon>

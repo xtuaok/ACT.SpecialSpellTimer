@@ -44,6 +44,7 @@
             this.UpdatePanelButton = new System.Windows.Forms.Button();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.SetConditionButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ReduceIconBrightnessCheckBox = new System.Windows.Forms.CheckBox();
@@ -126,6 +127,7 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.TelopSetConditionButton = new System.Windows.Forms.Button();
             this.TelopSelectZoneButton = new System.Windows.Forms.Button();
             this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
@@ -199,6 +201,10 @@
             this.CombatAnalyzingLabel = new System.Windows.Forms.Label();
             this.AnalyzeCombatButton = new System.Windows.Forms.Button();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
+            this.OverTextBox = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.ReadyTextBox = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.EnabledNotifyNormalSpellTimerCheckBox = new System.Windows.Forms.CheckBox();
             this.label63 = new System.Windows.Forms.Label();
@@ -239,10 +245,6 @@
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
-            this.label65 = new System.Windows.Forms.Label();
-            this.ReadyTextBox = new System.Windows.Forms.TextBox();
-            this.label66 = new System.Windows.Forms.Label();
-            this.OverTextBox = new System.Windows.Forms.TextBox();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
@@ -471,6 +473,7 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.SetConditionButton);
             this.DetailGroupBox.Controls.Add(this.tabControl1);
             this.DetailGroupBox.Controls.Add(this.SelectZoneButton);
             this.DetailGroupBox.Controls.Add(this.SelectJobButton);
@@ -481,6 +484,16 @@
             this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
+            // 
+            // SetConditionButton
+            // 
+            this.SetConditionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SetConditionButton.Location = new System.Drawing.Point(306, 631);
+            this.SetConditionButton.Name = "SetConditionButton";
+            this.SetConditionButton.Size = new System.Drawing.Size(144, 25);
+            this.SetConditionButton.TabIndex = 36;
+            this.SetConditionButton.Text = "SetConditionForStartButton";
+            this.SetConditionButton.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -1396,6 +1409,7 @@
             this.TelopDetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopDetailGroupBox.Controls.Add(this.TelopSetConditionButton);
             this.TelopDetailGroupBox.Controls.Add(this.TelopSelectZoneButton);
             this.TelopDetailGroupBox.Controls.Add(this.TelopVisualSetting);
             this.TelopDetailGroupBox.Controls.Add(this.TelopSelectJobButton);
@@ -1430,6 +1444,16 @@
             this.TelopDetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
+            // 
+            // TelopSetConditionButton
+            // 
+            this.TelopSetConditionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopSetConditionButton.Location = new System.Drawing.Point(306, 631);
+            this.TelopSetConditionButton.Name = "TelopSetConditionButton";
+            this.TelopSetConditionButton.Size = new System.Drawing.Size(144, 25);
+            this.TelopSetConditionButton.TabIndex = 47;
+            this.TelopSetConditionButton.Text = "SetConditionForStartButton";
+            this.TelopSetConditionButton.UseVisualStyleBackColor = true;
             // 
             // TelopSelectZoneButton
             // 
@@ -2040,26 +2064,26 @@
             this.toolStripSeparator2,
             this.CASetOriginItem});
             this.CombatAnalyzerContextMenuStrip.Name = "CombatAnalyzerContextMenuStrip";
-            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(224, 104);
+            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(242, 104);
             // 
             // CASelectAllItem
             // 
             this.CASelectAllItem.Name = "CASelectAllItem";
             this.CASelectAllItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.CASelectAllItem.Size = new System.Drawing.Size(223, 22);
+            this.CASelectAllItem.Size = new System.Drawing.Size(241, 22);
             this.CASelectAllItem.Text = "SelectAll";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(238, 6);
             // 
             // CACopyLogItem
             // 
             this.CACopyLogItem.Name = "CACopyLogItem";
             this.CACopyLogItem.ShortcutKeyDisplayString = "";
             this.CACopyLogItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.CACopyLogItem.Size = new System.Drawing.Size(223, 22);
+            this.CACopyLogItem.Size = new System.Drawing.Size(241, 22);
             this.CACopyLogItem.Text = "CopyLog";
             // 
             // CACopyLogDetailItem
@@ -2067,19 +2091,19 @@
             this.CACopyLogDetailItem.Name = "CACopyLogDetailItem";
             this.CACopyLogDetailItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.CACopyLogDetailItem.Size = new System.Drawing.Size(223, 22);
+            this.CACopyLogDetailItem.Size = new System.Drawing.Size(241, 22);
             this.CACopyLogDetailItem.Text = "CopyLogDetail";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(238, 6);
             // 
             // CASetOriginItem
             // 
             this.CASetOriginItem.Name = "CASetOriginItem";
             this.CASetOriginItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.CASetOriginItem.Size = new System.Drawing.Size(223, 22);
+            this.CASetOriginItem.Size = new System.Drawing.Size(241, 22);
             this.CASetOriginItem.Text = "SetLogOrigin";
             // 
             // label6
@@ -2201,6 +2225,38 @@
             this.OptionTabPage.Size = new System.Drawing.Size(1186, 668);
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "OptionTabPageTitle";
+            // 
+            // OverTextBox
+            // 
+            this.OverTextBox.Location = new System.Drawing.Point(293, 404);
+            this.OverTextBox.Name = "OverTextBox";
+            this.OverTextBox.Size = new System.Drawing.Size(100, 19);
+            this.OverTextBox.TabIndex = 51;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(6, 407);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(79, 12);
+            this.label66.TabIndex = 50;
+            this.label66.Text = "OverTextLabel";
+            // 
+            // ReadyTextBox
+            // 
+            this.ReadyTextBox.Location = new System.Drawing.Point(293, 379);
+            this.ReadyTextBox.Name = "ReadyTextBox";
+            this.ReadyTextBox.Size = new System.Drawing.Size(100, 19);
+            this.ReadyTextBox.TabIndex = 49;
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(6, 382);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(87, 12);
+            this.label65.TabIndex = 48;
+            this.label65.Text = "ReadyTextLabel";
             // 
             // label64
             // 
@@ -2592,38 +2648,6 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(6, 382);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(87, 12);
-            this.label65.TabIndex = 48;
-            this.label65.Text = "ReadyTextLabel";
-            // 
-            // ReadyTextBox
-            // 
-            this.ReadyTextBox.Location = new System.Drawing.Point(293, 379);
-            this.ReadyTextBox.Name = "ReadyTextBox";
-            this.ReadyTextBox.Size = new System.Drawing.Size(100, 19);
-            this.ReadyTextBox.TabIndex = 49;
-            // 
-            // label66
-            // 
-            this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(6, 407);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(79, 12);
-            this.label66.TabIndex = 50;
-            this.label66.Text = "OverTextLabel";
-            // 
-            // OverTextBox
-            // 
-            this.OverTextBox.Location = new System.Drawing.Point(293, 404);
-            this.OverTextBox.Name = "OverTextBox";
-            this.OverTextBox.Size = new System.Drawing.Size(100, 19);
-            this.OverTextBox.TabIndex = 51;
-            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2899,5 +2923,7 @@
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.TextBox OverTextBox;
         private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Button SetConditionButton;
+        private System.Windows.Forms.Button TelopSetConditionButton;
     }
 }

@@ -484,6 +484,8 @@
             this.RegexPatternToHide = string.Empty;
             this.JobFilter = string.Empty;
             this.ZoneFilter = string.Empty;
+            this.TimersMustRunningForStart = new Guid[0];
+            this.TimersMustStoppingForStart = new Guid[0];
             this.Font = new FontInfo();
             this.KeywordReplaced = string.Empty;
             this.KeywordToHideReplaced = string.Empty;
@@ -516,6 +518,8 @@
         public double Top { get; set; }
         public string JobFilter { get; set; }
         public string ZoneFilter { get; set; }
+        public Guid[] TimersMustRunningForStart { get; set; }
+        public Guid[] TimersMustStoppingForStart { get; set; }
         public bool Enabled { get; set; }
 
         [XmlIgnore]

@@ -362,75 +362,79 @@
             SpellTimer[] spells,
             string[] logLines)
         {
-            foreach (var spell in spells)
+            foreach (var logLine in logLines)
             {
-                var regex = spell.Regex;
-                var notifyNeeded = false;
-
                 // マッチする？
-                foreach (var logLine in logLines)
+                foreach (var spell in spells)
                 {
-                    // 正規表現が無効？
-                    if (!spell.RegexEnabled ||
-                        regex == null)
+                    var regex = spell.Regex;
+                    var notifyNeeded = false;
+
+                    // 開始条件を確認する
+                    if (ConditionUtility.CheckConditionsForSpell(spell))
                     {
-                        var keyword = spell.KeywordReplaced;
-                        if (string.IsNullOrWhiteSpace(keyword))
+                        // 正規表現が無効？
+                        if (!spell.RegexEnabled ||
+                            regex == null)
                         {
-                            continue;
-                        }
-
-                        // キーワードが含まれるか？
-                        if (logLine.ToUpper().Contains(
-                            keyword.ToUpper()))
-                        {
-                            // ヒットしたログを格納する
-                            spell.MatchedLog = logLine;
-
-                            spell.SpellTitleReplaced = spell.SpellTitle;
-                            spell.MatchDateTime = DateTime.Now;
-                            spell.UpdateDone = false;
-                            spell.OverDone = false;
-                            spell.BeforeDone = false;
-                            spell.TimeupDone = false;
-                            spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
-
-                            // マッチ時点のサウンドを再生する
-                            this.Play(spell.MatchSound);
-                            this.Play(spell.MatchTextToSpeak);
-
-                            notifyNeeded = true;
-                        }
-                    }
-                    else
-                    {
-                        // 正規表現でマッチングする
-                        var match = regex.Match(logLine);
-                        if (match.Success)
-                        {
-                            // ヒットしたログを格納する
-                            spell.MatchedLog = logLine;
-
-                            // 置換したスペル名を格納する
-                            spell.SpellTitleReplaced = match.Result(spell.SpellTitle);
-
-                            spell.MatchDateTime = DateTime.Now;
-                            spell.UpdateDone = false;
-                            spell.OverDone = false;
-                            spell.BeforeDone = false;
-                            spell.TimeupDone = false;
-                            spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
-
-                            // マッチ時点のサウンドを再生する
-                            this.Play(spell.MatchSound);
-
-                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                            var keyword = spell.KeywordReplaced;
+                            if (string.IsNullOrWhiteSpace(keyword))
                             {
-                                var tts = match.Result(spell.MatchTextToSpeak);
-                                this.Play(tts);
+                                continue;
                             }
 
-                            notifyNeeded = true;
+                            // キーワードが含まれるか？
+                            if (logLine.ToUpper().Contains(
+                                keyword.ToUpper()))
+                            {
+                                // ヒットしたログを格納する
+                                spell.MatchedLog = logLine;
+
+                                spell.SpellTitleReplaced = ConditionUtility.GetReplacedTitle(spell);
+                                spell.MatchDateTime = DateTime.Now;
+                                spell.UpdateDone = false;
+                                spell.OverDone = false;
+                                spell.BeforeDone = false;
+                                spell.TimeupDone = false;
+                                spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
+
+                                // マッチ時点のサウンドを再生する
+                                this.Play(spell.MatchSound);
+                                this.Play(spell.MatchTextToSpeak);
+
+                                notifyNeeded = true;
+                            }
+                        }
+                        else
+                        {
+                            // 正規表現でマッチングする
+                            var match = regex.Match(logLine);
+                            if (match.Success)
+                            {
+                                // ヒットしたログを格納する
+                                spell.MatchedLog = logLine;
+
+                                // 置換したスペル名を格納する
+                                spell.SpellTitleReplaced = match.Result(ConditionUtility.GetReplacedTitle(spell));
+
+                                spell.MatchDateTime = DateTime.Now;
+                                spell.UpdateDone = false;
+                                spell.OverDone = false;
+                                spell.BeforeDone = false;
+                                spell.TimeupDone = false;
+                                spell.CompleteScheduledTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
+
+                                // マッチ時点のサウンドを再生する
+                                this.Play(spell.MatchSound);
+
+                                if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                                {
+                                    var tts = match.Result(spell.MatchTextToSpeak);
+                                    this.Play(tts);
+                                }
+
+                                notifyNeeded = true;
+                            }
                         }
                     }
 
@@ -504,15 +508,21 @@
                         }
                     }
                     // end if 延長マッチング
-                }
-                // end foreach マッチング
 
-                // ACT標準のSpellTimerに変更を通知する
-                if (notifyNeeded)
-                {
-                    updateNormalSpellTimer(spell, false);
-                    notifyNormalSpellTimer(spell);
+                    // ACT標準のSpellTimerに変更を通知する
+                    if (notifyNeeded)
+                    {
+                        updateNormalSpellTimer(spell, false);
+                        notifyNormalSpellTimer(spell);
+                    }
                 }
+                // end loop spells
+            }
+
+            // スペルの更新とサウンド処理を行う
+            foreach (var spell in spells)
+            {
+                var regex = spell.Regex;
 
                 // Repeat対象のSpellを更新する
                 if (spell.RepeatEnabled &&

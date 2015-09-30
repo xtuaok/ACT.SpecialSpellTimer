@@ -913,4 +913,20 @@
     <value>スペルタイマが完了した時のテキスト(Ready)</value>
     <comment>Text to display when the timer is complete (Ready)</comment>
   </data>
+  <data name="IsRunning" xml:space="preserve">
+    <value>稼働中</value>
+    <comment>Is Running</comment>
+  </data>
+  <data name="IsStopping" xml:space="preserve">
+    <value>停止中</value>
+    <comment>Is Stopping</comment>
+  </data>
+  <data name="SetConditionForStartButton" xml:space="preserve">
+    <value>開始条件を設定する</value>
+    <comment>Conditions for Start...</comment>
+  </data>
+  <data name="SetConditionTitle" xml:space="preserve">
+    <value>条件を設定して下さい</value>
+    <comment>Please select conditions</comment>
+  </data>
 </root>
