@@ -70,13 +70,13 @@ FF14が内部のオブジェクトに割当てている一意なIDに置換さ�
 パーティ内の特定のジョブの誰か、または特定のジョブのｎ番目のメンバーにマッチします。<br />
 ただし、&lt;JOB&gt;は正規表現をONにしないと使えません。<br />
 <br />
-ex. パーティメンバーの下記のとき・・・
-Taro Paradin (ナイト)
-Jiro Paradin (ナイト)
+ex. パーティメンバーの下記のとき・・・<br />
+Taro Paradin (ナイト)<br />
+Jiro Paradin (ナイト)<br />
 <br />
-&lt;JOB1&gt; → Taro Paradin にマッチする
-&lt;JOB2&gt; → Jiro Paradin にマッチする
-&lt;JOB&gt; → Taro Paradin または Jiro Paradin にマッチする
+&lt;JOB1&gt; → Taro Paradin にマッチする<br />
+&lt;JOB2&gt; → Jiro Paradin にマッチする<br />
+&lt;JOB&gt; → Taro Paradin または Jiro Paradin にマッチする<br />
 <br />
 </td>
 </tr>
