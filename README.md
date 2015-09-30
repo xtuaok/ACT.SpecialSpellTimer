@@ -63,6 +63,23 @@ FF14が内部のオブジェクトに割当てている一意なIDに置換さ�
 このIDによってACTが生成している詳細なログにマッチさせると自分のペットだけを識別出来ます
 </td>
 </tr>
+
+<tr>
+<td>&lt;JOB&gt;, &lt;JOBn&gt;</td>
+<td>
+</td>
+パーティ内の特定のジョブの誰か、または特定のジョブのｎ番目のメンバーにマッチします。<br />
+ただし、&lt;JOB&gt;は正規表現をONにしないと使えません。<br />
+<br />
+ex. パーティメンバーの下記のとき・・・
+Taro Paradin (ナイト)
+Jiro Paradin (ナイト)
+<br />
+&lt;JOB1&gt; → Taro Paradin にマッチする
+&lt;JOB2&gt; → Jiro Paradin にマッチする
+&lt;JOB&gt; → Taro Paradin または Jiro Paradin にマッチする
+<br />
+</tr>
 </table>
   
 5) 俺の歌を聞かせたい    
