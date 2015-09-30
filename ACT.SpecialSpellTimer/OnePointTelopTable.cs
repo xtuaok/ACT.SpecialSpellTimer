@@ -231,6 +231,15 @@
         }
 
         /// <summary>
+        /// 指定されたGuidを持つOnePointTelopを取得する
+        /// </summary>
+        /// <param name="guid">Guid</param>
+        public OnePointTelop GetOnePointTelopByGuid(Guid guid)
+        {
+            return table.Where(x => x.guid == guid).FirstOrDefault();
+        }
+
+        /// <summary>
         /// デフォルトのファイル
         /// </summary>
         public string DefaultFile
@@ -257,6 +266,10 @@
             {
                 id++;
                 row.ID = id;
+                if (row.guid == Guid.Empty)
+                {
+                    row.guid = Guid.NewGuid();
+                }
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
@@ -452,6 +465,7 @@
     {
         public OnePointTelop()
         {
+            this.guid = Guid.Empty;
             this.Title = string.Empty;
             this.Keyword = string.Empty;
             this.KeywordToHide = string.Empty;
@@ -476,6 +490,7 @@
         }
 
         public long ID { get; set; }
+        public Guid guid { get; set; }
         public string Title { get; set; }
         public string Keyword { get; set; }
         public string KeywordToHide { get; set; }

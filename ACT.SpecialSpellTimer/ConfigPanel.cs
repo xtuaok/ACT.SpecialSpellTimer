@@ -244,6 +244,7 @@
                 nr.ID = SpellTimerTable.Table.Any() ?
                     SpellTimerTable.Table.Max(x => x.ID) + 1 :
                     1;
+                nr.guid = Guid.NewGuid();
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
                 nr.SpellIcon = string.Empty;
