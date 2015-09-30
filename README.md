@@ -74,9 +74,9 @@ ex. パーティメンバーの下記のとき・・・<br />
 Taro Paradin (ナイト)<br />
 Jiro Paradin (ナイト)<br />
 <br />
-&lt;JOB1&gt; → Taro Paradin にマッチする<br />
-&lt;JOB2&gt; → Jiro Paradin にマッチする<br />
-&lt;JOB&gt; → Taro Paradin または Jiro Paradin にマッチする<br />
+&lt;PLD1&gt; → Taro Paradin にマッチする<br />
+&lt;PLD2&gt; → Jiro Paradin にマッチする<br />
+&lt;PLD&gt; → Taro Paradin または Jiro Paradin にマッチする<br />
 <br />
 </td>
 </tr>
