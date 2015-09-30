@@ -67,7 +67,6 @@ FF14が内部のオブジェクトに割当てている一意なIDに置換さ�
 <tr>
 <td>&lt;JOB&gt;, &lt;JOBn&gt;</td>
 <td>
-</td>
 パーティ内の特定のジョブの誰か、または特定のジョブのｎ番目のメンバーにマッチします。<br />
 ただし、&lt;JOB&gt;は正規表現をONにしないと使えません。<br />
 <br />
@@ -79,6 +78,7 @@ Jiro Paradin (ナイト)
 &lt;JOB2&gt; → Jiro Paradin にマッチする
 &lt;JOB&gt; → Taro Paradin または Jiro Paradin にマッチする
 <br />
+</td>
 </tr>
 </table>
   
