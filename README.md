@@ -78,7 +78,7 @@ Jiro Paradin (ナイト)<br />
 &lt;PLD2&gt; → Jiro Paradin にマッチする<br />
 &lt;PLD&gt; → Taro Paradin または Jiro Paradin にマッチする<br />
 <br />
-&lt;PLD&gt; は正規表現の (?&lt;PLDs&gt;Taro Paladin|Jiro Paladin) に置換わってマッチングされます。
+&lt;PLD&gt; は正規表現の (?&lt;PLDs&gt;Taro Paladin|Jiro Paladin) に置換わってマッチングされます。<br />
 <br />
 ※ただし、パーティメンバ代名詞を有効にしていないと動作しません。<br />
 </td>
