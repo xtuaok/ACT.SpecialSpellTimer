@@ -127,10 +127,20 @@
 
             var logLine = logInfo.logLine.Trim();
 
+            // ログインした？
+            if (logLine.Contains("Welcome to"))
+            {
+                Task.Run(() =>
+                {
+                    Thread.Sleep(5 * 1000);
+                    FF14PluginHelper.RefreshPlayer();
+                    RefreshPTList();
+                });
+            }
+
             // ジョブに変化あり？
             if (logLine.Contains("にチェンジした。") ||
-                logLine.Contains("You change to ") ||
-                logLine.Contains("Welcome to"))
+                logLine.Contains("You change to "))
             {
                 FF14PluginHelper.RefreshPlayer();
                 RefreshPTList();
