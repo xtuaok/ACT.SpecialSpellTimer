@@ -56,6 +56,11 @@
         private List<string> buffer = new List<string>();
 
         /// <summary>
+        /// 最後のログのタイムスタンプ
+        /// </summary>
+        private DateTime lastLogineTimestamp;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public LogBuffer()
@@ -127,15 +132,11 @@
 
             var logLine = logInfo.logLine.Trim();
 
-            // ログインした？
-            if (logLine.Contains("Welcome to"))
+            // 最後のログから1min間が空いた？
+            if ((DateTime.Now - this.lastLogineTimestamp).TotalMinutes >= 1.0d)
             {
-                Task.Run(() =>
-                {
-                    Thread.Sleep(5 * 1000);
-                    FF14PluginHelper.RefreshPlayer();
-                    RefreshPTList();
-                });
+                FF14PluginHelper.RefreshPlayer();
+                RefreshPTList();
             }
 
             // ジョブに変化あり？
@@ -223,6 +224,9 @@
             lock (this.buffer)
             {
                 this.buffer.Add(logLine);
+
+                // ログのタイムスタンプを記録する
+                this.lastLogineTimestamp = DateTime.Now;
             }
         }
 
