@@ -193,32 +193,68 @@
             OnePointTelop[] telops,
             string[] logLines)
         {
-            foreach (var telop in telops)
+            foreach (var log in logLines)
             {
-                var regex = telop.Regex;
-                var regexToHide = telop.RegexToHide;
-                var notifyNeeded = false;
-
-                foreach (var log in logLines)
+                foreach (var telop in telops)
                 {
-                    // 通常マッチ
-                    if (regex == null)
+                    var matched = false;
+
+                    var regex = telop.Regex;
+                    var regexToHide = telop.RegexToHide;
+
+                    // 開始条件を確認する
+                    if (ConditionUtility.CheckConditionsForTelop(telop))
                     {
-                        var keyword = telop.KeywordReplaced;
-                        if (!string.IsNullOrWhiteSpace(keyword))
+                        // 通常マッチ
+                        if (regex == null)
                         {
-                            if (log.ToUpper().Contains(
-                                keyword.ToUpper()))
+                            var keyword = telop.KeywordReplaced;
+                            if (!string.IsNullOrWhiteSpace(keyword))
                             {
+                                if (log.ToUpper().Contains(
+                                    keyword.ToUpper()))
+                                {
+                                    var messageReplaced = ConditionUtility.GetReplacedMessage(telop);
+                                    if (!telop.AddMessageEnabled)
+                                    {
+                                        telop.MessageReplaced = messageReplaced;
+                                    }
+                                    else
+                                    {
+                                        telop.MessageReplaced += string.IsNullOrWhiteSpace(telop.MessageReplaced) ?
+                                            messageReplaced :
+                                            Environment.NewLine + messageReplaced;
+                                    }
+
+                                    telop.MatchDateTime = DateTime.Now;
+                                    telop.Delayed = false;
+                                    telop.MatchedLog = log;
+                                    telop.ForceHide = false;
+
+                                    SoundController.Default.Play(telop.MatchSound);
+                                    SoundController.Default.Play(telop.MatchTextToSpeak);
+
+                                    matched = true;
+                                }
+                            }
+                        }
+
+                        // 正規表現マッチ
+                        if (regex != null)
+                        {
+                            var match = regex.Match(log);
+                            if (match.Success)
+                            {
+                                var messageReplaced = ConditionUtility.GetReplacedMessage(telop);
                                 if (!telop.AddMessageEnabled)
                                 {
-                                    telop.MessageReplaced = telop.Message;
+                                    telop.MessageReplaced = match.Result(messageReplaced);
                                 }
                                 else
                                 {
                                     telop.MessageReplaced += string.IsNullOrWhiteSpace(telop.MessageReplaced) ?
-                                        telop.Message :
-                                        Environment.NewLine + telop.Message;
+                                        match.Result(messageReplaced) :
+                                        Environment.NewLine + match.Result(messageReplaced);
                                 }
 
                                 telop.MatchDateTime = DateTime.Now;
@@ -227,46 +263,22 @@
                                 telop.ForceHide = false;
 
                                 SoundController.Default.Play(telop.MatchSound);
-                                SoundController.Default.Play(telop.MatchTextToSpeak);
+                                if (!string.IsNullOrWhiteSpace(telop.MatchTextToSpeak))
+                                {
+                                    var tts = match.Result(telop.MatchTextToSpeak);
+                                    SoundController.Default.Play(tts);
+                                }
 
-                                notifyNeeded = true;
-                                continue;
+                                matched = true;
                             }
                         }
                     }
 
-                    // 正規表現マッチ
-                    if (regex != null)
+                    if (matched)
                     {
-                        var match = regex.Match(log);
-                        if (match.Success)
-                        {
-                            if (!telop.AddMessageEnabled)
-                            {
-                                telop.MessageReplaced = match.Result(telop.Message);
-                            }
-                            else
-                            {
-                                telop.MessageReplaced += string.IsNullOrWhiteSpace(telop.MessageReplaced) ?
-                                    match.Result(telop.Message) :
-                                    Environment.NewLine + match.Result(telop.Message);
-                            }
-
-                            telop.MatchDateTime = DateTime.Now;
-                            telop.Delayed = false;
-                            telop.MatchedLog = log;
-                            telop.ForceHide = false;
-
-                            SoundController.Default.Play(telop.MatchSound);
-                            if (!string.IsNullOrWhiteSpace(telop.MatchTextToSpeak))
-                            {
-                                var tts = match.Result(telop.MatchTextToSpeak);
-                                SoundController.Default.Play(tts);
-                            }
-
-                            notifyNeeded = true;
-                            continue;
-                        }
+                        SpellTimerCore.Default.updateNormalSpellTimerForTelop(telop, telop.ForceHide);
+                        SpellTimerCore.Default.notifyNormalSpellTimerForTelop(telop.Title);
+                        continue;
                     }
 
                     // 通常マッチ(強制非表示)
@@ -279,8 +291,7 @@
                                 keyword.ToUpper()))
                             {
                                 telop.ForceHide = true;
-                                notifyNeeded = true;
-                                continue;
+                                matched = true;
                             }
                         }
                     }
@@ -291,11 +302,22 @@
                         if (regexToHide.IsMatch(log))
                         {
                             telop.ForceHide = true;
-                            notifyNeeded = true;
-                            continue;
+                            matched = true;
                         }
                     }
-                }   // end loop logLines
+
+                    if (matched)
+                    {
+                        SpellTimerCore.Default.updateNormalSpellTimerForTelop(telop, telop.ForceHide);
+                        SpellTimerCore.Default.notifyNormalSpellTimerForTelop(telop.Title);
+                    }
+                }   // end loop telops
+            }
+
+            // スペルの更新とサウンド処理を行う
+            foreach (var telop in telops)
+            {
+                var regex = telop.Regex;
 
                 // ディレイ時間が経過した？
                 if (!telop.Delayed &&
@@ -312,12 +334,6 @@
                             telop.DelayTextToSpeak;
                         SoundController.Default.Play(tts);
                     }
-                }
-
-                if (notifyNeeded)
-                {
-                    SpellTimerCore.Default.updateNormalSpellTimerForTelop(telop, telop.ForceHide);
-                    SpellTimerCore.Default.notifyNormalSpellTimerForTelop(telop.Title);
                 }
             }
 #if false

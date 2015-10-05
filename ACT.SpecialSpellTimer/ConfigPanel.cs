@@ -196,6 +196,31 @@
                 }
             };
 
+            this.SetConditionButton.Click += (s1, e1) =>
+            {
+                var src = this.DetailGroupBox.Tag as SpellTimer;
+                if (src != null)
+                {
+                    using (var f = new SetConditionForm())
+                    {
+                        f.TimersMustRunning = src.TimersMustRunningForStart;
+                        f.TimersMustStopping = src.TimersMustStoppingForStart;
+
+                        if (f.ShowDialog(this) == DialogResult.OK)
+                        {
+                            src.TimersMustRunningForStart = f.TimersMustRunning;
+                            src.TimersMustStoppingForStart = f.TimersMustStopping;
+
+                            // 条件設定ボタンの色を変える（未設定：黒、設定有：青）
+                            this.SetConditionButton.ForeColor =
+                                (src.TimersMustRunningForStart.Length != 0 || src.TimersMustStoppingForStart.Length != 0) ?
+                                Color.Blue :
+                                Button.DefaultForeColor;
+                        }
+                    }
+                }
+            };
+
             this.SpellIconComboBox.SelectionChangeCommitted += (s1, e1) =>
             {
                 this.SpellVisualSetting.SpellIcon = (string)this.SpellIconComboBox.SelectedValue;
@@ -244,6 +269,7 @@
                 nr.ID = SpellTimerTable.Table.Any() ?
                     SpellTimerTable.Table.Max(x => x.ID) + 1 :
                     1;
+                nr.guid = Guid.NewGuid();
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
                 nr.SpellIcon = string.Empty;
@@ -261,6 +287,8 @@
                 nr.BackgroundColor = Settings.Default.BackgroundColor.ToHTML();
                 nr.JobFilter = string.Empty;
                 nr.ZoneFilter = string.Empty;
+                nr.TimersMustRunningForStart = new Guid[0];
+                nr.TimersMustStoppingForStart = new Guid[0];
 
                 // 現在選択しているノードの情報を一部コピーする
                 if (this.SpellTimerTreeView.SelectedNode != null)
@@ -305,6 +333,8 @@
                         nr.BackgroundAlpha = baseRow.BackgroundAlpha;
                         nr.JobFilter = baseRow.JobFilter;
                         nr.ZoneFilter = baseRow.ZoneFilter;
+                        nr.TimersMustRunningForStart = baseRow.TimersMustRunningForStart;
+                        nr.TimersMustStoppingForStart = baseRow.TimersMustStoppingForStart;
                     }
                 }
 
@@ -357,6 +387,12 @@
 
                 // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
                 this.SelectJobButton.ForeColor = nr.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+                // 条件設定ボタンの色を変える（未設定：黒、設定有：青）
+                this.SetConditionButton.ForeColor =
+                    (nr.TimersMustRunningForStart.Length != 0 || nr.TimersMustStoppingForStart.Length != 0) ?
+                    Color.Blue :
+                    Button.DefaultForeColor;
             }
 
             // 標準のスペルタイマーへ変更を反映する
@@ -757,6 +793,12 @@
 
             // ジョブ限定ボタンの色を変える（未設定：黒、設定有：青）
             this.SelectJobButton.ForeColor = src.JobFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+            // 条件設定ボタンの色を変える（未設定：黒、設定有：青）
+            this.SetConditionButton.ForeColor =
+                (src.TimersMustRunningForStart.Length != 0 || src.TimersMustStoppingForStart.Length != 0) ?
+                Color.Blue :
+                Button.DefaultForeColor;
         }
 
         /// <summary>

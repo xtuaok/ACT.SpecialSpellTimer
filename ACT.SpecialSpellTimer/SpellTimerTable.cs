@@ -252,6 +252,15 @@
         }
 
         /// <summary>
+        /// 指定されたGuidを持つSpellTimerを取得する
+        /// </summary>
+        /// <param name="guid">Guid</param>
+        public static SpellTimer GetSpellTimerByGuid(Guid guid)
+        {
+            return table.Where(x => x.guid == guid).FirstOrDefault();
+        }
+
+        /// <summary>
         /// デフォルトのファイル
         /// </summary>
         public static string DefaultFile
@@ -278,6 +287,10 @@
             {
                 id++;
                 row.ID = id;
+                if (row.guid == Guid.Empty)
+                {
+                    row.guid = Guid.NewGuid();
+                }
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
@@ -510,6 +523,7 @@
     {
         public SpellTimer()
         {
+            this.guid = Guid.Empty;
             this.Panel = string.Empty;
             this.SpellTitle = string.Empty;
             this.SpellIcon = string.Empty;
@@ -533,6 +547,8 @@
             this.RegexPattern = string.Empty;
             this.JobFilter = string.Empty;
             this.ZoneFilter = string.Empty;
+            this.TimersMustRunningForStart = new Guid[0];
+            this.TimersMustStoppingForStart = new Guid[0];
             this.Font = new FontInfo();
             this.KeywordReplaced = string.Empty;
             this.KeywordForExtendReplaced1 = string.Empty;
@@ -540,6 +556,7 @@
         }
 
         public long ID { get; set; }
+        public Guid guid { get; set; }
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
         public string SpellIcon { get; set; }
@@ -586,6 +603,8 @@
         public bool RegexEnabled { get; set; }
         public string JobFilter { get; set; }
         public string ZoneFilter { get; set; }
+        public Guid[] TimersMustRunningForStart { get; set; }
+        public Guid[] TimersMustStoppingForStart { get; set; }
         public bool Enabled { get; set; }
 
         [XmlIgnore]

@@ -112,6 +112,30 @@
                 }
             };
 
+            this.TelopSetConditionButton.Click += (s1, e1) =>
+            {
+                var src = this.TelopDetailGroupBox.Tag as OnePointTelop;
+                if (src != null)
+                {
+                    using (var f = new SetConditionForm())
+                    {
+                        f.TimersMustRunning = src.TimersMustRunningForStart;
+                        f.TimersMustStopping = src.TimersMustStoppingForStart;
+                        if (f.ShowDialog(this) == DialogResult.OK)
+                        {
+                            src.TimersMustRunningForStart = f.TimersMustRunning;
+                            src.TimersMustStoppingForStart = f.TimersMustStopping;
+
+                            // 条件設定ボタンの色を変える（未設定：黒、設定有：青）
+                            this.TelopSetConditionButton.ForeColor =
+                                (src.TimersMustRunningForStart.Length != 0 || src.TimersMustStoppingForStart.Length != 0) ?
+                                Color.Blue :
+                                Button.DefaultForeColor;
+                        }
+                    }
+                }
+            };
+
             this.TelopExportButton.Click += this.TelopExportButton_Click;
             this.TelopImportButton.Click += this.TelopImportButton_Click;
             this.TelopClearAllButton.Click += this.TelopClearAllButton_Click;
@@ -191,6 +215,7 @@
             nr.ID = OnePointTelopTable.Default.Table.Any() ?
                 OnePointTelopTable.Default.Table.Max(x => x.ID) + 1 :
                 1;
+            nr.guid = Guid.NewGuid();
             nr.Title = Translate.Get("NewTelop");
             nr.DisplayTime = 3;
             nr.FontColor = Settings.Default.FontColor.ToHTML();
@@ -203,6 +228,8 @@
             nr.Top = 10.0d;
             nr.JobFilter = string.Empty;
             nr.ZoneFilter = string.Empty;
+            nr.TimersMustRunningForStart = new Guid[0];
+            nr.TimersMustStoppingForStart = new Guid[0];
 
             // 現在選択しているノードの情報を一部コピーする
             if (this.TelopTreeView.SelectedNode != null)
@@ -234,6 +261,8 @@
                     nr.Top = baseRow.Top;
                     nr.JobFilter = baseRow.JobFilter;
                     nr.ZoneFilter = baseRow.ZoneFilter;
+                    nr.TimersMustRunningForStart = baseRow.TimersMustRunningForStart;
+                    nr.TimersMustStoppingForStart = baseRow.TimersMustStoppingForStart;
                 }
             }
 
@@ -265,6 +294,12 @@
 
             // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
             this.TelopSelectZoneButton.ForeColor = nr.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+            // 条件設定ボタンの色を変える（未設定：黒、設定有：青）
+            this.TelopSetConditionButton.ForeColor =
+                (nr.TimersMustRunningForStart.Length != 0 || nr.TimersMustStoppingForStart.Length != 0) ?
+                Color.Blue :
+                Button.DefaultForeColor;
 
             // 標準のスペルタイマーへ変更を反映する
             SpellTimerCore.Default.applyToNormalSpellTimer();
@@ -493,6 +528,12 @@
 
             // ゾーン限定ボタンの色を変える（未設定：黒、設定有：青）
             this.TelopSelectZoneButton.ForeColor = src.ZoneFilter != string.Empty ? Color.Blue : Button.DefaultForeColor;
+
+            // 条件設定ボタンの色を変える（未設定：黒、設定有：青）
+            this.TelopSetConditionButton.ForeColor =
+                (src.TimersMustRunningForStart.Length != 0 || src.TimersMustStoppingForStart.Length != 0) ?
+                Color.Blue :
+                Button.DefaultForeColor;
         }
     }
 }
