@@ -324,6 +324,7 @@
             {
                 fps = Settings.Default.MaxFPS;
             }
+
             Timeline.SetDesiredFrameRate(this.BarAnimation, fps);
 
             var currentWidth = this.IsReverse ?
@@ -339,6 +340,7 @@
                 this.BarAnimation.From = currentWidth / this.BarWidth;
                 this.BarAnimation.To = 1.0;
             }
+
             this.BarAnimation.Duration = new Duration(TimeSpan.FromSeconds(this.RecastTime));
 
             this.BarScale.BeginAnimation(ScaleTransform.ScaleXProperty, null);
