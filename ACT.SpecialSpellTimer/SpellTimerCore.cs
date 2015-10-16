@@ -654,7 +654,7 @@
                     {
                         spell.UpdateDone = false;
                     }
-                    
+
                     w.Show();
                 }
 
@@ -1091,34 +1091,34 @@
         {
             if (this.SpellTimerPanels != null)
             {
-                // Panelの位置を保存する
-                foreach (var panel in this.SpellTimerPanels)
-                {
-                    var setting = (
-                        from x in PanelSettings.Default.SettingsTable
-                        where
-                        x.PanelName == panel.PanelName
-                        select
-                        x).FirstOrDefault();
-
-                    if (setting == null)
-                    {
-                        setting = PanelSettings.Default.SettingsTable.NewPanelSettingsRow();
-                        PanelSettings.Default.SettingsTable.AddPanelSettingsRow(setting);
-                    }
-
-                    setting.PanelName = panel.PanelName;
-                    setting.Left = panel.Left;
-                    setting.Top = panel.Top;
-                }
-
-                if (this.SpellTimerPanels.Count > 0)
-                {
-                    PanelSettings.Default.Save();
-                }
-
                 ActInvoker.Invoke(() =>
                 {
+                    // Panelの位置を保存する
+                    foreach (var panel in this.SpellTimerPanels)
+                    {
+                        var setting = (
+                            from x in PanelSettings.Default.SettingsTable
+                            where
+                            x.PanelName == panel.PanelName
+                            select
+                            x).FirstOrDefault();
+
+                        if (setting == null)
+                        {
+                            setting = PanelSettings.Default.SettingsTable.NewPanelSettingsRow();
+                            PanelSettings.Default.SettingsTable.AddPanelSettingsRow(setting);
+                        }
+
+                        setting.PanelName = panel.PanelName;
+                        setting.Left = panel.Left;
+                        setting.Top = panel.Top;
+                    }
+
+                    if (this.SpellTimerPanels.Count > 0)
+                    {
+                        PanelSettings.Default.Save();
+                    }
+
                     foreach (var panel in this.SpellTimerPanels)
                     {
                         panel.Close();

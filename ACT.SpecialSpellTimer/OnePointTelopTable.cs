@@ -74,14 +74,14 @@
         {
             get
             {
-                if (enabledTable == null ||
-                    (DateTime.Now - enabledTableTimeStamp).TotalSeconds >= 5.0d)
+                if (this.enabledTable == null ||
+                    (DateTime.Now - this.enabledTableTimeStamp).TotalSeconds >= 5.0d)
                 {
-                    enabledTableTimeStamp = DateTime.Now;
-                    enabledTable = EnabledTableCore;
+                    this.enabledTableTimeStamp = DateTime.Now;
+                    this.enabledTable = EnabledTableCore;
                 }
 
-                return enabledTable;
+                return this.enabledTable;
             }
         }
 
