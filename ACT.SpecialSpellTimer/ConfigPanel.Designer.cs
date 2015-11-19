@@ -245,6 +245,7 @@
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
+            this.ToInstanceCheckBox = new System.Windows.Forms.CheckBox();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
@@ -510,6 +511,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ToInstanceCheckBox);
             this.tabPage1.Controls.Add(this.ReduceIconBrightnessCheckBox);
             this.tabPage1.Controls.Add(this.OverlapRecastTimeCheckBox);
             this.tabPage1.Controls.Add(this.HideSpellNameCheckBox);
@@ -2064,26 +2066,26 @@
             this.toolStripSeparator2,
             this.CASetOriginItem});
             this.CombatAnalyzerContextMenuStrip.Name = "CombatAnalyzerContextMenuStrip";
-            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(242, 104);
+            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(224, 104);
             // 
             // CASelectAllItem
             // 
             this.CASelectAllItem.Name = "CASelectAllItem";
             this.CASelectAllItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.CASelectAllItem.Size = new System.Drawing.Size(241, 22);
+            this.CASelectAllItem.Size = new System.Drawing.Size(223, 22);
             this.CASelectAllItem.Text = "SelectAll";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
             // CACopyLogItem
             // 
             this.CACopyLogItem.Name = "CACopyLogItem";
             this.CACopyLogItem.ShortcutKeyDisplayString = "";
             this.CACopyLogItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.CACopyLogItem.Size = new System.Drawing.Size(241, 22);
+            this.CACopyLogItem.Size = new System.Drawing.Size(223, 22);
             this.CACopyLogItem.Text = "CopyLog";
             // 
             // CACopyLogDetailItem
@@ -2091,19 +2093,19 @@
             this.CACopyLogDetailItem.Name = "CACopyLogDetailItem";
             this.CACopyLogDetailItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.CACopyLogDetailItem.Size = new System.Drawing.Size(241, 22);
+            this.CACopyLogDetailItem.Size = new System.Drawing.Size(223, 22);
             this.CACopyLogDetailItem.Text = "CopyLogDetail";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
             // 
             // CASetOriginItem
             // 
             this.CASetOriginItem.Name = "CASetOriginItem";
             this.CASetOriginItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.CASetOriginItem.Size = new System.Drawing.Size(241, 22);
+            this.CASetOriginItem.Size = new System.Drawing.Size(223, 22);
             this.CASetOriginItem.Text = "SetLogOrigin";
             // 
             // label6
@@ -2648,6 +2650,16 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
+            // ToInstanceCheckBox
+            // 
+            this.ToInstanceCheckBox.AutoSize = true;
+            this.ToInstanceCheckBox.Location = new System.Drawing.Point(519, 399);
+            this.ToInstanceCheckBox.Name = "ToInstanceCheckBox";
+            this.ToInstanceCheckBox.Size = new System.Drawing.Size(132, 16);
+            this.ToInstanceCheckBox.TabIndex = 73;
+            this.ToInstanceCheckBox.Text = "ToInstanceCheckBox";
+            this.ToInstanceCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2925,5 +2937,6 @@
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.Button SetConditionButton;
         private System.Windows.Forms.Button TelopSetConditionButton;
+        private System.Windows.Forms.CheckBox ToInstanceCheckBox;
     }
 }

@@ -929,4 +929,8 @@
     <value>Please select conditions</value>
     <comment>条件を設定して下さい</comment>
   </data>
+  <data name="ToInstanceCheckBox" xml:space="preserve">
+    <value>When being different in a spell name (indication text), I become an instance.</value>
+    <comment>スペルの名前(表示テキスト)が異なる場合にインスタンス化する</comment>
+  </data>
 </root>

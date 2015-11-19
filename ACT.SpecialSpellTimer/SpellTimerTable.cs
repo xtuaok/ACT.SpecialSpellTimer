@@ -19,6 +19,8 @@
     /// </summary>
     public static class SpellTimerTable
     {
+        private static object lockObject = new object();
+
         /// <summary>
         /// SpellTimerデータテーブル
         /// </summary>
@@ -35,13 +37,16 @@
         {
             get
             {
-                if (table == null)
+                lock (lockObject)
                 {
-                    table = new List<SpellTimer>();
-                    Load();
-                }
+                    if (table == null)
+                    {
+                        table = new List<SpellTimer>();
+                        Load();
+                    }
 
-                return table;
+                    return table;
+                }
             }
         }
 
@@ -52,14 +57,17 @@
         {
             get
             {
-                if (enabledTable == null ||
-                    (DateTime.Now - enabledTableTimeStamp).TotalSeconds >= 5.0d)
+                lock (lockObject)
                 {
-                    enabledTableTimeStamp = DateTime.Now;
-                    enabledTable = EnabledTableCore;
-                }
+                    if (enabledTable == null ||
+                        (DateTime.Now - enabledTableTimeStamp).TotalSeconds >= 5.0d)
+                    {
+                        enabledTableTimeStamp = DateTime.Now;
+                        enabledTable = EnabledTableCore;
+                    }
 
-                return enabledTable;
+                    return enabledTable;
+                }
             }
         }
 
@@ -221,6 +229,97 @@
                 }
 
                 return spellsFilteredJob.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// 定義のインスタンス（表示用のコピー）を生成する
+        /// </summary>
+        /// <param name="element">インスタンス化する定義</param>
+        /// <returns>生成されたインスタンス</returns>
+        public static SpellTimer CreateInstanceByElement(
+            SpellTimer element)
+        {
+            var instance = new SpellTimer();
+
+            instance.ID = Table.Max(x => x.ID) + 1;
+            instance.guid = Guid.NewGuid();
+            instance.Panel = element.Panel;
+            instance.SpellTitle = element.SpellTitle;
+            instance.SpellIcon = element.SpellIcon;
+            instance.SpellIconSize = element.SpellIconSize;
+            instance.Keyword = element.Keyword;
+            instance.KeywordForExtend1 = element.KeywordForExtend1;
+            instance.KeywordForExtend2 = element.KeywordForExtend2;
+            instance.RecastTime = element.RecastTime;
+            instance.RecastTimeExtending1 = element.RecastTimeExtending1;
+            instance.RecastTimeExtending2 = element.RecastTimeExtending2;
+            instance.ExtendBeyondOriginalRecastTime = element.ExtendBeyondOriginalRecastTime;
+            instance.UpperLimitOfExtension = element.UpperLimitOfExtension;
+            instance.RepeatEnabled = element.RepeatEnabled;
+            instance.ProgressBarVisible = element.ProgressBarVisible;
+            instance.MatchSound = element.MatchSound;
+            instance.MatchTextToSpeak = element.MatchTextToSpeak;
+            instance.OverSound = element.OverSound;
+            instance.OverTextToSpeak = element.OverTextToSpeak;
+            instance.OverTime = element.OverTime;
+            instance.BeforeSound = element.BeforeSound;
+            instance.BeforeTextToSpeak = element.BeforeTextToSpeak;
+            instance.BeforeTime = element.BeforeTime;
+            instance.TimeupSound = element.TimeupSound;
+            instance.TimeupTextToSpeak = element.TimeupTextToSpeak;
+            instance.MatchDateTime = element.MatchDateTime;
+            instance.TimeupHide = element.TimeupHide;
+            instance.IsReverse = element.IsReverse;
+            instance.Font = element.Font;
+            instance.FontFamily = element.FontFamily;
+            instance.FontSize = element.FontSize;
+            instance.FontStyle = element.FontStyle;
+            instance.FontColor = element.FontColor;
+            instance.FontOutlineColor = element.FontOutlineColor;
+            instance.BarColor = element.BarColor;
+            instance.BarOutlineColor = element.BarOutlineColor;
+            instance.BarWidth = element.BarWidth;
+            instance.BarHeight = element.BarHeight;
+            instance.BackgroundColor = element.BackgroundColor;
+            instance.BackgroundAlpha = element.BackgroundAlpha;
+            instance.DontHide = element.DontHide;
+            instance.HideSpellName = element.HideSpellName;
+            instance.OverlapRecastTime = element.OverlapRecastTime;
+            instance.ReduceIconBrightness = element.ReduceIconBrightness;
+            instance.RegexEnabled = element.RegexEnabled;
+            instance.JobFilter = element.JobFilter;
+            instance.ZoneFilter = element.ZoneFilter;
+            instance.TimersMustRunningForStart = element.TimersMustRunningForStart;
+            instance.TimersMustStoppingForStart = element.TimersMustStoppingForStart;
+            instance.Enabled = element.Enabled;
+
+            instance.ToInstance = false;
+            instance.IsInstance = true;
+
+            lock (lockObject)
+            {
+                table.Add(instance);
+
+                var array = new SpellTimer[enabledTable.Length + 1];
+                Array.Copy(enabledTable, array, enabledTable.Length);
+                array[enabledTable.Length] = instance;
+                enabledTable = array;
+            }
+
+            return instance;
+        }
+
+        /// <summary>
+        /// 指定したスペルをコレクションから除去する
+        /// </summary>
+        /// <param name="spell">除去するスペル</param>
+        public static void RemoveSpell(
+            SpellTimer spell)
+        {
+            lock (lockObject)
+            {
+                table.Remove(spell);
             }
         }
 
@@ -436,7 +535,10 @@
                 Directory.CreateDirectory(dir);
             }
 
-            foreach (var item in table)
+            var work = new List<SpellTimer>(
+                table.Where(x => !x.IsInstance));
+
+            foreach (var item in work)
             {
                 item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
                     Path.GetFileName(item.MatchSound) :
@@ -463,11 +565,11 @@
 
             using (var sw = new StreamWriter(file, false, new UTF8Encoding(false)))
             {
-                var xs = new XmlSerializer(table.GetType());
-                xs.Serialize(sw, table);
+                var xs = new XmlSerializer(work.GetType());
+                xs.Serialize(sw, work);
             }
 
-            foreach (var item in table)
+            foreach (var item in work)
             {
                 item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.MatchSound)) :
@@ -557,6 +659,7 @@
 
         public long ID { get; set; }
         public Guid guid { get; set; }
+        public long DisplayNo { get; set; }
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
         public string SpellIcon { get; set; }
@@ -605,6 +708,11 @@
         public string ZoneFilter { get; set; }
         public Guid[] TimersMustRunningForStart { get; set; }
         public Guid[] TimersMustStoppingForStart { get; set; }
+
+        /// <summary>インスタンス化する</summary>
+        /// <remarks>表示テキストが異なる条件でマッチングした場合に当該スペルの新しいインスタンスを生成する</remarks>
+        public bool ToInstance { get; set; }
+
         public bool Enabled { get; set; }
 
         [XmlIgnore]
@@ -621,7 +729,6 @@
         public string SpellTitleReplaced { get; set; }
         [XmlIgnore]
         public string MatchedLog { get; set; }
-        public long DisplayNo { get; set; }
         [XmlIgnore]
         public Regex Regex { get; set; }
         [XmlIgnore]
@@ -640,5 +747,9 @@
         public string RegexForExtendPattern2 { get; set; }
         [XmlIgnore]
         public string KeywordForExtendReplaced2 { get; set; }
+
+        /// <summary>インスタンス化されたスペルか？</summary>
+        [XmlIgnore]
+        public bool IsInstance { get; set; }
     }
 }

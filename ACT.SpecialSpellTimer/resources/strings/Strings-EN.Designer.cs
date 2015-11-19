@@ -1762,6 +1762,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   When being different in a spell name (indication text), I become an instance. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToInstanceCheckBox {
+            get {
+                return ResourceManager.GetString("ToInstanceCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Overlay opacity に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string TransmitOverlay {

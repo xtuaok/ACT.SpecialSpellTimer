@@ -1762,6 +1762,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   スペルの名前(表示テキスト)が異なる場合にインスタンス化する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToInstanceCheckBox {
+            get {
+                return ResourceManager.GetString("ToInstanceCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   オーバーレイの透過率 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string TransmitOverlay {

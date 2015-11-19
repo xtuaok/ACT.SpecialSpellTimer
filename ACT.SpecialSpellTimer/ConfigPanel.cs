@@ -335,6 +335,7 @@
                         nr.ZoneFilter = baseRow.ZoneFilter;
                         nr.TimersMustRunningForStart = baseRow.TimersMustRunningForStart;
                         nr.TimersMustStoppingForStart = baseRow.TimersMustStoppingForStart;
+                        nr.ToInstance = baseRow.ToInstance;
                     }
                 }
 
@@ -470,6 +471,7 @@
                     src.HideSpellName = this.HideSpellNameCheckBox.Checked;
                     src.OverlapRecastTime = this.OverlapRecastTimeCheckBox.Checked;
                     src.ReduceIconBrightness = this.ReduceIconBrightnessCheckBox.Checked;
+                    src.ToInstance = this.ToInstanceCheckBox.Checked;
 
                     src.Font = this.SpellVisualSetting.GetFontInfo();
                     src.FontColor = this.SpellVisualSetting.FontColor.ToHTML();
@@ -661,6 +663,7 @@
                 this.SpellTimerTreeView.Nodes.Clear();
 
                 var panels = SpellTimerTable.Table
+                    .Where(x => !x.IsInstance)
                     .OrderBy(x => x.Panel)
                     .Select(x => x.Panel)
                     .Distinct();
@@ -759,6 +762,7 @@
             this.HideSpellNameCheckBox.Checked = src.HideSpellName;
             this.OverlapRecastTimeCheckBox.Checked = src.OverlapRecastTime;
             this.ReduceIconBrightnessCheckBox.Checked = src.ReduceIconBrightness;
+            this.ToInstanceCheckBox.Checked = src.ToInstance;
 
             this.SpellVisualSetting.SetFontInfo(src.Font);
             this.SpellVisualSetting.BarColor = string.IsNullOrWhiteSpace(src.BarColor) ?
