@@ -230,6 +230,8 @@
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
             var title = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;
+            title = title.Replace(",", Environment.NewLine);
+
             if (tb.Text != title)
             {
                 tb.Text = title;

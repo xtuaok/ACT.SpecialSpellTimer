@@ -294,6 +294,17 @@
             instance.TimersMustStoppingForStart = element.TimersMustStoppingForStart;
             instance.Enabled = element.Enabled;
 
+            instance.MatchedLog = element.MatchedLog;
+            instance.Regex = element.Regex;
+            instance.RegexPattern = element.RegexPattern;
+            instance.KeywordReplaced = element.KeywordReplaced;
+            instance.RegexForExtend1 = element.RegexForExtend1;
+            instance.RegexForExtendPattern1 = element.RegexForExtendPattern1;
+            instance.KeywordForExtendReplaced1 = element.KeywordForExtendReplaced1;
+            instance.RegexForExtend2 = element.RegexForExtend2;
+            instance.RegexForExtendPattern2 = element.RegexForExtendPattern2;
+            instance.KeywordForExtendReplaced2 = element.KeywordForExtendReplaced2;
+
             instance.ToInstance = false;
             instance.IsInstance = true;
 
@@ -320,6 +331,21 @@
             lock (lockObject)
             {
                 table.Remove(spell);
+            }
+        }
+
+        /// <summary>
+        /// インスタンス化されたスペルをすべて削除する
+        /// </summary>
+        public static void RemoveAllInstanceSpells()
+        {
+            lock (lockObject)
+            {
+                var collection = table.Where(x => x.IsInstance);
+                foreach (var item in collection)
+                {
+                    table.Remove(item);
+                }
             }
         }
 
@@ -390,6 +416,7 @@
                 {
                     row.guid = Guid.NewGuid();
                 }
+
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;

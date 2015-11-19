@@ -350,6 +350,7 @@
                 SpellTimerTable.Table.Add(nr);
 
                 SpellTimerTable.ClearReplacedKeywords();
+                SpellTimerTable.RemoveAllInstanceSpells();
                 SpellTimerTable.Save();
 
                 // 新しいノードを生成する
@@ -490,6 +491,7 @@
                     }
 
                     SpellTimerTable.ClearReplacedKeywords();
+                    SpellTimerTable.RemoveAllInstanceSpells();
                     SpellTimerTable.Save();
                     this.LoadSpellTimerTable();
 
@@ -532,6 +534,7 @@
                 {
                     SpellTimerTable.Table.Remove(src);
                     SpellTimerTable.ClearReplacedKeywords();
+                    SpellTimerTable.RemoveAllInstanceSpells();
                     SpellTimerTable.Save();
 
                     this.DetailGroupBox.Visible = false;
@@ -671,6 +674,7 @@
                 {
                     var children = new List<TreeNode>();
                     var spells = SpellTimerTable.Table
+                        .Where(x => !x.IsInstance)
                         .OrderBy(x => x.DisplayNo)
                         .Where(x => x.Panel == panelName);
                     foreach (var spell in spells)

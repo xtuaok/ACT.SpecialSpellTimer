@@ -62,7 +62,7 @@
         x:Name="SpellTitleTextBlock" 
         HorizontalAlignment="Left" 
         VerticalAlignment="Top"
-        TextWrapping="NoWrap"
+        TextWrapping="Wrap"
         Fill="AliceBlue"
         Stroke="Blue"
         Text="Sample Spell"
