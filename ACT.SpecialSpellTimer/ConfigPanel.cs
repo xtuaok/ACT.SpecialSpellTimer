@@ -45,6 +45,20 @@
             this.DetailPanelGroupBox.Size = this.DetailGroupBox.Size;
             this.DetailPanelGroupBox.Anchor = this.DetailGroupBox.Anchor;
 
+            // インスタンス化に伴う正規表現のON/OFFを制限する
+            this.ToInstanceCheckBox.CheckedChanged += (s, e) =>
+            {
+                if (this.ToInstanceCheckBox.Checked)
+                {
+                    this.RegexEnabledCheckBox.Checked = true;
+                    this.RegexEnabledCheckBox.Enabled = false;
+                }
+                else
+                {
+                    this.RegexEnabledCheckBox.Enabled = true;
+                }
+            };
+
             this.Load += this.ConfigPanel_Load;
         }
 
