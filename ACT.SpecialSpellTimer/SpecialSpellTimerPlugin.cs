@@ -7,6 +7,7 @@
     using System.Windows.Forms;
 
     using ACT.SpecialSpellTimer.Properties;
+    using ACT.SpecialSpellTimer.Utility;
     using Advanced_Combat_Tracker;
 
     /// <summary>
@@ -40,6 +41,45 @@
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 表示切り替えボタン（スペスペボタン）の状態を切り替える
+        /// </summary>
+        /// <param name="visible">
+        /// 切り替える状態</param>
+        public static void ChangeSwitchVisibleButton(
+            bool visible)
+        {
+            Settings.Default.OverlayVisible = visible;
+            Settings.Default.Save();
+
+            SpellTimerCore.Default.ClosePanels();
+            OnePointTelopController.CloseTelops();
+
+            FF14PluginHelper.RefreshPlayer();
+            LogBuffer.RefreshPTList();
+            LogBuffer.RefreshPetID();
+
+            if (Settings.Default.OverlayVisible)
+            {
+                SpellTimerCore.Default.ActivatePanels();
+                OnePointTelopController.ActivateTelops();
+            }
+
+            ActInvoker.Invoke(() =>
+            {
+                if (Settings.Default.OverlayVisible)
+                {
+                    SwitchVisibleButton.BackColor = Color.OrangeRed;
+                    SwitchVisibleButton.ForeColor = Color.WhiteSmoke;
+                }
+                else
+                {
+                    SwitchVisibleButton.BackColor = SystemColors.Control;
+                    SwitchVisibleButton.ForeColor = Color.Black;
+                }
+            });
         }
 
         /// <summary>

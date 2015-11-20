@@ -390,10 +390,12 @@
                                     keyword.ToUpper()))
                                 {
                                     var targetSpell = spell;
-                                    var replacedTitle = ConditionUtility.GetReplacedTitle(spell);
 
                                     // ヒットしたログを格納する
                                     targetSpell.MatchedLog = logLine;
+
+                                    // スペル名（表示テキスト）を置換する
+                                    var replacedTitle = ConditionUtility.GetReplacedTitle(targetSpell);
 
                                     targetSpell.SpellTitleReplaced = replacedTitle;
                                     targetSpell.MatchDateTime = DateTime.Now;
@@ -421,7 +423,8 @@
                                     // ヒットしたログを格納する
                                     targetSpell.MatchedLog = logLine;
 
-                                    var replacedTitle = match.Result(ConditionUtility.GetReplacedTitle(spell));
+                                    // スペル名（表示テキスト）を置換する
+                                    var replacedTitle = match.Result(ConditionUtility.GetReplacedTitle(targetSpell));
 
                                     // インスタンス化する？
                                     if (spell.ToInstance)
@@ -434,9 +437,7 @@
                                             SpellTimerTable.CreateInstanceByElement(spell);
                                     }
 
-                                    // 置換したスペル名を格納する
                                     targetSpell.SpellTitleReplaced = replacedTitle;
-
                                     targetSpell.MatchDateTime = DateTime.Now;
                                     targetSpell.UpdateDone = false;
                                     targetSpell.OverDone = false;
@@ -533,8 +534,8 @@
                     // ACT標準のSpellTimerに変更を通知する
                     if (notifyNeeded)
                     {
-                        updateNormalSpellTimer(spell, false);
-                        notifyNormalSpellTimer(spell);
+                        this.updateNormalSpellTimer(spell, false);
+                        this.notifyNormalSpellTimer(spell);
                     }
                 }
                 // end loop spells
@@ -632,10 +633,10 @@
                     var ttl = Settings.Default.TimeOfHideSpell;
                     if (ttl < 1)
                     {
-                        ttl = 60;
+                        ttl = 60.0d;
                     }
 
-                    if ((DateTime.Now - spell.CompleteScheduledTime).TotalSeconds >= ttl)
+                    if ((DateTime.Now - spell.CompleteScheduledTime).TotalSeconds >= (ttl + 0.05d))
                     {
                         SpellTimerTable.RemoveSpell(spell);
                     }

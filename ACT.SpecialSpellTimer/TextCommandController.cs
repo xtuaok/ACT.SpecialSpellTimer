@@ -14,7 +14,7 @@
         /// コマンド解析用の正規表現
         /// </summary>
         private static Regex regexCommand = new Regex(
-            @".*/spespe (?<command>refresh|changeenabled|analyze|set|clear) (?<target>spells|telops|me|pt|pet|on|off|placeholder) ?(?<windowname>"".*""|all)? ?(?<value>.*)",
+            @".*/spespe (?<command>refresh|changeenabled|analyze|set|clear|on|off) (?<target>spells|telops|me|pt|pet|on|off|placeholder) ?(?<windowname>"".*""|all)? ?(?<value>.*)",
             RegexOptions.Compiled |
             RegexOptions.IgnoreCase);
 
@@ -166,6 +166,7 @@
 
                                     commandDone = true;
                                 }
+
                                 break;
                         }
 
@@ -186,9 +187,20 @@
 
                                     commandDone = true;
                                 }
+
                                 break;
                         }
 
+                        break;
+
+                    case "on":
+                        SpecialSpellTimerPlugin.ChangeSwitchVisibleButton(true);
+                        commandDone = true;
+                        break;
+
+                    case "off":
+                        SpecialSpellTimerPlugin.ChangeSwitchVisibleButton(false);
+                        commandDone = true;
                         break;
                 }
             }   // loop end logLines
