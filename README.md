@@ -25,7 +25,10 @@ ACT.SpecialSpellTimer.dll
 ACTが吐き出すログには上記のような独自のログがあります  
 これに対して正規表現を設定して、自身が与えたDoT（その他デバフも可）の開始を検出してください  
   
-4) ゲーム内のプレースホルダは使えないの？  
+4) 複数対象に対するDoTを個別に管理したい  
+[こちら](https://github.com/anoyetta/ACT.SpecialSpellTimer/releases/tag/v1.15.1) に従って設定してください  
+
+5) ゲーム内のプレースホルダは使えないの？  
 一部は使えるように対応しています  
 <table>
 <tr>
@@ -85,7 +88,7 @@ Jiro Paradin (ナイト)<br />
 </tr>
 </table>
   
-5) 俺の歌を聞かせたい    
+6) 俺の歌を聞かせたい    
 resources/wav にwaveファイルを投入するとスペスペで使用できるようになります  
 
 テキストコマンド
