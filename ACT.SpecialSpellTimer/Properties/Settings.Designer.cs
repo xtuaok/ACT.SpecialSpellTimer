@@ -358,5 +358,29 @@ namespace ACT.SpecialSpellTimer.Properties {
                 this["MaxFPS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SaveLogEnabled {
+            get {
+                return ((bool)(this["SaveLogEnabled"]));
+            }
+            set {
+                this["SaveLogEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SaveLogFile {
+            get {
+                return ((string)(this["SaveLogFile"]));
+            }
+            set {
+                this["SaveLogFile"] = value;
+            }
+        }
     }
 }

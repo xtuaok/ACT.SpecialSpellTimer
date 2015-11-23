@@ -933,4 +933,12 @@
     <value>When being different in a spell name (indication text), I become an instance.</value>
     <comment>スペルの名前(表示テキスト)が異なる場合にインスタンス化する</comment>
   </data>
+  <data name="SaveLogLabel" xml:space="preserve">
+    <value>Save the log.</value>
+    <comment>ログを保存する</comment>
+  </data>
+  <data name="ReferenceButton" xml:space="preserve">
+    <value>...</value>
+    <comment>...</comment>
+  </data>
 </root>

@@ -86,5 +86,11 @@
     <Setting Name="MaxFPS" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
+    <Setting Name="SaveLogEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SaveLogFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

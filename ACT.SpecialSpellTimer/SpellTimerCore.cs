@@ -443,7 +443,17 @@
                                     targetSpell.OverDone = false;
                                     targetSpell.BeforeDone = false;
                                     targetSpell.TimeupDone = false;
-                                    targetSpell.CompleteScheduledTime = targetSpell.MatchDateTime.AddSeconds(targetSpell.RecastTime);
+
+                                    // 効果時間を決定する
+                                    // グループ "duration" をキャプチャーしていた場合は効果時間を置換する
+                                    var durationAsText = match.Groups["duration"].Value;
+                                    long duration;
+                                    if (!long.TryParse(durationAsText, out duration))
+                                    {
+                                        duration = targetSpell.RecastTime;
+                                    }
+
+                                    targetSpell.CompleteScheduledTime = targetSpell.MatchDateTime.AddSeconds(duration);
 
                                     // マッチ時点のサウンドを再生する
                                     this.Play(targetSpell.MatchSound);

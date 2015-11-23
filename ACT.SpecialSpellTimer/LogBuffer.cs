@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -61,6 +63,11 @@
         private DateTime lastLogineTimestamp;
 
         /// <summary>
+        /// ログファイル出力用のバッファ
+        /// </summary>
+        private StringBuilder logBuffer = new StringBuilder();
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public LogBuffer()
@@ -108,9 +115,54 @@
                     ptmember.Clear();
                 }
 
+                // ログファイルをフラッシュする
+                this.FlushLogFile();
+
 #if DEBUG
                 Debug.WriteLine("Logをクリアしました");
 #endif
+            }
+        }
+
+        /// <summary>
+        /// ログを追記する
+        /// </summary>
+        /// <param name="logLine">追記するログ</param>
+        public void AppendLogFile(
+            string logLine)
+        {
+            if (Settings.Default.SaveLogEnabled &&
+                !string.IsNullOrWhiteSpace(Settings.Default.SaveLogFile))
+            {
+                lock (this.logBuffer)
+                {
+                    this.logBuffer.AppendLine(logLine);
+
+                    if (this.logBuffer.Length >= (5 * 1024))
+                    {
+                        this.FlushLogFile();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// ログファイルをフラッシュする
+        /// </summary>
+        public void FlushLogFile()
+        {
+            if (Settings.Default.SaveLogEnabled &&
+                !string.IsNullOrWhiteSpace(Settings.Default.SaveLogFile))
+            {
+                lock (this.logBuffer)
+                {
+                    File.AppendAllText(
+                        Settings.Default.SaveLogFile,
+                        this.logBuffer.ToString(),
+                        new UTF8Encoding(false));
+
+                    this.logBuffer.Clear();
+                }
             }
         }
 
@@ -228,6 +280,9 @@
                 // ログのタイムスタンプを記録する
                 this.lastLogineTimestamp = DateTime.Now;
             }
+
+            // ログファイルに出力する
+            this.AppendLogFile(logLine);
         }
 
         /// <summary>

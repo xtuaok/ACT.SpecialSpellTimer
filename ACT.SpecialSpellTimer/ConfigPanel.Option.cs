@@ -53,6 +53,25 @@
                 this.LoadSettingsOption();
             };
 
+            this.SaveLogCheckBox.CheckedChanged += (s1, e1) =>
+            {
+                this.SaveLogTextBox.Enabled = this.SaveLogCheckBox.Checked;
+                this.SaveLogButton.Enabled = this.SaveLogCheckBox.Checked;
+            };
+
+            this.SaveLogButton.Click += (s1, e1) =>
+            {
+                if (!string.IsNullOrWhiteSpace(this.SaveLogTextBox.Text))
+                {
+                    this.SaveLogFileDialog.FileName = this.SaveLogTextBox.Text;
+                }
+
+                if (this.SaveLogFileDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.SaveLogTextBox.Text = this.SaveLogFileDialog.FileName;
+                }
+            };
+
             Action action = new Action(() =>
             {
                 if (Settings.Default.OverlayVisible)
@@ -158,7 +177,7 @@
             this.DefaultVisualSetting.FontOutlineColor = Settings.Default.FontOutlineColor;
             this.DefaultVisualSetting.BackgroundColor = Settings.Default.BackgroundColor;
             this.DefaultVisualSetting.RefreshSampleImage();
-            
+
             this.OpacityNumericUpDown.Value = Settings.Default.Opacity;
             this.ClickThroughCheckBox.Checked = Settings.Default.ClickThroughEnabled;
             this.AutoSortCheckBox.Checked = Settings.Default.AutoSortEnabled;
@@ -171,6 +190,9 @@
 
             this.ReadyTextBox.Text = Settings.Default.ReadyText;
             this.OverTextBox.Text = Settings.Default.OverText;
+
+            this.SaveLogCheckBox.Checked = Settings.Default.SaveLogEnabled;
+            this.SaveLogTextBox.Text = Settings.Default.SaveLogFile;
 
             // 標準のスペルタイマーへ設定を反映する
             SpellTimerCore.Default.applyToNormalSpellTimer();
@@ -202,6 +224,9 @@
 
             Settings.Default.ReadyText = this.ReadyTextBox.Text;
             Settings.Default.OverText = this.OverTextBox.Text;
+
+            Settings.Default.SaveLogEnabled = this.SaveLogCheckBox.Checked;
+            Settings.Default.SaveLogFile = this.SaveLogTextBox.Text;
 
             // 有効状態から無効状態に変化する場合は、標準のスペルタイマーから設定を削除する
             if (Settings.Default.EnabledNotifyNormalSpellTimer &&

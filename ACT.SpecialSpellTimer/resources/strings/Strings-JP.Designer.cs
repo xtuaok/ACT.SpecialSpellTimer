@@ -1258,6 +1258,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   ... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ReferenceButton {
+            get {
+                return ResourceManager.GetString("ReferenceButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   正規表現が無効でも部分一致は既定で有効となっています\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string RegularExpressionExplanationTooltip {
@@ -1380,6 +1389,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string SaveColorSet {
             get {
                 return ResourceManager.GetString("SaveColorSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ログを保存する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SaveLogLabel {
+            get {
+                return ResourceManager.GetString("SaveLogLabel", resourceCulture);
             }
         }
         

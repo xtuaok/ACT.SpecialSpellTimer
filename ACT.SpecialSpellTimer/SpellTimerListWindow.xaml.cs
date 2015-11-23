@@ -165,7 +165,8 @@
                 x;
 
             // タイムアップしたものを除外する
-            if ((Settings.Default.TimeOfHideSpell > 0.0d) && !this.SpellPositionFixed)
+            if ((Settings.Default.TimeOfHideSpell > 0.0d) && 
+                !this.SpellPositionFixed)
             {
                 spells =
                     from x in spells
@@ -291,7 +292,8 @@
                 c.BarOutlineColor = spell.BarOutlineColor;
 
                 // 一度もログにマッチしていない時はバーを初期化する
-                if (spell.MatchDateTime == DateTime.MinValue && !spell.UpdateDone)
+                if (spell.MatchDateTime == DateTime.MinValue && 
+                    !spell.UpdateDone)
                 {
                     c.Progress = 1.0;
                     c.RecastTime = 0;
@@ -330,7 +332,8 @@
 
                 displayList.Add(c);
 
-                if ((Settings.Default.TimeOfHideSpell > 0.0d) && this.SpellPositionFixed)
+                if ((Settings.Default.TimeOfHideSpell > 0.0d) && 
+                    this.SpellPositionFixed)
                 {
                     if (!spell.DontHide &&
                         (DateTime.Now - spell.CompleteScheduledTime).TotalSeconds > Settings.Default.TimeOfHideSpell)

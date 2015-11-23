@@ -47,6 +47,7 @@
             this.SetConditionButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ToInstanceCheckBox = new System.Windows.Forms.CheckBox();
             this.ReduceIconBrightnessCheckBox = new System.Windows.Forms.CheckBox();
             this.OverlapRecastTimeCheckBox = new System.Windows.Forms.CheckBox();
             this.HideSpellNameCheckBox = new System.Windows.Forms.CheckBox();
@@ -67,7 +68,6 @@
             this.ExpandSecounds1NumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.KeywordToExpand1TextBox = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
-            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -129,7 +129,6 @@
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
             this.TelopSetConditionButton = new System.Windows.Forms.Button();
             this.TelopSelectZoneButton = new System.Windows.Forms.Button();
-            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
@@ -201,6 +200,10 @@
             this.CombatAnalyzingLabel = new System.Windows.Forms.Label();
             this.AnalyzeCombatButton = new System.Windows.Forms.Button();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
+            this.SaveLogButton = new System.Windows.Forms.Button();
+            this.SaveLogCheckBox = new System.Windows.Forms.CheckBox();
+            this.SaveLogTextBox = new System.Windows.Forms.TextBox();
+            this.label67 = new System.Windows.Forms.Label();
             this.OverTextBox = new System.Windows.Forms.TextBox();
             this.label66 = new System.Windows.Forms.Label();
             this.ReadyTextBox = new System.Windows.Forms.TextBox();
@@ -239,13 +242,15 @@
             this.label18 = new System.Windows.Forms.Label();
             this.SwitchOverlayButton = new System.Windows.Forms.Button();
             this.ShokikaButton = new System.Windows.Forms.Button();
-            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
             this.EnabledSpellTimerNoDecimal = new System.Windows.Forms.CheckBox();
-            this.ToInstanceCheckBox = new System.Windows.Forms.CheckBox();
+            this.SaveLogFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailPanelGroupBox.SuspendLayout();
@@ -557,6 +562,16 @@
             this.tabPage1.Text = "GeneralTab";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // ToInstanceCheckBox
+            // 
+            this.ToInstanceCheckBox.AutoSize = true;
+            this.ToInstanceCheckBox.Location = new System.Drawing.Point(519, 399);
+            this.ToInstanceCheckBox.Name = "ToInstanceCheckBox";
+            this.ToInstanceCheckBox.Size = new System.Drawing.Size(132, 16);
+            this.ToInstanceCheckBox.TabIndex = 73;
+            this.ToInstanceCheckBox.Text = "ToInstanceCheckBox";
+            this.ToInstanceCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ReduceIconBrightnessCheckBox
             // 
             this.ReduceIconBrightnessCheckBox.AutoSize = true;
@@ -778,24 +793,6 @@
             this.label50.Size = new System.Drawing.Size(171, 12);
             this.label50.TabIndex = 52;
             this.label50.Text = "MatchingLogWordToExpandLabel";
-            // 
-            // SpellVisualSetting
-            // 
-            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.BarEnabled = true;
-            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.HideSpellName = false;
-            this.SpellVisualSetting.Location = new System.Drawing.Point(195, 262);
-            this.SpellVisualSetting.Name = "SpellVisualSetting";
-            this.SpellVisualSetting.OverlapRecastTime = false;
-            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 109);
-            this.SpellVisualSetting.SpellIcon = "";
-            this.SpellVisualSetting.SpellIconSize = 0;
-            this.SpellVisualSetting.TabIndex = 51;
             // 
             // RegexEnabledCheckBox
             // 
@@ -1466,24 +1463,6 @@
             this.TelopSelectZoneButton.TabIndex = 46;
             this.TelopSelectZoneButton.Text = "SelectZoneButton";
             this.TelopSelectZoneButton.UseVisualStyleBackColor = true;
-            // 
-            // TelopVisualSetting
-            // 
-            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.BarEnabled = false;
-            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.HideSpellName = false;
-            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
-            this.TelopVisualSetting.Name = "TelopVisualSetting";
-            this.TelopVisualSetting.OverlapRecastTime = false;
-            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.TelopVisualSetting.SpellIcon = "";
-            this.TelopVisualSetting.SpellIconSize = 0;
-            this.TelopVisualSetting.TabIndex = 6;
             // 
             // TelopSelectJobButton
             // 
@@ -2182,6 +2161,10 @@
             // OptionTabPage
             // 
             this.OptionTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.OptionTabPage.Controls.Add(this.SaveLogButton);
+            this.OptionTabPage.Controls.Add(this.SaveLogCheckBox);
+            this.OptionTabPage.Controls.Add(this.SaveLogTextBox);
+            this.OptionTabPage.Controls.Add(this.label67);
             this.OptionTabPage.Controls.Add(this.OverTextBox);
             this.OptionTabPage.Controls.Add(this.label66);
             this.OptionTabPage.Controls.Add(this.ReadyTextBox);
@@ -2227,6 +2210,43 @@
             this.OptionTabPage.Size = new System.Drawing.Size(1186, 668);
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "OptionTabPageTitle";
+            // 
+            // SaveLogButton
+            // 
+            this.SaveLogButton.Enabled = false;
+            this.SaveLogButton.Location = new System.Drawing.Point(605, 448);
+            this.SaveLogButton.Name = "SaveLogButton";
+            this.SaveLogButton.Size = new System.Drawing.Size(37, 25);
+            this.SaveLogButton.TabIndex = 55;
+            this.SaveLogButton.Text = "ReferenceButton";
+            this.SaveLogButton.UseVisualStyleBackColor = true;
+            // 
+            // SaveLogCheckBox
+            // 
+            this.SaveLogCheckBox.AutoSize = true;
+            this.SaveLogCheckBox.Location = new System.Drawing.Point(293, 429);
+            this.SaveLogCheckBox.Name = "SaveLogCheckBox";
+            this.SaveLogCheckBox.Size = new System.Drawing.Size(64, 16);
+            this.SaveLogCheckBox.TabIndex = 54;
+            this.SaveLogCheckBox.Text = "Enabled";
+            this.SaveLogCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // SaveLogTextBox
+            // 
+            this.SaveLogTextBox.Enabled = false;
+            this.SaveLogTextBox.Location = new System.Drawing.Point(293, 451);
+            this.SaveLogTextBox.Name = "SaveLogTextBox";
+            this.SaveLogTextBox.Size = new System.Drawing.Size(306, 19);
+            this.SaveLogTextBox.TabIndex = 53;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(6, 430);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(75, 12);
+            this.label67.TabIndex = 52;
+            this.label67.Text = "SaveLogLabel";
             // 
             // OverTextBox
             // 
@@ -2600,24 +2620,6 @@
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
             // 
-            // DefaultVisualSetting
-            // 
-            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.BarEnabled = true;
-            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.HideSpellName = false;
-            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
-            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
-            this.DefaultVisualSetting.OverlapRecastTime = false;
-            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.DefaultVisualSetting.SpellIcon = "";
-            this.DefaultVisualSetting.SpellIconSize = 0;
-            this.DefaultVisualSetting.TabIndex = 37;
-            // 
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
@@ -2650,15 +2652,65 @@
             this.EnabledSpellTimerNoDecimal.Text = "Enabled";
             this.EnabledSpellTimerNoDecimal.UseVisualStyleBackColor = true;
             // 
-            // ToInstanceCheckBox
+            // SaveLogFileDialog
             // 
-            this.ToInstanceCheckBox.AutoSize = true;
-            this.ToInstanceCheckBox.Location = new System.Drawing.Point(519, 399);
-            this.ToInstanceCheckBox.Name = "ToInstanceCheckBox";
-            this.ToInstanceCheckBox.Size = new System.Drawing.Size(132, 16);
-            this.ToInstanceCheckBox.TabIndex = 73;
-            this.ToInstanceCheckBox.Text = "ToInstanceCheckBox";
-            this.ToInstanceCheckBox.UseVisualStyleBackColor = true;
+            this.SaveLogFileDialog.DefaultExt = "log";
+            this.SaveLogFileDialog.Filter = "Log files (*.log)|*.log|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            this.SaveLogFileDialog.RestoreDirectory = true;
+            // 
+            // SpellVisualSetting
+            // 
+            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.BarEnabled = true;
+            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.HideSpellName = false;
+            this.SpellVisualSetting.Location = new System.Drawing.Point(195, 262);
+            this.SpellVisualSetting.Name = "SpellVisualSetting";
+            this.SpellVisualSetting.OverlapRecastTime = false;
+            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 109);
+            this.SpellVisualSetting.SpellIcon = "";
+            this.SpellVisualSetting.SpellIconSize = 0;
+            this.SpellVisualSetting.TabIndex = 51;
+            // 
+            // TelopVisualSetting
+            // 
+            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.BarEnabled = false;
+            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.HideSpellName = false;
+            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
+            this.TelopVisualSetting.Name = "TelopVisualSetting";
+            this.TelopVisualSetting.OverlapRecastTime = false;
+            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.TelopVisualSetting.SpellIcon = "";
+            this.TelopVisualSetting.SpellIconSize = 0;
+            this.TelopVisualSetting.TabIndex = 6;
+            // 
+            // DefaultVisualSetting
+            // 
+            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.BarEnabled = true;
+            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.HideSpellName = false;
+            this.DefaultVisualSetting.Location = new System.Drawing.Point(293, 108);
+            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
+            this.DefaultVisualSetting.OverlapRecastTime = false;
+            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.DefaultVisualSetting.SpellIcon = "";
+            this.DefaultVisualSetting.SpellIconSize = 0;
+            this.DefaultVisualSetting.TabIndex = 37;
             // 
             // ConfigPanel
             // 
@@ -2938,5 +2990,10 @@
         private System.Windows.Forms.Button SetConditionButton;
         private System.Windows.Forms.Button TelopSetConditionButton;
         private System.Windows.Forms.CheckBox ToInstanceCheckBox;
+        private System.Windows.Forms.Button SaveLogButton;
+        private System.Windows.Forms.CheckBox SaveLogCheckBox;
+        private System.Windows.Forms.TextBox SaveLogTextBox;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.SaveFileDialog SaveLogFileDialog;
     }
 }
