@@ -433,6 +433,7 @@
                                         // 存在すればそれを使用して、なければ新しいインスタンスを生成する
                                         targetSpell = SpellTimerTable.EnabledTable.FirstOrDefault(x =>
                                             x.IsInstance &&
+                                            x.OriginID == spell.ID &&
                                             x.SpellTitleReplaced == replacedTitle) ??
                                             SpellTimerTable.CreateInstanceByElement(spell);
                                     }

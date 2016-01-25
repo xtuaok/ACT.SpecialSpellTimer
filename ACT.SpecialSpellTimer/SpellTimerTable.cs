@@ -243,6 +243,7 @@
             var instance = new SpellTimer();
 
             instance.ID = Table.Max(x => x.ID) + 1;
+            instance.OriginID = element.ID;
             instance.guid = Guid.NewGuid();
             instance.Panel = element.Panel;
             instance.SpellTitle = element.SpellTitle;
@@ -685,6 +686,7 @@
         }
 
         public long ID { get; set; }
+        public long OriginID { get; set; }
         public Guid guid { get; set; }
         public long DisplayNo { get; set; }
         public string Panel { get; set; }
